@@ -93,7 +93,6 @@ namespace AppTest.FormType
             {
                 case (int)FormType.XCP_DAQ:
                 case (int)FormType.XCP_DAQScope:
-                    LoadAllSignals();
                     eventNameDataGridViewTextBoxColumn.Visible = true;
                     eventIDDataGridViewTextBoxColumn.Visible = true;
                     DAQIDDataGridViewTextBoxColumn.Visible = true;
@@ -114,20 +113,18 @@ namespace AppTest.FormType
                     break;
                 case (int)FormType.Set://Set 对信号进行筛选，只能选character
                     {
-                        LoadCharacters();
-
                         eventNameDataGridViewTextBoxColumn.Visible = false;
                         eventIDDataGridViewTextBoxColumn.Visible = false;
                         DAQIDDataGridViewTextBoxColumn.Visible = false;
                     }
                     break;
                 default:
-                    LoadAllSignals();
                     eventNameDataGridViewTextBoxColumn.Visible = false;
                     eventIDDataGridViewTextBoxColumn.Visible = false;
                     DAQIDDataGridViewTextBoxColumn.Visible = false;
                     break;
             }
+            LoadSingalToTreeView(allSingals);
         }
 
         protected override bool CheckNameNull()
@@ -189,20 +186,12 @@ namespace AppTest.FormType
                 allSingals.xCPSignalList = new List<XCPSignal>();
                 foreach (var signal in await BaseProtocol.GetSingalsByProtocolTask(projectItem.CanIndex.Find(x => x.CanChannel == CurrentCanValue).ProtocolType, fileNames))
                 {
-                    if (signal is XCPSignal)
-                        allSingals.xCPSignalList.Add((XCPSignal)signal);
+                    if (signal is XCPSignal signal1)
+                        allSingals.xCPSignalList.Add(signal1);
                 }
 
                 allSingals.xCPSignalList.Sort();
-                foreach (var item in allSingals.xCPSignalList)
-                {
-                    if(cbbFormType.SelectedIndex == (int)FormType.Set)
-                    {
-                        if (!item.MeaOrCal)
-                            continue;
-                    }
-                    tvAllNode.Nodes.Add(item.SignalName);
-                }
+                LoadSingalToTreeView(allSingals);
             }
             catch (Exception ex)
             {
@@ -274,10 +263,7 @@ namespace AppTest.FormType
             {
                 result = allSingals.xCPSignalList;
             }
-            foreach (var item in result)
-            {
-                tvAllNode.Nodes.Add(item.SignalName);
-            }
+            LoadSingalToTreeView(result);
             //tvAllNode.ExpandAll();
         }
 
@@ -482,31 +468,60 @@ namespace AppTest.FormType
             return res;
         }
 
-        private void LoadCharacters()
+        private void LoadSingalToTreeView(XCPSignals signals)
         {
-            if (allSingals != null && allSingals.xCPSignalList != null && allSingals.xCPSignalList.Count > 0)
+            //if (formItem == null)
+            //    return;
+            //bool isGetForm = this.formItem.FormType == (int)FormType.Set;//不能用formItem,新建窗口没有FormItem
+            bool isGetForm = cbbFormType.SelectedIndex == (int)FormType.Set;
+            if (signals != null && signals.xCPSignalList != null && signals.xCPSignalList.Count > 0)
             {
                 tvAllNode.Nodes.Clear();
-                allSingals.xCPSignalList.Sort();
-                foreach (var item in allSingals.xCPSignalList)
+                signals.xCPSignalList.Sort();
+                foreach (var item in signals.xCPSignalList)
                 {
-                    if (item.MeaOrCal == false)
+                    if (isGetForm)//Get 窗口，不能加载measurement
+                    {
+                        if (item.MeaOrCal)//
+                            continue;
+                        else
+                        {
+                            tvAllNode.Nodes.Add(item.SignalName);
+                        }
+                    }
+                    else
+                    {
                         tvAllNode.Nodes.Add(item.SignalName);
+                    }
                 }
             }
         }
 
-        private void LoadAllSignals()
+        private void LoadSingalToTreeView(List<XCPSignal> signals)
         {
-            if (allSingals != null && allSingals.xCPSignalList != null && allSingals.xCPSignalList.Count > 0)
+            bool isGetForm = this.formItem.FormType == (int)FormType.Get;
+            if (signals != null && signals.Count > 0)
             {
                 tvAllNode.Nodes.Clear();
-                allSingals.xCPSignalList.Sort();
-                foreach (var item in allSingals.xCPSignalList)
+                signals.Sort();
+                foreach (var item in signals)
                 {
-                    tvAllNode.Nodes.Add(item.SignalName);
+                    if (isGetForm)//Get 窗口，不能加载measurement
+                    {
+                        if (item.MeaOrCal)//
+                            continue;
+                        else
+                        {
+                            tvAllNode.Nodes.Add(item.SignalName);
+                        }
+                    }
+                    else
+                    {
+                        tvAllNode.Nodes.Add(item.SignalName);
+                    }
                 }
             }
         }
+
     }
 }

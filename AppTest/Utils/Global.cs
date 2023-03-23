@@ -197,6 +197,9 @@ namespace AppTest.Helper
          * XCP信号调整顺序
          * 修复新建XCP窗口，信号名显示不全
          * 修复Set下拉框信号名显示不全
+         * 
+         * 【DAQGet】窗口增加最值判断，超限变红
+         * 修复修改XCP信号时，当窗口类型为【Set】时，初始化信号错误的bug
          */
 
         /// <summary>

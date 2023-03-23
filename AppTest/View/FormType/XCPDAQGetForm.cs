@@ -125,22 +125,31 @@ namespace AppTest.FormType
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            ShowSignalInfo(e);
+            vm.ShowSignalDetai(this.dataGridView1, e);
         }
 
-        protected virtual void ShowSignalInfo(DataGridViewCellEventArgs e)
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            try
+            if (dataGridView1.Columns[e.ColumnIndex].DataPropertyName == "StrValue")
             {
-                if (e.RowIndex < 0)
-                    return;
-                var signal = dataGridView1.Rows[e.RowIndex].DataBoundItem as XCPSignal;
-                SignalItemForm<XCPSignal> siF = new SignalItemForm<XCPSignal>(signal, signal.SignalName);
-                siF.Show();
-            }
-            catch (Exception ex)
-            {
-                ShowLog(ex.Message);
+                try
+                {
+                    var v = Convert.ToDouble(e.Value);
+                    var signal = dataGridView1.Rows[e.RowIndex].DataBoundItem as BaseSignal;
+                    if (v > signal.Maximum || v < signal.Minimum)
+                    {
+                        dataGridView1.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                    }
+                    else
+                    {
+                        dataGridView1.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Black;
+                    }
+                }
+                catch
+                {
+                    dataGridView1.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
+                }
+
             }
         }
     }

@@ -202,5 +202,11 @@ namespace AppTest.FormType
             LogHelper.WriteToOutput(this.Name, "描点结束,使用了" + times + "毫秒");
         }
 
+        protected override void ModifiedSignals()
+        {
+            vm.ModifiedSignals();
+            ReLoadSignal();
+        }
+
     }
 }

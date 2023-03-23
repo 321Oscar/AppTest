@@ -39,8 +39,23 @@
             this.btnUp = new System.Windows.Forms.Button();
             this.btnDown = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.signalNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EventNameColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.customNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cycleTimeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lengthDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.minimumDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.maximumDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startBitDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.byteOrderDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MessageIDColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.valueTypeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.factorDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.offsetDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.strValueDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commentDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dBCSignalBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel4 = new System.Windows.Forms.Panel();
             this.btnCustomSignal = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -64,32 +79,17 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.signalNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.customNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cycleTimeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lengthDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.minimumDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.maximumDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startBitDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.byteOrderDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valueTypeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.factorDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.offsetDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.strValueDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commentDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dBCSignalBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource)).BeginInit();
             this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -175,10 +175,66 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             // 
+            // signalNameDataGridViewTextBoxColumn1
+            // 
+            this.signalNameDataGridViewTextBoxColumn1.DataPropertyName = "SignalName";
+            resources.ApplyResources(this.signalNameDataGridViewTextBoxColumn1, "signalNameDataGridViewTextBoxColumn1");
+            this.signalNameDataGridViewTextBoxColumn1.Name = "signalNameDataGridViewTextBoxColumn1";
+            this.signalNameDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
             // EventNameColumn
             // 
             resources.ApplyResources(this.EventNameColumn, "EventNameColumn");
             this.EventNameColumn.Name = "EventNameColumn";
+            // 
+            // customNameDataGridViewTextBoxColumn1
+            // 
+            this.customNameDataGridViewTextBoxColumn1.DataPropertyName = "CustomName";
+            resources.ApplyResources(this.customNameDataGridViewTextBoxColumn1, "customNameDataGridViewTextBoxColumn1");
+            this.customNameDataGridViewTextBoxColumn1.Name = "customNameDataGridViewTextBoxColumn1";
+            // 
+            // cycleTimeDataGridViewTextBoxColumn1
+            // 
+            this.cycleTimeDataGridViewTextBoxColumn1.DataPropertyName = "CycleTime";
+            resources.ApplyResources(this.cycleTimeDataGridViewTextBoxColumn1, "cycleTimeDataGridViewTextBoxColumn1");
+            this.cycleTimeDataGridViewTextBoxColumn1.Name = "cycleTimeDataGridViewTextBoxColumn1";
+            // 
+            // lengthDataGridViewTextBoxColumn1
+            // 
+            this.lengthDataGridViewTextBoxColumn1.DataPropertyName = "Length";
+            resources.ApplyResources(this.lengthDataGridViewTextBoxColumn1, "lengthDataGridViewTextBoxColumn1");
+            this.lengthDataGridViewTextBoxColumn1.Name = "lengthDataGridViewTextBoxColumn1";
+            this.lengthDataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // minimumDataGridViewTextBoxColumn1
+            // 
+            this.minimumDataGridViewTextBoxColumn1.DataPropertyName = "Minimum";
+            resources.ApplyResources(this.minimumDataGridViewTextBoxColumn1, "minimumDataGridViewTextBoxColumn1");
+            this.minimumDataGridViewTextBoxColumn1.Name = "minimumDataGridViewTextBoxColumn1";
+            // 
+            // maximumDataGridViewTextBoxColumn1
+            // 
+            this.maximumDataGridViewTextBoxColumn1.DataPropertyName = "Maximum";
+            resources.ApplyResources(this.maximumDataGridViewTextBoxColumn1, "maximumDataGridViewTextBoxColumn1");
+            this.maximumDataGridViewTextBoxColumn1.Name = "maximumDataGridViewTextBoxColumn1";
+            // 
+            // unitDataGridViewTextBoxColumn1
+            // 
+            this.unitDataGridViewTextBoxColumn1.DataPropertyName = "Unit";
+            resources.ApplyResources(this.unitDataGridViewTextBoxColumn1, "unitDataGridViewTextBoxColumn1");
+            this.unitDataGridViewTextBoxColumn1.Name = "unitDataGridViewTextBoxColumn1";
+            // 
+            // startBitDataGridViewTextBoxColumn1
+            // 
+            this.startBitDataGridViewTextBoxColumn1.DataPropertyName = "StartBit";
+            resources.ApplyResources(this.startBitDataGridViewTextBoxColumn1, "startBitDataGridViewTextBoxColumn1");
+            this.startBitDataGridViewTextBoxColumn1.Name = "startBitDataGridViewTextBoxColumn1";
+            // 
+            // byteOrderDataGridViewTextBoxColumn1
+            // 
+            this.byteOrderDataGridViewTextBoxColumn1.DataPropertyName = "ByteOrder";
+            resources.ApplyResources(this.byteOrderDataGridViewTextBoxColumn1, "byteOrderDataGridViewTextBoxColumn1");
+            this.byteOrderDataGridViewTextBoxColumn1.Name = "byteOrderDataGridViewTextBoxColumn1";
             // 
             // MessageIDColumn
             // 
@@ -186,6 +242,40 @@
             resources.ApplyResources(this.MessageIDColumn, "MessageIDColumn");
             this.MessageIDColumn.Name = "MessageIDColumn";
             this.MessageIDColumn.ReadOnly = true;
+            // 
+            // valueTypeDataGridViewTextBoxColumn1
+            // 
+            this.valueTypeDataGridViewTextBoxColumn1.DataPropertyName = "ValueType";
+            resources.ApplyResources(this.valueTypeDataGridViewTextBoxColumn1, "valueTypeDataGridViewTextBoxColumn1");
+            this.valueTypeDataGridViewTextBoxColumn1.Name = "valueTypeDataGridViewTextBoxColumn1";
+            // 
+            // factorDataGridViewTextBoxColumn1
+            // 
+            this.factorDataGridViewTextBoxColumn1.DataPropertyName = "Factor";
+            resources.ApplyResources(this.factorDataGridViewTextBoxColumn1, "factorDataGridViewTextBoxColumn1");
+            this.factorDataGridViewTextBoxColumn1.Name = "factorDataGridViewTextBoxColumn1";
+            // 
+            // offsetDataGridViewTextBoxColumn1
+            // 
+            this.offsetDataGridViewTextBoxColumn1.DataPropertyName = "Offset";
+            resources.ApplyResources(this.offsetDataGridViewTextBoxColumn1, "offsetDataGridViewTextBoxColumn1");
+            this.offsetDataGridViewTextBoxColumn1.Name = "offsetDataGridViewTextBoxColumn1";
+            // 
+            // strValueDataGridViewTextBoxColumn1
+            // 
+            this.strValueDataGridViewTextBoxColumn1.DataPropertyName = "StrValue";
+            resources.ApplyResources(this.strValueDataGridViewTextBoxColumn1, "strValueDataGridViewTextBoxColumn1");
+            this.strValueDataGridViewTextBoxColumn1.Name = "strValueDataGridViewTextBoxColumn1";
+            // 
+            // commentDataGridViewTextBoxColumn1
+            // 
+            this.commentDataGridViewTextBoxColumn1.DataPropertyName = "Comment";
+            resources.ApplyResources(this.commentDataGridViewTextBoxColumn1, "commentDataGridViewTextBoxColumn1");
+            this.commentDataGridViewTextBoxColumn1.Name = "commentDataGridViewTextBoxColumn1";
+            // 
+            // dBCSignalBindingSource
+            // 
+            this.dBCSignalBindingSource.DataSource = typeof(AppTest.Model.DBCSignal);
             // 
             // panel4
             // 
@@ -358,96 +448,6 @@
             this.tableLayoutPanel2.Controls.Add(this.groupBox2, 0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
-            // signalNameDataGridViewTextBoxColumn1
-            // 
-            this.signalNameDataGridViewTextBoxColumn1.DataPropertyName = "SignalName";
-            resources.ApplyResources(this.signalNameDataGridViewTextBoxColumn1, "signalNameDataGridViewTextBoxColumn1");
-            this.signalNameDataGridViewTextBoxColumn1.Name = "signalNameDataGridViewTextBoxColumn1";
-            this.signalNameDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // customNameDataGridViewTextBoxColumn1
-            // 
-            this.customNameDataGridViewTextBoxColumn1.DataPropertyName = "CustomName";
-            resources.ApplyResources(this.customNameDataGridViewTextBoxColumn1, "customNameDataGridViewTextBoxColumn1");
-            this.customNameDataGridViewTextBoxColumn1.Name = "customNameDataGridViewTextBoxColumn1";
-            // 
-            // cycleTimeDataGridViewTextBoxColumn1
-            // 
-            this.cycleTimeDataGridViewTextBoxColumn1.DataPropertyName = "CycleTime";
-            resources.ApplyResources(this.cycleTimeDataGridViewTextBoxColumn1, "cycleTimeDataGridViewTextBoxColumn1");
-            this.cycleTimeDataGridViewTextBoxColumn1.Name = "cycleTimeDataGridViewTextBoxColumn1";
-            // 
-            // lengthDataGridViewTextBoxColumn1
-            // 
-            this.lengthDataGridViewTextBoxColumn1.DataPropertyName = "Length";
-            resources.ApplyResources(this.lengthDataGridViewTextBoxColumn1, "lengthDataGridViewTextBoxColumn1");
-            this.lengthDataGridViewTextBoxColumn1.Name = "lengthDataGridViewTextBoxColumn1";
-            this.lengthDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // minimumDataGridViewTextBoxColumn1
-            // 
-            this.minimumDataGridViewTextBoxColumn1.DataPropertyName = "Minimum";
-            resources.ApplyResources(this.minimumDataGridViewTextBoxColumn1, "minimumDataGridViewTextBoxColumn1");
-            this.minimumDataGridViewTextBoxColumn1.Name = "minimumDataGridViewTextBoxColumn1";
-            // 
-            // maximumDataGridViewTextBoxColumn1
-            // 
-            this.maximumDataGridViewTextBoxColumn1.DataPropertyName = "Maximum";
-            resources.ApplyResources(this.maximumDataGridViewTextBoxColumn1, "maximumDataGridViewTextBoxColumn1");
-            this.maximumDataGridViewTextBoxColumn1.Name = "maximumDataGridViewTextBoxColumn1";
-            // 
-            // unitDataGridViewTextBoxColumn1
-            // 
-            this.unitDataGridViewTextBoxColumn1.DataPropertyName = "Unit";
-            resources.ApplyResources(this.unitDataGridViewTextBoxColumn1, "unitDataGridViewTextBoxColumn1");
-            this.unitDataGridViewTextBoxColumn1.Name = "unitDataGridViewTextBoxColumn1";
-            // 
-            // startBitDataGridViewTextBoxColumn1
-            // 
-            this.startBitDataGridViewTextBoxColumn1.DataPropertyName = "StartBit";
-            resources.ApplyResources(this.startBitDataGridViewTextBoxColumn1, "startBitDataGridViewTextBoxColumn1");
-            this.startBitDataGridViewTextBoxColumn1.Name = "startBitDataGridViewTextBoxColumn1";
-            // 
-            // byteOrderDataGridViewTextBoxColumn1
-            // 
-            this.byteOrderDataGridViewTextBoxColumn1.DataPropertyName = "ByteOrder";
-            resources.ApplyResources(this.byteOrderDataGridViewTextBoxColumn1, "byteOrderDataGridViewTextBoxColumn1");
-            this.byteOrderDataGridViewTextBoxColumn1.Name = "byteOrderDataGridViewTextBoxColumn1";
-            // 
-            // valueTypeDataGridViewTextBoxColumn1
-            // 
-            this.valueTypeDataGridViewTextBoxColumn1.DataPropertyName = "ValueType";
-            resources.ApplyResources(this.valueTypeDataGridViewTextBoxColumn1, "valueTypeDataGridViewTextBoxColumn1");
-            this.valueTypeDataGridViewTextBoxColumn1.Name = "valueTypeDataGridViewTextBoxColumn1";
-            // 
-            // factorDataGridViewTextBoxColumn1
-            // 
-            this.factorDataGridViewTextBoxColumn1.DataPropertyName = "Factor";
-            resources.ApplyResources(this.factorDataGridViewTextBoxColumn1, "factorDataGridViewTextBoxColumn1");
-            this.factorDataGridViewTextBoxColumn1.Name = "factorDataGridViewTextBoxColumn1";
-            // 
-            // offsetDataGridViewTextBoxColumn1
-            // 
-            this.offsetDataGridViewTextBoxColumn1.DataPropertyName = "Offset";
-            resources.ApplyResources(this.offsetDataGridViewTextBoxColumn1, "offsetDataGridViewTextBoxColumn1");
-            this.offsetDataGridViewTextBoxColumn1.Name = "offsetDataGridViewTextBoxColumn1";
-            // 
-            // strValueDataGridViewTextBoxColumn1
-            // 
-            this.strValueDataGridViewTextBoxColumn1.DataPropertyName = "StrValue";
-            resources.ApplyResources(this.strValueDataGridViewTextBoxColumn1, "strValueDataGridViewTextBoxColumn1");
-            this.strValueDataGridViewTextBoxColumn1.Name = "strValueDataGridViewTextBoxColumn1";
-            // 
-            // commentDataGridViewTextBoxColumn1
-            // 
-            this.commentDataGridViewTextBoxColumn1.DataPropertyName = "Comment";
-            resources.ApplyResources(this.commentDataGridViewTextBoxColumn1, "commentDataGridViewTextBoxColumn1");
-            this.commentDataGridViewTextBoxColumn1.Name = "commentDataGridViewTextBoxColumn1";
-            // 
-            // dBCSignalBindingSource
-            // 
-            this.dBCSignalBindingSource.DataSource = typeof(AppTest.Model.DBCSignal);
-            // 
             // AddNewForm
             // 
             resources.ApplyResources(this, "$this");
@@ -464,6 +464,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -472,7 +473,6 @@
             this.groupBox2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

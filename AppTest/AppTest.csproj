@@ -758,14 +758,17 @@
     <None Include="Resources\menu.png" />
     <None Include="Resources\close.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\..\测试流程\TestFlowControl\ELFTest\ELFTest.csproj">
-      <Project>{CB24D50B-400A-4D25-BFB6-6C0C85791C7F}</Project>
+    <ProjectReference Include="..\..\..\Platforms\DBCLibrary\DBCLibrary.csproj">
+      <Project>{8b9cb7ea-2149-4a1c-962e-593ff6c6c8e5}</Project>
+      <Name>DBCLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Platforms\ELFTest\ELFTest.csproj">
+      <Project>{cb24d50b-400a-4d25-bfb6-6c0c85791c7f}</Project>
       <Name>ELFTest</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\测试流程\TestFlowControl\LPCanControl\LPCanControl.csproj">
-      <Project>{2D4A9545-CBAB-4D8D-82C3-74C2C5B9B4BB}</Project>
+    <ProjectReference Include="..\..\..\Platforms\LPCanControl\LPCanControl.csproj">
+      <Project>{2d4a9545-cbab-4d8d-82c3-74c2c5b9b4bb}</Project>
       <Name>LPCanControl</Name>
     </ProjectReference>
   </ItemGroup>

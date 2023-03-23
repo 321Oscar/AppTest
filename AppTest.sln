@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppTest", "AppTest\AppTest.csproj", "{FBF79F49-15E8-44D2-B299-DDBB9F302C17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPCanControl", "..\..\测试流程\TestFlowControl\LPCanControl\LPCanControl.csproj", "{2D4A9545-CBAB-4D8D-82C3-74C2C5B9B4BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LPCanControl", "..\..\Platforms\LPCanControl\LPCanControl.csproj", "{2D4A9545-CBAB-4D8D-82C3-74C2C5B9B4BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELFTest", "..\..\测试流程\TestFlowControl\ELFTest\ELFTest.csproj", "{CB24D50B-400A-4D25-BFB6-6C0C85791C7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBCLibrary", "..\..\Platforms\DBCLibrary\DBCLibrary.csproj", "{8B9CB7EA-2149-4A1C-962E-593FF6C6C8E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ELFTest", "..\..\Platforms\ELFTest\ELFTest.csproj", "{CB24D50B-400A-4D25-BFB6-6C0C85791C7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{2D4A9545-CBAB-4D8D-82C3-74C2C5B9B4BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D4A9545-CBAB-4D8D-82C3-74C2C5B9B4BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D4A9545-CBAB-4D8D-82C3-74C2C5B9B4BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B9CB7EA-2149-4A1C-962E-593FF6C6C8E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B9CB7EA-2149-4A1C-962E-593FF6C6C8E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B9CB7EA-2149-4A1C-962E-593FF6C6C8E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B9CB7EA-2149-4A1C-962E-593FF6C6C8E5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CB24D50B-400A-4D25-BFB6-6C0C85791C7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CB24D50B-400A-4D25-BFB6-6C0C85791C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB24D50B-400A-4D25-BFB6-6C0C85791C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU

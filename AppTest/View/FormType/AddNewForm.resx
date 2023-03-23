@@ -157,7 +157,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="tbFormName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 23</value>
+    <value>127, 23</value>
   </data>
   <data name="tbFormName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -277,10 +277,10 @@
     <value>Fill</value>
   </data>
   <data name="panel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>505, 53</value>
+    <value>603, 53</value>
   </data>
   <data name="panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 128</value>
+    <value>46, 290</value>
   </data>
   <data name="panel5.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -454,13 +454,13 @@
     <value>Fill</value>
   </data>
   <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 53</value>
+    <value>353, 53</value>
   </data>
   <data name="dataGridView1.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 128</value>
+    <value>244, 290</value>
   </data>
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -511,10 +511,10 @@
     <value>Fill</value>
   </data>
   <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 3</value>
+    <value>353, 3</value>
   </data>
   <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 44</value>
+    <value>244, 44</value>
   </data>
   <data name="panel4.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -586,10 +586,10 @@
     <value>Fill</value>
   </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 53</value>
+    <value>253, 53</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 128</value>
+    <value>94, 290</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -606,6 +606,9 @@
   <data name="&gt;&gt;panel3.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="tbSignalText.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
   <data name="tbSignalText.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 11</value>
   </data>
@@ -613,7 +616,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="tbSignalText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 23</value>
+    <value>146, 23</value>
   </data>
   <data name="tbSignalText.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -630,8 +633,11 @@
   <data name="&gt;&gt;tbSignalText.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="metroButton_Query.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Right</value>
+  </data>
   <data name="metroButton_Query.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 11</value>
+    <value>155, 11</value>
   </data>
   <data name="metroButton_Query.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 24</value>
@@ -661,7 +667,7 @@
     <value>3, 3</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 44</value>
+    <value>244, 44</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -688,7 +694,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="tvAllNode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 126</value>
+    <value>244, 288</value>
   </data>
   <data name="tvAllNode.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -715,7 +721,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>554, 184</value>
+    <value>652, 346</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -748,7 +754,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>560, 208</value>
+    <value>658, 370</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -994,7 +1000,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>560, 71</value>
+    <value>658, 71</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1018,7 +1024,7 @@
     <value>Top, Right</value>
   </data>
   <data name="metroButton_Cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>452, 3</value>
+    <value>550, 3</value>
   </data>
   <data name="metroButton_Cancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 33</value>
@@ -1045,7 +1051,7 @@
     <value>Top, Right</value>
   </data>
   <data name="metroButton_Ok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>356, 5</value>
+    <value>454, 5</value>
   </data>
   <data name="metroButton_Ok.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 33</value>
@@ -1072,13 +1078,13 @@
     <value>Fill</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 279</value>
+    <value>0, 441</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>560, 41</value>
+    <value>658, 41</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1174,7 +1180,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>560, 320</value>
+    <value>658, 482</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1204,7 +1210,7 @@
     <value>7, 17</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>600, 400</value>
+    <value>698, 562</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>微软雅黑, 9pt</value>
@@ -1221,23 +1227,17 @@
   <data name="$this.Text" xml:space="preserve">
     <value>新建</value>
   </data>
-  <data name="&gt;&gt;EventNameColumn.Name" xml:space="preserve">
-    <value>EventNameColumn</value>
-  </data>
-  <data name="&gt;&gt;EventNameColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MessageIDColumn.Name" xml:space="preserve">
-    <value>MessageIDColumn</value>
-  </data>
-  <data name="&gt;&gt;MessageIDColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;signalNameDataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>signalNameDataGridViewTextBoxColumn1</value>
   </data>
   <data name="&gt;&gt;signalNameDataGridViewTextBoxColumn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;EventNameColumn.Name" xml:space="preserve">
+    <value>EventNameColumn</value>
+  </data>
+  <data name="&gt;&gt;EventNameColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;customNameDataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>customNameDataGridViewTextBoxColumn1</value>
@@ -1285,6 +1285,12 @@
     <value>byteOrderDataGridViewTextBoxColumn1</value>
   </data>
   <data name="&gt;&gt;byteOrderDataGridViewTextBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MessageIDColumn.Name" xml:space="preserve">
+    <value>MessageIDColumn</value>
+  </data>
+  <data name="&gt;&gt;MessageIDColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;valueTypeDataGridViewTextBoxColumn1.Name" xml:space="preserve">

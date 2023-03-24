@@ -15,7 +15,7 @@ namespace AppTest.Helper
     {
         private static readonly log4net.ILog logWarn = log4net.LogManager.GetLogger("Warn");
         private static readonly log4net.ILog logError = log4net.LogManager.GetLogger("Error");
-        private static readonly log4net.ILog logDebug = log4net.LogManager.GetLogger("LogDebug");
+        //private static readonly log4net.ILog logDebug = log4net.LogManager.GetLogger("LogDebug");
         private static readonly log4net.ILog logInfo = log4net.LogManager.GetLogger("LogInfo");
         private static readonly log4net.ILog logSend = log4net.LogManager.GetLogger("LogSend");
         private static readonly log4net.ILog logReceive = log4net.LogManager.GetLogger("LogReceive");
@@ -141,13 +141,13 @@ namespace AppTest.Helper
             }
         }
 
-        public static void Debug(string content)
-        {
-            if (logDebug.IsDebugEnabled)
-            {
-                logDebug.Debug(content);
-            }
-        }
+        //public static void Debug(string content)
+        //{
+        //    if (logDebug.IsDebugEnabled)
+        //    {
+        //        logDebug.Debug(content);
+        //    }
+        //}
 
         public static void Warn(string type,string formName,string info)
         {

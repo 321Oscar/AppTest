@@ -25,7 +25,7 @@ namespace AppTest.FormType
     internal class FormCreateHelper
     {
 
-        public static BaseDataForm CreateForm(FormItem formItem, ProjectItem owner)
+        public static BaseDataForm CreateForm(FormItem formItem, ProjectItem owner, DependencyXCPDAQSignals dependencyXCPDAQ = null)
         {
             BaseDataForm userForm = null;
 
@@ -69,10 +69,10 @@ namespace AppTest.FormType
                     userForm = new RollingCounterForm();
                     break;
                 case FormType.XCP_DAQ:
-                    userForm = new XCPDAQGetForm();
+                    userForm = new XCPDAQGetForm(dependencyXCPDAQ);
                     break;
                 case FormType.XCP_DAQScope:
-                    userForm = new XCPDAQScopeForm();
+                    userForm = new XCPDAQScopeForm(dependencyXCPDAQ);
                     break;
             }
             if (userForm == null)

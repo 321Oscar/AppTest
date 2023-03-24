@@ -47,6 +47,7 @@ namespace AppTest
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.startDAQToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -179,7 +180,8 @@ namespace AppTest
             // xCPToolStripMenuItem
             // 
             this.xCPToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.xCPInfoToolStripMenuItem});
+            this.xCPInfoToolStripMenuItem,
+            this.startDAQToolStripMenuItem});
             this.xCPToolStripMenuItem.Name = "xCPToolStripMenuItem";
             this.xCPToolStripMenuItem.Size = new System.Drawing.Size(43, 22);
             this.xCPToolStripMenuItem.Text = "XCP";
@@ -211,6 +213,13 @@ namespace AppTest
             this.statusStrip1.Size = new System.Drawing.Size(536, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // startDAQToolStripMenuItem
+            // 
+            this.startDAQToolStripMenuItem.Name = "startDAQToolStripMenuItem";
+            this.startDAQToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startDAQToolStripMenuItem.Text = "StartDAQ";
+            this.startDAQToolStripMenuItem.Click += new System.EventHandler(this.startDAQToolStripMenuItem_Click);
             // 
             // ProjectForm
             // 
@@ -257,5 +266,6 @@ namespace AppTest
         private System.Windows.Forms.ToolStripButton tsp_ImportElf;
         private System.Windows.Forms.ToolStripMenuItem xCPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xCPInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startDAQToolStripMenuItem;
     }
 }

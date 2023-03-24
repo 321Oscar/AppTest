@@ -141,7 +141,7 @@ namespace AppTest.FormType
             //base.OnDataRecieveEvent(sender, args);
         }
 
-        protected override void AddValuetoPlotter()
+        protected override void AddValuetoPlotter(object obj)
         {
             return;
             sw.Reset();

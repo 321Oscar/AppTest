@@ -21,12 +21,14 @@ namespace AppTest.FormType
         //XCPModule XcpModule;
         //private Dictionary<int, List<byte>> recieveData;
         readonly XCPDAQGetViewModel vm;
+        readonly DependencyXCPDAQSignals _dependencyXCPDAQSignals;
 
-        public XCPDAQGetForm()
+        public XCPDAQGetForm(DependencyXCPDAQSignals dependencyXCPDAQSignals)
         {
             InitializeComponent();
 
             vm = new XCPDAQGetViewModel(this);
+            _dependencyXCPDAQSignals = dependencyXCPDAQSignals;
 
             base.MDIModeVisible = false;
 
@@ -40,6 +42,7 @@ namespace AppTest.FormType
         protected override void InitSignalUC()
         {
             vm.XCPSignals = this.FormItem.XCPSingals;
+            _dependencyXCPDAQSignals.Add(this.FormItem.XCPSingals,this.Name);
             BindingList<XCPSignal> bs = new BindingList<XCPSignal>(vm.XCPSignals.xCPSignalList);
             this.dataGridView1.DataSource = bs;
 
@@ -65,18 +68,18 @@ namespace AppTest.FormType
         {
             base.ReLoadSignal();
 
-            vm.XcpModule.StartStopDAQ(0x00, (uint)this.CanChannel);
+            //_dependencyXCPDAQSignals.XcpModule.StartStopDAQ(0x00, (uint)this.CanChannel);
             IsGetdata = false;
 
-            if (!vm.InitDAQ((uint)this.CanChannel))
-            {
+            //if (!_dependencyXCPDAQSignals.InitDAQ((uint)this.CanChannel))
+            //{
                 
-            }
-            else
-            {
-                vm.XcpModule.StartStopDAQ(0x01, (uint)this.CanChannel);
-                IsGetdata = true;
-            }
+            //}
+            //else
+            //{
+            //    _dependencyXCPDAQSignals.XcpModule.StartStopDAQ(0x01, (uint)this.CanChannel);
+            //    IsGetdata = true;
+            //}
         }
 
         protected override void InitStateStrip()
@@ -87,21 +90,21 @@ namespace AppTest.FormType
 
         public override void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
         {
-            vm.OnDataRecieveEvent(sender, args);
+            //_dependencyXCPDAQSignals.OnDataRecieveEvent(sender, args);
         }
 
         protected override void ModifiedGetdata(bool get)
         {
             metroButtonStart.Text = !get ? "Start" : "Stop";
             ShowLog("");
-            RegisterOrUnRegisterDataRecieve(get);
+            //_dependencyXCPDAQSignals.RegisterOrUnRegisterDataRecieve(get, OwnerProject, CanChannel);
         }
 
         private void metroButtonStart_Click(object sender, EventArgs e)
         {
             if (IsGetdata)//正在获取数据
             {
-                vm.XcpModule.StartStopDAQ(0x00, (uint)this.CanChannel);
+                //vm.XcpModule.StartStopDAQ(0x00, (uint)this.CanChannel);
                 IsGetdata = false;
             }
             else
@@ -112,20 +115,20 @@ namespace AppTest.FormType
                     return;
                 }
 
-                if (!vm.InitDAQ((uint)this.CanChannel))
-                {
-                    LeapMessageBox.Instance.ShowInfo("DAQ配置失败!");
-                    return;
-                }
+                //if (!_dependencyXCPDAQSignals.InitDAQ((uint)this.CanChannel))
+                //{
+                //    LeapMessageBox.Instance.ShowInfo("DAQ配置失败!");
+                //    return;
+                //}
 
-                vm.XcpModule.StartStopDAQ(0x01, (uint)this.CanChannel);
+                //vm.XcpModule.StartStopDAQ(0x01, (uint)this.CanChannel);
                 IsGetdata = true;
             }
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            vm.ShowSignalDetai(this.dataGridView1, e);
+            vm.ShowSignalDetail(this.dataGridView1, e);
         }
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

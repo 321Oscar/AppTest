@@ -24,12 +24,16 @@ namespace AppTest.FormType
     public partial class XCPDAQScopeForm : MeasureForm
     {
         readonly XCPDAQGetViewModel vm;
+        readonly DependencyXCPDAQSignals _dependencyXCPDAQSignals;
 
-        public XCPDAQScopeForm() : base(ProtocolType.XCP)
+
+        public XCPDAQScopeForm(DependencyXCPDAQSignals dependencyXCPDAQSignals) : base(ProtocolType.XCP)
         {
             InitializeComponent();
 
             vm = new XCPDAQGetViewModel(this);
+
+            _dependencyXCPDAQSignals = dependencyXCPDAQSignals;
             //plotView1.Model.Axes.Clear();
 
             //plotView1.Model.Axes.Add(new LinearAxis() { Position = AxisPosition.Bottom});
@@ -44,6 +48,9 @@ namespace AppTest.FormType
             }
 
             vm.XCPSignals = this.FormItem.XCPSingals;
+            _dependencyXCPDAQSignals.Add(this.FormItem.XCPSingals, this.Name);
+
+            //vm.XCPSignals = new XCPSignals() { xCPSignalList = _dependencyXCPDAQSignals.XCPSignalsByForm[this.Name]};
 
             AddLinetoPlotFromSignal();
 
@@ -118,35 +125,65 @@ namespace AppTest.FormType
 
         protected override void ModifiedGetdata(bool get)
         {
-            if (get)
-            {
-                var initDaqTrue = vm.InitDAQ((uint)this.CanChannel);
-                if (!initDaqTrue)
-                {
-                    LeapMessageBox.Instance.ShowInfo($"DAQ 配置{(initDaqTrue ? "成功" : "失败")}");
-                    return;
-                }
-                vm.XcpModule.StartStopDAQ(0x01, (uint)this.CanChannel);
-                LeapMessageBox.Instance.ShowInfo($"DAQ 启动");
-            }
-            else
-            {
-                /// stop daq
-                vm.XcpModule.StartStopDAQ(0x00, (uint)this.CanChannel);
-            }
-            base.ModifiedGetdata(get);
+            //if (get)
+            //{
+            //    var initDaqTrue = _dependencyXCPDAQSignals.InitDAQ((uint)this.CanChannel);
+            //    if (!initDaqTrue)
+            //    {
+            //        LeapMessageBox.Instance.ShowInfo($"DAQ 配置{(initDaqTrue ? "成功" : "失败")}");
+            //        return;
+            //    }
+            //    vm.XcpModule.StartStopDAQ(0x01, (uint)this.CanChannel);
+            //    LeapMessageBox.Instance.ShowInfo($"DAQ 启动");
+            //}
+            //else
+            //{
+            //    /// stop daq
+            //    vm.XcpModule.StartStopDAQ(0x00, (uint)this.CanChannel);
+            //}
+            MidifiedControl(get);
+            //_dependencyXCPDAQSignals.RegisterOrUnRegisterDataRecieve(get, OwnerProject, CanChannel);
         }
 
         public override void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
         {
-            vm.OnDataRecieveEvent(sender, args);
+            return;
+            //_dependencyXCPDAQSignals.OnDataRecieveEvent(sender, args);
             //}
         }
 
-        protected override void AddValuetoPlotter()
+        protected override void AddValuetoPlotter(object obj)
         {
-            sw.Reset();
-            sw.Restart();
+            int timeSpan = (int)obj;
+            do
+            {
+                if (plotView1.InvokeRequired)
+                {
+                    plotView1.Invoke(new Action(() => {
+                        ShowLog("");
+                        foreach (var item in vm.XCPSignals.xCPSignalList)
+                        {
+                            var lineSer2 = plotView1.Model.Series.Where(x => x.Title == item.SignalName).ToArray()[0] as LineSeries;
+
+                            DateTime dt = DateTime.Now;
+                            plotModel.Axes[0].Maximum = DateTimeAxis.ToDouble(dt.AddSeconds(1));
+
+                            lineSer2.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dt), Convert.ToDouble(item.StrValue)));
+                            LogHelper.WriteToOutput(this.Name, $"{item.SignalName} 添加点【{item.StrValue}】,");
+                            if (lineSer2.Points.Count > CurvePointMaxCount)
+                            {
+                                lineSer2.Points.RemoveAt(0);
+                            }
+                        }
+                        plotModel.InvalidatePlot(true);
+                    }));
+                }
+
+                Thread.Sleep(timeSpan);
+            } while (IsGetdata);
+
+            return;
+
             ShowLog("");
             foreach (var item in vm.XCPSignals.xCPSignalList)
             {
@@ -156,6 +193,7 @@ namespace AppTest.FormType
                 plotModel.Axes[0].Maximum = DateTimeAxis.ToDouble(dt.AddSeconds(1));
 
                 lineSer2.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dt), Convert.ToDouble(item.StrValue)));
+                Console.WriteLine( $"{item.SignalName} 添加点【{item.StrValue}】,", this.Name);
                 plotModel.Axes[0].Maximum = DateTimeAxis.ToDouble(dt.AddSeconds(1));
 #else //使用时间戳作为X轴
                 plotModel.Axes[0].Maximum = item.TimeStamp + 1;
@@ -197,9 +235,6 @@ namespace AppTest.FormType
                 }
             }
             plotModel.InvalidatePlot(true);
-            sw.Stop();
-            long times = sw.ElapsedMilliseconds;
-            LogHelper.WriteToOutput(this.Name, "描点结束,使用了" + times + "毫秒");
         }
 
         protected override void ModifiedSignals()

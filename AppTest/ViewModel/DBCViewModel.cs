@@ -29,7 +29,7 @@ namespace AppTest.ViewModel
             }
         }
 
-        public override void ShowSignalDetai(DataGridView dataGridView, DataGridViewCellEventArgs e)
+        public override void ShowSignalDetail(DataGridView dataGridView, DataGridViewCellEventArgs e)
         {
             try
             {

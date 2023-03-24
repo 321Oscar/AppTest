@@ -2,6 +2,7 @@
 using AppTest.FormType.Helper;
 using AppTest.Helper;
 using AppTest.Model;
+using AppTest.ViewModel;
 using ELFSharp.ELF;
 using ELFSharp.ELF.Sections;
 using ELFTest;
@@ -19,6 +20,7 @@ using System.Windows.Forms;
 
 namespace AppTest
 {
+    
     public partial class ProjectForm : BaseForm
     {
         #region 打开动画
@@ -108,6 +110,8 @@ namespace AppTest
         /// XCP Event Name
         /// </summary>
         public List<string> XCPEventName { get; set; }
+
+        public DependencyXCPDAQSignals dependencyXCPDAQSignals;
 
         public ProjectForm()
         {
@@ -232,7 +236,7 @@ namespace AppTest
                         //open Form 
                         if (form.IsOpen && openForm)
                         {
-                            BaseDataForm userForm = FormCreateHelper.CreateForm(form, this.projectItem);
+                            BaseDataForm userForm = FormCreateHelper.CreateForm(form, this.projectItem,this.dependencyXCPDAQSignals);
                             userForm.MdiContainer = this;
                             userForm.MdiParent = this;
                            // userForm.Parent = this;
@@ -278,7 +282,7 @@ namespace AppTest
             {
                 
                 FormItem formItem = (item.Tag as FormItem);
-                BaseDataForm userForm = FormCreateHelper.CreateForm(formItem, this.projectItem);
+                BaseDataForm userForm = FormCreateHelper.CreateForm(formItem, this.projectItem, this.dependencyXCPDAQSignals);
                 //userForm.Delete += UserForm_Delete;
                 if (userForm == null)
                     return;
@@ -337,7 +341,7 @@ namespace AppTest
                 }
                 this.projectItem.Form.Add(addNewForm.FormItem);
                 //IsAdded = true;
-                BaseDataForm userForm = FormCreateHelper.CreateForm(addNewForm.FormItem, projectItem);
+                BaseDataForm userForm = FormCreateHelper.CreateForm(addNewForm.FormItem, projectItem, this.dependencyXCPDAQSignals);
                 if (userForm != null)
                 {
                     userForm.MdiContainer = this;
@@ -614,6 +618,9 @@ namespace AppTest
                 this.XcpModule.OnCMDStatusChanged += XcpModule_OnCMDStatusChanged;
                 this.xcpModule.OnConnectStatusChanged += XcpModule_OnConnectStatusChanged;
                 this.xCPToolStripMenuItem.Visible = true;
+
+                this.dependencyXCPDAQSignals = new DependencyXCPDAQSignals();
+                dependencyXCPDAQSignals.XcpModule = this.xcpModule;
             }
 
             await InitForms(true);
@@ -842,5 +849,250 @@ namespace AppTest
             da += $"transport version:{XcpModule.XCP_Transport_Version}\n\r";
             MessageBox.Show(da);
         }
+
+        private void startDAQToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dependencyXCPDAQSignals.RegisterOrUnRegisterDataRecieve(this.projectItem, canChannel: (int)CurrentCanValue);
+        }
     }
+
+    /// <summary>
+    /// XCP DAQ 配置
+    /// </summary>
+    public class DependencyXCPDAQSignals : XCPDAQViewModel
+    {
+        public DependencyXCPDAQSignals()
+        {
+            XCPSignals = new XCPSignals() { xCPSignalList = new List<XCPSignal>() };
+        }
+
+        public Dictionary<string, List<XCPSignal>> XCPSignalsByForm { get; private set; } = new Dictionary<string, List<XCPSignal>>();
+
+        public void Add(XCPSignal signal, string formName,ref XCPSignal refSignal)
+        {
+            if (XCPSignalsByForm.ContainsKey(formName))
+            {
+                if (!XCPSignalsByForm[formName].Contains(signal))
+                    XCPSignalsByForm[formName].Add(signal);
+            }
+            else
+            {
+                XCPSignalsByForm.Add(formName, new List<XCPSignal> { signal });
+            }
+
+            if (!XCPSignals.xCPSignalList.Contains(signal))
+            {
+                XCPSignals.xCPSignalList.Add(signal);
+            }
+            else
+            {
+                refSignal = XCPSignals.xCPSignalList.Find(x => x.SignalName == signal.SignalName);
+            }
+        }
+
+        public void Add(List<XCPSignal> signals, string formName)
+        {
+            for (int i = 0; i < signals.Count; i++)
+            {
+                XCPSignal s = null;
+                Add(signals[i], formName,ref s);
+                if (s != null)
+                    signals[i] = s;
+            }
+        }
+
+        public void Add(XCPSignals signals, string formName)
+        {
+            for (int i = 0; i < signals.xCPSignalList.Count; i++)
+            {
+                XCPSignal s = null;
+                Add(signals.xCPSignalList[i], formName, ref s);
+                if (s != null)
+                    signals.xCPSignalList[i] = s;
+            }
+        }
+
+        public void Remove(XCPSignal signal, string formName)
+        {
+            //删除form所属的信号
+            if (XCPSignalsByForm.ContainsKey(formName))
+            {
+                XCPSignalsByForm[formName].Remove(signal);
+            }
+            //是否需要从DAQ中删除
+            bool remove = true;
+            //查找每个Form
+            foreach (var item in XCPSignalsByForm)
+            {
+                if (item.Value.Contains(signal))
+                    remove = false;
+            }
+
+            if (remove)
+            {
+                XCPSignals.xCPSignalList.Remove(signal);
+            }
+        }
+
+        /// <summary>
+        /// 是否在获取数据，true/false
+        /// </summary>
+        public bool GetDataState { get; set; } = false;
+
+        public void RegisterOrUnRegisterDataRecieve(ProjectItem ownerProject,int canChannel)
+        {
+            GetDataState = !GetDataState;
+            USBCanManager.Instance.Register(ownerProject, OnDataRecieveEvent, canChannel, GetDataState);
+            if (GetDataState)
+            {
+                //启动
+                InitDAQ((uint)canChannel);
+                XcpModule.StartStopDAQ(0x01, (uint)canChannel);
+            }
+            else
+            {
+                //停止
+                XcpModule.StartStopDAQ(0x00, (uint)canChannel);
+            }
+        }
+
+        public override bool InitDAQ(uint canChannel)
+        {
+            foreach (var item in XCPSignals.xCPSignalList)
+            {
+                item.StrValue = "0";
+            }
+
+            recieveData = new Dictionary<int, List<byte>>();
+            DAQList.Clear();
+            //根据事件ID排序
+            this.XCPSignals.xCPSignalList.Sort((x, y) => { return x.EventID.CompareTo(y.EventID); });
+            foreach (var signal in this.XCPSignals.xCPSignalList)
+            {
+                DAQList.AddSignal(signal);
+            }
+
+            foreach (var daq in DAQList.DAQs)
+            {
+                recieveData.Add(daq.Event_Channel_Number, new List<byte>());
+            }
+
+            var initDaqTrue = XcpModule.SetDAQ(DAQList.DAQs, canChannel);
+            if (!initDaqTrue)
+            {
+                LogHelper.Info($"DAQ 配置{(initDaqTrue ? "成功" : "失败")}");
+            }
+            return initDaqTrue;
+        }
+
+        public override async Task ParseResponeToXCPSignalAsync(List<byte> data, int eventIndex)
+        {
+            var signals = XCPSignals.xCPSignalList.FindAll(x => x.EventID == eventIndex);
+            //解析时间戳
+            int timestamp = BitConverterExt.ToUInt16(data.ToArray(), 0, 0);
+            List<SignalEntity> signalEntities = new List<SignalEntity>();
+            var datatimeStr = DateTime.Now.ToString(Global.DATETIMEFORMAT);
+            foreach (var signal in signals)
+            {
+                byte size = (byte)signal.Length;
+                var da = new byte[size];
+                try
+                {
+                    for (int i = 0; i < size; i++)
+                    {
+                        da[i] = data[signal.StartIndex + i + 2];
+                    }
+                    signal.StrValue = XCPHelper.DealData4Byte(signal, da);
+                }
+                catch (System.InvalidOperationException errOp)
+                {
+                    LogHelper.Error($"{signal.SignalName} Data :{signal.StrValue}", errOp);
+                }
+                catch (ArgumentOutOfRangeException errRange)
+                {
+                    LogHelper.Error($"{signal.SignalName} size :{size};startInd:{signal.StartIndex};dataLength:{data.Count}", errRange);
+                }
+                catch (Exception err)
+                {
+                    //ShowLog($"{signal.SignalName} Parse Data error ");
+                    string log = string.Empty;
+                    foreach (var item in data)
+                    {
+                        log += $" {item:X}";
+                    }
+                    LogHelper.Error($"{Form.Name} {signal.SignalName} Parse Data error :{log}", err);
+                }
+            }
+
+            if (signalEntities.Count > 0 && Form.IsSaveData)
+            {
+                LogHelper.WriteToOutput(Form.Name, $"Start Save db.");
+                var dbAsync = await DBHelper.GetDb();
+                var result = await dbAsync.InsertAllAsync(signalEntities);
+                LogHelper.WriteToOutput(Form.Name, $"Save Success，Counter:{result}.");
+            }
+
+            signalEntities.Clear();
+        }
+
+        public override void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
+        {
+            var rx_mails = args.can_msgs;
+            if (null == rx_mails)
+                throw new Exception("接收数据错误。");
+
+            foreach (var item in rx_mails)
+            {
+                //判断ID
+                if (item.cid != XcpModule.Slaveid)
+                {
+                    continue;
+                }
+                //判断是否是DTO以及DTO　ID
+                if (XCPHelper.CTOCheck(item.b[0]))
+                    continue;
+
+                //拼接数据报文
+                lock (recieveData)
+                {
+                    foreach (var daq in DAQList.DAQs)
+                    {
+                        //PID 在该DAQ中
+                        if (item.b[0] == daq.ODTs[0].ID)//第一帧
+                        {
+                            var data = new byte[daq.ODTs[0].UsedSize + 2];//将时间戳也获取
+                            Array.Copy(item.b, 1, data, 0, daq.ODTs[0].UsedSize + 2);
+                            recieveData[daq.Event_Channel_Number].AddRange(data);
+                        }
+
+                        if (item.b[0] == daq.ODTs[0].ID + daq.ODTs.Count - 1)//最后一帧
+                        {
+                            if (item.b[0] != daq.ODTs[0].ID)
+                            {
+                                //添加数据
+                                byte size = daq.ODTs.Find(x => x.ID == item.b[0]).UsedSize;
+                                var data = new byte[size];
+                                Array.Copy(item.b, 1, data, 0, size);
+                                recieveData[daq.Event_Channel_Number].AddRange(data);
+                            }
+                            //解析数据
+                            ParseResponeToXCPSignalAsync(recieveData[daq.Event_Channel_Number], daq.Event_Channel_Number);
+
+                            //清空数据
+                            recieveData[daq.Event_Channel_Number].Clear();
+                        }
+                        else if (item.b[0] > daq.ODTs[0].ID && item.b[0] < daq.ODTs[0].ID + daq.ODTs.Count - 1)
+                        {
+                            byte size = daq.ODTs.Find(x => x.ID == item.b[0]).UsedSize;
+                            var data = new byte[size];
+                            Array.Copy(item.b, 1, data, 0, size);
+                            recieveData[daq.Event_Channel_Number].AddRange(data);
+                        }
+                    }
+                }
+               
+            }
+        }
+    }
+
 }

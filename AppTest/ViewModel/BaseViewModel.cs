@@ -6,7 +6,7 @@ namespace AppTest.ViewModel
 {
     public abstract class BaseViewModel
     {
-        public BaseDataForm Form;
+        public BaseDataForm Form { get; set; }
         public abstract void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args);
 
         private bool isGetdata;
@@ -34,6 +34,6 @@ namespace AppTest.ViewModel
 
         public abstract void ModifiedSignals();
 
-        public abstract void ShowSignalDetai(DataGridView dataGridView, DataGridViewCellEventArgs e);
+        public abstract void ShowSignalDetail(DataGridView dataGridView, DataGridViewCellEventArgs e);
     }
 }

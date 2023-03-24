@@ -137,14 +137,35 @@ namespace AppTest.FormType
        
         protected override void ModifiedGetdata(bool get)
         {
+            MidifiedControl(get);
+            RegisterOrUnRegisterDataRecieve(get);
+        }
+
+        Thread plotterThread;
+
+        public void MidifiedControl(bool get)
+        {
             btnGetData.Text = !get ? "Start" : "Stop";//按钮显示
             nudTime.Enabled = !get;//时间间隔
-            if (get)
-                AddValueToPlottimer.Interval = (int)nudTime.Value;
-            AddValueToPlottimer.Enabled = get;//描点定时器
             nudPointCount.Enabled = !get;//曲线点数可修改
             CurvePointMaxCount = (int)nudPointCount.Value;//曲线点数
-            RegisterOrUnRegisterDataRecieve(get);
+            //if (get)
+            //    AddValueToPlottimer.Interval = (int)nudTime.Value;
+            //AddValueToPlottimer.Enabled = get;//描点定时器
+            if (get) 
+            {
+                plotterThread = new Thread(AddValuetoPlotter);
+                plotterThread.IsBackground = true;
+                plotterThread.Start((int)nudTime.Value);
+            }
+            else
+            {
+                if (plotterThread != null)
+                    plotterThread.Join();
+                plotterThread = null;
+            }
+
+            
         }
 
         public override async void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
@@ -321,32 +342,46 @@ namespace AppTest.FormType
         /// <param name="e"></param>
         private void AddValueToPlottimer_Tick(object sender, EventArgs e)
         {
-            AddValuetoPlotter();
-        }
-
-        protected virtual void AddValuetoPlotter()
-        {
             sw.Reset();
             sw.Restart();
-            ShowLog("");
-            foreach (var item in Signals.SignalList)
-            {
-                var lineSer2 = plotView1.Model.Series.Where(x => x.Title == item.SignalName).ToArray()[0] as LineSeries;
-
-                DateTime dt = DateTime.Now;
-                plotModel.Axes[0].Maximum = DateTimeAxis.ToDouble(dt.AddSeconds(1));
-
-                lineSer2.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dt), Convert.ToDouble(item.StrValue)));
-                LogHelper.WriteToOutput(this.Name, $"{item.SignalName} 添加点【{item.StrValue}】,");
-                if (lineSer2.Points.Count > CurvePointMaxCount)
-                {
-                    lineSer2.Points.RemoveAt(0);
-                }
-            }
-            plotModel.InvalidatePlot(true);
+            //AddValuetoPlotter();
             sw.Stop();
             long times = sw.ElapsedMilliseconds;
             LogHelper.WriteToOutput(this.Name, "描点结束,使用了" + times + "毫秒");
+        }
+
+        
+
+        protected virtual void AddValuetoPlotter(object obj)
+        {
+            int timeSpan = (int)obj;
+            do
+            {
+                if (plotView1.InvokeRequired)
+                {
+                    plotView1.Invoke(new Action(()=> {
+                        ShowLog("");
+                        foreach (var item in Signals.SignalList)
+                        {
+                            var lineSer2 = plotView1.Model.Series.Where(x => x.Title == item.SignalName).ToArray()[0] as LineSeries;
+
+                            DateTime dt = DateTime.Now;
+                            plotModel.Axes[0].Maximum = DateTimeAxis.ToDouble(dt.AddSeconds(1));
+
+                            lineSer2.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dt), Convert.ToDouble(item.StrValue)));
+                            LogHelper.WriteToOutput(this.Name, $"{item.SignalName} 添加点【{item.StrValue}】,");
+                            if (lineSer2.Points.Count > CurvePointMaxCount)
+                            {
+                                lineSer2.Points.RemoveAt(0);
+                            }
+                        }
+                        plotModel.InvalidatePlot(true);
+                    }) );
+                }
+               
+                Thread.Sleep(timeSpan);
+            } while (IsGetdata);
+            
         }
 
         /// <summary>

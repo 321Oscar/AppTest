@@ -118,6 +118,7 @@ namespace AppTest.FormType
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BaseDataForm_FormClosed);
             this.ResizeEnd += new System.EventHandler(this.BaseForm_ResizeEnd);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BaseDataForm_MouseClick);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.BaseDataForm_MouseMove);
             this.Resize += new System.EventHandler(this.BaseForm_Resize);
             this.StyleChanged += new System.EventHandler(this.BaseForm_SizeChanged);
             this.contextMenuStrip1.ResumeLayout(false);

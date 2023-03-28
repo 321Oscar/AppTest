@@ -37,7 +37,7 @@ namespace AppTest.Model
             throw new NotImplementedException();
         }
 
-        internal static byte[] ConvertToByte(string writeData, int valueType,int byteorder)
+        internal static byte[] ConvertToByte(string writeData, int valueType, int byteorder)
         {
             byte[] rntData = new byte[8];
             switch ((XCPValueType)valueType)
@@ -121,11 +121,59 @@ namespace AppTest.Model
                     break;
             }
 
-            if(byteorder == 0)//motorala
+            if (byteorder == 0)//motorala
             {
 
             }
             else //intel
+            {
+                Array.Reverse(rntData);
+            }
+
+            return rntData;
+        }
+
+        internal static byte[] ConvertToByte_Fail(string writeData, int valueType, int byteorder)
+        {
+            byte[] rntData;
+            switch ((XCPValueType)valueType)
+            {
+                case XCPValueType.BOOLEAN:
+                    bool b = Convert.ToBoolean(int.Parse(writeData));
+                    rntData = BitConverter.GetBytes(b);
+                    break;
+                case XCPValueType.UBYTE:
+                    rntData = new byte[] { Convert.ToByte(writeData) };
+                    break;
+                case XCPValueType.BYTE:
+                    rntData = BitConverter.GetBytes(Convert.ToSByte(writeData));
+                    break;
+                case XCPValueType.UWORD:
+                    rntData = BitConverter.GetBytes(Convert.ToUInt16(writeData));
+                    break;
+                case XCPValueType.SWORD:
+                    rntData = BitConverter.GetBytes(Convert.ToInt16(writeData));
+                    break;
+                case XCPValueType.ULONG:
+                    rntData = BitConverter.GetBytes(Convert.ToUInt32(writeData));
+                    break;
+                case XCPValueType.LONG:
+                    rntData = BitConverter.GetBytes(Convert.ToInt32(writeData));
+                    break;
+                case XCPValueType.FLOAT32:
+                    rntData = BitConverter.GetBytes(Convert.ToSingle(writeData));
+                    break;
+                case XCPValueType.FLOAT64:
+                    rntData = BitConverter.GetBytes(Convert.ToDouble(writeData));
+                    break;
+                case XCPValueType.Lookup1D_BOOLEAN:
+                    rntData = new byte[] { Convert.ToByte(Convert.ToBoolean(writeData)) };
+                    break;
+                default:
+                    throw new ArgumentException($"Unsupported value type: {valueType}");
+            }
+
+            if (byteorder == 0) //intel
             {
                 Array.Reverse(rntData);
             }
@@ -185,7 +233,7 @@ namespace AppTest.Model
         /// <param name="signal"></param>
         /// <param name="resData"></param>
         /// <returns></returns>
-        internal static string DealData4Byte(XCPSignal signal, byte[] resData)
+        internal static string DealData4Byte_old(XCPSignal signal, byte[] resData)
         {
             Int64 temp = 0;
             for (int i = 0; i < signal.Length; i++)
@@ -223,7 +271,52 @@ namespace AppTest.Model
             return "--";
         }
 
-        internal static void TransformAddress(string eCUAddress, int address_TYPE, out byte[] address)
+        internal static string DealData4Byte(XCPSignal signal, byte[] resData)
+        {
+            Int64 temp = 0;
+            for (int i = 0; i < signal.Length; i++)
+            {
+                temp = temp << 8 | resData[i];
+            }
+
+            var conversionMethods = new Dictionary<XCPValueType, Func<byte[], string>>
+            {
+                { XCPValueType.BOOLEAN, data => Convert.ToString(temp) },
+                { XCPValueType.UBYTE, data => Convert.ToString(temp) },
+                { XCPValueType.BYTE, data => Convert.ToString((int)temp) },
+                { XCPValueType.UWORD, data => Convert.ToString(temp) },
+                { XCPValueType.SWORD, data => Convert.ToString(temp) },
+                { XCPValueType.ULONG, data => Convert.ToString(temp) },
+                { XCPValueType.LONG, data => Convert.ToString(temp) },
+                { XCPValueType.FLOAT32, data =>
+                    {
+                        if (signal.ByteOrder_int == 0)
+                            Array.Reverse(data);
+                        var v = BitConverter.ToSingle(data, 0);
+                        return XCPHelper.MethodStruConvert(signal.Compu_Methd, v);
+                    }
+                },
+                { XCPValueType.FLOAT64, data =>
+                    {
+                        if (signal.ByteOrder_int == 0)
+                            Array.Reverse(data);
+                        var v = BitConverter.ToDouble(data, 0);
+                        return XCPHelper.MethodStruConvert(signal.Compu_Methd, v);
+                    }
+                },
+                { XCPValueType.Lookup1D_BOOLEAN, data => Convert.ToString(temp) }
+            };
+
+            if (conversionMethods.TryGetValue((XCPValueType)signal.ValueType, out var conversionMethod))
+            {
+                return conversionMethod(resData);
+            }
+
+            return "--";
+        }
+
+        [Obsolete]
+        internal static void TransformAddress_Old(string eCUAddress, int address_TYPE, out byte[] address)
         {
             address = new byte[4];
             //int add = int.Parse(eCUAddress,System.Globalization.NumberStyles.HexNumber)
@@ -246,7 +339,24 @@ namespace AppTest.Model
             }
         }
 
-        public static int RecordStrConvert(string record)
+        internal static void TransformAddress(string eCUAddress, int address_TYPE, out byte[] address)
+        {
+            address = new byte[4];
+
+            if (uint.TryParse(eCUAddress, System.Globalization.NumberStyles.HexNumber, null, out uint Address))
+            {
+                byte[] tempAddress = BitConverter.GetBytes(Address);
+
+                if (address_TYPE == 0)
+                {
+                    Array.Reverse(tempAddress);
+                }
+
+                Array.Copy(tempAddress, address, 4);
+            }
+        }
+
+        public static int RecordStrConvert_old(string record)
         {
             if (Enum.TryParse(record, out XCPValueType valueType))
             {
@@ -281,12 +391,33 @@ namespace AppTest.Model
             }
         }
 
+        public static int RecordStrConvert(string record)
+        {
+            if (Enum.TryParse(record, true, out XCPValueType valueType))
+            {
+                return (int)valueType;
+            }
+
+            var valueTypes = Enum.GetNames(typeof(XCPValueType));
+
+            foreach (var type in valueTypes)
+            {
+                if (record.ToUpper().Contains(type))
+                {
+                    Enum.TryParse(type, true, out valueType);
+                    return (int)valueType;
+                }
+            }
+
+            return -1;
+        }
+
         /// <summary>
         /// 将method转成系数
         /// </summary>
         /// <param name="conversion_Method"></param>
         /// <returns></returns>
-        internal static string MethodStruConvert(CCP_COMPU_METHOD conversion_Method, float oldValue)
+        internal static string MethodStruConvert_old(CCP_COMPU_METHOD conversion_Method, float oldValue)
         {
             try
             {
@@ -306,6 +437,73 @@ namespace AppTest.Model
                     float e = float.Parse(coffs[5]);
                     float f = float.Parse(coffs[6]);
                     float x = ((a * oldValue * oldValue) + (b * oldValue) + c) / (d * oldValue * oldValue + e * oldValue + f);
+                    return x.ToString(format);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error("MethodStruConvert", ex);
+
+            }
+            return oldValue.ToString();
+        }
+
+        internal static string MethodStruConvert(CCP_COMPU_METHOD conversionMethod, float oldValue)
+        {
+            try
+            {
+                if (conversionMethod.Format == null)
+                {
+                    return oldValue.ToString();
+                }
+
+                string[] formats = conversionMethod.Format.Split('%', '.', '"');
+                int totalLength = int.Parse(formats[2]);
+                int decimalLength = int.Parse(formats[3]);
+                string format = $"f{decimalLength}";
+
+                if (conversionMethod.Conversion_Type.ToLower().Contains("rat"))
+                {
+                    string[] coefficients = conversionMethod.Coefficients.Split(' ');
+                    float a = float.Parse(coefficients[1]);
+                    float b = float.Parse(coefficients[2]);
+                    float c = float.Parse(coefficients[3]);
+                    float d = float.Parse(coefficients[4]);
+                    float e = float.Parse(coefficients[5]);
+                    float f = float.Parse(coefficients[6]);
+                    float x = ((a * oldValue * oldValue) + (b * oldValue) + c) / (d * oldValue * oldValue + e * oldValue + f);
+
+                    return x.ToString(format);
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(nameof(MethodStruConvert), ex);
+            }
+
+            return oldValue.ToString();
+        }
+
+        internal static string MethodStruConvert(CCP_COMPU_METHOD conversion_Method, double oldValue)
+        {
+            try
+            {
+                if (conversion_Method.Format == null)
+                    return oldValue.ToString();
+                var formats = conversion_Method.Format.Split('%', '.', '"');
+                int length = int.Parse(formats[2]);//总长
+                int length2 = int.Parse(formats[3]);//小数位数
+                string format = $"f{length2}";
+                if (conversion_Method.Conversion_Type.ToLower().Contains("rat"))
+                {
+                    string[] coffs = conversion_Method.Coefficients.Split(' ');
+                    float a = float.Parse(coffs[1]);
+                    float b = float.Parse(coffs[2]);
+                    float c = float.Parse(coffs[3]);
+                    float d = float.Parse(coffs[4]);
+                    float e = float.Parse(coffs[5]);
+                    float f = float.Parse(coffs[6]);
+                    double x = ((a * oldValue * oldValue) + (b * oldValue) + c) / (d * oldValue * oldValue + e * oldValue + f);
                     return x.ToString(format);
                 }
             }

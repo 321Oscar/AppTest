@@ -99,7 +99,7 @@ namespace AppTest.Helper
 
         public Dictionary<ProjectItem, USBCAN> USBCans { get { return usbCans; } }
         public Dictionary<ProjectItem, ZCANInstance> ZCans { get { return zCANInstances; } }
-        public void Register(ProjectItem project, RecieveDataEventHandler recieveMethod, int canChannel, bool get)
+        public void Register(ProjectItem project, ReceiveDataEventHandler recieveMethod, int canChannel, bool get)
         {
             if (usbCans.ContainsKey(project))
             {
@@ -393,7 +393,7 @@ namespace AppTest.Helper
         /// <param name="canindex">can口通道索引：默认为0</param>
         /// <param name="formName">接收的窗口</param>
         /// <returns><see cref="CAN_msg"/>[]</returns>
-        public CANRecieveFrame[] Receive(ProjectItem project, int canindex = 0, string formName = "recieve")
+        public CANReceiveFrame[] Receive(ProjectItem project, int canindex = 0, string formName = "recieve")
         {
             bool isadd = usbCans.TryGetValue(project, out USBCAN usbCan);
 
@@ -421,7 +421,7 @@ namespace AppTest.Helper
         /// <param name="canindex">can口通道索引：默认为0</param>
         /// <param name="formName">接收的窗口</param>
         /// <returns><see cref="CAN_msg"/>[]</returns>
-        public CANRecieveFrame[] Receive(ProjectItem project, int[] ids, int canindex = 0, string formName = "recieve")
+        public CANReceiveFrame[] Receive(ProjectItem project, int[] ids, int canindex = 0, string formName = "recieve")
         {
             bool isadd = usbCans.TryGetValue(project, out USBCAN usbCan);
 

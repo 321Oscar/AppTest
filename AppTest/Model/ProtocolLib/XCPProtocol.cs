@@ -1322,7 +1322,7 @@ namespace AppTest.ProtocolLib
             return rnt;
         }
 
-        public override Dictionary<BaseSignal, string> Multip(CANRecieveFrame[] can_msg, List<BaseSignal> singals)
+        public override Dictionary<BaseSignal, string> Multip(CANReceiveFrame[] can_msg, List<BaseSignal> singals)
         {
             throw new NotImplementedException();
         }
@@ -1334,7 +1334,7 @@ namespace AppTest.ProtocolLib
             return A2lFileParseWithjar(filePath);
         }
 
-        public override string Single(CANRecieveFrame[] can_msg, BaseSignal signalItem)
+        public override string Single(CANReceiveFrame[] can_msg, BaseSignal signalItem)
         {
             throw new NotImplementedException();
         }
@@ -1349,7 +1349,7 @@ namespace AppTest.ProtocolLib
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<BaseSignal> MultipYeild(CANRecieveFrame[] can_msg, List<BaseSignal> singals)
+        public override IEnumerable<BaseSignal> MultipYield(CANReceiveFrame[] can_msg, List<BaseSignal> singals)
         {
             throw new NotImplementedException();
         }

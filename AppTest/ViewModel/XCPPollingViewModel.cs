@@ -38,7 +38,7 @@ namespace AppTest.ViewModel
         {
             Form = form;
         }
-        public override void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
+        public override void OnDataRecieveEvent(object sender, CANDataReceiveEventArgs args)
         {
             return;
         }

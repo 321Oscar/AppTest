@@ -7,7 +7,7 @@ namespace AppTest.ViewModel
     public abstract class BaseViewModel
     {
         public BaseDataForm Form;
-        public abstract void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args);
+        public abstract void OnDataRecieveEvent(object sender, CANDataReceiveEventArgs args);
 
         private bool isGetdata;
 

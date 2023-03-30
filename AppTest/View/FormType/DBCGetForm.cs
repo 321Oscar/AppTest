@@ -112,7 +112,7 @@ namespace AppTest.FormType
             }
         }
 
-        public override void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
+        public override void OnDataReceiveEvent(object sender, CANDataReceiveEventArgs args)
         {
             vm.OnDataRecieveEvent(sender, args);
         }

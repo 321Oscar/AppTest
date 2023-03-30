@@ -208,7 +208,7 @@ namespace AppTest.FormType
                 {
                     candata[j] = (byte)int.Parse(lineData[6 + j], System.Globalization.NumberStyles.HexNumber);
                 }
-                CANRecieveFrame msg = new CANRecieveFrame(int.Parse(lineData[2], System.Globalization.NumberStyles.HexNumber), candata, 0);
+                CANReceiveFrame msg = new CANReceiveFrame(int.Parse(lineData[2], System.Globalization.NumberStyles.HexNumber), candata, 0);
                 ascSignal.CAN_Msg = msg;
                 ASCSignals.Add(ascSignal);
 
@@ -273,7 +273,7 @@ namespace AppTest.FormType
                 singals.SignalList = signals;
                 DBCProtocol dbc = new DBCProtocol();
                 string value = string.Empty;
-                foreach (var item in dbc.MultipYeild(new CANRecieveFrame[] { signal.CAN_Msg }, singals.SignalList.Cast<BaseSignal>().ToList()))
+                foreach (var item in dbc.MultipYield(new CANReceiveFrame[] { signal.CAN_Msg }, singals.SignalList.Cast<BaseSignal>().ToList()))
                 {
                     value += item.SignalName +"："+ item.StrValue + "\r\n";
                 }
@@ -320,13 +320,13 @@ namespace AppTest.FormType
         private string sendOrRec;
         private string reserved2;
         private int datalength;
-        private CANRecieveFrame cAN_Msg;
+        private CANReceiveFrame cAN_Msg;
 
         public decimal Timestap { get => timestap; set => timestap = value; }
         public int Reserved { get => reserved; set => reserved = value; }
         public string SendOrRec { get => sendOrRec; set => sendOrRec = value; }
         public string Reserved2 { get => reserved2; set => reserved2 = value; }
-        public CANRecieveFrame CAN_Msg { get => cAN_Msg; set => cAN_Msg = value; }
+        public CANReceiveFrame CAN_Msg { get => cAN_Msg; set => cAN_Msg = value; }
         public int Datalength { get => datalength; set => datalength = value; }
     }
 }

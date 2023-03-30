@@ -305,7 +305,7 @@ namespace AppTest.FormType
         /// <param name="get"></param>
         protected virtual void RegisterOrUnRegisterDataRecieve(bool get)
         {
-            USBCanManager.Instance.Register(OwnerProject, OnDataRecieveEvent, CanChannel, get);
+            USBCanManager.Instance.Register(OwnerProject, OnDataReceiveEvent, CanChannel, get);
         }
         /// <summary>
         /// Can Channel改变时的事件
@@ -354,7 +354,7 @@ namespace AppTest.FormType
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public virtual async void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
+        public virtual async void OnDataReceiveEvent(object sender, CANDataReceiveEventArgs args)
         {
             try
             {
@@ -364,7 +364,7 @@ namespace AppTest.FormType
                 var rx_mails = args.can_msgs;
                 if (null == rx_mails)
                     throw new Exception("接收数据错误。");
-                foreach (var item in Protocol.MultipYeild(rx_mails, Signals.SignalList.Cast<BaseSignal>().ToList()))
+                foreach (var item in Protocol.MultipYield(rx_mails, Signals.SignalList.Cast<BaseSignal>().ToList()))
                 //foreach (var item in protocol.MultipYeild(rx_mails, Signals))
                 {
                     //signalUC[item.SignalName].SignalValue = item.StrValue;
@@ -388,6 +388,38 @@ namespace AppTest.FormType
 
                 signalEntities.Clear();
 
+            }
+            catch (Exception ex)
+            {
+                IsGetdata = false;
+                ShowLog(ex.Message);
+            }
+        }
+
+        public async Task OnDataReceiveEvent_new(object sender, CANDataReceiveEventArgs args)
+        {
+            try
+            {
+                var signalEntities = Protocol.MultipYield(args.can_msgs, Signals.SignalList.Cast<BaseSignal>().ToList())
+                             .Select(item => new SignalEntity
+                             {
+                                 DataTime = DateTime.Now.ToString(Global.DATETIMEFORMAT),
+                                 ProjectName = OwnerProject.Name,
+                                 FormName = this.Name,
+                                 SignalName = item.SignalName,
+                                 SignalValue = item.StrValue,
+                                 CreatedOn = DateTime.Now.ToString(Global.DATETIMEFORMAT),
+                             })
+                             .ToList();
+
+                if (signalEntities.Count == 0 || !IsSaveData)
+                    return;
+
+                using (var dbAsync = DBHelper.GetDb())
+                {
+                    var result = await dbAsync.Result.InsertAllAsync(signalEntities);
+                    LogHelper.WriteToOutput(this.Name, $"ThreadID:{Thread.CurrentThread.ManagedThreadId};Log: Save Success，Counter:{result}.");
+                }
             }
             catch (Exception ex)
             {

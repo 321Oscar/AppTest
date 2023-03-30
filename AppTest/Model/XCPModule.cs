@@ -51,7 +51,7 @@ namespace AppTest.Model
         private XCPCMDStatus currentCMDStatus;
         private readonly ProjectItem projectItem;
         public ProjectItem ProjectItem { get => projectItem; }
-        private readonly Queue<CANRecieveFrame> receiveData;
+        private readonly Queue<CANReceiveFrame> receiveData;
         private readonly AutoResetEvent ReceiveEvent;
         private Thread receiveThread;
         private bool receiveRunning = false;
@@ -137,7 +137,7 @@ namespace AppTest.Model
             this.projectItem = projectItem;
 
             ReceiveEvent = new AutoResetEvent(false);
-            receiveData = new Queue<CANRecieveFrame>();
+            receiveData = new Queue<CANReceiveFrame>();
             ByteOrder = Global.ByteOrder.Intel;
             SlaveBlockAvail = true;
         }
@@ -1010,7 +1010,7 @@ namespace AppTest.Model
             } while (receiveRunning);
         }
 
-        private void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
+        private void OnDataRecieveEvent(object sender, CANDataReceiveEventArgs args)
         {
             try
             {
@@ -1035,7 +1035,7 @@ namespace AppTest.Model
             }
         }
 
-        private void OnDaqDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
+        private void OnDaqDataRecieveEvent(object sender, CANDataReceiveEventArgs args)
         {
 
         }

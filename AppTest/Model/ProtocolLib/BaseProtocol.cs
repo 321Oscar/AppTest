@@ -115,7 +115,7 @@ namespace AppTest.ProtocolLib
         /// <param name="can_msg"></param>
         /// <param name="singals"></param>
         /// <returns><see cref="Dictionary{SignalItem, string}"/>信号+值</returns>
-        public abstract Dictionary<BaseSignal, string> Multip(CANRecieveFrame[] can_msg, List<BaseSignal> singals);
+        public abstract Dictionary<BaseSignal, string> Multip(CANReceiveFrame[] can_msg, List<BaseSignal> singals);
 
         /// <summary>
         /// 解析报文，yeild return
@@ -123,7 +123,7 @@ namespace AppTest.ProtocolLib
         /// <param name="can_msg"></param>
         /// <param name="singals"></param>
         /// <returns></returns>
-        public abstract IEnumerable<BaseSignal> MultipYeild(CANRecieveFrame[] can_msg, List<BaseSignal> singals);
+        public abstract IEnumerable<BaseSignal> MultipYield(CANReceiveFrame[] can_msg, List<BaseSignal> singals);
 
         /// <summary>
         /// 解析协议中的信号
@@ -139,7 +139,7 @@ namespace AppTest.ProtocolLib
         /// <param name="can_msg"></param>
         /// <param name="signalItem"></param>
         /// <returns>信号值</returns>
-        public abstract string Single(CANRecieveFrame[] can_msg, BaseSignal signalItem);
+        public abstract string Single(CANReceiveFrame[] can_msg, BaseSignal signalItem);
 
         /// <summary>
         /// 将信号值组帧

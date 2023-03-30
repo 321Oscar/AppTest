@@ -60,7 +60,7 @@ namespace AppTest.ProtocolLib
         /// <param name="can_msg"></param>
         /// <param name="singals"></param>
         /// <returns></returns>
-        public override Dictionary<BaseSignal, string> Multip(CANRecieveFrame[] can_msg, List<BaseSignal> singals)
+        public override Dictionary<BaseSignal, string> Multip(CANReceiveFrame[] can_msg, List<BaseSignal> singals)
         {
             Dictionary<BaseSignal, string> signalValue = new Dictionary<BaseSignal, string>();
             //解析can msg
@@ -121,26 +121,31 @@ namespace AppTest.ProtocolLib
             return signalValue;
         }
 
-        public override IEnumerable<BaseSignal> MultipYeild(CANRecieveFrame[] can_msg, List<BaseSignal> singals)
+        public override IEnumerable<BaseSignal> MultipYield(CANReceiveFrame[] can_msg, List<BaseSignal> singals)
         {
             //Dictionary<SignalItem, string> signalValue = new Dictionary<SignalItem, string>();
             //解析can msg
             #region DBC数据解释处理
+            // 为每一个 signal 执行以下逻辑：
             for (int i = 0; i < singals.Count; i++)
             {
                 DBCSignal signal = singals[i] as DBCSignal;
+                // 若信号无需收发，则跳过此次循环。
                 if (!signal.WhetherSendOrGet)
                     continue;
+                // 获取 can_msg 中 messageID 与当前信号相符的 CANReceiveFrame 元素集合，若不存在则直接返回当前 signal（yield return）。
                 var canThisID = can_msg.Where(x => x.cid == int.Parse(signal.MessageID, System.Globalization.NumberStyles.HexNumber));
-                if (canThisID != null || canThisID.Count() != 0) 
+                if (canThisID != null && canThisID.Count() != 0) 
                 {
+                    // 对于查找到匹配 CAN 消息中包含当前 Signal Item 的情况进行如下处理：
                     foreach (var item in canThisID)
                     {
-                        int len_rem1 = (int)(8 - (signal.StartBit % 8));
-                        int byte_start = (int)(signal.StartBit / 8);
-                        int len_rem2 = (int)((signal.StartBit + signal.Length) % 8);
-                        int byte_end = (int)((signal.StartBit + signal.Length) / 8);
-                        long tmp = 0;
+                        int len_rem1 = (int)(8 - (signal.StartBit % 8));// 当前 Signal 在其位宽所在字节中占用比特数不足一字节时的左侧剩余比特位数。
+                        int byte_start = (int)(signal.StartBit / 8);// 当前 Signal 数据存放开始位置所在的字节序列号。
+                        int len_rem2 = (int)((signal.StartBit + signal.Length) % 8);// 当前 Signal 在其位宽最后个别比特处结束时右侧占用的比特位数。 
+                        int byte_end = (int)((signal.StartBit + signal.Length) / 8);// 结束位置所在字节序列编号。
+                        long tmp = 0;// 存储信号数据的中间值。
+                         // 情况一：当前 Signal 数据所在位置不足覆盖某个完整字节。
                         if ((byte_start + 1) <= byte_end)
                         {
                             for (int k = byte_start + 1; k < byte_end; k++)
@@ -151,6 +156,8 @@ namespace AppTest.ProtocolLib
                             tmp = tmp * (long)Math.Pow(2, len_rem1) + (long)(item.b[byte_start] >> (8 - len_rem1));
 
                             long tmp2 = 0;
+                            // 若结束时在下一个字节之前，则直接取出对应实际比特位数，
+                            // 否则，计算并取出最后一个部分包含该Signal数据的比特位的值
                             if (byte_end >= 8)
                                 tmp2 = 0;
                             else
@@ -159,6 +166,7 @@ namespace AppTest.ProtocolLib
 
                             tmp = tmp + tmp2;
                         }
+                        // 当前 Signal 数据占用比特位宽度跨越单个字节，此时只需从开始位置所在字节序列中取值即可。	
                         else
                         {
                             tmp = (item.b[byte_start] % (int)Math.Pow(2, len_rem2)) >> (8 - len_rem1);
@@ -226,7 +234,7 @@ namespace AppTest.ProtocolLib
             return singals;
         }
 
-        public override string Single(CANRecieveFrame[] can_msg, BaseSignal signalItem)
+        public override string Single(CANReceiveFrame[] can_msg, BaseSignal signalItem)
         {
             throw new NotImplementedException();
         }

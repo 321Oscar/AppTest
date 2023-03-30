@@ -10,6 +10,6 @@ namespace AppTest.Model.Interface
 {
     public interface IDataParse
     {
-        void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args);
+        void OnDataRecieveEvent(object sender, CANDataReceiveEventArgs args);
     }
 }

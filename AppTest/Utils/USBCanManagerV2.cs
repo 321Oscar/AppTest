@@ -10,9 +10,9 @@ using BaudRateType = AppTest.FormType.BaudRateType;
 
 namespace AppTest.Helper
 {
-    public sealed class USBCanManager
+    public sealed class USBCanManagerV2
     {
-        private static readonly Lazy<USBCanManager> lazy = new Lazy<USBCanManager>(()=> new USBCanManager());
+        private static readonly Lazy<USBCanManagerV2> lazy = new Lazy<USBCanManagerV2>(()=> new USBCanManagerV2());
 
         Dictionary<BaudRateType, string> BaudRateTypeValue_Special = new Dictionary<BaudRateType, string>() 
         {
@@ -59,9 +59,9 @@ namespace AppTest.Helper
             { BaudRateType.Kbps1000,"0x14"}
 
         };
-        public static USBCanManager Instance { get { return lazy.Value; } }
+        public static USBCanManagerV2 Instance { get { return lazy.Value; } }
 
-        private USBCanManager()
+        private USBCanManagerV2()
         {
             usbCans = new Dictionary<ProjectItem, USBCAN>();
             zCANInstances = new Dictionary<ProjectItem, ZCANInstance>();

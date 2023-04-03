@@ -44,7 +44,7 @@ namespace AppTest.FormType
             {
                 case FormType.Get:
                     gbRlcntControls.Visible = gbSetControls.Visible = false;
-                    SetColr(GetColor);
+                    ChangeBaseColor(GetColor);
                     metroTabControl1.Style  = MetroFramework.MetroColorStyle.Blue;
                     this.Style = MetroFramework.MetroColorStyle.Blue;
                     LoadDatGridViewContext();
@@ -53,7 +53,7 @@ namespace AppTest.FormType
                     this.Style = MetroFramework.MetroColorStyle.Orange;
                     metroTabControl1.Style = MetroFramework.MetroColorStyle.Orange;
                     metroComboBox_Signal.Style = MetroFramework.MetroColorStyle.Orange;
-                    SetColr(SetColor);
+                    ChangeBaseColor(SetColor);
                     LoadDatGridViewContext();
                     gbRlcntControls.Visible = gbGetControls.Visible = false;
                     this.SaveDataVisible = false;
@@ -93,13 +93,13 @@ namespace AppTest.FormType
 
         }
 
-        private void SetColr(Color c)
+        protected override void ChangeBaseColor(Color c)
         {
+            base.ChangeBaseColor(c);
             this.dataGridView1.DefaultCellStyle.SelectionBackColor = c;
             //this.cbbSignals.BackColor = c;
             //this.cbbSignals.ForeColor = Color.White;
-            this.statusStrip1.BackColor = c;
-            this.statusStrip1.ForeColor = Color.White;
+            
         }
 
         /// <summary>

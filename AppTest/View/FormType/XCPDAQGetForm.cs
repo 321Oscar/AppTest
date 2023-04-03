@@ -17,6 +17,7 @@ namespace AppTest.FormType
 {
     public partial class XCPDAQGetForm : BaseDataForm
     {
+        protected readonly Color GetColor = Color.FromArgb(0, 174, 219);
         //DAQList DAQList = new DAQList();
         //XCPModule XcpModule;
         //private Dictionary<int, List<byte>> recieveData;
@@ -37,6 +38,8 @@ namespace AppTest.FormType
             InitStateStrip();
 
             cycleTimeDataGridViewTextBoxColumn.Visible = false;
+
+            ChangeBaseColor(GetColor);
         }
 
         protected override void InitSignalUC()
@@ -52,7 +55,7 @@ namespace AppTest.FormType
             hduc.Dock = DockStyle.Fill;
             metroTabPage2.Controls.Clear();
             metroTabPage2.Controls.Add(hduc);
-            //hduc.ChangeColorTheme(ScopeColor);
+            hduc.ChangeColorTheme(GetColor);
 
             ProjectForm parent = (ProjectForm)this.MdiParent;
             vm.XcpModule = parent.XcpModule;
@@ -88,7 +91,16 @@ namespace AppTest.FormType
             statusStrip1.Location = new Point(0, this.Size.Height);
         }
 
-        public override void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
+        protected override void ChangeBaseColor(Color c)
+        {
+            base.ChangeBaseColor(c);
+            metroButtonStart.Style = MetroFramework.MetroColorStyle.Blue;
+            metroTabControl1.Style = MetroFramework.MetroColorStyle.Blue;
+            this.Style = MetroFramework.MetroColorStyle.Blue;
+            this.dataGridView1.DefaultCellStyle.SelectionBackColor = GetColor;
+        }
+
+        public override void OnDataReceiveEvent(object sender, CANDataReceiveEventArgs args)
         {
             //_dependencyXCPDAQSignals.OnDataRecieveEvent(sender, args);
         }

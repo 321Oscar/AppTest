@@ -219,5 +219,15 @@ namespace AppTest.FormType
                 LeapMessageBox.Instance.ShowInfo("保存成功。地址：" + SavePath);
             }
         }
+
+        private void copyNameToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //DataGridViewClipboardCopyMode.
+            if (dataGridView1.SelectedRows.Count == 0)
+                return;
+            string signalName = (dataGridView1.SelectedRows[0].DataBoundItem as SignalEntity).SignalName;
+            Clipboard.SetDataObject(signalName);
+            LeapMessageBox.Instance.ShowInfo($"信号名称：【{signalName}】已复制到剪切板");
+        }
     }
 }

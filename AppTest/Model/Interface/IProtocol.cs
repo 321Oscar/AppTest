@@ -16,7 +16,7 @@ namespace AppTest.ProtocolLib
         /// </summary>\
         /// <param name="can_msg">原始数据</param>
         /// <returns></returns>
-        string Single(CANRecieveFrame[] can_msg,BaseSignal signalItem);
+        string Single(CANReceiveFrame[] can_msg,BaseSignal signalItem);
 
         /// <summary>
         /// 多个信号解析
@@ -24,7 +24,7 @@ namespace AppTest.ProtocolLib
         /// <param name="can_msg">原始数据</param>
         /// <param name="singals">测量信号</param>
         /// <returns>Dictionary <see cref="DBCSignal"/>, string></returns>
-        Dictionary<BaseSignal, string> Multip(CANRecieveFrame[] can_msg, List<BaseSignal> singals);
+        Dictionary<BaseSignal, string> Multip(CANReceiveFrame[] can_msg, List<BaseSignal> singals);
 
         /// <summary>
         /// 协议文档解析出信号信息

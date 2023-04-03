@@ -59,6 +59,7 @@ namespace AppTest.FormType
             this.label3 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.copyNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.signalEntityBindingSource)).BeginInit();
@@ -76,6 +77,7 @@ namespace AppTest.FormType
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -93,7 +95,7 @@ namespace AppTest.FormType
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(416, 233);
+            this.dataGridView1.Size = new System.Drawing.Size(627, 379);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
@@ -157,15 +159,16 @@ namespace AppTest.FormType
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.CurveToolStripMenuItem,
-            this.exportToolStripMenuItem});
+            this.exportToolStripMenuItem,
+            this.copyNameToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(145, 64);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(189, 116);
             // 
             // CurveToolStripMenuItem
             // 
             this.CurveToolStripMenuItem.Image = global::AppTest.Properties.Resources.Measure_color;
             this.CurveToolStripMenuItem.Name = "CurveToolStripMenuItem";
-            this.CurveToolStripMenuItem.Size = new System.Drawing.Size(144, 30);
+            this.CurveToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.CurveToolStripMenuItem.Text = "生成曲线图";
             this.CurveToolStripMenuItem.Click += new System.EventHandler(this.CurveToolStripMenuItem_Click);
             // 
@@ -173,7 +176,7 @@ namespace AppTest.FormType
             // 
             this.exportToolStripMenuItem.Image = global::AppTest.Properties.Resources.export__1_;
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(144, 30);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
             this.exportToolStripMenuItem.Text = "Export";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
@@ -195,7 +198,7 @@ namespace AppTest.FormType
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.flowLayoutPanel1.MinimumSize = new System.Drawing.Size(2, 42);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(416, 42);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(627, 42);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // panel4
@@ -233,7 +236,7 @@ namespace AppTest.FormType
             // 
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(0, 42);
+            this.panel2.Location = new System.Drawing.Point(269, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(269, 42);
@@ -260,7 +263,7 @@ namespace AppTest.FormType
             // 
             this.panel1.Controls.Add(this.dateTimePickerStart);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(0, 84);
+            this.panel1.Location = new System.Drawing.Point(0, 42);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(269, 42);
@@ -287,7 +290,7 @@ namespace AppTest.FormType
             // 
             this.panel3.Controls.Add(this.dateTimePickerEnd);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(0, 126);
+            this.panel3.Location = new System.Drawing.Point(269, 42);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(269, 42);
@@ -328,8 +331,15 @@ namespace AppTest.FormType
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(422, 291);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(633, 437);
             this.tableLayoutPanel1.TabIndex = 3;
+            // 
+            // copyNameToolStripMenuItem
+            // 
+            this.copyNameToolStripMenuItem.Name = "copyNameToolStripMenuItem";
+            this.copyNameToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.copyNameToolStripMenuItem.Text = "CopyName";
+            this.copyNameToolStripMenuItem.Click += new System.EventHandler(this.copyNameToolStripMenuItem_Click);
             // 
             // HistoryDataUC
             // 
@@ -385,5 +395,6 @@ namespace AppTest.FormType
         private System.Windows.Forms.DataGridViewTextBoxColumn CreatedOn;
         private System.Windows.Forms.DataGridViewTextBoxColumn projectNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn formNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ToolStripMenuItem copyNameToolStripMenuItem;
     }
 }

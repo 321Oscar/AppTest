@@ -145,7 +145,7 @@ namespace AppTest.FormType
             //_dependencyXCPDAQSignals.RegisterOrUnRegisterDataRecieve(get, OwnerProject, CanChannel);
         }
 
-        public override void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
+        public override void OnDataReceiveEvent(object sender, CANDataReceiveEventArgs args)
         {
             return;
             //_dependencyXCPDAQSignals.OnDataRecieveEvent(sender, args);

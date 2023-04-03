@@ -45,7 +45,7 @@ namespace AppTest.ViewModel
             return initDaqTrue;
         }
 
-        public override void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
+        public override void OnDataReceiveEvent(object sender, CANDataReceiveEventArgs args)
         {
             var rx_mails = args.can_msgs;
             if (null == rx_mails)

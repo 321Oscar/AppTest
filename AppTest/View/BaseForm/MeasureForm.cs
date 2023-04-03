@@ -168,9 +168,9 @@ namespace AppTest.FormType
             
         }
 
-        public override async void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
+        public override async void OnDataReceiveEvent(object sender, CANDataReceiveEventArgs args)
         {
-            base.OnDataRecieveEvent(sender, args);
+            base.OnDataReceiveEvent(sender, args);
 
             await Task.Delay(1000);
             //AddValueToPlottimer_Tick(null,null);
@@ -497,7 +497,7 @@ namespace AppTest.FormType
                     return;
                 }
                 //var data = protocol.Multip(rx_mails, Signals);
-                foreach (var item in Protocol.MultipYeild(rx_mails, Signals.SignalList.Cast<BaseSignal>().ToList()))
+                foreach (var item in Protocol.MultipYield(rx_mails, Signals.SignalList.Cast<BaseSignal>().ToList()))
                 {
                     entity = new SignalEntity();
                     entity.DataTime = datatimeStr;

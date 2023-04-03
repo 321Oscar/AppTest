@@ -68,7 +68,7 @@ namespace AppTest.ViewModel
             DBCProtocol = new DBCProtocol(dbcFilePath);
         }
 
-        public async override void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
+        public async override void OnDataReceiveEvent(object sender, CANDataReceiveEventArgs args)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace AppTest.ViewModel
                 var rx_mails = args.can_msgs;
                 if (null == rx_mails)
                     throw new Exception("接收数据错误。");
-                foreach (var item in DBCProtocol.MultipYeild(rx_mails, DBCSignals.SignalList.Cast<BaseSignal>().ToList()))
+                foreach (var item in DBCProtocol.MultipYield(rx_mails, DBCSignals.SignalList.Cast<BaseSignal>().ToList()))
                 {
                     //signalUC[item.SignalName].SignalValue = item.StrValue;
                     entity = new SignalEntity();

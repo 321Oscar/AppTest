@@ -200,12 +200,18 @@ namespace AppTest.Helper
          * 
          * 【DAQGet】窗口增加最值判断，超限变红
          * 修复修改XCP信号时，当窗口类型为【Set】时，初始化信号错误的bug
+         * 
+         * v0.003.05-beta
+         * 1.修改XCP数据解析，地址转换等方法
+         * 2.存储数据按钮放到左下角
+         * 3.DAQGetForm修改颜色
+         * 4.历史数据界面增加复制信号名
          */
 
         /// <summary>
         /// 版本号
         /// </summary>
-        public const string SoftVersion = "v0.003.04-beta";
+        public const string SoftVersion = "v0.003.05-beta";
 
         #region 图标
         public static System.IntPtr IconHandle_ProjectCenter = (global::AppTest.Properties.Resources.ProjectCenter).GetHicon();

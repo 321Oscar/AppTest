@@ -942,7 +942,7 @@ namespace AppTest
         public void RegisterOrUnRegisterDataRecieve(ProjectItem ownerProject,int canChannel)
         {
             GetDataState = !GetDataState;
-            USBCanManager.Instance.Register(ownerProject, OnDataRecieveEvent, canChannel, GetDataState);
+            USBCanManager.Instance.Register(ownerProject, OnDataReceiveEvent, canChannel, GetDataState);
             if (GetDataState)
             {
                 //启动
@@ -1035,7 +1035,7 @@ namespace AppTest
             signalEntities.Clear();
         }
 
-        public override void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
+        public override void OnDataReceiveEvent(object sender, CANDataReceiveEventArgs args)
         {
             var rx_mails = args.can_msgs;
             if (null == rx_mails)

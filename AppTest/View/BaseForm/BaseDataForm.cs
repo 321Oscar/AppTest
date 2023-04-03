@@ -18,6 +18,7 @@ using MetroFramework.Forms;
 using LPCanControl.CANInfo;
 using AppTest.ProtocolLib;
 using AppTest.Model.Interface;
+using AppTest.View.UserControl;
 
 namespace AppTest.FormType
 {
@@ -63,10 +64,10 @@ namespace AppTest.FormType
         const int CS_DropSHADOW = 0x20000;
         const int GCL_STYLE = (-26);
 
-        Rectangle Top { get { return new Rectangle(0, 0, this.ClientSize.Width, _); } }
-        Rectangle Left { get { return new Rectangle(0, 0, _, this.ClientSize.Height); } }
-        Rectangle Bottom { get { return new Rectangle(0, this.ClientSize.Height - _, this.ClientSize.Width, _); } }
-        Rectangle Right { get { return new Rectangle(this.ClientSize.Width - _, 0, _, this.ClientSize.Height); } }
+        //Rectangle Top { get { return new Rectangle(0, 0, this.ClientSize.Width, _); } }
+        //Rectangle Left { get { return new Rectangle(0, 0, _, this.ClientSize.Height); } }
+        //Rectangle Bottom { get { return new Rectangle(0, this.ClientSize.Height - _, this.ClientSize.Width, _); } }
+        //Rectangle Right { get { return new Rectangle(this.ClientSize.Width - _, 0, _, this.ClientSize.Height); } }
 
         Rectangle TopLeft { get { return new Rectangle(0, 0, _, _); } }
         Rectangle TopRight { get { return new Rectangle(this.ClientSize.Width - _, 0, _, _); } }
@@ -157,12 +158,34 @@ namespace AppTest.FormType
         /// <summary>
         /// 是否启用数据库存储数据
         /// </summary>
-        public bool IsSaveData { get => isSaveData; set => isSaveData = value; }
+        public bool IsSaveData { get => isSaveData; set 
+            { 
+                isSaveData = value;
+                isSaveDataToolStripMenuItem.Checked = IsSaveData;
+                savedataBtn.IsTransparentLayerVisible = IsSaveData;
+                if (IsSaveData)
+                {
+                    savedataBtn.Text = "保存中";
+                }
+                else
+                {
+                    savedataBtn.Text = "未保存";
+                }
+            } 
+        }
 
         /// <summary>
         /// 存储数据按钮可见性
         /// </summary>
-        public bool SaveDataVisible { get => isSaveDataToolStripMenuItem.Visible; set => isSaveDataToolStripMenuItem.Visible = value; }
+        public bool SaveDataVisible
+        {
+            get { return isSaveDataToolStripMenuItem.Visible && savedataBtn.Visible; }
+            set
+            {
+                isSaveDataToolStripMenuItem.Visible = value;
+                savedataBtn.Visible = value;
+            }
+        }
         /// <summary>
         /// MDI模式切换按钮
         /// </summary>
@@ -217,7 +240,7 @@ namespace AppTest.FormType
         /// </summary>
         protected ToolStripComboBox tscbb;
         protected ToolStripStatusLabel toolLog;
-
+        protected TransparentLayerToolStripLabel savedataBtn;
         public BaseDataForm()
         {
             InitializeComponent();
@@ -226,12 +249,23 @@ namespace AppTest.FormType
             //DoubleBuffered = true;
             //this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw | ControlStyles.AllPaintingInWmPaint, true);
             //this.UpdateStyles();
+            //ToolStripComboBox
+            savedataBtn = new TransparentLayerToolStripLabel() { Text = "未保存",Dock = DockStyle.Right};
+            savedataBtn.Click += SavedataBtn_Click;
+            
+            this.statusStrip1.Items.AddRange(new ToolStripItem[] { savedataBtn, new ToolStripSeparator() });
 
             this.ShowIcon = false;
             //x = Width;
             //y = Height;
             //setTag(this);
             this.OnCanChannelChange += DataForm_OnCanChannelChange;
+        }
+
+        private void SavedataBtn_Click(object sender, EventArgs e)
+        {
+            this.IsSaveData = !this.IsSaveData;
+            Invalidate();
         }
 
         #region -- virtual --
@@ -271,7 +305,7 @@ namespace AppTest.FormType
         /// <param name="get"></param>
         protected virtual void RegisterOrUnRegisterDataRecieve(bool get)
         {
-            USBCanManager.Instance.Register(OwnerProject, OnDataRecieveEvent, CanChannel, get);
+            USBCanManager.Instance.Register(OwnerProject, OnDataReceiveEvent, CanChannel, get);
         }
         /// <summary>
         /// Can Channel改变时的事件
@@ -320,7 +354,7 @@ namespace AppTest.FormType
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        public virtual async void OnDataRecieveEvent(object sender, CANDataRecieveEventArgs args)
+        public virtual async void OnDataReceiveEvent(object sender, CANDataReceiveEventArgs args)
         {
             try
             {
@@ -330,7 +364,7 @@ namespace AppTest.FormType
                 var rx_mails = args.can_msgs;
                 if (null == rx_mails)
                     throw new Exception("接收数据错误。");
-                foreach (var item in Protocol.MultipYeild(rx_mails, Signals.SignalList.Cast<BaseSignal>().ToList()))
+                foreach (var item in Protocol.MultipYield(rx_mails, Signals.SignalList.Cast<BaseSignal>().ToList()))
                 //foreach (var item in protocol.MultipYeild(rx_mails, Signals))
                 {
                     //signalUC[item.SignalName].SignalValue = item.StrValue;
@@ -354,6 +388,38 @@ namespace AppTest.FormType
 
                 signalEntities.Clear();
 
+            }
+            catch (Exception ex)
+            {
+                IsGetdata = false;
+                ShowLog(ex.Message);
+            }
+        }
+
+        public async Task OnDataReceiveEvent_new(object sender, CANDataReceiveEventArgs args)
+        {
+            try
+            {
+                var signalEntities = Protocol.MultipYield(args.can_msgs, Signals.SignalList.Cast<BaseSignal>().ToList())
+                             .Select(item => new SignalEntity
+                             {
+                                 DataTime = DateTime.Now.ToString(Global.DATETIMEFORMAT),
+                                 ProjectName = OwnerProject.Name,
+                                 FormName = this.Name,
+                                 SignalName = item.SignalName,
+                                 SignalValue = item.StrValue,
+                                 CreatedOn = DateTime.Now.ToString(Global.DATETIMEFORMAT),
+                             })
+                             .ToList();
+
+                if (signalEntities.Count == 0 || !IsSaveData)
+                    return;
+
+                using (var dbAsync = DBHelper.GetDb())
+                {
+                    var result = await dbAsync.Result.InsertAllAsync(signalEntities);
+                    LogHelper.WriteToOutput(this.Name, $"ThreadID:{Thread.CurrentThread.ManagedThreadId};Log: Save Success，Counter:{result}.");
+                }
             }
             catch (Exception ex)
             {
@@ -394,7 +460,7 @@ namespace AppTest.FormType
         {
             tslbCanIndex = new ToolStripLabel();
             tslbCanIndex.Text = $"CanIndex: {CanChannel}";
-            toolLog = new ToolStripStatusLabel();
+            toolLog = new ToolStripStatusLabel() { Spring = true };
             toolLog.ForeColor = Color.Red;
             //分隔符
             ToolStripSeparator tss1 = new ToolStripSeparator();
@@ -406,6 +472,12 @@ namespace AppTest.FormType
                     toolLog
                 }
             );
+        }
+
+        protected virtual void ChangeBaseColor(Color c)
+        {
+            this.statusStrip1.BackColor = c;
+            this.statusStrip1.ForeColor = Color.White;
         }
 
         #endregion
@@ -456,7 +528,7 @@ namespace AppTest.FormType
         private void isSaveDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.IsSaveData = !IsSaveData;
-            isSaveDataToolStripMenuItem.Checked = IsSaveData;
+            
         }
 
         #endregion
@@ -549,10 +621,23 @@ namespace AppTest.FormType
         {
             base.OnPaint(e);
             return;
+            if (IsSaveData)
+            {
+                using (SolidBrush brush = new SolidBrush(Color.FromArgb(128, Color.Gray)))
+                {
+                    Rectangle rect = new Rectangle(statusStrip1.Location.X + savedataBtn.Bounds.X,
+                                                    statusStrip1.Location.Y + savedataBtn.Bounds.Y,
+                                                    savedataBtn.Bounds.Width,
+                                                    savedataBtn.Bounds.Height);
+                    e.Graphics.FillRectangle(brush, rect);
+                }
+            }
+
+            return;
             //e.Graphics.FillRectangle(Brushes.Green, Top);
-            e.Graphics.FillRectangle(Brushes.DarkBlue, Left);
-            e.Graphics.FillRectangle(Brushes.DarkBlue, Right);
-            e.Graphics.FillRectangle(Brushes.DarkBlue, Bottom);
+            //e.Graphics.FillRectangle(Brushes.DarkBlue, Left);
+            //e.Graphics.FillRectangle(Brushes.DarkBlue, Right);
+            //e.Graphics.FillRectangle(Brushes.DarkBlue, Bottom);
 
             Rectangle rc = new Rectangle(this.ClientSize.Width - cGrip, this.ClientSize.Height - cGrip, cGrip, cGrip);
             ControlPaint.DrawSizeGrip(e.Graphics, this.BackColor, rc);
@@ -597,27 +682,82 @@ namespace AppTest.FormType
                 {
                     m.Result = (IntPtr)HTBOTTOMRIGHT;
                 }
-                else if (Top.Contains(cursor))
-                {
-                    m.Result = (IntPtr)HTTOP;
-                }
-                else if (Left.Contains(cursor))
-                {
-                    m.Result = (IntPtr)HTLEFT;
-                }
-                else if (Right.Contains(cursor))
-                {
-                    m.Result = (IntPtr)HTRIGHT;
-                }
-                else if (Bottom.Contains(cursor))
-                {
-                    m.Result = (IntPtr)HTBOTTOM;
-                }
+                //else if (Top.Contains(cursor))
+                //{
+                //    m.Result = (IntPtr)HTTOP;
+                //}
+                //else if (Left.Contains(cursor))
+                //{
+                //    m.Result = (IntPtr)HTLEFT;
+                //}
+                //else if (Right.Contains(cursor))
+                //{
+                //    m.Result = (IntPtr)HTRIGHT;
+                //}
+                //else if (Bottom.Contains(cursor))
+                //{
+                //    m.Result = (IntPtr)HTBOTTOM;
+                //}
             }
         }
 
         #region -- 弃用 -- 控件大小随窗口大小等比例缩放 --
         private float x;
+
+        private void BaseDataForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            //Debug.a
+            return;
+            if(this.MdiParent != null)
+            {
+                var closeForm = FindChildForm(this);
+                int x, y = 0;
+                if(closeForm.Location.Y + closeForm.Height < this.Location.Y)
+                {
+                    y = closeForm.Location.Y + closeForm.Height + 10;
+                }
+                else
+                {
+                    y = this.Location.Y;
+                }
+
+                if(closeForm.Location.X + closeForm.Width > this.Location.X)
+                {
+                    x = closeForm.Location.X + closeForm.Width + 10;
+                }
+                else
+                {
+                    x = this.Location.X;
+                }
+
+                this.Location = new Point(x, y);
+            }
+        }
+
+        /// <summary>
+        /// 查找距离最近的一个form
+        /// </summary>
+        /// <returns></returns>
+        private Form FindChildForm(Form source)
+        {
+            Form f = null;
+            double minlength = double.MaxValue;
+            foreach (var form in MdiParent.MdiChildren)
+            {
+                if(form != source && form.Visible)
+                {
+                    double length = Math.Sqrt(Math.Pow(form.Location.X - source.Location.X, 2) + Math.Pow(form.Location.Y - source.Location.Y, 2));
+                    if(minlength > length)
+                    {
+                        minlength = length;
+                        f = form;
+                    }
+                }
+            }
+
+            return f;
+        }
+
         private float y;
 
 

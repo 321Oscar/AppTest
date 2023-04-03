@@ -66,6 +66,7 @@ namespace AppTest.FormType
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
+            this.metroPanelMain.Controls.Add(this.tableLayoutPanel1);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource)).BeginInit();

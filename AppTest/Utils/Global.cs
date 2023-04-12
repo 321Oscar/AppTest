@@ -206,6 +206,10 @@ namespace AppTest.Helper
          * 2.存储数据按钮放到左下角
          * 3.DAQGetForm修改颜色
          * 4.历史数据界面增加复制信号名
+         * 
+         * v0.003.06-beta
+         * 1.修复导入elf文件更新地址 固定更新can0的a2l文件的bug
+         * 2.删除excel格式解析数据
          */
 
         /// <summary>

@@ -31,8 +31,8 @@ namespace AppTest.ProtocolLib
                     case (int)ProtocolType.DBC:
                             protocol = new DBCProtocol();
                         break;
-                    case (int)ProtocolType.Excel:
-                        throw new Exception("Excel协议暂不支持");
+                    //case (int)ProtocolType.Excel:
+                    //    throw new Exception("Excel协议暂不支持");
                     //singals = new Singals();
                     //break;
                     case (int)ProtocolType.XCP:
@@ -72,8 +72,8 @@ namespace AppTest.ProtocolLib
                         case (int)ProtocolType.DBC:
                             protocol = new DBCProtocol();
                             break;
-                        case (int)ProtocolType.Excel:
-                            throw new Exception("Excel协议暂不支持");
+                        //case (int)ProtocolType.Excel:
+                        //    throw new Exception("Excel协议暂不支持");
                         //singals = new Singals();
                         //break;
                         case (int)ProtocolType.XCP:

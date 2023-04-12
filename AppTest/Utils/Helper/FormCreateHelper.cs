@@ -98,8 +98,8 @@ namespace AppTest.FormType
                     case ProtocolType.DBC:
                         userForm.ProtocolCommand = "AppTest.ProtocolLib.DBCProtocol";
                         break;
-                    case ProtocolType.Excel:
-                        throw new Exception("Excel协议未实现");
+                    //case ProtocolType.Excel:
+                    //    throw new Exception("Excel协议未实现");
                 }
             }
 
@@ -134,8 +134,8 @@ namespace AppTest.FormType
         DBC,
         [Description("*.a2l")]
         XCP,
-        [Description("*.xls")]
-        Excel
+        //[Description("*.xls")]
+        //Excel
     }
 
     public enum BaudRateType

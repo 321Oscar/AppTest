@@ -603,7 +603,7 @@ namespace AppTest
             this.Location = new Point(StartX, StartY);
             AnimateWindow(this.Handle, 200, AW_HOR_POSITIVE | AW_SLIDE);
 
-            if (projectItem.CanIndex[0].ProtocolType == (int)ProtocolType.XCP)
+            if (projectItem.CanIndex[0].ProtocolType == (int)ProtocolType.XCP || projectItem.CanIndex[1].ProtocolType == (int)ProtocolType.XCP)
             {
                 this.tslbXcpStatus.Visible = true;
                 tsp_ImportElf.Visible = true;
@@ -751,33 +751,25 @@ namespace AppTest
             openFileDialog.Filter = "elf文件|*.elf";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                /// 更新地址
+                /// 解析a2l文件，并更新measurement 和characterics中的地址
+                /// 1.import a2l
                 /// 解析ELF文件，读取其中变量
                 var elf = ELFReader.Load(openFileDialog.FileName);
                 var s = (SymbolTable<uint>)elf.GetSection(".symtab");
                 var parameters = s.Entries.Where(x => x.Type == SymbolType.Object);
-                /// 遍历所有窗口中的信号
-                foreach (var formItem in projectItem.Form)
-                {
-                    if (formItem.XCPSingals == null || formItem.XCPSingals.xCPSignalList.Count == 0)
-                        continue;
-                    foreach (var signal in formItem.XCPSingals.xCPSignalList)
-                    {
-                        var q = parameters.Where(x => x.Name == signal.SignalName).Select(x => x.Value);
-                        if (q != null && q.Count() > 0)
-                        {
-                            signal.ECUAddress = q.First().ToString("X");
-                            LogHelper.Info($"{formItem.Name}-{signal.SignalName} 更新地址。");
-                        }
-                           
-                    }
-                    LeapMessageBox.Instance.ShowInfo($"{formItem.Name}信号地址更新完成.");
-                }
 
-                /// 更新地址
-                /// 解析a2l文件，并更新measurement 和characterics中的地址
-                /// 1.import a2l
-                var fileNames = this.projectItem.CanIndex[0].ProtocolFileName.Split(';');
-                string filePath = AppDomain.CurrentDomain.BaseDirectory  + ProtocolType.XCP.ToString() + "\\" + fileNames[0];
+                string fileName = null;
+                foreach (var item in projectItem.CanIndex)
+                {
+                    if (item.isUsed)
+                    {
+                        fileName = item.ProtocolFileName;
+                    }
+                }
+                if(fileName == null)
+                    LeapMessageBox.Instance.ShowInfo($"无a2l文件。");
+                string filePath = AppDomain.CurrentDomain.BaseDirectory  + ProtocolType.XCP.ToString() + "\\" + fileName;
                 var jarPath = ".\\Config\\a2lparser.jar";
                 var a2lJson = ELFParseForm.ParseA2lFile(jarPath, filePath);
                 if(a2lJson == null)
@@ -808,6 +800,25 @@ namespace AppTest
                 }
                 /// 3.export a2l
                 ELFParseForm.Json2Asap(a2lJson, filePath, jarPath);
+
+               
+                /// 遍历所有窗口中的信号
+                foreach (var formItem in projectItem.Form)
+                {
+                    if (formItem.XCPSingals == null || formItem.XCPSingals.xCPSignalList.Count == 0)
+                        continue;
+                    foreach (var signal in formItem.XCPSingals.xCPSignalList)
+                    {
+                        var q = parameters.Where(x => x.Name == signal.SignalName).Select(x => x.Value);
+                        if (q != null && q.Count() > 0)
+                        {
+                            signal.ECUAddress = q.First().ToString("X");
+                            LogHelper.Info($"{formItem.Name}-{signal.SignalName} 更新地址。");
+                        }
+
+                    }
+                    LeapMessageBox.Instance.ShowInfo($"{formItem.Name}信号地址更新完成.");
+                }
             }
 
         }

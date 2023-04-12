@@ -34,6 +34,24 @@ namespace AppTest.Model
         }
     }
 
+    /// <summary>
+    /// 启动时判断是否有该数据库，没有的话则不可用，
+    /// 有的话？比对板子(需要连接can盒并且读取DID)的Code是否匹配，Count是否>10
+    /// 满足Code.count <10 则软件可用
+    /// </summary>
+    public class AuthenticationEntity
+    {
+        [PrimaryKey, AutoIncrement]
+        public int ID { get; set; }
+
+        public string Code
+        {
+            get; set;
+        }
+
+        public int Count { get; set; }
+    }
+
     public class SignalDB : SQLiteConnection
     {
         public TableQuery<SignalEntity> signalEntities { get { return this.Table<SignalEntity>(); } }

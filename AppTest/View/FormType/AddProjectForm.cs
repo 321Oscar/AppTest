@@ -223,6 +223,10 @@ namespace AppTest.FormType
                         canIndex.SlaveID = int.Parse(tbSlaveID.Text.Trim(), System.Globalization.NumberStyles.HexNumber);
                     }
                 }
+                else
+                {
+                    canIndex.ProtocolFileName = "";
+                }
             }
             catch (Exception ex)
             {

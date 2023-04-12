@@ -67,6 +67,8 @@
 | v0.002.05-beta   | 增加XCP模块（polling）<br />增加A2L文件解析<br />修复RollingCounter界面启动发送后，Get界面无法获取数据的Bug（zlgcan 使用自收自发后，can收不到新数据）<br /> Signal结构修改,projectItem结构修改<br />| 2023-01-12  |
 | v0.003.01-beta   | 增加XCPDAQ模块<br />| 2023-03-07  |
 | v0.003.03-beta   | 解析a2l转换成XCPSignal时，对变量的类型解析方式修改<br />修复Form CANchannel变化，XCP CANIndex=1时 连接失败，addnewform 添加信号失败的bug<br/>按钮图标更新<br/>增加数据保存，波形回放（内置数据）|  2023-03-15  |
+| v0.003.04-beta   | 设备为2EU时，只启用CAN1时，打开通道失败 <br/> 修复Set信号最值为0的bug <br/> XCP信号调整顺序  <br/>修复新建XCP窗口，信号名显示不全 <br/> 修复Set下拉框信号名显示不全  <br/>【DAQGet】窗口增加最值判断，超限变红  <br/>修复修改XCP信号时，当窗口类型为【Set】时，初始化信号错误的bug |  2023-03-15  |
+| v0.003.05-beta   | 修改XCP数据解析，地址转换等方法 <br/>存储数据按钮放到左下角<br/>DAQGetForm修改颜色<br/>历史数据界面增加复制信号名|  2023-03-15  |
 注：该软件使用CAN的驱动版本为 ZLGCAN 2.2.0 ，若打开设备失败则安装对应版本驱动!
 
 ![123](ReadMeImg/image-20211206134506794.png)

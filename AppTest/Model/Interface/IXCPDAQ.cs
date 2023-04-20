@@ -17,8 +17,8 @@ namespace AppTest.Model
         /// <summary>
         /// 解析报文
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="eventIndex"></param>
+        /// <param name="data">拼接后的报文</param>
+        /// <param name="eventIndex">信号所属的 daq 事件通道索引</param>
         /// <returns></returns>
         Task ParseResponeToXCPSignalAsync(List<byte> data, int eventIndex);
     }

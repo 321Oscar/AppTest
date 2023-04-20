@@ -33,16 +33,10 @@ namespace AppTest.FormType
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SignalName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SignalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DataTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreatedOn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.projectNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.formNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CurveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.signalEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -59,7 +53,14 @@ namespace AppTest.FormType
             this.label3 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.copyNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SignalName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SignalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DataTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreatedOn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.projectNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.formNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.signalEntityBindingSource)).BeginInit();
@@ -81,6 +82,7 @@ namespace AppTest.FormType
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
+            this.TimeStamp,
             this.SignalName,
             this.SignalValue,
             this.DataTime,
@@ -99,61 +101,6 @@ namespace AppTest.FormType
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // SignalName
-            // 
-            this.SignalName.DataPropertyName = "SignalName";
-            this.SignalName.HeaderText = "SignalName";
-            this.SignalName.Name = "SignalName";
-            this.SignalName.ReadOnly = true;
-            // 
-            // SignalValue
-            // 
-            this.SignalValue.DataPropertyName = "SignalValue";
-            this.SignalValue.HeaderText = "SignalValue";
-            this.SignalValue.Name = "SignalValue";
-            this.SignalValue.ReadOnly = true;
-            // 
-            // DataTime
-            // 
-            this.DataTime.DataPropertyName = "DataTime";
-            dataGridViewCellStyle1.Format = "yyyy-MM-dd HH:mm:ss fff";
-            this.DataTime.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DataTime.HeaderText = "DataTime";
-            this.DataTime.Name = "DataTime";
-            this.DataTime.ReadOnly = true;
-            // 
-            // CreatedOn
-            // 
-            this.CreatedOn.DataPropertyName = "CreatedOn";
-            dataGridViewCellStyle2.Format = "yyyy-MM-dd HH:mm:ss fff";
-            dataGridViewCellStyle2.NullValue = "--";
-            this.CreatedOn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.CreatedOn.HeaderText = "CreatedOn";
-            this.CreatedOn.Name = "CreatedOn";
-            this.CreatedOn.ReadOnly = true;
-            // 
-            // projectNameDataGridViewTextBoxColumn
-            // 
-            this.projectNameDataGridViewTextBoxColumn.DataPropertyName = "ProjectName";
-            this.projectNameDataGridViewTextBoxColumn.HeaderText = "ProjectName";
-            this.projectNameDataGridViewTextBoxColumn.Name = "projectNameDataGridViewTextBoxColumn";
-            this.projectNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // formNameDataGridViewTextBoxColumn
-            // 
-            this.formNameDataGridViewTextBoxColumn.DataPropertyName = "FormName";
-            this.formNameDataGridViewTextBoxColumn.HeaderText = "FormName";
-            this.formNameDataGridViewTextBoxColumn.Name = "formNameDataGridViewTextBoxColumn";
-            this.formNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
@@ -162,13 +109,13 @@ namespace AppTest.FormType
             this.exportToolStripMenuItem,
             this.copyNameToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(189, 116);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(150, 94);
             // 
             // CurveToolStripMenuItem
             // 
             this.CurveToolStripMenuItem.Image = global::AppTest.Properties.Resources.Measure_color;
             this.CurveToolStripMenuItem.Name = "CurveToolStripMenuItem";
-            this.CurveToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.CurveToolStripMenuItem.Size = new System.Drawing.Size(149, 30);
             this.CurveToolStripMenuItem.Text = "生成曲线图";
             this.CurveToolStripMenuItem.Click += new System.EventHandler(this.CurveToolStripMenuItem_Click);
             // 
@@ -176,9 +123,16 @@ namespace AppTest.FormType
             // 
             this.exportToolStripMenuItem.Image = global::AppTest.Properties.Resources.export__1_;
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(149, 30);
             this.exportToolStripMenuItem.Text = "Export";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            // 
+            // copyNameToolStripMenuItem
+            // 
+            this.copyNameToolStripMenuItem.Name = "copyNameToolStripMenuItem";
+            this.copyNameToolStripMenuItem.Size = new System.Drawing.Size(149, 30);
+            this.copyNameToolStripMenuItem.Text = "CopyName";
+            this.copyNameToolStripMenuItem.Click += new System.EventHandler(this.copyNameToolStripMenuItem_Click);
             // 
             // signalEntityBindingSource
             // 
@@ -334,12 +288,67 @@ namespace AppTest.FormType
             this.tableLayoutPanel1.Size = new System.Drawing.Size(633, 437);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
-            // copyNameToolStripMenuItem
+            // ID
             // 
-            this.copyNameToolStripMenuItem.Name = "copyNameToolStripMenuItem";
-            this.copyNameToolStripMenuItem.Size = new System.Drawing.Size(188, 30);
-            this.copyNameToolStripMenuItem.Text = "CopyName";
-            this.copyNameToolStripMenuItem.Click += new System.EventHandler(this.copyNameToolStripMenuItem_Click);
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // TimeStamp
+            // 
+            this.TimeStamp.DataPropertyName = "TimeStamp";
+            this.TimeStamp.HeaderText = "TimeStamp";
+            this.TimeStamp.Name = "TimeStamp";
+            this.TimeStamp.ReadOnly = true;
+            // 
+            // SignalName
+            // 
+            this.SignalName.DataPropertyName = "SignalName";
+            this.SignalName.HeaderText = "SignalName";
+            this.SignalName.Name = "SignalName";
+            this.SignalName.ReadOnly = true;
+            // 
+            // SignalValue
+            // 
+            this.SignalValue.DataPropertyName = "SignalValue";
+            this.SignalValue.HeaderText = "SignalValue";
+            this.SignalValue.Name = "SignalValue";
+            this.SignalValue.ReadOnly = true;
+            // 
+            // DataTime
+            // 
+            this.DataTime.DataPropertyName = "DataTime";
+            dataGridViewCellStyle1.Format = "yyyy-MM-dd HH:mm:ss fff";
+            this.DataTime.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DataTime.HeaderText = "DataTime";
+            this.DataTime.Name = "DataTime";
+            this.DataTime.ReadOnly = true;
+            // 
+            // CreatedOn
+            // 
+            this.CreatedOn.DataPropertyName = "CreatedOn";
+            dataGridViewCellStyle2.Format = "yyyy-MM-dd HH:mm:ss fff";
+            dataGridViewCellStyle2.NullValue = "--";
+            this.CreatedOn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.CreatedOn.HeaderText = "CreatedOn";
+            this.CreatedOn.Name = "CreatedOn";
+            this.CreatedOn.ReadOnly = true;
+            // 
+            // projectNameDataGridViewTextBoxColumn
+            // 
+            this.projectNameDataGridViewTextBoxColumn.DataPropertyName = "ProjectName";
+            this.projectNameDataGridViewTextBoxColumn.HeaderText = "ProjectName";
+            this.projectNameDataGridViewTextBoxColumn.Name = "projectNameDataGridViewTextBoxColumn";
+            this.projectNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // formNameDataGridViewTextBoxColumn
+            // 
+            this.formNameDataGridViewTextBoxColumn.DataPropertyName = "FormName";
+            this.formNameDataGridViewTextBoxColumn.HeaderText = "FormName";
+            this.formNameDataGridViewTextBoxColumn.Name = "formNameDataGridViewTextBoxColumn";
+            this.formNameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // HistoryDataUC
             // 
@@ -388,13 +397,14 @@ namespace AppTest.FormType
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.ToolStripMenuItem copyNameToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeStamp;
         private System.Windows.Forms.DataGridViewTextBoxColumn SignalName;
         private System.Windows.Forms.DataGridViewTextBoxColumn SignalValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn DataTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreatedOn;
         private System.Windows.Forms.DataGridViewTextBoxColumn projectNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn formNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.ToolStripMenuItem copyNameToolStripMenuItem;
     }
 }

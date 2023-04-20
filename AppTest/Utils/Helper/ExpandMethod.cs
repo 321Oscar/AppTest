@@ -81,4 +81,32 @@ namespace AppTest.Helper
         }
 
     }
+
+    public static class ByteExtension
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="b"></param>
+        /// <param name="m">从右往左数,小的索引</param>
+        /// <param name="n">从右往左数,大的索引</param>
+        /// <returns></returns>
+        public static byte GetBits(this byte b,int m, int n)
+        {
+            int mask = (1 << (n - m + 1)) - 1;
+            byte result = (byte)((b >> m) & mask);
+            return result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="b"></param>
+        /// <param name="indx"></param>
+        /// <returns></returns>
+        public static byte GetBit(this byte b,int indx)
+        {
+            return (byte)((b >> indx) & 1);
+        }
+    }
 }

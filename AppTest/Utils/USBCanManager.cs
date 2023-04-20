@@ -257,7 +257,7 @@ namespace AppTest.Helper
             bool isExist = usbCans.TryGetValue(project, out USBCAN usbCan);
             if (isExist)
             {
-                usbCan.StartReceive(false, new int[] { 0 });
+                usbCan.StartReceive(false, new int[] { 0,1 });
             }
             else
             {
@@ -407,7 +407,7 @@ namespace AppTest.Helper
             for (int i = 0; i < data.Length; i++)
             {
                 string log = data[i].ToString();
-                LogHelper.WriteToOutput(formName, $"通道[{canindex}] [{data[i].timeStamp:yyyy-MM-dd HH:mm:ss fff}] 接收：" + log);
+                LogHelper.WriteToOutput(formName, $"通道[{canindex}] [{data[i].TimeStampStr:yyyy-MM-dd HH:mm:ss fff}] 接收：" + log);
             }
 
             return data;
@@ -437,7 +437,7 @@ namespace AppTest.Helper
             for (int i = 0; i < data.Length; i++)
             {
                 string log = data[i].ToString();
-                LogHelper.WriteToOutput(formName, $"通道[{canindex}] [{data[i].timeStamp:yyyy-MM-dd HH:mm:ss fff}] 接收：" + log);
+                LogHelper.WriteToOutput(formName, $"通道[{canindex}] [{data[i].TimeStampStr:yyyy-MM-dd HH:mm:ss fff}] 接收：" + log);
             }
 
             return data;

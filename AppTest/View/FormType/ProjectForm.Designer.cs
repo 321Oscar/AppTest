@@ -188,7 +188,7 @@ namespace AppTest
             // xCPInfoToolStripMenuItem
             // 
             this.xCPInfoToolStripMenuItem.Name = "xCPInfoToolStripMenuItem";
-            this.xCPInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.xCPInfoToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.xCPInfoToolStripMenuItem.Text = "XCPInfo";
             this.xCPInfoToolStripMenuItem.Click += new System.EventHandler(this.xCPInfoToolStripMenuItem_Click);
             // 
@@ -205,6 +205,7 @@ namespace AppTest
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.Color.Gainsboro;
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Location = new System.Drawing.Point(0, 367);
             this.statusStrip1.Name = "statusStrip1";

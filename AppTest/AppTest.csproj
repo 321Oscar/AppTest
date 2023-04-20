@@ -332,6 +332,12 @@
     <Compile Include="View\FormType\DBCGetForm.Designer.cs">
       <DependentUpon>DBCGetForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FormType\LicenseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormType\LicenseForm.Designer.cs">
+      <DependentUpon>LicenseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\FormType\ProtocolsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -548,6 +554,9 @@
     <EmbeddedResource Include="View\BaseForm\BaseDataForm.resx">
       <DependentUpon>BaseDataForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\FormType\LicenseForm.resx">
+      <DependentUpon>LicenseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormType\ProtocolsForm.resx">
       <DependentUpon>ProtocolsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -635,6 +644,7 @@
     <None Include="Properties\app.manifest" />
     <None Include="Properties\DataSources\AppTest.DBCLib.Signal.datasource" />
     <None Include="Properties\DataSources\AppTest.FormType.ASCSignal.datasource" />
+    <None Include="Properties\DataSources\AppTest.Model.AuthenticationEntity.datasource" />
     <None Include="Properties\DataSources\AppTest.Model.DBCSignal.datasource" />
     <None Include="Properties\DataSources\AppTest.ProjectClass.DBCSignal.datasource" />
     <None Include="Properties\DataSources\AppTest.ProjectClass.SignalEntity.datasource" />
@@ -778,6 +788,9 @@
       <Project>{2d4a9545-cbab-4d8d-82c3-74c2c5b9b4bb}</Project>
       <Name>LPCanControl</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UDSDependency\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.0.1\build\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.0.1\build\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />

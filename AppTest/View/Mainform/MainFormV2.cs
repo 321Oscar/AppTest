@@ -2,7 +2,9 @@
 using AppTest.FormType.Helper;
 using AppTest.Helper;
 using AppTest.Model;
+using AppTest.View.FormType;
 using ELFTest;
+using LPCanControl.UDS;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -32,6 +34,8 @@ namespace AppTest
             this.Icon = Icon.FromHandle(Global.IconHandle_ProjectCenter);/*global::AppTest.Properties.Resources.导入*/;
 
             treeViewRoot.FullRowSelect = false;
+
+            UDSHelper.lp_logInit();
         }
 
 
@@ -524,10 +528,11 @@ namespace AppTest
 
         private void testToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //MSForm ms = new MSForm();
-            //ms.Show();
-            TestBorderForm tbf = new TestBorderForm();
-            tbf.Show();
+            //var configAsync = DBHelper.GetAuthenticationDb();
+            //configAsync.Result.AuthenticationEntities.CountAsync();
+
+            LicenseForm licenseForm = new LicenseForm();
+            licenseForm.ShowDialog();
         }
 
         private void treeViewRoot_DrawNode(object sender, DrawTreeNodeEventArgs e)

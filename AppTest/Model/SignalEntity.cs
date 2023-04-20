@@ -22,6 +22,8 @@ namespace AppTest.Model
         public string CreatedOn { get; set; }
         public int TimeStamp { get; set; }
 
+        public int CANTimeStamp { get; set; }
+
         public int CompareTo(SignalEntity other)
         {
             //return other.DataTime.CompareTo(this.DataTime);Excel中不支持ms的时间，导入导出数据有问题
@@ -44,10 +46,21 @@ namespace AppTest.Model
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
+        /// <summary>
+        /// ProductName
+        /// </summary>
         public string Code
         {
             get; set;
         }
+        /// <summary>
+        /// F199编译日期
+        /// </summary>
+        public string Code1 { get; set; }
+        /// <summary>
+        /// F189软件版本号
+        /// </summary>
+        public string Code2 { get; set; }
 
         public int Count { get; set; }
     }
@@ -76,9 +89,22 @@ namespace AppTest.Model
         }
     }
 
+    public class AuthenticationAsyncDB : SQLiteAsyncConnection
+    {
+        public AsyncTableQuery<AuthenticationEntity> AuthenticationEntities { get { return this.Table<AuthenticationEntity>(); } }
+
+        public AuthenticationAsyncDB(string databasePath, bool storeDateTimeAsTicks = false) : base(databasePath, storeDateTimeAsTicks)
+        {
+            CreateTableAsync<AuthenticationEntity>();
+            //Sqliteco
+            //SQLite.SQLiteAsyncConnection.ResetPool
+        }
+    }
+
     public class DBHelper
     {
         private static SignalAsyncDB _db;
+        private static AuthenticationAsyncDB _db_au;
         private static readonly AsyncLock _mutex = new AsyncLock();
 
         public static async Task<SignalAsyncDB> GetDb()
@@ -95,6 +121,28 @@ namespace AppTest.Model
                     _db = new SignalAsyncDB($"{Environment.CurrentDirectory}{Global.DBPATH}");
 
                     return _db;
+                }
+            }
+            catch (Exception er)
+            {
+                throw er;
+            }
+        }
+
+        public static async Task<AuthenticationAsyncDB> GetAuthenticationDb()
+        {
+            try
+            {
+                using (await _mutex.LockAsync())
+                {
+                    if (_db_au != null)
+                    {
+                        return _db_au;
+                    }
+
+                    _db_au = new AuthenticationAsyncDB($"{Environment.CurrentDirectory}{Global.CONFIGPATH}");
+
+                    return _db_au;
                 }
             }
             catch (Exception er)

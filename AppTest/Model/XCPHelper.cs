@@ -12,6 +12,7 @@ namespace AppTest.Model
     {
         public const byte STD_CONNECT = 0xFF;
         public const byte STD_DISCONNECT = 0xFE;
+        public const byte STD_GETSTATUS = 0xFD;
         public const byte STD_SHORTUPLOAD = 0xF4;
         public const byte STD_SET_MTA = 0xF6;
         public const byte STD_UPLOAD = 0xF5;
@@ -30,11 +31,6 @@ namespace AppTest.Model
                 default:
                     return XCPResponse.Ok;
             }
-        }
-
-        internal static byte[] CalKeyWithSeed(List<byte> seeds)
-        {
-            throw new NotImplementedException();
         }
 
         internal static byte[] ConvertToByte(string writeData, int valueType, int byteorder)

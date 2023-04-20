@@ -156,6 +156,7 @@ namespace AppTest.FormType
                 {
                     cbChannelUsed.Checked = indexItem.isUsed;
                     cbbProtocolType.SelectedIndex = indexItem.ProtocolType;
+                    cbAuth.Checked = indexItem.IsAuth;
                     //add by xwd 2022-03-30 增加xcp
                     if (indexItem.ProtocolType == (int)ProtocolType.XCP)
                     {
@@ -210,6 +211,7 @@ namespace AppTest.FormType
                 }
                 canIndex.isUsed = cbChannelUsed.Checked;
                 canIndex.CanChannel = cbbCanIndex.SelectedIndex;
+                canIndex.IsAuth = cbAuth.Checked;
                 if (cbChannelUsed.Checked)
                 {
                     canIndex.ProtocolType = cbbProtocolType.SelectedIndex;

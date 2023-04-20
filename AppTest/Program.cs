@@ -66,6 +66,16 @@ namespace AppTest
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\Data");
             }
             var dbAsync = DBHelper.GetDb();
+            var configAsync = DBHelper.GetAuthenticationDb();
+            //Hide config.db
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\Config.db";
+            FileAttributes attributes = File.GetAttributes(filePath);
+            if ((attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
+            {
+                // 文件未隐藏，需要隐藏
+                attributes |= FileAttributes.Hidden;
+                File.SetAttributes(filePath, attributes);
+            }
         }
     }
 }

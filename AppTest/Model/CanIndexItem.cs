@@ -12,6 +12,11 @@ namespace AppTest.Model
         /// 
         /// </summary>
         public bool isUsed { get; set; }
+
+        /// <summary>
+        /// 是否用于软件校验
+        /// </summary>
+        public bool IsAuth { get; set; }
         /// <summary>
         /// 
         /// </summary>

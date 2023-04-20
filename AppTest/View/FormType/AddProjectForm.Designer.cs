@@ -64,6 +64,7 @@
             this.cbbDeviceType = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.cbAuth = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.grbCanInfo.SuspendLayout();
             this.SuspendLayout();
@@ -126,6 +127,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cbAuth);
             this.groupBox1.Controls.Add(this.tbSlaveID);
             this.groupBox1.Controls.Add(this.lbSlaveID);
             this.groupBox1.Controls.Add(this.tbMasterID);
@@ -319,6 +321,12 @@
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.panel1.Name = "panel1";
             // 
+            // cbAuth
+            // 
+            resources.ApplyResources(this.cbAuth, "cbAuth");
+            this.cbAuth.Name = "cbAuth";
+            this.cbAuth.UseVisualStyleBackColor = true;
+            // 
             // AddProjectForm
             // 
             resources.ApplyResources(this, "$this");
@@ -377,5 +385,6 @@
         private System.Windows.Forms.Label lbSlaveID;
         private System.Windows.Forms.TextBox tbMasterID;
         private System.Windows.Forms.Label lbMasterID;
+        private System.Windows.Forms.CheckBox cbAuth;
     }
 }

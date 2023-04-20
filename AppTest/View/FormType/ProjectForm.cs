@@ -6,6 +6,7 @@ using ELFSharp.ELF;
 using ELFSharp.ELF.Sections;
 using ELFTest;
 using LPCanControl.CANInfo;
+using LPCanControl.UDS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -332,7 +333,7 @@ namespace AppTest
                 //
                 if (this.projectItem.Form.Find(x => x.Name == addNewForm.FormItem.Name) != null)
                 {
-                    MessageBox.Show("名称重复");
+                    MessageBox.Show("名称重复", "新建窗口错误", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error) ;
                     return;
                 }
                 this.projectItem.Form.Add(addNewForm.FormItem);
@@ -348,13 +349,13 @@ namespace AppTest
                 }
                 else
                 {
-                    MessageBox.Show("打开【" + addNewForm.FormItem.Name + "】窗口失败");
+                    MessageBox.Show("打开【" + addNewForm.FormItem.Name + "】窗口失败","Info");
                 }
             }
         }
 
        
-        private void toolStripButton_Connect_Click(object sender, EventArgs e)
+        private async void toolStripButton_Connect_Click(object sender, EventArgs e)
         {
             if (!USBCanManager.Instance.Exist(projectItem))
             {
@@ -403,7 +404,8 @@ namespace AppTest
                             ///can.init
                             if (tsb_ConnectXCP.Visible)
                             {
-                                USBCanManager.Instance.InitCan(projectItem, item.CanChannel, (uint)projectItem.CanIndex[0].SlaveID - 1, (uint)projectItem.CanIndex[0].SlaveID +1 );
+                                //USBCanManager.Instance.InitCan(projectItem, item.CanChannel, (uint)projectItem.CanIndex[0].SlaveID - 1, (uint)projectItem.CanIndex[0].SlaveID +1 );
+                                USBCanManager.Instance.InitCan(projectItem, item.CanChannel);
                             }
                             else
                             {
@@ -428,6 +430,15 @@ namespace AppTest
                     this.tslbCanStatus.Text = $"{(FormType.DeviceType)projectItem.DeviceType} [{projectItem.CanIndex.Count}] 已打开 ";
                     USBCanManager.Instance.StartRecv(projectItem, caninds.ToArray());//caninds
                     LeapMessageBox.Instance.ShowInfo("CAN 数据接收已启动");
+
+                    //增加DID读写
+                    if(Global.Protected == 1)
+                    {
+                        Cursor = Cursors.WaitCursor;
+                        LeapMessageBox.Instance.ShowInfo("软件校验中..请等待");
+                        await Task.Run(CheckAuth);
+                        Cursor = Cursors.Default;
+                    }
                 }
                 else
                 {
@@ -437,6 +448,127 @@ namespace AppTest
                 }
 
             }
+        }
+
+        private async void CheckAuth()
+        {
+            ReadDID(UDSHelper.DIDInfos[9], out string productName);
+            ReadDID(UDSHelper.DIDInfos[13], out string date);
+            ReadDID(UDSHelper.DIDInfos[3], out string version);
+
+            if (productName == LPCanControl.Model.Global.ReadDIDFail ||
+                date == LPCanControl.Model.Global.ReadDIDFail||
+                version == LPCanControl.Model.Global.ReadDIDFail)
+            {
+                LeapMessageBox.Instance.ShowInfo("软件校验失败,请重新连接");
+                
+                return;
+            }
+
+            
+
+            var db = await DBHelper.GetAuthenticationDb();
+
+            string sqlStr = $"select * from AuthenticationEntity where Code ='{productName}' and Code1 ='{date}' and Code2 ='{version}' ";
+
+            var entities = await db.QueryAsync<AuthenticationEntity>(sqlStr);
+
+            if(entities.Count == 0)
+            {
+                AuthenticationEntity entity = new AuthenticationEntity()
+                {
+                    Code = productName,
+                    Code1 = date,
+                    Code2 = version,
+                    Count = 1
+                };
+
+                await db.InsertAsync(entity);
+            }
+            else
+            {
+                if(entities[0].Count >= 10)
+                {
+                    //禁用帧
+                    WriteDID(new LPCanControl.Model.DIDInfo() {Name="0x0304",DID = 0x0304,Length = 1,DIDType = LPCanControl.Model.DIDType.enc_HEX }, "0", out bool suc);
+                    LogHelper.Info($"write did 0304 to 0 {(suc ? "success" : "Fail")}");
+                    LeapMessageBox.Instance.ShowInfo("软件Lisence失效，请刷写新程序");
+                    this.Enabled = false;
+                }
+                else
+                {
+                    WriteDID(new LPCanControl.Model.DIDInfo() { Name = "0x0304", DID = 0x0304, Length = 1, DIDType = LPCanControl.Model.DIDType.enc_HEX }, "1", out bool suc);
+                    LogHelper.Info($"write did 0x0304 to 1 {(suc ? "success" : "Fail")}");
+                    entities[0].Count++;
+                    await db.UpdateAsync(entities[0]);
+                    LeapMessageBox.Instance.ShowInfo("软件校验成功.");
+                }
+            }
+
+            USBCanManager.Instance.StartRecv(projectItem,new int[] { 0,1});//caninds
+        }
+
+        private void ReadDID(LPCanControl.Model.DIDInfo did,out string result)
+        {
+            USBCanManager.Instance.CloseRecv(projectItem);//caninds
+            List<int> caninds = new List<int>();
+            result = LPCanControl.Model.Global.ReadDIDFail;
+            //遍历can口
+            foreach (var item in projectItem.CanIndex)
+            {
+                caninds.Add(item.CanChannel);
+                if ((FormType.DeviceType)projectItem.DeviceType == FormType.DeviceType.USBCANFD_200U)
+                {
+                    result = UDSHelper.ReadDID(currentUpgradeType: UDSHelper.UpGradeIDs[LPCanControl.Model.UpgradeType.MCU],
+                    dIDInfo: did,
+                    canDeviceHandle: USBCanManager.Instance.ZCans[this.projectItem].DeviceHandle,
+                    canIndHandle: USBCanManager.Instance.ZCans[this.projectItem].GetChannelHandle(item.CanChannel),
+                    canDeviceInd: projectItem.DeviceIndex,
+                    canInd: item.CanChannel);
+                }
+                else
+                {
+                    result = UDSHelper.ReadDID(currentUpgradeType: UDSHelper.UpGradeIDs[LPCanControl.Model.UpgradeType.MCU],
+                    dIDInfo: did,
+                    canDeviceType: this.projectItem.DeviceType,
+                    canDeviceInd: projectItem.DeviceIndex, canInd: item.CanChannel);
+                }
+                if (result != LPCanControl.Model.Global.ReadDIDFail)
+                    break;
+            }
+            USBCanManager.Instance.StartRecv(projectItem, caninds.ToArray());//caninds
+        }
+
+        private void WriteDID(LPCanControl.Model.DIDInfo did,string val, out bool result)
+        {
+            USBCanManager.Instance.CloseRecv(projectItem);//caninds
+            List<int> caninds = new List<int>();
+            result = false;
+            //遍历can口
+            foreach (var item in projectItem.CanIndex)
+            {
+                caninds.Add(item.CanChannel);
+                if ((FormType.DeviceType)projectItem.DeviceType == FormType.DeviceType.USBCANFD_200U)
+                {
+                    result = UDSHelper.WriteDID(val,
+                        currentUpgradeType: UDSHelper.UpGradeIDs[LPCanControl.Model.UpgradeType.MCU],
+                    dIDInfo: did,
+                    canDeviceIndHandle: USBCanManager.Instance.ZCans[this.projectItem].DeviceHandle,
+                    canIndHandle: USBCanManager.Instance.ZCans[this.projectItem].GetChannelHandle(item.CanChannel),
+                    canDeviceInd: projectItem.DeviceIndex,
+                    canInd: item.CanChannel);
+                }
+                else
+                {
+                    result = UDSHelper.WriteDID(val, currentUpgradeType: UDSHelper.UpGradeIDs[LPCanControl.Model.UpgradeType.MCU],
+                    dIDInfo: did,
+                    canDeviceType: this.projectItem.DeviceType,
+                    canDeviceInd: projectItem.DeviceIndex, canInd: item.CanChannel);
+                }
+                if (result)
+                    break;
+            }
+            USBCanManager.Instance.StartRecv(projectItem, caninds.ToArray());//caninds
         }
 
         private void toolStripButton_DisConnect_Click(object sender, EventArgs e)
@@ -470,9 +602,10 @@ namespace AppTest
         private void InitStatusBar()
         {
             //CAN通道
-            ToolStripLabel tsl = new ToolStripLabel
+            ToolStripLabel tsl = new ToolStripStatusLabel
             {
-                Text = "Can通道"
+                Text = "Can通道",
+                BorderSides = ToolStripStatusLabelBorderSides.Left
             };
             statusStrip1.Items.Add(tsl);
 
@@ -488,28 +621,27 @@ namespace AppTest
             tscbb.SelectedIndexChanged += Tscbb_SelectedIndexChanged;
             statusStrip1.Items.Add(tscbb);
             //分隔符
-            ToolStripSeparator tss = new ToolStripSeparator();
-            statusStrip1.Items.Add(tss);
 
             //CAN打开状态
-            tslbCanStatus = new ToolStripLabel();
+            tslbCanStatus = new ToolStripStatusLabel() {BorderSides = ToolStripStatusLabelBorderSides.Left };
             //tslCanStatus.Text = "";
             statusStrip1.Items.Add(tslbCanStatus);
-            //分隔符
-            ToolStripSeparator tss1 = new ToolStripSeparator();
-            statusStrip1.Items.Add(tss1);
 
             //XCP
-            tslbXcpStatus = new ToolStripLabel();
+            tslbXcpStatus = new ToolStripStatusLabel() { BorderSides = ToolStripStatusLabelBorderSides.Left };
             statusStrip1.Items.Add(tslbXcpStatus);
 
-            tslbMasterID = new ToolStripLabel { Dock = DockStyle.Right };
+            tslbMasterID = new ToolStripStatusLabel { BorderSides = ToolStripStatusLabelBorderSides.Left };
             statusStrip1.Items.Add(tslbMasterID);
 
-            tslbSlaveID = new ToolStripLabel { Dock = DockStyle.Right };
+            tslbSlaveID = new ToolStripStatusLabel { BorderSides = ToolStripStatusLabelBorderSides.Left };
             statusStrip1.Items.Add(tslbSlaveID);
 
-            tslbXCPCmdStatus = new ToolStripLabel();
+            tslbXCPCmdStatus = new ToolStripStatusLabel()
+            {
+                BorderSides = ToolStripStatusLabelBorderSides.Left | ToolStripStatusLabelBorderSides.Right,
+                Spring = true
+            };
             statusStrip1.Items.Add(tslbXCPCmdStatus);
 
             tscbb.SelectedIndex = 0;
@@ -603,13 +735,25 @@ namespace AppTest
             this.Location = new Point(StartX, StartY);
             AnimateWindow(this.Handle, 200, AW_HOR_POSITIVE | AW_SLIDE);
 
-            if (projectItem.CanIndex[0].ProtocolType == (int)ProtocolType.XCP || projectItem.CanIndex[1].ProtocolType == (int)ProtocolType.XCP)
+            if (projectItem.CanIndex[0].ProtocolType == (int)ProtocolType.XCP)
             {
                 this.tslbXcpStatus.Visible = true;
                 tsp_ImportElf.Visible = true;
                 tslbXcpStatus.Text = $"XCP 未连接";
                 this.tsb_ConnectXCP.Visible = tslbMasterID.Visible = tslbSlaveID.Visible = true;
                 this.xcpModule = new XCPModule((uint)projectItem.CanIndex[0].MasterID, (uint)projectItem.CanIndex[0].SlaveID, this.projectItem);
+                XCPModuleManager.AddXCPModule(xcpModule);
+                this.XcpModule.OnCMDStatusChanged += XcpModule_OnCMDStatusChanged;
+                this.xcpModule.OnConnectStatusChanged += XcpModule_OnConnectStatusChanged;
+                this.xCPToolStripMenuItem.Visible = true;
+            }
+            else if (projectItem.CanIndex[1].ProtocolType == (int)ProtocolType.XCP)
+            {
+                this.tslbXcpStatus.Visible = true;
+                tsp_ImportElf.Visible = true;
+                tslbXcpStatus.Text = $"XCP 未连接";
+                this.tsb_ConnectXCP.Visible = tslbMasterID.Visible = tslbSlaveID.Visible = true;
+                this.xcpModule = new XCPModule((uint)projectItem.CanIndex[1].MasterID, (uint)projectItem.CanIndex[1].SlaveID, this.projectItem);
                 XCPModuleManager.AddXCPModule(xcpModule);
                 this.XcpModule.OnCMDStatusChanged += XcpModule_OnCMDStatusChanged;
                 this.xcpModule.OnConnectStatusChanged += XcpModule_OnConnectStatusChanged;
@@ -843,15 +987,18 @@ namespace AppTest
             /// protocol version
             /// transport version
             da += $"byteorder:{XcpModule.ByteOrder}\n\r";
-            //da += $"calPage Support:{XcpModule.CalPageSupport}\n\r";
-            //da += $"DAQ Support:{XcpModule.DAQSupport}\n\r";
-            //da += $"STIM Support:{XcpModule.STIMPageSupport}\n\r";
-            //da += $"PGM Support:{XcpModule.PGMSupport}\n\r";
-            da += $"MAX CTO:{XcpModule.MAX_CTO}\n\r";
-            da += $"MAX DTO:{XcpModule.MAX_DTO}\n\r";
-            da += $"protocol version:{XcpModule.XCP_Protocol_Version}\n\r";
-            da += $"transport version:{XcpModule.XCP_Transport_Version}\n\r";
-            MessageBox.Show(da);
+            da += $"calPage Support:{XcpModule.ConnectResponse.CalPageSupport}\n\r";
+            da += $"DAQ Support:{XcpModule.ConnectResponse.DAQSupport}\n\r";
+            da += $"STIM Support:{XcpModule.ConnectResponse.STIMPageSupport}\n\r";
+            da += $"PGM Support:{XcpModule.ConnectResponse.PGMSupport}\n\r";
+            da += $"MAX CTO:{XcpModule.ConnectResponse.MAX_CTO}\n\r";
+            da += $"MAX DTO:{XcpModule.ConnectResponse.MAX_DTO}\n\r";
+            da += $"protocol version:{XcpModule.ConnectResponse.XCP_Protocol_Version}\n\r";
+            da += $"transport version:{XcpModule.ConnectResponse.XCP_Transport_Version}\n\r";
+            da += "\n\r";
+            da += $"DAQProtected:{XcpModule.GetStatusResponse.CurrentResourceProtectionStatus.DAQProtected}\n\r";
+            da += $"DaqRunning:{XcpModule.GetStatusResponse.DaqRunning}\n\r";
+            MessageBox.Show(da, "XCP 基本信息",MessageBoxButtons.OK ,MessageBoxIcon.Information);
         }
     }
 }

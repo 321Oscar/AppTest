@@ -17,6 +17,7 @@ namespace AppTest.Helper
         /// 数据库文件
         /// </summary>
         public const string DBPATH = "\\Data\\MeasureInfo.db";
+        public const string CONFIGPATH = "\\Config\\Config.db";
         public const string DATETIMEFORMAT = "yyyy-MM-dd HH:mm:ss fff";
 
         public enum ByteOrder
@@ -216,6 +217,8 @@ namespace AppTest.Helper
         /// 版本号
         /// </summary>
         public const string SoftVersion = "v0.003.05-beta";
+
+        public const int Protected = 0;
 
         #region 图标
         public static System.IntPtr IconHandle_ProjectCenter = (global::AppTest.Properties.Resources.ProjectCenter).GetHicon();

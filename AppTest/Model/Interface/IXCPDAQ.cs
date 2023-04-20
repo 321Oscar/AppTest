@@ -19,7 +19,8 @@ namespace AppTest.Model
         /// </summary>
         /// <param name="data">拼接后的报文</param>
         /// <param name="eventIndex">信号所属的 daq 事件通道索引</param>
+        /// <param name="cantimeStamp">时间戳</param>
         /// <returns></returns>
-        Task ParseResponeToXCPSignalAsync(List<byte> data, int eventIndex);
+        Task ParseResponeToXCPSignalAsync(List<byte> data, int eventIndex, uint cantimeStamp);
     }
 }

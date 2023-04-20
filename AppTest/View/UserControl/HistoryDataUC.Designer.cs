@@ -37,7 +37,6 @@ namespace AppTest.FormType
             this.CurveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyNameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.signalEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -53,9 +52,26 @@ namespace AppTest.FormType
             this.label3 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.lbToPage = new System.Windows.Forms.Label();
+            this.tbCurPage = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.lbTotalPage = new System.Windows.Forms.Label();
+            this.tbCurrentPage = new System.Windows.Forms.TextBox();
+            this.btnPageEnd = new System.Windows.Forms.Button();
+            this.btnNextPage = new System.Windows.Forms.Button();
+            this.btnPrevPage = new System.Windows.Forms.Button();
+            this.btnPageStart = new System.Windows.Forms.Button();
+            this.lbQueryLog = new System.Windows.Forms.Label();
+            this.signalEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SignalName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CANTimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SignalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DataTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CreatedOn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,13 +79,15 @@ namespace AppTest.FormType
             this.formNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.signalEntityBindingSource)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.signalEntityBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -82,8 +100,9 @@ namespace AppTest.FormType
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
-            this.TimeStamp,
             this.SignalName,
+            this.CANTimeStamp,
+            this.TimeStamp,
             this.SignalValue,
             this.DataTime,
             this.CreatedOn,
@@ -92,12 +111,12 @@ namespace AppTest.FormType
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.DataSource = this.signalEntityBindingSource;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 54);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 94);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(627, 379);
+            this.dataGridView1.Size = new System.Drawing.Size(1098, 474);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
@@ -134,10 +153,6 @@ namespace AppTest.FormType
             this.copyNameToolStripMenuItem.Text = "CopyName";
             this.copyNameToolStripMenuItem.Click += new System.EventHandler(this.copyNameToolStripMenuItem_Click);
             // 
-            // signalEntityBindingSource
-            // 
-            this.signalEntityBindingSource.DataSource = typeof(AppTest.Model.SignalEntity);
-            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
@@ -152,7 +167,7 @@ namespace AppTest.FormType
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.flowLayoutPanel1.MinimumSize = new System.Drawing.Size(2, 42);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(627, 42);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1098, 42);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // panel4
@@ -162,7 +177,7 @@ namespace AppTest.FormType
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(269, 42);
+            this.panel4.Size = new System.Drawing.Size(72, 42);
             this.panel4.TabIndex = 2;
             // 
             // progressBar1
@@ -170,7 +185,7 @@ namespace AppTest.FormType
             this.progressBar1.Location = new System.Drawing.Point(98, 4);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(168, 33);
+            this.progressBar1.Size = new System.Drawing.Size(80, 33);
             this.progressBar1.TabIndex = 3;
             // 
             // btnQuery
@@ -180,7 +195,7 @@ namespace AppTest.FormType
             this.btnQuery.Location = new System.Drawing.Point(3, 4);
             this.btnQuery.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnQuery.Name = "btnQuery";
-            this.btnQuery.Size = new System.Drawing.Size(87, 34);
+            this.btnQuery.Size = new System.Drawing.Size(69, 34);
             this.btnQuery.TabIndex = 0;
             this.btnQuery.Text = "查询";
             this.btnQuery.UseVisualStyleBackColor = true;
@@ -190,7 +205,7 @@ namespace AppTest.FormType
             // 
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Location = new System.Drawing.Point(269, 0);
+            this.panel2.Location = new System.Drawing.Point(72, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(269, 42);
@@ -217,15 +232,15 @@ namespace AppTest.FormType
             // 
             this.panel1.Controls.Add(this.dateTimePickerStart);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(0, 42);
+            this.panel1.Location = new System.Drawing.Point(341, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(269, 42);
+            this.panel1.Size = new System.Drawing.Size(201, 42);
             this.panel1.TabIndex = 1;
             // 
             // dateTimePickerStart
             // 
-            this.dateTimePickerStart.Location = new System.Drawing.Point(43, 9);
+            this.dateTimePickerStart.Location = new System.Drawing.Point(29, 9);
             this.dateTimePickerStart.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dateTimePickerStart.Name = "dateTimePickerStart";
             this.dateTimePickerStart.Size = new System.Drawing.Size(167, 23);
@@ -234,7 +249,7 @@ namespace AppTest.FormType
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 13);
+            this.label1.Location = new System.Drawing.Point(3, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(20, 17);
             this.label1.TabIndex = 0;
@@ -244,24 +259,24 @@ namespace AppTest.FormType
             // 
             this.panel3.Controls.Add(this.dateTimePickerEnd);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(269, 42);
+            this.panel3.Location = new System.Drawing.Point(542, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(269, 42);
+            this.panel3.Size = new System.Drawing.Size(180, 42);
             this.panel3.TabIndex = 2;
             // 
             // dateTimePickerEnd
             // 
-            this.dateTimePickerEnd.Location = new System.Drawing.Point(43, 7);
+            this.dateTimePickerEnd.Location = new System.Drawing.Point(29, 8);
             this.dateTimePickerEnd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dateTimePickerEnd.Name = "dateTimePickerEnd";
-            this.dateTimePickerEnd.Size = new System.Drawing.Size(193, 23);
+            this.dateTimePickerEnd.Size = new System.Drawing.Size(140, 23);
             this.dateTimePickerEnd.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 12);
+            this.label3.Location = new System.Drawing.Point(3, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(20, 17);
             this.label3.TabIndex = 0;
@@ -276,17 +291,182 @@ namespace AppTest.FormType
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel6, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.panel5, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(633, 437);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1104, 612);
             this.tableLayoutPanel1.TabIndex = 3;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.lbQueryLog);
+            this.panel6.Controls.Add(this.lbToPage);
+            this.panel6.Controls.Add(this.tbCurPage);
+            this.panel6.Controls.Add(this.button1);
+            this.panel6.Controls.Add(this.button2);
+            this.panel6.Controls.Add(this.button3);
+            this.panel6.Controls.Add(this.button4);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(3, 575);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(1098, 34);
+            this.panel6.TabIndex = 4;
+            // 
+            // lbToPage
+            // 
+            this.lbToPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbToPage.AutoSize = true;
+            this.lbToPage.Location = new System.Drawing.Point(850, 8);
+            this.lbToPage.Name = "lbToPage";
+            this.lbToPage.Size = new System.Drawing.Size(43, 17);
+            this.lbToPage.TabIndex = 11;
+            this.lbToPage.Text = "/共x页";
+            // 
+            // tbCurPage
+            // 
+            this.tbCurPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbCurPage.Location = new System.Drawing.Point(805, 5);
+            this.tbCurPage.Name = "tbCurPage";
+            this.tbCurPage.Size = new System.Drawing.Size(39, 23);
+            this.tbCurPage.TabIndex = 10;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(980, 5);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 9;
+            this.button1.Text = ">>";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnPageEnd_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(899, 5);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 8;
+            this.button2.Text = ">";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.btnNextPage_Click);
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.Location = new System.Drawing.Point(723, 5);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "<";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.BtnPrevPage_Click);
+            // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.Location = new System.Drawing.Point(642, 5);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 6;
+            this.button4.Text = "<<";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.btnPageStart_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.lbTotalPage);
+            this.panel5.Controls.Add(this.tbCurrentPage);
+            this.panel5.Controls.Add(this.btnPageEnd);
+            this.panel5.Controls.Add(this.btnNextPage);
+            this.panel5.Controls.Add(this.btnPrevPage);
+            this.panel5.Controls.Add(this.btnPageStart);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel5.Location = new System.Drawing.Point(3, 53);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(1098, 34);
+            this.panel5.TabIndex = 3;
+            // 
+            // lbTotalPage
+            // 
+            this.lbTotalPage.AutoSize = true;
+            this.lbTotalPage.Location = new System.Drawing.Point(212, 11);
+            this.lbTotalPage.Name = "lbTotalPage";
+            this.lbTotalPage.Size = new System.Drawing.Size(43, 17);
+            this.lbTotalPage.TabIndex = 5;
+            this.lbTotalPage.Text = "/共x页";
+            // 
+            // tbCurrentPage
+            // 
+            this.tbCurrentPage.Location = new System.Drawing.Point(167, 8);
+            this.tbCurrentPage.Name = "tbCurrentPage";
+            this.tbCurrentPage.Size = new System.Drawing.Size(39, 23);
+            this.tbCurrentPage.TabIndex = 4;
+            this.tbCurrentPage.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tbCurrentPage_KeyUp);
+            // 
+            // btnPageEnd
+            // 
+            this.btnPageEnd.Location = new System.Drawing.Point(342, 8);
+            this.btnPageEnd.Name = "btnPageEnd";
+            this.btnPageEnd.Size = new System.Drawing.Size(75, 23);
+            this.btnPageEnd.TabIndex = 3;
+            this.btnPageEnd.Text = ">>";
+            this.btnPageEnd.UseVisualStyleBackColor = true;
+            this.btnPageEnd.Click += new System.EventHandler(this.btnPageEnd_Click);
+            // 
+            // btnNextPage
+            // 
+            this.btnNextPage.Location = new System.Drawing.Point(261, 8);
+            this.btnNextPage.Name = "btnNextPage";
+            this.btnNextPage.Size = new System.Drawing.Size(75, 23);
+            this.btnNextPage.TabIndex = 2;
+            this.btnNextPage.Text = ">";
+            this.btnNextPage.UseVisualStyleBackColor = true;
+            this.btnNextPage.Click += new System.EventHandler(this.btnNextPage_Click);
+            // 
+            // btnPrevPage
+            // 
+            this.btnPrevPage.Location = new System.Drawing.Point(85, 8);
+            this.btnPrevPage.Name = "btnPrevPage";
+            this.btnPrevPage.Size = new System.Drawing.Size(75, 23);
+            this.btnPrevPage.TabIndex = 1;
+            this.btnPrevPage.Text = "<";
+            this.btnPrevPage.UseVisualStyleBackColor = true;
+            this.btnPrevPage.Click += new System.EventHandler(this.BtnPrevPage_Click);
+            // 
+            // btnPageStart
+            // 
+            this.btnPageStart.Location = new System.Drawing.Point(4, 8);
+            this.btnPageStart.Name = "btnPageStart";
+            this.btnPageStart.Size = new System.Drawing.Size(75, 23);
+            this.btnPageStart.TabIndex = 0;
+            this.btnPageStart.Text = "<<";
+            this.btnPageStart.UseVisualStyleBackColor = true;
+            this.btnPageStart.Click += new System.EventHandler(this.btnPageStart_Click);
+            // 
+            // lbQueryLog
+            // 
+            this.lbQueryLog.AutoSize = true;
+            this.lbQueryLog.Location = new System.Drawing.Point(3, 11);
+            this.lbQueryLog.Name = "lbQueryLog";
+            this.lbQueryLog.Size = new System.Drawing.Size(65, 17);
+            this.lbQueryLog.TabIndex = 12;
+            this.lbQueryLog.Text = "QueryLog";
+            // 
+            // signalEntityBindingSource
+            // 
+            this.signalEntityBindingSource.DataSource = typeof(AppTest.Model.SignalEntity);
             // 
             // ID
             // 
@@ -296,19 +476,26 @@ namespace AppTest.FormType
             this.ID.ReadOnly = true;
             this.ID.Visible = false;
             // 
-            // TimeStamp
-            // 
-            this.TimeStamp.DataPropertyName = "TimeStamp";
-            this.TimeStamp.HeaderText = "TimeStamp";
-            this.TimeStamp.Name = "TimeStamp";
-            this.TimeStamp.ReadOnly = true;
-            // 
             // SignalName
             // 
             this.SignalName.DataPropertyName = "SignalName";
             this.SignalName.HeaderText = "SignalName";
             this.SignalName.Name = "SignalName";
             this.SignalName.ReadOnly = true;
+            // 
+            // CANTimeStamp
+            // 
+            this.CANTimeStamp.DataPropertyName = "CANTimeStamp";
+            this.CANTimeStamp.HeaderText = "CANTimeStamp";
+            this.CANTimeStamp.Name = "CANTimeStamp";
+            this.CANTimeStamp.ReadOnly = true;
+            // 
+            // TimeStamp
+            // 
+            this.TimeStamp.DataPropertyName = "TimeStamp";
+            this.TimeStamp.HeaderText = "TimeStamp";
+            this.TimeStamp.Name = "TimeStamp";
+            this.TimeStamp.ReadOnly = true;
             // 
             // SignalValue
             // 
@@ -358,10 +545,9 @@ namespace AppTest.FormType
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "HistoryDataUC";
-            this.Size = new System.Drawing.Size(633, 437);
+            this.Size = new System.Drawing.Size(1104, 612);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.signalEntityBindingSource)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -371,6 +557,11 @@ namespace AppTest.FormType
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.signalEntityBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -398,9 +589,25 @@ namespace AppTest.FormType
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ToolStripMenuItem copyNameToolStripMenuItem;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button btnPageEnd;
+        private System.Windows.Forms.Button btnNextPage;
+        private System.Windows.Forms.Button btnPrevPage;
+        private System.Windows.Forms.Button btnPageStart;
+        private System.Windows.Forms.Label lbTotalPage;
+        private System.Windows.Forms.TextBox tbCurrentPage;
+        private System.Windows.Forms.Label lbToPage;
+        private System.Windows.Forms.TextBox tbCurPage;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label lbQueryLog;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TimeStamp;
         private System.Windows.Forms.DataGridViewTextBoxColumn SignalName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CANTimeStamp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TimeStamp;
         private System.Windows.Forms.DataGridViewTextBoxColumn SignalValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn DataTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn CreatedOn;

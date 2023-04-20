@@ -1,12 +1,14 @@
 ﻿using AppTest.FormType.Helper;
 using AppTest.Helper;
 using AppTest.Model;
+using AppTest.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,22 +17,32 @@ namespace AppTest.FormType
 {
     public partial class HistoryDataUC : UserControl
     {
+        HistoryViewModel _historyViewModel; 
         public HistoryDataUC()
         {
             InitializeComponent();
+
+            _historyViewModel = new HistoryViewModel();
+
             dateTimePickerStart.Format = DateTimePickerFormat.Custom;
-            dateTimePickerStart.CustomFormat = datetimeFormat;
+            dateTimePickerStart.CustomFormat = HistoryViewModel.datetimeFormat;
             dateTimePickerEnd.Format = DateTimePickerFormat.Custom;
-            dateTimePickerEnd.CustomFormat = datetimeFormat;
+            dateTimePickerEnd.CustomFormat = HistoryViewModel.datetimeFormat;
 
             dataGridView1.MultiSelect = true;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.RowHeadersVisible = true;
 
-            progressBar1.Maximum = 100;
-            backgroundWorker1.WorkerReportsProgress = true;
-            backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
+            var threadSafeModel = new SynchronizedNotifyPropertyChanged<HistoryViewModel>(_historyViewModel, this);
+            tbCurrentPage.DataBindings.Add("Text", threadSafeModel, "CurrentPage",false, updateMode: DataSourceUpdateMode.OnPropertyChanged);
+            tbCurPage.DataBindings.Add("Text", threadSafeModel, "CurrentPage",false, updateMode: DataSourceUpdateMode.OnPropertyChanged);
+            lbToPage.DataBindings.Add("Text", threadSafeModel, "TotalPageStr", false, updateMode: DataSourceUpdateMode.OnPropertyChanged);
+            lbTotalPage.DataBindings.Add("Text", threadSafeModel, "TotalPageStr", false, DataSourceUpdateMode.OnPropertyChanged);
+            textBox1.DataBindings.Add("Text", threadSafeModel, "QueryName", false, DataSourceUpdateMode.OnPropertyChanged);
+            lbQueryLog.DataBindings.Add("Text", threadSafeModel, "QueryLog", false, DataSourceUpdateMode.OnPropertyChanged);
+
+            _historyViewModel.DataGridView = dataGridView1;
         }
 
         public void ChangeColorTheme(Color c)
@@ -60,19 +72,13 @@ namespace AppTest.FormType
             progressBar1.Value = 0;
         }
 
-        const string datetimeFormat = "yy/MM/dd HH:mm:ss"; 
-
-        public string ProjectName;
-        public string FormName;
+        public string ProjectName { get => _historyViewModel.ProjectName; set => _historyViewModel.ProjectName = value; }
+        public string FormName { get => _historyViewModel.FormName; set => _historyViewModel.FormName = value; }
+        
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
             Query();
-            //if (!backgroundWorker1.IsBusy)
-            //{
-            //    backgroundWorker1.RunWorkerAsync();
-            //}
-            //Query();
         }
 
         private void CurveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -103,7 +109,7 @@ namespace AppTest.FormType
                 width: dataGridView1.RowHeadersWidth - 4,
                 height: e.RowBounds.Height);
 
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(),
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1 +((_historyViewModel.CurrentPage-1) * _historyViewModel.PageInfoCount)).ToString(),
                 dataGridView1.RowHeadersDefaultCellStyle.Font,
                 rectangle,
                 dataGridView1.RowHeadersDefaultCellStyle.ForeColor,
@@ -168,22 +174,22 @@ namespace AppTest.FormType
         private async void Query()
         {
             btnQuery.Enabled = false;
-            var db = await DBHelper.GetDb();
-            var dateStart = dateTimePickerStart.Value;
-            var dateEnd = dateTimePickerEnd.Value;
-            // var allEntities = await db.signalEntities.ToListAsync();
-            string sqlStr = $"select * from SignalEntity where ProjectName ='{ProjectName}' and" +
-                 $" FormName = '{FormName}' and CreatedON > '{dateStart:yyyy-MM-dd HH:mm:ss}'";
-            if (!string.IsNullOrEmpty(textBox1.Text.Trim()))
+
+            try
             {
-                sqlStr += $" and SignalName like '%{textBox1.Text}%'";
+                _historyViewModel.Start = dateTimePickerStart.Value;
+                _historyViewModel.End = dateTimePickerEnd.Value;
+                //_historyViewModel.que = dateTimePickerEnd.Value;
+                await _historyViewModel.Query();
             }
-            var entities = await db.QueryAsync<SignalEntity>(sqlStr);
-            dataGridView1.DataSource = null;
-            dataGridView1.DataSource = entities;
-            if (entities.Count == 0)
-                LeapMessageBox.Instance.ShowInformation("无数据！");
-            btnQuery.Enabled = true;
+            catch (Exception err)
+            {
+                LeapMessageBox.Instance.ShowError(err.Message);
+            }
+            finally
+            {
+                btnQuery.Enabled = true;
+            }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -228,6 +234,51 @@ namespace AppTest.FormType
             string signalName = (dataGridView1.SelectedRows[0].DataBoundItem as SignalEntity).SignalName;
             Clipboard.SetDataObject(signalName);
             LeapMessageBox.Instance.ShowInfo($"信号名称：【{signalName}】已复制到剪切板");
+        }
+
+        private async void btnPageStart_Click(object sender, EventArgs e)
+        {
+            //第一页
+            _historyViewModel.CurrentPage = 1;
+            _historyViewModel.Start = dateTimePickerStart.Value;
+            _historyViewModel.End = dateTimePickerEnd.Value;
+
+            await _historyViewModel.Query(true, _historyViewModel.CurrentPage);
+
+            dataGridView1.Refresh();
+        }
+
+        private void BtnPrevPage_Click(object sender, EventArgs e)
+        {
+            if(_historyViewModel.CurrentPage > 1)
+            {
+                _historyViewModel.CurrentPage--;
+                _historyViewModel.Query(pageIdx:_historyViewModel.CurrentPage);
+            }
+            
+        }
+
+        private void btnNextPage_Click(object sender, EventArgs e)
+        {
+            if (_historyViewModel.CurrentPage < _historyViewModel.TotalPage)
+            {
+                _historyViewModel.CurrentPage++;
+                _historyViewModel.Query(pageIdx: _historyViewModel.CurrentPage);
+            }
+        }
+
+        private void tbCurrentPage_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                _historyViewModel.Query(pageIdx: _historyViewModel.CurrentPage);
+            }
+        }
+
+        private void btnPageEnd_Click(object sender, EventArgs e)
+        {
+            _historyViewModel.CurrentPage = _historyViewModel.TotalPage;
+            _historyViewModel.Query(pageIdx: _historyViewModel.CurrentPage);
         }
     }
 }

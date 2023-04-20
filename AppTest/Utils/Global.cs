@@ -211,12 +211,18 @@ namespace AppTest.Helper
          * v0.003.06-beta
          * 1.修复导入elf文件更新地址 固定更新can0的a2l文件的bug
          * 2.删除excel格式解析数据
+         * 2023/04/20
+         * 1.增加软件校验：读取DID判断次数
+         * 2.XCP增加sendNkey
+         * 3.XCPDAQ保存信号增加报文时间戳
+         * 4.增加UDS库
+         * 5.修改历史记录界面，增加分页
          */
 
         /// <summary>
         /// 版本号
         /// </summary>
-        public const string SoftVersion = "v0.003.05-beta";
+        public const string SoftVersion = "v0.003.06-beta";
 
         public const int Protected = 0;
 

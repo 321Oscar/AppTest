@@ -22,7 +22,7 @@ namespace AppTest.Model
         public string CreatedOn { get; set; }
         public int TimeStamp { get; set; }
 
-        public int CANTimeStamp { get; set; }
+        public uint CANTimeStamp { get; set; }
 
         public int CompareTo(SignalEntity other)
         {

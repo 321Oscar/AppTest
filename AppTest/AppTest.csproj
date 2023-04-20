@@ -280,6 +280,7 @@
     <Compile Include="Utils\Helper\XCPModuleManager.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\DBCViewModel.cs" />
+    <Compile Include="ViewModel\HistoryViewModel.cs" />
     <Compile Include="ViewModel\XCPDAQGetViewModel.cs" />
     <Compile Include="ViewModel\XCPDAQViewModel.cs" />
     <Compile Include="ViewModel\XCPPollingViewModel.cs" />
@@ -658,6 +659,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="UDSDependency\Ability.ini" />
+    <None Include="UDSDependency\lpdencryptfile.tmp" />
+    <None Include="UDSDependency\ManufactureTestCInterface.lib" />
+    <None Include="UDSDependency\MesLogin.ini" />
+    <None Include="UDSDependency\MesServerConfig.ini" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -769,6 +775,22 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="UDSDependency\ControlCAN.dll" />
+    <Content Include="UDSDependency\ControlCAN2e-u.dll" />
+    <Content Include="UDSDependency\ControlCAN2e.dll" />
+    <Content Include="UDSDependency\ControlCAN3.dll" />
+    <Content Include="UDSDependency\libcrypto-1_1.dll" />
+    <Content Include="UDSDependency\ManufactureTestCInterface.dll" />
+    <Content Include="UDSDependency\MesNew.dll" />
+    <Content Include="UDSDependency\Perfolizer.dll" />
+    <Content Include="UDSDependency\Qt5Core.dll" />
+    <Content Include="UDSDependency\Qt5Gui.dll" />
+    <Content Include="UDSDependency\Qt5Network.dll" />
+    <Content Include="UDSDependency\Qt5SerialPort.dll" />
+    <Content Include="UDSDependency\Qt5Sql.dll" />
+    <Content Include="UDSDependency\Qt5WebSockets.dll" />
+    <Content Include="UDSDependency\Qt5Widgets.dll" />
+    <Content Include="UDSDependency\zlgcan.dll" />
     <None Include="Image\ConnectXCP.png" />
     <None Include="Image\importA2L.png" />
     <None Include="Resources\notifier.png" />
@@ -789,9 +811,7 @@
       <Name>LPCanControl</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UDSDependency\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.0.1\build\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.0.1\build\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

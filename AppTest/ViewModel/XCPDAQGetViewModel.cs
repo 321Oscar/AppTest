@@ -84,7 +84,7 @@ namespace AppTest.ViewModel
                             recieveData[daq.Event_Channel_Number].AddRange(data);
                         }
                         //解析数据
-                        ParseResponeToXCPSignalAsync(recieveData[daq.Event_Channel_Number], daq.Event_Channel_Number);
+                        ParseResponeToXCPSignalAsync(recieveData[daq.Event_Channel_Number], daq.Event_Channel_Number, item.TimeStampInt);
 
                         //清空数据
                         recieveData[daq.Event_Channel_Number].Clear();
@@ -100,7 +100,7 @@ namespace AppTest.ViewModel
             }
         }
 
-        public override async Task ParseResponeToXCPSignalAsync(List<byte> data, int eventIndex)
+        public override async Task ParseResponeToXCPSignalAsync(List<byte> data, int eventIndex,uint cantimeStamp)
         {
             var signals = XCPSignals.xCPSignalList.FindAll(x => x.EventID == eventIndex);
             //解析时间戳
@@ -147,7 +147,8 @@ namespace AppTest.ViewModel
                     SignalName = signal.SignalName,
                     SignalValue = signal.StrValue,
                     CreatedOn = DateTime.Now.ToString(Global.DATETIMEFORMAT),
-                    TimeStamp = signal.TimeStamp
+                    TimeStamp = signal.TimeStamp,
+                    CANTimeStamp = cantimeStamp
                 };
                 signalEntities.Add(entity);
             }

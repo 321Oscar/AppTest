@@ -11,7 +11,7 @@ namespace AppTest.ViewModel
         public Dictionary<int, List<byte>> recieveData;
 
         public abstract bool InitDAQ(uint canChannel);
-        public abstract Task ParseResponeToXCPSignalAsync(List<byte> data, int eventIndex);
+        public abstract Task ParseResponeToXCPSignalAsync(List<byte> data, int eventIndex, uint cantimeStamp);
 
     }
 }

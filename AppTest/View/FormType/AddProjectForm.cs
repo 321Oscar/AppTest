@@ -247,7 +247,7 @@ namespace AppTest.FormType
                     var signals = BaseProtocol.GetSingalsByProtocol(projectItem.CanIndex.Find(x => x.CanChannel == cbbCanIndex.SelectedIndex).ProtocolType, fileName);
                     foreach (var item in projectItem.Form)
                     {
-                        if (item.CanChannel == cbbCanIndex.SelectedIndex)
+                        if (item.CanChannel == cbbCanIndex.SelectedIndex && item.DBCSignals != null)
                         {
                             for (int i = 0; i < item.DBCSignals.SignalList.Count; i++)
                             {

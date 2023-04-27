@@ -217,14 +217,19 @@ namespace AppTest.Helper
          * 3.XCPDAQ保存信号增加报文时间戳
          * 4.增加UDS库
          * 5.修改历史记录界面，增加分页
+         * 
+         * 
          */
 
         /// <summary>
         /// 版本号
         /// </summary>
-        public const string SoftVersion = "v0.003.06-beta";
+        public const string SoftVersion = "v10.003.06-beta";
 
-        public const int Protected = 0;
+        /// <summary>
+        /// Protect = 1时，版本号为10.xxx.xx
+        /// </summary>
+        public const int Protected = 1;
 
         #region 图标
         public static System.IntPtr IconHandle_ProjectCenter = (global::AppTest.Properties.Resources.ProjectCenter).GetHicon();

@@ -785,6 +785,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="favicon.ico" />
+    <Content Include="Resources\Image\debug.png" />
+    <Content Include="Resources\Image\error.png" />
+    <Content Include="Resources\Image\info.png" />
+    <Content Include="Resources\Image\warn.png" />
     <Content Include="UDSDependency\ControlCAN.dll" />
     <Content Include="UDSDependency\ControlCAN2e-u.dll" />
     <Content Include="UDSDependency\ControlCAN2e.dll" />

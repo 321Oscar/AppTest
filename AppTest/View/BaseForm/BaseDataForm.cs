@@ -210,7 +210,7 @@ namespace AppTest.FormType
                 {
                     ModifiedGetdata(value);
                 }
-                isGetdata = value;
+                this.ShowLog($"数据获取{(isGetdata ? "启动" : "关闭")}");
             }
         }
 
@@ -363,7 +363,10 @@ namespace AppTest.FormType
                 var datatimeStr = DateTime.Now.ToString(Global.DATETIMEFORMAT);
                 var rx_mails = args.can_msgs;
                 if (null == rx_mails)
-                    throw new Exception("接收数据错误。");
+                {
+                    ShowLog("接收数据错误。", LPLogLevel.Warn);
+                }
+
                 foreach (var item in Protocol.MultipYield(rx_mails, Signals.SignalList.Cast<BaseSignal>().ToList()))
                 //foreach (var item in protocol.MultipYeild(rx_mails, Signals))
                 {
@@ -392,7 +395,7 @@ namespace AppTest.FormType
             catch (Exception ex)
             {
                 IsGetdata = false;
-                ShowLog(ex.Message);
+                ShowLog(ex.Message,LPLogLevel.Error);
             }
         }
 
@@ -424,14 +427,14 @@ namespace AppTest.FormType
             catch (Exception ex)
             {
                 IsGetdata = false;
-                ShowLog(ex.Message);
+                ShowLog(ex.Message,LPLogLevel.Error);
             }
         }
         /// <summary>
         /// 显示日志
         /// </summary>
         /// <param name="log"></param>
-        protected virtual void ShowLog(string log,LPLogLevel level = LPLogLevel.Debug)
+        public virtual void ShowLog(string log, LPLogLevel level = LPLogLevel.Info)
         {
             try
             {
@@ -448,7 +451,7 @@ namespace AppTest.FormType
                 }
                 if (MdiParent != null && this.MdiParent is ProjectForm && !string.IsNullOrEmpty(log))
                 {
-                    ((ProjectForm)MdiParent).ShowLog(log, level);
+                    ((ProjectForm)MdiParent).ShowLog($"[{this.Name}] {log}", level);
                 }
             }
             catch (Exception ex)

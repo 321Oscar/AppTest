@@ -13,10 +13,7 @@ namespace AppTest.View.UC
 {
     public partial class LogListview : UserControl
     {
-        private List<LogModel> _logModelsDebug = new List<LogModel>();
-        private List<LogModel> _logModelsInfo = new List<LogModel>();
-        private List<LogModel> _logModelsWarn = new List<LogModel>();
-        private List<LogModel> _logModelsError = new List<LogModel>();
+        private List<LogModel> _logs = new List<LogModel>();
 
         private LPLogLevel _currentLevel = LPLogLevel.Info;
 
@@ -26,46 +23,30 @@ namespace AppTest.View.UC
         {
             InitializeComponent();
             cbbLogLevel.DataSource = Enum.GetValues(typeof(LPLogLevel));
-
+            cbbLogLevel.SelectedIndex = (int)LPLogLevel.All;
             //lvLog.Columns[2].Width = lvLog.ClientSize.Width - lvLog.Columns[0].Width - lvLog.Columns[1].Width - 10;
         }
 
         public void AddLog(string log, LPLogLevel logLevel = LPLogLevel.Info)
         {
             var l = new LogModel(log, logLevel);
-            switch (logLevel)
+
+            _logs.Add(l);
+            if(_logs.Count > 1000)
             {
-                case LPLogLevel.Debug:
-                    _logModelsDebug.Add(l);
-                    break;
-                case LPLogLevel.Info:
-                    _logModelsInfo.Add(l);
-                    break;
-                case LPLogLevel.Warn:
-                    _logModelsWarn.Add(l);
-                    break;
-                case LPLogLevel.Error:
-                    _logModelsError.Add(l);
-                    break;
-                default:
-                    _logModelsInfo.Add(l);
-                    break;
+                _logs.RemoveAt(0);
             }
 
             if(_currentLevel == logLevel || CurrentLevel == LPLogLevel.All)
             {
-                ListViewItem item = new ListViewItem(l.LogTime.ToString());
-                item.SubItems.Add(l.LogLevel.ToString());
-                item.SubItems.Add(l.LogStr);
-                this.lvLog.Items.Add(item);
-                lvLog.Items[lvLog.Items.Count - 1].EnsureVisible();
-                //lvLog.sel
+                AddItems(l);
             }
         }
 
         private void cbbLogLevel_SelectedIndexChanged(object sender, EventArgs e)
         {
             CurrentLevel = (LPLogLevel)cbbLogLevel.SelectedIndex;
+
             LoadLog(CurrentLevel);
         }
 
@@ -75,42 +56,43 @@ namespace AppTest.View.UC
             switch (level)
             {
                 case LPLogLevel.Debug:
-                    s = _logModelsDebug;
-                    break;
                 case LPLogLevel.Info:
-                    s = _logModelsInfo;
-                    break;
                 case LPLogLevel.Warn:
-                    s = _logModelsWarn;
-                    break;
                 case LPLogLevel.Error:
-                    s = _logModelsError;
+                    s = _logs.Where(x => x.LogLevel == level).ToList();
                     break;
                 default:
-                    s = _logModelsInfo;
-                    _logModelsInfo.AddRange(_logModelsDebug);
-                    _logModelsInfo.AddRange(_logModelsWarn);
-                    _logModelsInfo.AddRange(_logModelsError);
+                    s = _logs;
                     break;
             }
             lvLog.Items.Clear();
             foreach (var l in s)
             {
-                ListViewItem item = new ListViewItem(l.LogTime.ToString());
-                item.SubItems.Add(l.LogLevel.ToString());
-                item.SubItems.Add(l.LogStr);
-                this.lvLog.Items.Add(item);
-                lvLog.Items[lvLog.Items.Count - 1].EnsureVisible();
+                AddItems(l);
             }
+        }
+
+        private void AddItems(LogModel l)
+        {
+            ListViewItem item = new ListViewItem(l.LogTimeStr)
+            {
+                ImageIndex = (int)l.LogLevel,
+                ForeColor = l.ShowColor
+            };
+            item.SubItems.Add(l.LogLevel.ToString());
+            item.SubItems.Add(l.LogStr);
+
+            lvLog.Items.Add(item);
+            lvLog.Items[lvLog.Items.Count - 1].EnsureVisible();
         }
 
         private void btnClearLog_Click(object sender, EventArgs e)
         {
             lvLog.Items.Clear();
-            _logModelsDebug = new List<LogModel>();
-            _logModelsInfo = new List<LogModel>();
-            _logModelsWarn = new List<LogModel>();
-            _logModelsError = new List<LogModel>();
+            _logs = new List<LogModel>();
+            //_logModelsInfo = new List<LogModel>();
+            //_logModelsWarn = new List<LogModel>();
+            //_logModelsError = new List<LogModel>();
         }
        // Timer t = new Timer();
         private void btnAddLog_Click(object sender, EventArgs e)

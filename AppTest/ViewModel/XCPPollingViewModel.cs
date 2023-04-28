@@ -103,7 +103,7 @@ namespace AppTest.ViewModel
                     break;
                 GetDataByCycleTime(tenSignals, cInd);
                 Thread.Sleep(10);
-            } while (IsGetdata);
+            } while (VMIsGetdata);
         }
 
         private void Get100ms(object canChannel)
@@ -115,7 +115,7 @@ namespace AppTest.ViewModel
                     break;
                 GetDataByCycleTime(hSignals, cInd);
                 Thread.Sleep(100);
-            } while (IsGetdata);
+            } while (VMIsGetdata);
         }
 
         private void Get1000ms(object canChannel)
@@ -127,7 +127,7 @@ namespace AppTest.ViewModel
                     break;
                 GetDataByCycleTime(tSignals, cInd);
                 Thread.Sleep(1000);
-            } while (IsGetdata);
+            } while (VMIsGetdata);
         }
 
         private async void GetDataByCycleTime(List<XCPSignal> signals,uint canChannel)
@@ -183,7 +183,7 @@ namespace AppTest.ViewModel
             }
             catch (Exception ex)
             {
-                IsGetdata = false;
+                VMIsGetdata = false;
                 ShowLog?.Invoke(ex.Message);
                 LogHelper.Error(Form.Name, ex);
             }

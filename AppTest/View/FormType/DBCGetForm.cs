@@ -58,7 +58,7 @@ namespace AppTest.FormType
 
             }
 
-            vm.ModifiedGetdata += ModifiedGetdata;
+            vm.VMModifiedGetdata += ModifiedGetdata;
             vm.ShowLog += ShowLog;
         }
 
@@ -92,15 +92,16 @@ namespace AppTest.FormType
 
         protected override void DataControl()
         {
-            if (vm.IsGetdata)//正在获取数据
+            if (vm.VMIsGetdata)//正在获取数据
             {
-                vm.IsGetdata = false;
+                vm.VMIsGetdata = false;
+                ShowLog("已关闭获取数据");
             }
             else
             {
                 if (!USBCanManager.Instance.Exist(OwnerProject))
                 {
-                    LeapMessageBox.Instance.ShowInfo("CAN未打开!");
+                    ShowLog("CAN未打开!", LPLogLevel.Warn);
                     return;
                 }
                 foreach (var item in vm.DBCSignals.SignalList)
@@ -108,7 +109,8 @@ namespace AppTest.FormType
                     item.StrValue = "0";
                 }
 
-                vm.IsGetdata = true;
+                vm.VMIsGetdata = true;
+                ShowLog("已启动获取数据");
             }
         }
 
@@ -189,9 +191,6 @@ namespace AppTest.FormType
 
         protected override void SetOrSend()
         {
-            string log = string.Empty;
-            ShowLog("");
-
             if (this.FormType == FormType.Set)//Set  发送数据
             {
                 byte sendtype = (byte)tscbb.SelectedIndex;
@@ -208,22 +207,22 @@ namespace AppTest.FormType
                     {
                         if (USBCanManager.Instance.Send(OwnerProject, CanChannel, sendData: frame[0], $"[{this.FormType}]{this.Name}", sendtype))
                         {
-                            log += $"{frame[0].ID:X}发送成功";
+                            ShowLog( $"{frame[0].ID:X}发送成功:{frame[0]}",LPLogLevel.Debug);
                         }
                     }
                     catch (USBCANOpenException ex)
                     {
-                        LeapMessageBox.Instance.ShowInfo(ex.Message);
+                        ShowLog(ex.Message,LPLogLevel.Warn);
+                        break;
+                    }
+                    catch(Exception ex)
+                    {
+                        ShowLog(ex.Message, LPLogLevel.Error);
                         break;
                     }
 
                 }
             }
-           
-
-            if (!string.IsNullOrEmpty(log))
-                ShowLog(log);
-
         }
     }
 }

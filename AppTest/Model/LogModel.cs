@@ -22,6 +22,7 @@ namespace AppTest.Model
         public Color ShowColor { get=> GetColor(LogLevel); }
 
         public DateTime LogTime { get; set; } = DateTime.MinValue;
+        public string LogTimeStr { get => LogTime.ToString("yyyy/MM/dd HH:mm:ss fff"); } 
 
         public override string ToString()
         {
@@ -29,7 +30,7 @@ namespace AppTest.Model
                 return LogStr;
             else
             {
-                return $"{LogTime}:{LogStr}";
+                return $"{LogTimeStr}:{LogStr}";
             }
         }
 
@@ -42,7 +43,7 @@ namespace AppTest.Model
                 case LPLogLevel.Info:
                     return Color.Black;
                 case LPLogLevel.Warn:
-                    return Color.Yellow;
+                    return Color.FromArgb(255, 193, 37);
                 case LPLogLevel.Error:
                     return Color.Red;
                 default:
@@ -54,10 +55,10 @@ namespace AppTest.Model
 
     public enum LPLogLevel
     {
-        All,
         Debug,//gray
         Info,//black
         Warn,//yellow
-        Error
+        Error,
+        All,
     }
 }

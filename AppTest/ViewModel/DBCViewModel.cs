@@ -104,8 +104,8 @@ namespace AppTest.ViewModel
             }
             catch (Exception ex)
             {
-                IsGetdata = false;
-                ShowLog?.Invoke(ex.Message);
+                VMIsGetdata = false;
+                ShowLog?.Invoke(ex.Message,LPLogLevel.Error);
             }
         }
 

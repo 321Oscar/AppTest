@@ -116,24 +116,64 @@ namespace AppTest.FormType
             plotModel.InvalidatePlot(true);
         }
 
-        protected override void ModifiedGetdata(bool get)
+        protected override void GetDataChange()
         {
-            if (get)
+            if (IsGetdata)
             {
-                var initDaqTrue = vm.InitDAQ((uint)this.CanChannel);
-                if (!initDaqTrue)
-                {
-                    LeapMessageBox.Instance.ShowInfo($"DAQ 配置{(initDaqTrue ? "成功" : "失败")}");
-                    return;
-                }
-                vm.XcpModule.StartStopDAQ(0x01, (uint)this.CanChannel);
-                LeapMessageBox.Instance.ShowInfo($"DAQ 启动");
+                vm.XcpModule.StartStopDAQ(0x00, (uint)this.CanChannel);
+                IsGetdata = false;
             }
             else
             {
-                /// stop daq
-                vm.XcpModule.StartStopDAQ(0x00, (uint)this.CanChannel);
+                if (nudTime.Value == 0)
+                {
+                    ShowLog("间隔不能为0");
+                    return;
+                }
+
+                //check can is open 
+                if (!USBCanManager.Instance.Exist(OwnerProject))
+                {
+                    ShowLog("CAN未打开!",LPLogLevel.Warn);
+                    return;
+                }
+
+                var initDaqTrue = vm.InitDAQ((uint)this.CanChannel);
+                if (!initDaqTrue)
+                {
+                    ShowLog($"DAQ 配置{(initDaqTrue ? "成功" : "失败")}",LPLogLevel.Error);
+                    return;
+                }
+                vm.XcpModule.StartStopDAQ(0x01, (uint)this.CanChannel);
+                ShowLog($"DAQ 启动");
+
+                //clear data in oxyplot
+                ClearOxyData();
+                btnFocus_Click(null, null);
+
+                IsGetdata = true;
+
             }
+        }
+
+        protected override void ModifiedGetdata(bool get)
+        {
+            //if (get)
+            //{
+            //    var initDaqTrue = vm.InitDAQ((uint)this.CanChannel);
+            //    if (!initDaqTrue)
+            //    {
+            //        LeapMessageBox.Instance.ShowInfo($"DAQ 配置{(initDaqTrue ? "成功" : "失败")}");
+            //        return;
+            //    }
+            //    vm.XcpModule.StartStopDAQ(0x01, (uint)this.CanChannel);
+            //    LeapMessageBox.Instance.ShowInfo($"DAQ 启动");
+            //}
+            //else
+            //{
+            //    /// stop daq
+            //    vm.XcpModule.StartStopDAQ(0x00, (uint)this.CanChannel);
+            //}
             base.ModifiedGetdata(get);
         }
 

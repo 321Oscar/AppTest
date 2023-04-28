@@ -151,7 +151,7 @@ namespace AppTest.FormType
             bool send = USBCanManager.Instance.SendTest(OwnerProject,ref errorlog, canindex: this.CanChannel);
             if (!send)
             {
-                MessageBox.Show(errorlog);
+               // MessageBox.Show(errorlog);
                 ShowLog(errorlog);
             }
               
@@ -217,7 +217,7 @@ namespace AppTest.FormType
         {
             btnGet.Text = !get ? "Start" : "Stop";
             nudTimerInterval.Enabled = !get;
-            ShowLog("");
+            ShowLog($"{this.Name} {get}");
             //WhetherSendOrGet.ReadOnly = get;
             RegisterOrUnRegisterDataRecieve(get);
         }

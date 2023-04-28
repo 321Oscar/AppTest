@@ -884,7 +884,10 @@ namespace AppTest.Model
             sendData[3] = number[1];
 
             if (SendCMD(sendData, out byte[] res, canIndex) != XCPResponse.Ok)
+            {
                 throw new XCPException("分配 DAQ (D5) 失败:" + XCPHelper.ParseErrCode(res[1]));
+            }
+                
 
             //-根据DAQ数量，将ODT填入DAQ列表中（0xD4）
             for (short n = DAQProperty.Min_DAQ; n < DAQProperty.Min_DAQ + daqCount; n++)
@@ -1216,7 +1219,7 @@ namespace AppTest.Model
 
         private bool CheckConnect(uint canindx)
         {
-            return this.Connect(canindx);
+            return this.connectStatus == XCPConnectStatus.Connected;
         }
 
         private uint GetId(uint id)

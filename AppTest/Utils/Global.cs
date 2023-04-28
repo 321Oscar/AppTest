@@ -229,12 +229,12 @@ namespace AppTest.Helper
         /// <summary>
         /// 版本号
         /// </summary>
-        public const string SoftVersion = "v10.003.07-beta";
+        public const string SoftVersion = "v0.003.07-beta";
 
         /// <summary>
         /// Protect = 1时，版本号为10.xxx.xx
         /// </summary>
-        public const int Protected = 1;
+        public const int Protected = 0;
 
         #region 图标
         public static System.IntPtr IconHandle_ProjectCenter = (global::AppTest.Properties.Resources.ProjectCenter).GetHicon();

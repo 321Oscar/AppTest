@@ -117,6 +117,7 @@ namespace AppTest
             this.VerticaltoolStripButton.Name = "VerticaltoolStripButton";
             this.VerticaltoolStripButton.Size = new System.Drawing.Size(28, 28);
             this.VerticaltoolStripButton.Text = "铺满";
+            this.VerticaltoolStripButton.Visible = false;
             this.VerticaltoolStripButton.Click += new System.EventHandler(this.VerticaltoolStripButton_Click);
             // 
             // tsb_ConnectXCP
@@ -210,6 +211,7 @@ namespace AppTest
             // logToolStripMenuItem
             // 
             this.logToolStripMenuItem.Checked = true;
+            this.logToolStripMenuItem.CheckOnClick = true;
             this.logToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.logToolStripMenuItem.Name = "logToolStripMenuItem";
             this.logToolStripMenuItem.Size = new System.Drawing.Size(180, 22);

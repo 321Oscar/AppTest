@@ -120,13 +120,13 @@ namespace AppTest.FormType
             {
                 if (!USBCanManager.Instance.Exist(OwnerProject))
                 {
-                    LeapMessageBox.Instance.ShowInfo("CAN未打开!");
+                    ShowLog("CAN未打开!", LPLogLevel.Warn);
                     return;
                 }
 
                 if (!vm.InitDAQ((uint)this.CanChannel))
                 {
-                    LeapMessageBox.Instance.ShowInfo("DAQ配置失败!");
+                    ShowLog("DAQ配置失败!", LPLogLevel.Error);
                     return;
                 }
 

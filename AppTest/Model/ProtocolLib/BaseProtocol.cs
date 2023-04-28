@@ -51,7 +51,7 @@ namespace AppTest.ProtocolLib
                         continue;
                     foreach (var item in sigals)
                     {
-                        if (singals.Find(x => x.SignalName == item.SignalName) == null)
+                        if (!singals.Contains(item))
                             singals.Add(item);
                     }
                 }

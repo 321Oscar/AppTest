@@ -273,7 +273,7 @@ namespace AppTest.FormType
             }
         }
 
-        private void btnFocus_Click(object sender, EventArgs e)
+        protected void btnFocus_Click(object sender, EventArgs e)
         {
             plotModel.ResetAllAxes();
             plotModel.InvalidatePlot(true);
@@ -303,7 +303,7 @@ namespace AppTest.FormType
             }
         }
 
-        private void ClearOxyData()
+        protected void ClearOxyData()
         {
             foreach (var item in plotView1.Model.Series)
             {
@@ -356,17 +356,14 @@ namespace AppTest.FormType
         /// <param name="e"></param>
         private void btnGetData_Click(object sender, EventArgs e)
         {
+            GetDataChange();
+        }
+
+        protected virtual void GetDataChange()
+        {
             if (IsGetdata)
             {
-                //getDataTimer.Dispose();
                 IsGetdata = false;
-               
-                //getDataThread.Join();
-                //getDataThread = null;
-
-                //nudTime.Enabled = true;
-                //AddValueToPlottimer.Enabled = false;
-                //btnGetData.Text = "Start";
             }
             else
             {
@@ -389,16 +386,6 @@ namespace AppTest.FormType
 
                 IsGetdata = true;
 
-                //getDataTimer = new System.Threading.Timer(GetDataTimer_Elapsed, null, 10, (int)nudTime.Value);
-
-                //getDataThread = new Thread(new ParameterizedThreadStart(GetDataByInterval));
-                //getDataThread.IsBackground = true;
-                //getDataThread.Start((int)nudTime.Value);
-
-                //AddValueToPlottimer.Enabled = true;
-                //nudTime.Enabled = false;
-
-                //btnGetData.Text = "Stop";
             }
         }
 

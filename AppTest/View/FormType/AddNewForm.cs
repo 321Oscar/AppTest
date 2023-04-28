@@ -374,10 +374,11 @@ namespace AppTest.FormType
             {
                 foreach (TreeNode signal in msgID.Nodes)
                 {
-                    if (signal.Checked && !lbSelectedNode.Items.Contains(signal.Text))
+                    if (signal.Checked)
                     {
-                        lbSelectedNode.Items.Add(signal.Text);
-                        SelectedDbcSignals.Add(allSingals.SignalList.Find(x => x.SignalName == signal.Text));
+                        //lbSelectedNode.Items.Add(signal.Text);
+                        if (SelectedDbcSignals.FirstOrDefault(x => x.SignalName == signal.Text && x.MessageID == msgID.Text) == null)
+                            SelectedDbcSignals.Add(allSingals.SignalList.Find(x => x.SignalName == signal.Text));
                     }
                 }
             }
@@ -385,11 +386,11 @@ namespace AppTest.FormType
 
         protected virtual void RemoveSignal()
         {
-            while (lbSelectedNode.SelectedItems.Count > 0)
-            {
-                string signalName = lbSelectedNode.SelectedItem.ToString();
-                lbSelectedNode.Items.Remove(signalName);
-            }
+            //while (lbSelectedNode.SelectedItems.Count > 0)
+            //{
+            //    string signalName = lbSelectedNode.SelectedItem.ToString();
+            //    lbSelectedNode.Items.Remove(signalName);
+            //}
             while (dataGridView1.SelectedRows.Count > 0)
             {
                 DBCSignal s = dataGridView1.SelectedRows[0].DataBoundItem as DBCSignal;

@@ -28,22 +28,23 @@ namespace AppTest.FormType
         public XCPGetForm(FormType formType) : base(formType, ProtocolType.XCP)
         {
             vm = new XCPPollingViewModel(this);
+            //vm.IsGetdata = this.IsGetdata;
         }
 
         #region Override
 
         protected override void DataControl()
         {
-            if (vm.IsGetdata)//正在获取数据
+            if (vm.VMIsGetdata)//正在获取数据
             {
                 //IsGetdata = false;
-                vm.IsGetdata = false;
+                vm.VMIsGetdata = false;
             }
             else
             {
                 if (!USBCanManager.Instance.Exist(OwnerProject))
                 {
-                    LeapMessageBox.Instance.ShowInfo("CAN未打开!");
+                    ShowLog("CAN未打开!");
                     return;
                 }
                 foreach (var item in vm.XCPSignals.xCPSignalList)
@@ -52,7 +53,7 @@ namespace AppTest.FormType
                 }
 
                 //IsGetdata = true;
-                vm.IsGetdata = true;
+                vm.VMIsGetdata = true;
             }
         }
 
@@ -74,7 +75,7 @@ namespace AppTest.FormType
 
             vm.InitCylceSignals();
 
-            vm.ModifiedGetdata += ModifiedGetdata;
+            vm.VMModifiedGetdata += ModifiedGetdata;
 
             InitIDAndProtocolCmd();
 
@@ -201,12 +202,12 @@ namespace AppTest.FormType
                 }
                 catch (XCPException xcpEx)
                 {
-                    ShowLog($"{item.SignalName}发送错误：{xcpEx.Message}");
+                    ShowLog($"{item.SignalName}发送错误：{xcpEx.Message}",LPLogLevel.Warn);
                     break;
                 }
                 catch (Exception ex)
                 {
-                    ShowLog($"{item.SignalName}发送错误：{ex.Message}");
+                    ShowLog($"{item.SignalName}发送错误：{ex.Message}",LPLogLevel.Error);
                     continue;
                 }
 

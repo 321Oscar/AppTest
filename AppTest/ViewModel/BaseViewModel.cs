@@ -12,13 +12,13 @@ namespace AppTest.ViewModel
 
         private bool isGetdata;
 
-        public bool IsGetdata
+        public bool VMIsGetdata
         {
             get => isGetdata;
             set
             {
                 isGetdata = value;
-                ModifiedGetdata?.Invoke(value);
+                VMModifiedGetdata?.Invoke(value);
             }
         }
 
@@ -26,11 +26,11 @@ namespace AppTest.ViewModel
         /// 获取数据时，界面按钮变化，需要设置invoke
         /// </summary>
         /// <param name="get"></param>
-        public ModifiedGetState ModifiedGetdata;
+        public ModifiedGetState VMModifiedGetdata;
 
         public SetLog ShowLog;
 
-        public delegate void SetLog(string log,LPLogLevel level = LPLogLevel.Debug); 
+        public delegate void SetLog(string log,LPLogLevel level = LPLogLevel.Info); 
         public delegate void ModifiedGetState(bool getOrnot);
 
         public abstract void ModifiedSignals();

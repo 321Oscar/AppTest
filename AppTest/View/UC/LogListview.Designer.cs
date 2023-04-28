@@ -30,6 +30,7 @@ namespace AppTest.View.UC
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogListview));
             this.lvLog = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -41,6 +42,7 @@ namespace AppTest.View.UC
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +61,7 @@ namespace AppTest.View.UC
             this.lvLog.Location = new System.Drawing.Point(3, 53);
             this.lvLog.Name = "lvLog";
             this.lvLog.Size = new System.Drawing.Size(552, 174);
+            this.lvLog.SmallImageList = this.imageList1;
             this.lvLog.TabIndex = 0;
             this.lvLog.UseCompatibleStateImageBehavior = false;
             this.lvLog.View = System.Windows.Forms.View.Details;
@@ -84,7 +87,7 @@ namespace AppTest.View.UC
             // 
             this.btnClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClearLog.Location = new System.Drawing.Point(182, 13);
+            this.btnClearLog.Location = new System.Drawing.Point(181, 13);
             this.btnClearLog.Name = "btnClearLog";
             this.btnClearLog.Size = new System.Drawing.Size(75, 23);
             this.btnClearLog.TabIndex = 1;
@@ -94,10 +97,8 @@ namespace AppTest.View.UC
             // 
             // cbbLogLevel
             // 
-            this.cbbLogLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.cbbLogLevel.FormattingEnabled = true;
-            this.cbbLogLevel.Location = new System.Drawing.Point(55, 13);
+            this.cbbLogLevel.Location = new System.Drawing.Point(52, 14);
             this.cbbLogLevel.Name = "cbbLogLevel";
             this.cbbLogLevel.Size = new System.Drawing.Size(121, 20);
             this.cbbLogLevel.TabIndex = 2;
@@ -105,8 +106,6 @@ namespace AppTest.View.UC
             // 
             // lbLogLevel
             // 
-            this.lbLogLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.lbLogLevel.AutoSize = true;
             this.lbLogLevel.Location = new System.Drawing.Point(3, 18);
             this.lbLogLevel.Name = "lbLogLevel";
@@ -157,6 +156,15 @@ namespace AppTest.View.UC
             this.panel1.Size = new System.Drawing.Size(552, 44);
             this.panel1.TabIndex = 0;
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "debug.png");
+            this.imageList1.Images.SetKeyName(1, "info.png");
+            this.imageList1.Images.SetKeyName(2, "warn.png");
+            this.imageList1.Images.SetKeyName(3, "error.png");
+            // 
             // LogListview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -185,5 +193,6 @@ namespace AppTest.View.UC
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

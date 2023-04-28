@@ -2,6 +2,7 @@
 using AppTest.Helper;
 using AppTest.Model;
 using AppTest.ProtocolLib;
+using LPCanControl.CANInfo;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -228,7 +229,7 @@ namespace AppTest.FormType
                 //测试CAN盒是否能否发送数据
                 if (TestCanSend())
                 {
-                    ShowLog("");
+                    //ShowLog("");
                     AddSendThread();
                 }
             }
@@ -241,8 +242,8 @@ namespace AppTest.FormType
             bool send = USBCanManager.Instance.SendTest(OwnerProject, ref errorlog, canindex: this.CanChannel);
             if (!send)
             {
-                MessageBox.Show(errorlog);
-                ShowLog(errorlog);
+                //MessageBox.Show(errorlog);
+                ShowLog(errorlog, LPLogLevel.Warn);
             }
 
             return send;
@@ -324,7 +325,7 @@ namespace AppTest.FormType
                     int time = int.Parse(ct.Name.Split(new char[] { ';' })[1]);
                     if (time == 0)
                     {
-                        LeapMessageBox.Instance.ShowInformation("不支持周期为0的信号!");
+                        ShowLog($"不支持周期为0的信号!{ct.Name}", LPLogLevel.Warn);
                         return;
                     }
                     //System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
@@ -454,11 +455,21 @@ namespace AppTest.FormType
 
                */
                 USBCanManager.Instance.Send(OwnerProject, canindex: this.CanChannel, sendData: frame[0], $"[{this.FormType}]{this.Name}");
+                //ShowLog($"[{ this.FormType}]{ this.Name} Send Data {res}:{frame[0]}");
+            }
+            catch(USBCANOpenException ex)
+            {
+                ShowLog(ex.Message, LPLogLevel.Warn);
+                IsSend = false;
+                var thread = timerList.Find(x => x.Name == gb.Name);
+                if (thread != null)
+                {
+                    thread.Abort();
+                }
             }
             catch (Exception ex)
             {
-                LogHelper.Error(this.Name, ex);
-                ShowLog(ex.Message);
+                ShowLog(ex.Message, LPLogLevel.Error);
                 IsSend = false;
                 var thread = timerList.Find(x => x.Name == gb.Name);
                 if (thread != null)
@@ -514,10 +525,10 @@ namespace AppTest.FormType
                 }
                 catch (Exception ex)
                 {
-                    LeapMessageBox.Instance.ShowError(ex);
+                    ShowLog(ex.Message, LPLogLevel.Error);
                     return;
                 }
-               
+
                 //newValue = oldValue + nudCoe.Value;
                 SignalUC[selectSignal.SignalName].SignalValue = newValue.ToString();
                 cbbSignals_SelectedIndexChanged(null, null);

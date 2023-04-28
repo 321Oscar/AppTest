@@ -36,13 +36,23 @@ namespace AppTest.ViewModel
             {
                 recieveData.Add(daq.Event_Channel_Number, new List<byte>());
             }
-
-            var initDaqTrue = XcpModule.SetDAQ(DAQList.DAQs, canChannel);
-            if (!initDaqTrue)
+            try
             {
-                LogHelper.Info($"DAQ 配置{(initDaqTrue ? "成功" : "失败")}");
+                var initDaqTrue = XcpModule.SetDAQ(DAQList.DAQs, canChannel);
+
+                Form.ShowLog($"DAQ 配置{(initDaqTrue ? "成功" : "失败")}");
+
+                return initDaqTrue;
             }
-            return initDaqTrue;
+            catch (XCPException xcperr)
+            {
+                Form.ShowLog(xcperr.Message, LPLogLevel.Warn);
+            }
+            catch (Exception err)
+            {
+                Form.ShowLog(err.Message, LPLogLevel.Error);
+            }
+            return false;
         }
 
         public override void OnDataRecieveEvent(object sender, CANDataReceiveEventArgs args)
@@ -122,11 +132,11 @@ namespace AppTest.ViewModel
                 }
                 catch (System.InvalidOperationException errOp)
                 {
-                    LogHelper.Error($"{Form.Name} {signal.SignalName} Data :{signal.StrValue}", errOp);
+                    Form.ShowLog($"{Form.Name} {signal.SignalName} Data :{signal.StrValue};{errOp.Message}",LPLogLevel.Warn );
                 }
                 catch (ArgumentOutOfRangeException errRange)
                 {
-                    LogHelper.Error($"{Form.Name} {signal.SignalName} size :{size};startInd:{signal.StartIndex};dataLength:{data.Count}", errRange);
+                    Form.ShowLog($"{Form.Name} {signal.SignalName} size :{size};startInd:{signal.StartIndex};dataLength:{data.Count} {errRange.Message}" , LPLogLevel.Warn);
                 }
                 catch (Exception err)
                 {
@@ -136,7 +146,7 @@ namespace AppTest.ViewModel
                     {
                         log += $" {item:X}";
                     }
-                    LogHelper.Error($"{Form.Name} {signal.SignalName} Parse Data error :{log}", err);
+                    Form.ShowLog($"{Form.Name} {signal.SignalName} Parse Data error {err.Message} :{log}", LPLogLevel.Error);
                 }
                 signal.TimeStamp = timestamp;
                 entity = new SignalEntity

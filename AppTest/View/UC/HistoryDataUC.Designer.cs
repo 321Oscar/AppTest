@@ -33,6 +33,13 @@ namespace AppTest.FormType
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SignalName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CANTimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SignalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DataTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreatedOn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.CurveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,6 +60,7 @@ namespace AppTest.FormType
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.lbQueryLog = new System.Windows.Forms.Label();
             this.lbToPage = new System.Windows.Forms.Label();
             this.tbCurPage = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -66,17 +74,9 @@ namespace AppTest.FormType
             this.btnNextPage = new System.Windows.Forms.Button();
             this.btnPrevPage = new System.Windows.Forms.Button();
             this.btnPageStart = new System.Windows.Forms.Button();
-            this.lbQueryLog = new System.Windows.Forms.Label();
-            this.signalEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SignalName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CANTimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TimeStamp = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SignalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DataTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CreatedOn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.projectNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.formNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.signalEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -119,6 +119,61 @@ namespace AppTest.FormType
             this.dataGridView1.Size = new System.Drawing.Size(1098, 474);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // SignalName
+            // 
+            this.SignalName.DataPropertyName = "SignalName";
+            this.SignalName.HeaderText = "SignalName";
+            this.SignalName.Name = "SignalName";
+            this.SignalName.ReadOnly = true;
+            // 
+            // CANTimeStamp
+            // 
+            this.CANTimeStamp.DataPropertyName = "CANTimeStamp";
+            this.CANTimeStamp.HeaderText = "CANTimeStamp";
+            this.CANTimeStamp.Name = "CANTimeStamp";
+            this.CANTimeStamp.ReadOnly = true;
+            // 
+            // TimeStamp
+            // 
+            this.TimeStamp.DataPropertyName = "TimeStamp";
+            this.TimeStamp.HeaderText = "TimeStamp";
+            this.TimeStamp.Name = "TimeStamp";
+            this.TimeStamp.ReadOnly = true;
+            // 
+            // SignalValue
+            // 
+            this.SignalValue.DataPropertyName = "SignalValue";
+            this.SignalValue.HeaderText = "SignalValue";
+            this.SignalValue.Name = "SignalValue";
+            this.SignalValue.ReadOnly = true;
+            // 
+            // DataTime
+            // 
+            this.DataTime.DataPropertyName = "DataTime";
+            dataGridViewCellStyle1.Format = "yyyy-MM-dd HH:mm:ss fff";
+            this.DataTime.DefaultCellStyle = dataGridViewCellStyle1;
+            this.DataTime.HeaderText = "DataTime";
+            this.DataTime.Name = "DataTime";
+            this.DataTime.ReadOnly = true;
+            // 
+            // CreatedOn
+            // 
+            this.CreatedOn.DataPropertyName = "CreatedOn";
+            dataGridViewCellStyle2.Format = "yyyy-MM-dd HH:mm:ss fff";
+            dataGridViewCellStyle2.NullValue = "--";
+            this.CreatedOn.DefaultCellStyle = dataGridViewCellStyle2;
+            this.CreatedOn.HeaderText = "CreatedOn";
+            this.CreatedOn.Name = "CreatedOn";
+            this.CreatedOn.ReadOnly = true;
             // 
             // contextMenuStrip1
             // 
@@ -309,6 +364,7 @@ namespace AppTest.FormType
             // 
             // panel6
             // 
+            this.panel6.BackColor = System.Drawing.Color.White;
             this.panel6.Controls.Add(this.lbQueryLog);
             this.panel6.Controls.Add(this.lbToPage);
             this.panel6.Controls.Add(this.tbCurPage);
@@ -322,11 +378,20 @@ namespace AppTest.FormType
             this.panel6.Size = new System.Drawing.Size(1098, 34);
             this.panel6.TabIndex = 4;
             // 
+            // lbQueryLog
+            // 
+            this.lbQueryLog.AutoSize = true;
+            this.lbQueryLog.Location = new System.Drawing.Point(3, 11);
+            this.lbQueryLog.Name = "lbQueryLog";
+            this.lbQueryLog.Size = new System.Drawing.Size(65, 17);
+            this.lbQueryLog.TabIndex = 12;
+            this.lbQueryLog.Text = "QueryLog";
+            // 
             // lbToPage
             // 
             this.lbToPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lbToPage.AutoSize = true;
-            this.lbToPage.Location = new System.Drawing.Point(850, 8);
+            this.lbToPage.Location = new System.Drawing.Point(846, 8);
             this.lbToPage.Name = "lbToPage";
             this.lbToPage.Size = new System.Drawing.Size(43, 17);
             this.lbToPage.TabIndex = 11;
@@ -335,7 +400,7 @@ namespace AppTest.FormType
             // tbCurPage
             // 
             this.tbCurPage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbCurPage.Location = new System.Drawing.Point(805, 5);
+            this.tbCurPage.Location = new System.Drawing.Point(801, 5);
             this.tbCurPage.Name = "tbCurPage";
             this.tbCurPage.Size = new System.Drawing.Size(39, 23);
             this.tbCurPage.TabIndex = 10;
@@ -343,6 +408,7 @@ namespace AppTest.FormType
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Location = new System.Drawing.Point(980, 5);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
@@ -354,6 +420,7 @@ namespace AppTest.FormType
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Location = new System.Drawing.Point(899, 5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
@@ -365,7 +432,8 @@ namespace AppTest.FormType
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(723, 5);
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(719, 5);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 7;
@@ -376,7 +444,8 @@ namespace AppTest.FormType
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(642, 5);
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(638, 5);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 6;
@@ -386,6 +455,7 @@ namespace AppTest.FormType
             // 
             // panel5
             // 
+            this.panel5.BackColor = System.Drawing.Color.White;
             this.panel5.Controls.Add(this.lbTotalPage);
             this.panel5.Controls.Add(this.tbCurrentPage);
             this.panel5.Controls.Add(this.btnPageEnd);
@@ -417,7 +487,8 @@ namespace AppTest.FormType
             // 
             // btnPageEnd
             // 
-            this.btnPageEnd.Location = new System.Drawing.Point(342, 8);
+            this.btnPageEnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPageEnd.Location = new System.Drawing.Point(348, 8);
             this.btnPageEnd.Name = "btnPageEnd";
             this.btnPageEnd.Size = new System.Drawing.Size(75, 23);
             this.btnPageEnd.TabIndex = 3;
@@ -427,7 +498,8 @@ namespace AppTest.FormType
             // 
             // btnNextPage
             // 
-            this.btnNextPage.Location = new System.Drawing.Point(261, 8);
+            this.btnNextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNextPage.Location = new System.Drawing.Point(267, 8);
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Size = new System.Drawing.Size(75, 23);
             this.btnNextPage.TabIndex = 2;
@@ -437,6 +509,7 @@ namespace AppTest.FormType
             // 
             // btnPrevPage
             // 
+            this.btnPrevPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrevPage.Location = new System.Drawing.Point(85, 8);
             this.btnPrevPage.Name = "btnPrevPage";
             this.btnPrevPage.Size = new System.Drawing.Size(75, 23);
@@ -447,6 +520,7 @@ namespace AppTest.FormType
             // 
             // btnPageStart
             // 
+            this.btnPageStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPageStart.Location = new System.Drawing.Point(4, 8);
             this.btnPageStart.Name = "btnPageStart";
             this.btnPageStart.Size = new System.Drawing.Size(75, 23);
@@ -454,74 +528,6 @@ namespace AppTest.FormType
             this.btnPageStart.Text = "<<";
             this.btnPageStart.UseVisualStyleBackColor = true;
             this.btnPageStart.Click += new System.EventHandler(this.btnPageStart_Click);
-            // 
-            // lbQueryLog
-            // 
-            this.lbQueryLog.AutoSize = true;
-            this.lbQueryLog.Location = new System.Drawing.Point(3, 11);
-            this.lbQueryLog.Name = "lbQueryLog";
-            this.lbQueryLog.Size = new System.Drawing.Size(65, 17);
-            this.lbQueryLog.TabIndex = 12;
-            this.lbQueryLog.Text = "QueryLog";
-            // 
-            // signalEntityBindingSource
-            // 
-            this.signalEntityBindingSource.DataSource = typeof(AppTest.Model.SignalEntity);
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // SignalName
-            // 
-            this.SignalName.DataPropertyName = "SignalName";
-            this.SignalName.HeaderText = "SignalName";
-            this.SignalName.Name = "SignalName";
-            this.SignalName.ReadOnly = true;
-            // 
-            // CANTimeStamp
-            // 
-            this.CANTimeStamp.DataPropertyName = "CANTimeStamp";
-            this.CANTimeStamp.HeaderText = "CANTimeStamp";
-            this.CANTimeStamp.Name = "CANTimeStamp";
-            this.CANTimeStamp.ReadOnly = true;
-            // 
-            // TimeStamp
-            // 
-            this.TimeStamp.DataPropertyName = "TimeStamp";
-            this.TimeStamp.HeaderText = "TimeStamp";
-            this.TimeStamp.Name = "TimeStamp";
-            this.TimeStamp.ReadOnly = true;
-            // 
-            // SignalValue
-            // 
-            this.SignalValue.DataPropertyName = "SignalValue";
-            this.SignalValue.HeaderText = "SignalValue";
-            this.SignalValue.Name = "SignalValue";
-            this.SignalValue.ReadOnly = true;
-            // 
-            // DataTime
-            // 
-            this.DataTime.DataPropertyName = "DataTime";
-            dataGridViewCellStyle1.Format = "yyyy-MM-dd HH:mm:ss fff";
-            this.DataTime.DefaultCellStyle = dataGridViewCellStyle1;
-            this.DataTime.HeaderText = "DataTime";
-            this.DataTime.Name = "DataTime";
-            this.DataTime.ReadOnly = true;
-            // 
-            // CreatedOn
-            // 
-            this.CreatedOn.DataPropertyName = "CreatedOn";
-            dataGridViewCellStyle2.Format = "yyyy-MM-dd HH:mm:ss fff";
-            dataGridViewCellStyle2.NullValue = "--";
-            this.CreatedOn.DefaultCellStyle = dataGridViewCellStyle2;
-            this.CreatedOn.HeaderText = "CreatedOn";
-            this.CreatedOn.Name = "CreatedOn";
-            this.CreatedOn.ReadOnly = true;
             // 
             // projectNameDataGridViewTextBoxColumn
             // 
@@ -536,6 +542,10 @@ namespace AppTest.FormType
             this.formNameDataGridViewTextBoxColumn.HeaderText = "FormName";
             this.formNameDataGridViewTextBoxColumn.Name = "formNameDataGridViewTextBoxColumn";
             this.formNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // signalEntityBindingSource
+            // 
+            this.signalEntityBindingSource.DataSource = typeof(AppTest.Model.SignalEntity);
             // 
             // HistoryDataUC
             // 

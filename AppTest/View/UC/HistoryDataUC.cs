@@ -47,8 +47,26 @@ namespace AppTest.FormType
 
         public void ChangeColorTheme(Color c)
         {
-            this.btnQuery.BackColor = c;
+            btnQuery.BackColor = c;
             btnQuery.ForeColor = Color.White;
+
+            btnNextPage.BackColor = c;
+            btnNextPage.ForeColor = Color.White;
+            btnPrevPage.BackColor = c;
+            btnPrevPage.ForeColor = Color.White; 
+            btnPageStart.BackColor = c;
+            btnPageStart.ForeColor = Color.White;
+            btnPageEnd.BackColor = c;
+            btnPageEnd.ForeColor = Color.White;
+
+            button1.BackColor = c;
+            button1.ForeColor = Color.White;
+            button2.BackColor = c;
+            button2.ForeColor = Color.White;
+            button3.BackColor = c;
+            button3.ForeColor = Color.White;
+            button4.BackColor = c;
+            button4.ForeColor = Color.White;
 
             dataGridView1.DefaultCellStyle.SelectionBackColor = c;
         }

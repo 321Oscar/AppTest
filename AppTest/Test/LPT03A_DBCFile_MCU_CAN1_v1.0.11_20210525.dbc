@@ -1,0 +1,576 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: ABS ACU BCM BMS CCU DCDC EPS GW ICU MCU MMI PTC TPMS VCU IVI OBC
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ DCDC_RollingCounter : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ ESC_FRWheelSpeedVD : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ ESC_FRWheelSpeedKPH : 0|13@1+ (0.05625,0) [0|300.0375] "KPH" Vector__XXX
+ SG_ ESC_FRWheelDirection : 0|2@1+ (1,0) [0|3] "-" Vector__XXX
+ SG_ ESC_FLWheelSpeedVD : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ ESC_FLWheelSpeedKPH : 0|13@1+ (0.05625,0) [0|300.0375] "KPH" Vector__XXX
+ SG_ ESC_FLWheelDirection : 0|2@1+ (1,0) [0|3] "-" Vector__XXX
+ SG_ ESC_RollingCounter_122 : 0|4@1+ (1,0) [0|15] "-" Vector__XXX
+ SG_ ESC_CheckSum_122 : 0|8@1+ (1,0) [0|255] "-" Vector__XXX
+ SG_ ESC_RRWheelSpeedVD : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ ESC_RRWheelSpeedKPH : 0|13@1+ (0.05625,0) [0|300.0375] "KPH" Vector__XXX
+ SG_ ESC_RRWheelDirection : 0|2@1+ (1,0) [0|3] "-" Vector__XXX
+ SG_ ESC_RollingCounter_123 : 0|4@1+ (1,0) [0|15] "-" Vector__XXX
+ SG_ ESC_RLWheelSpeedVD : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ ESC_RLWheelSpeedKPH : 0|13@1+ (0.05625,0) [0|300.0375] "KPH" Vector__XXX
+ SG_ ESC_RLWheelDirection : 0|2@1+ (1,0) [0|3] "-" Vector__XXX
+ SG_ ESC_CheckSum_123 : 0|8@1+ (1,0) [0|255] "-" Vector__XXX
+ SG_ ESC_RRWheelSpeedRC : 0|12@1+ (1,0) [0|4095] "-" Vector__XXX
+ SG_ ESC_RollingCounter_124 : 0|4@1+ (1,0) [0|15] "-" Vector__XXX
+ SG_ ESC_RLWheelSpeedRC : 0|12@1+ (1,0) [0|4095] "-" Vector__XXX
+ SG_ ESC_FRWheelSpeedRC : 0|12@1+ (1,0) [0|4095] "-" Vector__XXX
+ SG_ ESC_FLWheelSpeedRC : 0|12@1+ (1,0) [0|4095] "-" Vector__XXX
+ SG_ ESC_CheckSum_124 : 0|8@1+ (1,0) [0|255] "-" Vector__XXX
+ SG_ APS_VehicleSpeedCtl : 0|6@1+ (0.125,0) [0|7.875] "km/h" Vector__XXX
+ SG_ APS_ParkingSts : 0|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ MCU_User_defined5 : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ MCU_User_defined4 : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ MCU_User_defined3 : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ MCU_User_defined2 : 0|13@1+ (1,0) [0|8191] "" Vector__XXX
+ SG_ MCU_StateMachinetOutState : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ MCU_Power12V : 0|9@1+ (0.1,0) [0|50] "" Vector__XXX
+ SG_ MCU_SWD_RAMAddres : 0|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ MCU_Adc_Isr_Success : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_MotorSelect : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ MCU_User_defined1 : 0|6@1+ (1,0) [0|63] "" Vector__XXX
+ SG_ MCU_AD_Derating : 0|7@1+ (0.01,0) [0|1.27] "" Vector__XXX
+ SG_ MCU_TorComp : 0|10@1+ (1,-400) [-400|623] "" Vector__XXX
+ SG_ MCU_TorCalc : 0|10@1+ (1,-400) [-400|623] "" Vector__XXX
+ SG_ MCU_IqComp : 0|10@1+ (1,-500) [-500|523] "" Vector__XXX
+ SG_ MCU_IdComp : 0|10@1+ (1,-500) [-500|523] "" Vector__XXX
+ SG_ MCU_UsOutFlt : 0|11@1+ (0.1,0) [0|204.7] "" Vector__XXX
+ SG_ Mcu_pdpRest_num : 0|5@1+ (1,0) [0|31] "" Vector__XXX
+ SG_ Mcu_DrvPowerRest_Flag : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Ic : 0|11@1+ (1,-1000) [-1000|1047] "" Vector__XXX
+ SG_ MCU_Ia : 0|11@1+ (1,-1000) [-1000|1047] "" Vector__XXX
+ SG_ MCU_Power_Enable : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Ic_offset : 0|11@1+ (1,0) [0|2047] "" Vector__XXX
+ SG_ MCU_Troque_Ref : 0|13@1+ (0.1,-300) [-300|519.1] "" Vector__XXX
+ SG_ MCU_Ia_offset : 0|11@1+ (1,0) [0|2047] "" Vector__XXX
+ SG_ MCU_Vq : 0|11@1+ (1,-1000) [-1000|1047] "" Vector__XXX
+ SG_ MCU_Vd : 0|11@1+ (1,-1000) [-1000|1047] "" Vector__XXX
+ SG_ MCU_Iq : 0|11@1+ (1,-1000) [-1000|1047] "" Vector__XXX
+ SG_ MCU_Iq_ref : 0|10@1+ (1,-500) [-500|523] "" Vector__XXX
+ SG_ MCU_Id : 0|11@1+ (1,-1000) [-1000|1047] "A" Vector__XXX
+ SG_ MCU_Id_ref : 0|10@1+ (1,-500) [-500|523] "" Vector__XXX
+ SG_ DCDC_RollingCounter_324 : 0|4@1+ (1,0) [0|15] "-" Vector__XXX
+ SG_ DCDC_ConversionMode : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ DCDC_CanTimeOut : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ DCDC_b1OCP : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ DCDC_DTC : 0|6@1+ (1,0) [0|63] "-" Vector__XXX
+ SG_ DCDC_Derating : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DCDC_Hardware_Fault_Flag : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DCDC_Over_Input_Current : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DCDC_Over_Input_Voltage : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DCDC_Over_Output_Current : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DCDC_Over_Output_Voltage : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DCDC_Over_Temperature : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DCDC_Real_Input_Power : 0|5@1+ (0.1,0) [0|2] "KW" Vector__XXX
+ SG_ DCDC_Real_Output_Current : 0|12@1+ (0.1,0) [0|250] "A" Vector__XXX
+ SG_ DCDC_Real_Output_Voltage : 0|12@1+ (0.1,0) [0|50] "V" Vector__XXX
+ SG_ DCDC_Reality_Temperature : 0|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ DCDC_RollingCounter : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ DCDC_Under_Input_Voltage : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DCDC_Under_Output_Voltage : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DCDC_WorkSts : 0|3@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ MCU_Fault_VoltOverFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_VoltOver_ASCFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_VoltLowerWarn : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_VoltLowerFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_VcuTroqCmdWarn : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_VcuSpdCmdWarn : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_SpodOverASCFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_SpdOverWarn : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_SpdOverFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_QC_CurFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_PTC2FDFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_PTC1FDFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_MotTemSenWarnAll : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_MotTempOverWarn : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_MotTempOverFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_MotemSenWarn2 : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_MotemSenWarn1 : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_IGBTTemSenFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_IgbtTempOverWarn : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_IgbtTempOverFault2 : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_IgbtTempOverFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_IGBT_UPFault_Flag : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_IGBT_PDPFault_Flag : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_IGBT_DRIVEFault_Flag : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_IGBT_DNFault_Flag : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_HWRdcFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_DrvPBCFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_CurrSenWPhFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_CurrSenVPhFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_CurrSenBUSFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_CurrOverFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_CurrBUS_OverFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_CrashFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_CoolSenFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_CanEBTimeOutFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_CanEBLostMsgFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_CanEATimeOutFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_CanEALostMsgFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_CanEAInvalidFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_Can2BusOffFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_Can1BusOffFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_BlockWarn : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_BlockFault : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_5VOverWarn : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_5VLowerWarn : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_12VOverWarn : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Fault_12VLowerWarn : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ OBC1_AC_OVP : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ OBC1_AC_UVP : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ OBC1_CAN_Fault : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ OBC1_DTC : 0|8@1+ (1,0) [0|255] "-" Vector__XXX
+ SG_ OBC1_HV_OCP : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ OBC1_LV_OVP : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ OBC1_LV_UVP : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ OBC_FaultLevel : 0|3@1+ (1,0) [0|3] "-" Vector__XXX
+ SG_ OBC_HV_OVP : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ OBC_HV_UVP : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ OBC_RollingCounter_325 : 0|4@1+ (1,0) [0|15] "-" Vector__XXX
+ SG_ OBC_WorkSts : 0|3@1+ (1,0) [0|7] "-" Vector__XXX
+ SG_ OBC_ChargeCurr : 0|10@1+ (0.1,0) [0|100] "A" Vector__XXX
+ SG_ OBC_ChargeVolt : 0|14@1+ (0.1,0) [0|1000] "V" Vector__XXX
+ SG_ OBC_ChargerTemp : 0|8@1+ (1,-40) [-40|120] "??" Vector__XXX
+ SG_ OBC_ChargerTempWarning : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ OBC_HardwareSts : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ OBC_InputCurr : 0|10@1+ (0.1,0) [0|100] "A" Vector__XXX
+ SG_ OBC_InputVolt : 0|13@1+ (0.1,0) [0|800] "V" Vector__XXX
+ SG_ OBC_OutputSts : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ OBC_RollingCounter_325 : 0|4@1+ (1,0) [0|15] "-" Vector__XXX
+ SG_ OBC_StartSts : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ OBC_VoltInputSts : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ BMS_BattChargerSts : 0|3@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ BMS_BattCoreOverTemp : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_BattCoreUnderTemp : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_BattHVILSts : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_BattMaxChargePower : 0|12@1+ (0.1,0) [0|250] "Kw" Vector__XXX
+ SG_ BMS_BattMaxDischargePower : 0|12@1+ (0.1,0) [0|250] "Kw" Vector__XXX
+ SG_ BMS_CellOverlVolt : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_CellUnderVolt : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_CheckSum : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ BMS_DCChgRelayCloseReq : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_HighVolSts : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_IsoRessistanceLevel : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_NegativeRelayFB : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_NegativeRelay_F : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_OverChargeCurr : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_OverDischargeCurr : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_PositiveRelayFB : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_PositiveRelay_F : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_PreChargeFinishSts : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ BMS_PreChargeRelayFB : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_RollingCounter : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ BMS_SelfCheck : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ BMS_SysOverlVolt : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_SysUnderVolt : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ BMS_Warning_Level : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ BMS_BattCurr : 0|16@1+ (0.1,-500) [-500|500] "A" Vector__XXX
+ SG_ BMS_BattSOC : 0|8@1+ (1,0) [0|100] "%" Vector__XXX
+ SG_ BMS_BattSOH : 0|8@1+ (1,0) [0|100] "%" Vector__XXX
+ SG_ BMS_BattVolt : 0|16@1+ (0.1,0) [0|500] "V" Vector__XXX
+ SG_ BMS_RemainEnergy : 0|16@1+ (1,0) [0|65530] "Wh" Vector__XXX
+ SG_ BMS_CCConnectSts : 0|2@1+ (1,0) [0|3] "-" Vector__XXX
+ SG_ BMS_CCValue : 0|4@1+ (1,0) [0|15] "-" Vector__XXX
+ SG_ BMS_CPDutyCycleValue : 0|8@1+ (1,0) [0|100] "%" Vector__XXX
+ SG_ BMS_LVOutEnable : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ BMS_MaxChargeCurr : 0|10@1+ (0.1,0) [0|100] "A" Vector__XXX
+ SG_ BMS_MaxChargePower : 0|9@1+ (0.05,0) [0|25] "kw" Vector__XXX
+ SG_ BMS_MaxChargeVolt : 0|16@1+ (0.1,0) [0|500] "V" Vector__XXX
+ SG_ BMS_RollingCounter : 0|4@1+ (1,0) [0|15] "-" Vector__XXX
+ SG_ BMS_SleepReq : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ BMS_WorkModReq : 0|3@1+ (1,0) [0|7] "-" Vector__XXX
+ SG_ BMS_ChargerACInput : 0|1@1+ (1,0) [0|1] "-" Vector__XXX
+ SG_ BMS_MaxChargeCurr : 0|16@1+ (0.1,0) [0|500] "A" Vector__XXX
+ SG_ BMS_MaxChargePower : 0|9@1+ (0.05,0) [0|25] "kw" Vector__XXX
+ SG_ BMS_MaxChargeVolt : 0|16@1+ (0.1,0) [0|500] "V" Vector__XXX
+ SG_ BMS_OnBoardChargerEnable : 0|2@1+ (1,0) [0|3] "-" Vector__XXX
+
+BO_ 293 ESC_125: 8 ABS
+ SG_ ESC_VehicleSpeedVD : 23|1@1+ (1,0) [0|1] "-"  MCU
+ SG_ ESC_RollingCounter_125 : 52|4@1+ (1,0) [0|15] "-"  MCU
+ SG_ ESC_CheckSum_125 : 56|8@1+ (1,0) [0|255] "-"  MCU
+ SG_ ESC_VehicleSpeed : 8|13@1+ (0.05625,0) [0|460.74375] "KPH"  MCU
+
+BO_ 928 ACU_3A0: 8 ACU
+ SG_ ACU_AirbagFailSts : 8|3@1+ (1,0) [0|3] ""  BCM,BMS,GW,ICU,MCU,VCU
+ SG_ ACU_CheckSum : 56|8@1+ (1,0) [0|255] ""  BCM,BMS,GW,ICU,MCU,VCU
+ SG_ ACU_CrashOutputSts : 0|8@1+ (1,0) [0|255] ""  BCM,BMS,GW,ICU,MCU,VCU
+ SG_ ACU_DrvSeatBeltRSt : 12|2@1+ (1,0) [0|3] ""  BCM,BMS,GW,ICU,MCU,VCU
+ SG_ ACU_RollingCounter : 52|4@1+ (1,0) [0|15] ""  BCM,BMS,GW,ICU,MCU,VCU
+
+BO_ 1707 RMCU_0x6AB: 8 MCU
+ SG_ DBC_MCU_idc : 48|16@1+ (0.1,0) [0|6553.5] "" Vector__XXX
+ SG_ DBC_MCU_F16_resver1 : 32|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+ SG_ DBC_MCU_Tcalc : 16|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+ SG_ DBC_MCU_Pinv : 0|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+
+BO_ 1710 RMCU_0x6AE: 8 MCU
+ SG_ FWCTRL_IqComp : 48|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+ SG_ CurntCtrl_UqFb : 32|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+ SG_ CurntCtrl_UdFb : 16|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+ SG_ FWCTRL_IdComp : 0|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+
+BO_ 1711 RMCU_0x6AF: 8 MCU
+ SG_ CurntCtrl_Iq_Fb : 48|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+ SG_ CurntCtrl_Id_Fb : 32|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+ SG_ PointSearch_Out_FLT_Iqref : 16|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+ SG_ PointSearch_Out_FLT_Idref : 0|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+
+BO_ 1709 RMCU_0x6AD: 8 MCU
+ SG_ Sytem_STS_EnableDrive : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ StateMachineStructIn_upperCmd : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ CurntCtrl_Iq_Ref : 32|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+ SG_ CurntCtrl_Id_Ref : 16|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+ SG_ CurntCtrl_UsOutFlt : 0|16@1+ (0.1,-1000) [-1000|5553.5] "" Vector__XXX
+
+BO_ 257 MCU_101: 8 MCU
+ SG_ MCU_HighVoltPowerOffReq : 51|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_ActualTorqueFB : 24|13@1+ (0.1,-300) [-300|300] "Nm"  BCM,ICU,MMI,VCU
+ SG_ MCU_ActualTorqueFB_F : 22|1@1+ (1,0) [0|1] ""  BCM,ICU,MMI,VCU
+ SG_ MCU_CheckSum : 56|8@1+ (1,0) [0|255] ""  BCM,ICU,MMI,VCU
+ SG_ MCU_CoolingReq : 49|2@1+ (1,0) [0|3] ""  BCM,ICU,MMI,VCU
+ SG_ MCU_DrvMotorFaultSts : 18|1@1+ (1,0) [0|1] ""  BCM,ICU,MMI,VCU
+ SG_ MCU_DrvMotorRPM : 0|16@1+ (1,-15000) [-15000|15000] "rpm"  BCM,ICU,MMI,VCU
+ SG_ MCU_DrvMotorRPM_F : 21|1@1+ (1,0) [0|1] ""  BCM,ICU,MMI,VCU
+ SG_ MCU_DrvMotorWorkSts : 37|2@1+ (1,0) [0|3] ""  BCM,ICU,MMI,VCU
+ SG_ MCU_InstantPower : 40|9@1+ (1,-150) [-150|150] "kw"  BCM,ICU,MMI,VCU
+ SG_ MCU_PowrOff_Req : 23|1@1+ (1,0) [0|1] ""  BCM,ICU,MMI,VCU
+ SG_ MCU_RollingCounter : 52|4@1+ (1,0) [0|15] ""  BCM,ICU,MMI,VCU
+ SG_ MCU_SelfCheck : 19|2@1+ (1,0) [0|3] ""  BCM,ICU,MMI,VCU
+ SG_ MCU_Warning_Level : 16|2@1+ (1,0) [0|3] ""  BCM,ICU,MMI,VCU
+
+BO_ 258 MCU_102: 8 MCU
+ SG_ MCU_MotorOverTempWarning : 53|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ MCU_Motor_WaterInletTemp : 54|6@1+ (2,-20) [-20|100] "C" Vector__XXX
+ SG_ MCU_CCM1HVILSts : 52|1@1+ (1,0) [0|1] ""  BMS,ICU,MMI,VCU
+ SG_ MCU_DrvMotorTemp : 0|8@1+ (1,-50) [-50|200] "℃"  BMS,ICU,MMI,VCU
+ SG_ MCU_MainWireCurr : 32|16@1+ (0.1,-1000) [-1000|1000] "A"  BMS,ICU,MMI,VCU
+ SG_ MCU_MainWireVolt : 16|16@1+ (0.1,0) [0|1000] "V"  BMS,ICU,MMI,VCU
+ SG_ MCU_PTCHVILSts : 51|1@1+ (1,0) [0|1] ""  BMS,ICU,MMI,VCU
+ SG_ MCU_RollingCounter_102 : 60|4@1+ (1,0) [0|15] ""  BMS,ICU,MMI,VCU
+ SG_ MCU_Temp : 8|8@1+ (1,-50) [-50|200] "℃"  BMS,ICU,MMI,VCU
+
+BO_ 234 VCU_EA: 8 VCU
+ SG_ VCU_BMSEmergencyCmd : 36|1@1+ (1,0) [0|1] ""  ABS,BCM,BMS,DCDC,EPS,GW,ICU,MCU,MMI
+ SG_ VCU_BMSMainRelayCmd : 35|1@1+ (1,0) [0|1] ""  ABS,BCM,BMS,DCDC,EPS,GW,ICU,MCU,MMI
+ SG_ VCU_BrakePedalSts : 38|2@1+ (1,0) [0|3] ""  ABS,BCM,BMS,DCDC,EPS,GW,ICU,MCU,MMI
+ SG_ VCU_CheckSum_EA : 56|8@1+ (1,0) [0|255] ""  ABS,BCM,BMS,DCDC,EPS,GW,ICU,MCU,MMI
+ SG_ VCU_DCDCEnableCmd : 37|1@1+ (1,0) [0|1] ""  ABS,BCM,BMS,DCDC,EPS,GW,ICU,MCU,MMI
+ SG_ VCU_DrvControlMode : 29|1@1+ (1,0) [0|1] ""  ABS,BCM,BMS,DCDC,EPS,GW,ICU,MCU,MMI
+ SG_ VCU_DrvRequestSpeed : 0|16@1+ (1,-15000) [-15000|15000] "rpm"  ABS,BCM,BMS,DCDC,EPS,GW,ICU,MCU,MMI
+ SG_ VCU_DrvRequestTorque : 16|13@1+ (0.1,-300) [-300|300] "Nm"  ABS,BCM,BMS,DCDC,EPS,GW,ICU,MCU,MMI
+ SG_ VCU_GearLevelPosSts : 32|2@1+ (1,0) [0|3] ""  ABS,BCM,BMS,DCDC,EPS,GW,ICU,MCU,MMI
+ SG_ VCU_RollingCounter_EA : 52|4@1+ (1,0) [0|15] ""  ABS,BCM,BMS,DCDC,EPS,GW,ICU,MCU,MMI
+ SG_ VCU_VehicleSts : 34|1@1+ (1,0) [0|1] ""  ABS,BCM,BMS,DCDC,EPS,GW,ICU,MCU,MMI
+ SG_ VCU_Vehicle_Warning : 30|2@1+ (1,0) [0|3] ""  ABS,BCM,BMS,DCDC,EPS,GW,ICU,MCU,MMI
+
+BO_ 235 VCU_EB: 8 VCU
+ SG_ VCU_VehicleDirect : 31|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ VCU_ACChargeHVILSts : 4|1@1+ (1,0) [0|1] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_ACFanReq : 6|2@1+ (1,0) [0|3] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_ActiveReleaseCmd : 15|1@1+ (1,0) [0|1] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_AlwChargeSts : 5|1@1+ (1,0) [0|1] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_BMSPumpPercent : 62|2@1+ (1,0) [0|3] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_BrakeLightReq : 10|1@1+ (1,0) [0|1] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_BrakeSysFault : 27|1@1+ (1,0) [0|1] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_DCChargeHVILSts : 3|1@1+ (1,0) [0|1] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_DriveHVILSts : 2|1@1+ (1,0) [0|1] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_FastChgRelayCmd : 12|1@1+ (1,0) [0|1] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_HVACOffSpecReq : 26|1@1+ (1,0) [0|1] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_KeyPosition : 8|2@1+ (1,0) [0|3] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_MCUPumpPercent : 53|3@1+ (1,0) [0|7] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_MainRelaySts : 13|1@1+ (1,0) [0|1] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_PTCHeatingReq1 : 24|1@1+ (1,0) [0|1] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_PTCHeatingReq2 : 25|1@1+ (1,0) [0|1] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_PowerOn2ResetReq : 14|1@1+ (1,0) [0|1] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_PowerReduceReq : 0|2@1+ (1,0) [0|3] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_RollingCounter_EB : 56|4@1+ (1,0) [0|15] ""  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_ThrottlePosition : 32|8@1+ (0.393,0) [0|100] "%"  BCM,BMS,GW,ICU,MCU,MMI
+ SG_ VCU_VehicleSpeedVD : 29|2@1+ (1,0) [0|3] ""  BCM,BMS,GW,ICU,MCU,MMI
+
+BO_ 237 VCU_ED: 8 VCU
+ SG_ VCU_SuppressJitterRequest : 31|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ VCU_ESCActive : 36|1@1+ (1,0) [0|1] ""  BMS
+ SG_ VCU_FastChgExitTemp : 40|8@1+ (0.5,-20) [-20|100] "℃"  BMS
+ SG_ VCU_OpeartingMode : 37|3@1+ (1,0) [0|7] ""  BMS
+ SG_ VCU_PowerMode : 32|4@1+ (1,0) [0|15] ""  BMS
+ SG_ VCU_RollingCounter_ED : 56|4@1+ (1,0) [0|15] ""  BMS
+ SG_ VCU_SlowChgExitTemp : 48|8@1+ (0.5,-20) [-20|100] "℃"  BMS
+ SG_ VCU_VehicleHighVoltMode : 60|2@1+ (1,0) [0|3] ""  BMS
+
+
+
+CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
+CM_ SG_ 3221225472 DCDC_RollingCounter "生命信号";
+CM_ SG_ 3221225472 MCU_StateMachinetOutState "电机控制自检状态";
+CM_ SG_ 3221225472 MCU_Power12V "电机控制自检状态";
+CM_ SG_ 3221225472 MCU_Adc_Isr_Success "电机控制自检状态";
+CM_ SG_ 3221225472 DCDC_Derating "DCDC限功率";
+CM_ SG_ 3221225472 DCDC_Hardware_Fault_Flag "DCDC硬件故障";
+CM_ SG_ 3221225472 DCDC_Over_Input_Current "DCDC输入过流";
+CM_ SG_ 3221225472 DCDC_Over_Input_Voltage "DCDC输入过压";
+CM_ SG_ 3221225472 DCDC_Over_Output_Current "DCDC限流保护";
+CM_ SG_ 3221225472 DCDC_Over_Output_Voltage "DCDC输出过压";
+CM_ SG_ 3221225472 DCDC_Over_Temperature "DCDC过温";
+CM_ SG_ 3221225472 DCDC_Real_Input_Power "DCDC实时输入功率";
+CM_ SG_ 3221225472 DCDC_Real_Output_Current "DCDC实时输出电流";
+CM_ SG_ 3221225472 DCDC_Real_Output_Voltage "DCDC实时输出电压";
+CM_ SG_ 3221225472 DCDC_Reality_Temperature "DCDC本体温度";
+CM_ SG_ 3221225472 DCDC_Under_Input_Voltage "DCDC输入欠压";
+CM_ SG_ 3221225472 DCDC_Under_Output_Voltage "DCDC输出欠压";
+CM_ SG_ 3221225472 DCDC_WorkSts "DCDC工作状态";
+CM_ SG_ 3221225472 MCU_Fault_VoltOverFault "母线过压报警";
+CM_ SG_ 3221225472 MCU_Fault_VoltOver_ASCFault "母线过压ASC";
+CM_ SG_ 3221225472 MCU_Fault_VoltLowerWarn "母线欠压报警";
+CM_ SG_ 3221225472 MCU_Fault_VoltLowerFault "母线欠压ASC";
+CM_ SG_ 3221225472 MCU_Fault_VcuTroqCmdWarn "驱动扭矩指令超出阈值";
+CM_ SG_ 3221225472 MCU_Fault_VcuSpdCmdWarn "驱动转速指令超出阈值";
+CM_ SG_ 3221225472 MCU_Fault_SpodOverASCFault "超速ASC故障";
+CM_ SG_ 3221225472 MCU_Fault_SpdOverWarn "电机超速报警";
+CM_ SG_ 3221225472 MCU_Fault_SpdOverFault "超速故障";
+CM_ SG_ 3221225472 MCU_Fault_QC_CurFault "快充继电器故障";
+CM_ SG_ 3221225472 MCU_Fault_PTC2FDFault "PTC2继电器故障";
+CM_ SG_ 3221225472 MCU_Fault_PTC1FDFault "PTC1继电器故障";
+CM_ SG_ 3221225472 MCU_Fault_MotTemSenWarnAll "两路电机传感器故障";
+CM_ SG_ 3221225472 MCU_Fault_MotTempOverWarn "电机过温报警";
+CM_ SG_ 3221225472 MCU_Fault_MotTempOverFault "电机过温故障";
+CM_ SG_ 3221225472 MCU_Fault_MotemSenWarn2 "第二路电机传感器故障";
+CM_ SG_ 3221225472 MCU_Fault_MotemSenWarn1 "第一路电机传感器故障";
+CM_ SG_ 3221225472 MCU_Fault_IGBTTemSenFault "IGBT温度传感器故障";
+CM_ SG_ 3221225472 MCU_Fault_IgbtTempOverWarn "IGBT过温报警";
+CM_ SG_ 3221225472 MCU_Fault_IgbtTempOverFault2 "IGBT严重过温";
+CM_ SG_ 3221225472 MCU_Fault_IgbtTempOverFault "IGBT过温故障";
+CM_ SG_ 3221225472 MCU_Fault_IGBT_UPFault_Flag "IGBT上桥驱动故障";
+CM_ SG_ 3221225472 MCU_Fault_IGBT_PDPFault_Flag "IGBT硬件过流";
+CM_ SG_ 3221225472 MCU_Fault_IGBT_DRIVEFault_Flag "IGBT驱动故障";
+CM_ SG_ 3221225472 MCU_Fault_IGBT_DNFault_Flag "IGBT下桥驱动故障";
+CM_ SG_ 3221225472 MCU_Fault_HWRdcFault "旋变故障";
+CM_ SG_ 3221225472 MCU_Fault_DrvPBCFault "驱动板故障";
+CM_ SG_ 3221225472 MCU_Fault_CurrSenWPhFault "W相电流传感器故障";
+CM_ SG_ 3221225472 MCU_Fault_CurrSenVPhFault "V相电流传感器故障";
+CM_ SG_ 3221225472 MCU_Fault_CurrSenBUSFault "母线电流传感器故障";
+CM_ SG_ 3221225472 MCU_Fault_CurrOverFault "电机相过流故障";
+CM_ SG_ 3221225472 MCU_Fault_CurrBUS_OverFault "母线过流故障";
+CM_ SG_ 3221225472 MCU_Fault_CrashFault "碰撞故障";
+CM_ SG_ 3221225472 MCU_Fault_CoolSenFault "水冷传感器故障";
+CM_ SG_ 3221225472 MCU_Fault_CanEBTimeOutFault "EB消息超时";
+CM_ SG_ 3221225472 MCU_Fault_CanEBLostMsgFault "EB信息丢失";
+CM_ SG_ 3221225472 MCU_Fault_CanEATimeOutFault "EA消息超时";
+CM_ SG_ 3221225472 MCU_Fault_CanEALostMsgFault "EA信息丢失";
+CM_ SG_ 3221225472 MCU_Fault_CanEAInvalidFault "EA信号失效故障";
+CM_ SG_ 3221225472 MCU_Fault_Can2BusOffFault "CAN2总线关闭";
+CM_ SG_ 3221225472 MCU_Fault_Can1BusOffFault "CAN1总线关闭故障";
+CM_ SG_ 3221225472 MCU_Fault_BlockWarn "堵转报警";
+CM_ SG_ 3221225472 MCU_Fault_BlockFault "堵转故障";
+CM_ SG_ 3221225472 MCU_Fault_5VOverWarn "5V过压报警";
+CM_ SG_ 3221225472 MCU_Fault_5VLowerWarn "5V欠压报警";
+CM_ SG_ 3221225472 MCU_Fault_12VOverWarn "12V过压报警";
+CM_ SG_ 3221225472 MCU_Fault_12VLowerWarn "12V欠压报警";
+CM_ SG_ 257 MCU_ActualTorqueFB "实际扭矩反馈";
+CM_ SG_ 257 MCU_ActualTorqueFB_F "实际扭矩反馈错误";
+CM_ SG_ 257 MCU_CheckSum "校验位";
+CM_ SG_ 257 MCU_CoolingReq "电机冷却请求";
+CM_ SG_ 257 MCU_DrvMotorFaultSts "驱动电机故障状态";
+CM_ SG_ 257 MCU_DrvMotorRPM "电机转速";
+CM_ SG_ 257 MCU_DrvMotorRPM_F "电机转速错误";
+CM_ SG_ 257 MCU_DrvMotorWorkSts "驱动电机工作状态";
+CM_ SG_ 257 MCU_InstantPower "电机瞬时功率";
+CM_ SG_ 257 MCU_PowrOff_Req "电机控制器下电请求";
+CM_ SG_ 257 MCU_RollingCounter "生命信号";
+CM_ SG_ 257 MCU_SelfCheck "电机控制自检状态";
+CM_ SG_ 257 MCU_Warning_Level "电机控制器故障报警";
+CM_ SG_ 258 MCU_MotorOverTempWarning "电机高温报警";
+CM_ SG_ 258 MCU_Motor_WaterInletTemp "电机水泵进水口温度";
+CM_ SG_ 258 MCU_CCM1HVILSts "CCM1高压互锁信号（ IPU端）";
+CM_ SG_ 258 MCU_DrvMotorTemp "驱动电机温度";
+CM_ SG_ 258 MCU_MainWireCurr "动力母线电流值";
+CM_ SG_ 258 MCU_MainWireVolt "动力母线电压值";
+CM_ SG_ 258 MCU_PTCHVILSts "PTC高压互锁信号";
+CM_ SG_ 258 MCU_RollingCounter_102 "生命信号";
+CM_ SG_ 258 MCU_Temp "电机控制器温度";
+CM_ SG_ 234 VCU_BMSEmergencyCmd "BMS紧急命令";
+CM_ SG_ 234 VCU_BMSMainRelayCmd "BMS主继电器命令";
+CM_ SG_ 234 VCU_BrakePedalSts "刹车开关信号";
+CM_ SG_ 234 VCU_CheckSum_EA "校验位";
+CM_ SG_ 234 VCU_DCDCEnableCmd "DCDC使能信号";
+CM_ SG_ 234 VCU_DrvControlMode "扭矩/转速控制模式选择位";
+CM_ SG_ 234 VCU_DrvRequestSpeed "驱动转速值";
+CM_ SG_ 234 VCU_DrvRequestTorque "驱动扭矩值";
+CM_ SG_ 234 VCU_GearLevelPosSts "档位信号";
+CM_ SG_ 234 VCU_RollingCounter_EA "生命信号";
+CM_ SG_ 234 VCU_VehicleSts "整车状态";
+CM_ SG_ 234 VCU_Vehicle_Warning "整车故障报警";
+CM_ SG_ 235 VCU_VehicleDirect "车辆方向";
+CM_ SG_ 235 VCU_ACChargeHVILSts "慢充HVIL状态";
+CM_ SG_ 235 VCU_ACFanReq "冷凝风扇启动";
+CM_ SG_ 235 VCU_ActiveReleaseCmd "MCU主动泄放命令";
+CM_ SG_ 235 VCU_AlwChargeSts "允许充电状态";
+CM_ SG_ 235 VCU_BMSPumpPercent "电池水泵等级";
+CM_ SG_ 235 VCU_BrakeLightReq "刹车制动故障信号";
+CM_ SG_ 235 VCU_BrakeSysFault "制动系统故障状态";
+CM_ SG_ 235 VCU_DCChargeHVILSts "快充HVIL状态";
+CM_ SG_ 235 VCU_DriveHVILSts "驱动HVIL状态";
+CM_ SG_ 235 VCU_FastChgRelayCmd "快充继电器闭合命令";
+CM_ SG_ 235 VCU_HVACOffSpecReq "空调关闭请求";
+CM_ SG_ 235 VCU_KeyPosition "钥匙门位置信号";
+CM_ SG_ 235 VCU_MCUPumpPercent "电机水泵等级";
+CM_ SG_ 235 VCU_MainRelaySts "VCU主继电器状态";
+CM_ SG_ 235 VCU_PTCHeatingReq1 "PTC加热开启请求1";
+CM_ SG_ 235 VCU_PTCHeatingReq2 "PTC加热开启请求2";
+CM_ SG_ 235 VCU_PowerOn2ResetReq "请求On2电源重启";
+CM_ SG_ 235 VCU_PowerReduceReq "降功率请求";
+CM_ SG_ 235 VCU_RollingCounter_EB "生命信号";
+CM_ SG_ 235 VCU_ThrottlePosition "加速踏板位置信号";
+CM_ SG_ 235 VCU_VehicleSpeedVD "车速有效性";
+CM_ SG_ 237 VCU_SuppressJitterRequest "关闭抑制抖动";
+CM_ SG_ 237 VCU_ESCActive "ESC控制触发";
+CM_ SG_ 237 VCU_FastChgExitTemp "快速充电口温度";
+CM_ SG_ 237 VCU_OpeartingMode "VCU运行模式";
+CM_ SG_ 237 VCU_PowerMode "VCU动力模式";
+CM_ SG_ 237 VCU_RollingCounter_ED "生命信号";
+CM_ SG_ 237 VCU_SlowChgExitTemp "慢速充电口温度";
+CM_ SG_ 237 VCU_VehicleHighVoltMode "VCU高压模式";
+BA_DEF_  "DBName" STRING ;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","J1939PG","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","StandardCAN_FD","ExtendedCAN_FD";
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cyclic","Event","CyclicIfActive","SpontanWithDelay","CyclicAndSpontan","CyclicAndSpontanWithDelay";
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 0;
+BA_DEF_ BO_  "GenMsgDelayTime" INT 0 0;
+BA_DEF_ SG_  "GenSigStartValue" FLOAT 0 0;
+BA_DEF_DEF_  "DBName" "Cluster";
+BA_DEF_DEF_  "BusType" "CAN";
+BA_DEF_DEF_  "VFrameFormat" "StandardCAN";
+BA_DEF_DEF_  "GenMsgSendType" "Cyclic";
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_ "DBName" "Cluster";
+BA_ "GenMsgCycleTime" BO_ 293 10;
+BA_ "GenMsgCycleTime" BO_ 928 10;
+BA_ "GenMsgCycleTime" BO_ 1707 20;
+BA_ "GenMsgCycleTime" BO_ 1710 20;
+BA_ "GenMsgCycleTime" BO_ 1711 20;
+BA_ "GenMsgCycleTime" BO_ 1709 20;
+BA_ "GenMsgCycleTime" BO_ 257 10;
+BA_ "GenMsgSendType" BO_ 257 0;
+BA_ "VFrameFormat" BO_ 257 0;
+BA_ "GenMsgCycleTime" BO_ 258 20;
+BA_ "GenMsgSendType" BO_ 258 0;
+BA_ "VFrameFormat" BO_ 258 0;
+BA_ "GenMsgCycleTime" BO_ 234 10;
+BA_ "GenMsgSendType" BO_ 234 0;
+BA_ "VFrameFormat" BO_ 234 0;
+BA_ "GenMsgCycleTime" BO_ 235 20;
+BA_ "GenMsgSendType" BO_ 235 0;
+BA_ "VFrameFormat" BO_ 235 0;
+BA_ "GenMsgCycleTime" BO_ 237 20;
+BA_ "GenMsgSendType" BO_ 237 0;
+BA_ "VFrameFormat" BO_ 237 0;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_User_defined5 0;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_User_defined4 0;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_User_defined3 0;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_User_defined2 0;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_SWD_RAMAddres 0;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_MotorSelect 0;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_User_defined1 0;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_AD_Derating 0;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_TorComp 400;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_TorCalc 400;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_IqComp 500;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_IdComp 500;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_UsOutFlt 0;
+BA_ "GenSigStartValue" SG_ 3221225472 Mcu_pdpRest_num 0;
+BA_ "GenSigStartValue" SG_ 3221225472 Mcu_DrvPowerRest_Flag 0;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_Ic 1000;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_Ia 1000;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_Power_Enable 0;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_Ic_offset 0;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_Troque_Ref 3000;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_Ia_offset 0;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_Vq 1000;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_Vd 1000;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_Iq 1000;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_Iq_ref 500;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_Id 1000;
+BA_ "GenSigStartValue" SG_ 3221225472 MCU_Id_ref 500;
+BA_ "GenSigStartValue" SG_ 3221225472 DCDC_Reality_Temperature 40;
+BA_ "GenSigStartValue" SG_ 1707 DBC_MCU_idc 0;
+BA_ "GenSigStartValue" SG_ 1707 DBC_MCU_F16_resver1 10000;
+BA_ "GenSigStartValue" SG_ 1707 DBC_MCU_Tcalc 10000;
+BA_ "GenSigStartValue" SG_ 1707 DBC_MCU_Pinv 10000;
+BA_ "GenSigStartValue" SG_ 1710 FWCTRL_IqComp 0;
+BA_ "GenSigStartValue" SG_ 1710 CurntCtrl_UqFb 0;
+BA_ "GenSigStartValue" SG_ 1710 CurntCtrl_UdFb 0;
+BA_ "GenSigStartValue" SG_ 1710 FWCTRL_IdComp 0;
+BA_ "GenSigStartValue" SG_ 1711 CurntCtrl_Iq_Fb 0;
+BA_ "GenSigStartValue" SG_ 1711 CurntCtrl_Id_Fb 0;
+BA_ "GenSigStartValue" SG_ 1711 PointSearch_Out_FLT_Iqref 0;
+BA_ "GenSigStartValue" SG_ 1711 PointSearch_Out_FLT_Idref 0;
+BA_ "GenSigStartValue" SG_ 1709 Sytem_STS_EnableDrive 0;
+BA_ "GenSigStartValue" SG_ 1709 StateMachineStructIn_upperCmd 0;
+BA_ "GenSigStartValue" SG_ 1709 CurntCtrl_Iq_Ref 0;
+BA_ "GenSigStartValue" SG_ 1709 CurntCtrl_Id_Ref 0;
+BA_ "GenSigStartValue" SG_ 1709 CurntCtrl_UsOutFlt 0;
+BA_ "GenSigStartValue" SG_ 257 MCU_ActualTorqueFB 3000;
+BA_ "GenSigStartValue" SG_ 257 MCU_DrvMotorRPM 15000;
+BA_ "GenSigStartValue" SG_ 257 MCU_InstantPower 150;
+BA_ "GenSigStartValue" SG_ 258 MCU_Motor_WaterInletTemp 10;
+BA_ "GenSigStartValue" SG_ 258 MCU_DrvMotorTemp 50;
+BA_ "GenSigStartValue" SG_ 258 MCU_MainWireCurr 10000;
+BA_ "GenSigStartValue" SG_ 258 MCU_Temp 50;
+BA_ "GenSigStartValue" SG_ 234 VCU_DrvRequestSpeed 15000;
+BA_ "GenSigStartValue" SG_ 234 VCU_DrvRequestTorque 3000;
+BA_ "GenSigStartValue" SG_ 237 VCU_FastChgExitTemp 40;
+BA_ "GenSigStartValue" SG_ 237 VCU_SlowChgExitTemp 40;
+VAL_ 3221225472 BMS_CCConnectSts 3 "parital_connect" 2 "inverter_connect" 1 "charger_connect" 0 "disconnect" ;
+VAL_ 3221225472 BMS_LVOutEnable 1 "Enable" 0 "Disable" ;
+VAL_ 3221225472 BMS_SleepReq 1 "Request" 0 "Not_Request" ;
+VAL_ 3221225472 BMS_WorkModReq 7 "reserved1" 6 "reserved" 5 "Inverter" 4 "Heat" 3 "constant_Power" 2 "constant_Voltage" 1 "constant_Current" 0 "closed_" ;
+VAL_ 3221225472 BMS_ChargerACInput 1 "Connected" 0 "Disconnected" ;
+VAL_ 3221225472 BMS_OnBoardChargerEnable 3 "constant_Power" 2 "constant_Voltage" 1 "constant_Current" 0 "closed_" ;
+VAL_ 257 MCU_HighVoltPowerOffReq 1 "Request" 0 "No Request" ;
+VAL_ 235 VCU_VehicleDirect 1 "Backward" 0 "Forward" ;
+

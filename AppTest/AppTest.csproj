@@ -669,6 +669,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Test\LPT03A_DBCFile_MCU_CAN1_v1.0.11_20210525.dbc" />
+    <None Include="Test\Project1Test_1_40.A2L" />
     <None Include="UDSDependency\Ability.ini" />
     <None Include="UDSDependency\lpdencryptfile.tmp" />
     <None Include="UDSDependency\ManufactureTestCInterface.lib" />

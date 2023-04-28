@@ -234,6 +234,8 @@ namespace AppTest.DBCLib
                         }
                         break;
                     case "BA_":
+                        if (lineAry.Length < 3)
+                            break;
                         if (lineAry[1].Contains("CycleTime") && lineAry[2]=="BO_")
                         {
                             if (uint.TryParse(lineAry[3], out uint messageID))

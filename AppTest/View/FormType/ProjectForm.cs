@@ -313,7 +313,7 @@ namespace AppTest
                 }
                 else
                 {
-                    LeapMessageBox.Instance.ShowInfo($"【{userForm.Name}】已经打开");
+                    ShowLog($"【{userForm.Name}】已经打开");
                 }
 
             }
@@ -349,7 +349,7 @@ namespace AppTest
                 }
                 else
                 {
-                    MessageBox.Show("打开【" + addNewForm.FormItem.Name + "】窗口失败","Info");
+                    ShowLog("打开【" + addNewForm.FormItem.Name + "】窗口失败");
                 }
             }
         }
@@ -424,28 +424,41 @@ namespace AppTest
                     CanIsOpen = true;
                     toolStripButton_DisConnect.Enabled = true;
                     //btnStartCan.Text = "Close";
-                    LeapMessageBox.Instance.ShowInfo("CAN 打开成功");
+                    ShowLog("CAN 打开成功");
 
                     //启动接收线程
                     this.tslbCanStatus.Text = $"{(FormType.DeviceType)projectItem.DeviceType} [{projectItem.CanIndex.Count}] 已打开 ";
                     USBCanManager.Instance.StartRecv(projectItem, caninds.ToArray());//caninds
-                    LeapMessageBox.Instance.ShowInfo("CAN 数据接收已启动");
+                    ShowLog("CAN 数据接收已启动");
 
                     //增加DID读写
                     if(Global.Protected == 1)
                     {
-                        Cursor = Cursors.WaitCursor;
                         ShowLog("软件校验中..请等待");
+
+                        foreach (Control item in Controls)
+                        {
+                            item.Enabled = false;
+                        }
+
                         var res = await Task.Run(CheckAuth);
+
+                        if (res)
+                        {
+                            foreach (Control item in Controls)
+                            {
+                                item.Enabled = true;
+                            }
+                        }
+
                         ShowLog($"软件校验{(res ? "成功" : "失败")}");
-                        Cursor = Cursors.Default;
                     }
                 }
                 else
                 {
                     this.tslbCanStatus.Text = $"{(FormType.DeviceType)projectItem.DeviceType} 打开失败 ";
-                    ShowLog($"{(FormType.DeviceType)projectItem.DeviceType} 打开失败 ");
-                    LeapMessageBox.Instance.ShowWarn(tslbCanStatus.Text);
+                    ShowLog($"{(FormType.DeviceType)projectItem.DeviceType} 打开失败 ",LPLogLevel.Warn);
+                    //LeapMessageBox.Instance.ShowWarn(tslbCanStatus.Text);
                     USBCanManager.Instance.RemoveUsbCan(projectItem);
                 }
 
@@ -484,7 +497,7 @@ namespace AppTest
                 };
 
                 await db.InsertAsync(entity);
-                ShowLog("软件校验成功.");
+                //ShowLog("软件校验成功.");
             }
             else
             {
@@ -494,10 +507,7 @@ namespace AppTest
                     WriteDID(new LPCanControl.Model.DIDInfo() {Name="0x0304",DID = 0x0304,Length = 1,DIDType = LPCanControl.Model.DIDType.enc_HEX }, "0", out bool suc);
                     LogHelper.Info($"write did 0304 to 0 {(suc ? "success" : "Fail")}");
                     ShowLog("软件Lisence失效，请刷写新程序");
-                    this.Invoke(new Action(() =>
-                    {
-                        this.Enabled = false;
-                    }));
+                  
                     res = false;
                 }
                 else
@@ -506,7 +516,7 @@ namespace AppTest
                     LogHelper.Info($"write did 0x0304 to 1 {(suc ? "success" : "Fail")}");
                     entities[0].Count++;
                     await db.UpdateAsync(entities[0]);
-                    ShowLog("软件校验成功.");
+                    //ShowLog("软件校验成功.");
                 }
             }
 
@@ -587,7 +597,7 @@ namespace AppTest
                 toolStripButton_DisConnect.Enabled = false;
                 this.tslbCanStatus.Text = $"{(FormType.DeviceType)projectItem.DeviceType} 通道数：[{projectItem.CanIndex.Count}] 已关闭 ";
                 //LeapMessageBox.Instance.ShowInfo(this.Name + "，关闭Can成功。");
-                ShowLog(this.Name + "，关闭Can成功。",true);
+                ShowLog(this.Name + "，关闭Can成功。",showtip:true);
             }
         }
 
@@ -658,6 +668,7 @@ namespace AppTest
         private void XcpModule_OnConnectStatusChanged(object sender, EventArgs args)
         {
             string status = sender.ToString();
+            this.ShowLog($"XCP:{status}");
             if (this.InvokeRequired)
             {
                 this.Invoke(new Action(() => {
@@ -695,13 +706,14 @@ namespace AppTest
             }
         }
         Color colorB = Color.FromArgb(255, 255, 255);
-        private void ShowLog(string log, bool showtip = false)
+        public void ShowLog(string log,LPLogLevel level = LPLogLevel.Info, bool showtip = false)
         {
             if (this.InvokeRequired)
             {
                 this.Invoke(new Action(() =>
                 {
                     tslbXCPCmdStatus.Text = log;
+                    logListview1.AddLog(log, level);
                     if (showtip)
                     {
                         LeapMessageBox.Instance.ShowInfo(log);
@@ -711,6 +723,11 @@ namespace AppTest
             else
             {
                 tslbXCPCmdStatus.Text = log;
+                logListview1.AddLog(log, level);
+                if (showtip)
+                {
+                    LeapMessageBox.Instance.ShowInfo(log);
+                }
             }
         }
 
@@ -898,14 +915,14 @@ namespace AppTest
                     if (this.XcpModule.DisConnect(CurrentCanValue))
                     {
                         tsb_ConnectXCP.ToolTipText = "连接XCP";
-                        LeapMessageBox.Instance.ShowInfo(this.Name + "，断开XCP成功");
+                        ShowLog(this.Name + "，断开XCP成功");
                     }
                 }
                     
                 else if (this.XcpModule.Connect(CurrentCanValue))
                 {
                     tsb_ConnectXCP.ToolTipText = "断开XCP";
-                    LeapMessageBox.Instance.ShowInfo(this.Name + "，连接XCP成功");
+                    ShowLog(this.Name + "，连接XCP成功",showtip:true);
 
                     XCPEventName = XcpModule.GetEventsName(CurrentCanValue);
                    
@@ -939,13 +956,13 @@ namespace AppTest
                     }
                 }
                 if(fileName == null)
-                    LeapMessageBox.Instance.ShowInfo($"无a2l文件。");
+                    ShowLog($"无a2l文件。");
                 string filePath = AppDomain.CurrentDomain.BaseDirectory  + ProtocolType.XCP.ToString() + "\\" + fileName;
                 var jarPath = ".\\Config\\a2lparser.jar";
                 var a2lJson = ELFParseForm.ParseA2lFile(jarPath, filePath);
                 if(a2lJson == null)
                 {
-                    LeapMessageBox.Instance.ShowError($"{filePath}信号地址更新失败.");
+                    ShowLog($"{filePath}信号地址更新失败.",LPLogLevel.Error);
                     return;
                 }
                 /// 2.modified a2l
@@ -984,11 +1001,11 @@ namespace AppTest
                         if (q != null && q.Count() > 0)
                         {
                             signal.ECUAddress = q.First().ToString("X");
-                            LogHelper.Info($"{formItem.Name}-{signal.SignalName} 更新地址。");
+                            ShowLog($"{formItem.Name}-{signal.SignalName} 更新地址。",LPLogLevel.Debug);
                         }
 
                     }
-                    LeapMessageBox.Instance.ShowInfo($"{formItem.Name}信号地址更新完成.");
+                    ShowLog($"{formItem.Name}信号地址更新完成.");
                 }
             }
 
@@ -1026,6 +1043,18 @@ namespace AppTest
             da += $"DAQProtected:{XcpModule.GetStatusResponse.CurrentResourceProtectionStatus.DAQProtected}\n\r";
             da += $"DaqRunning:{XcpModule.GetStatusResponse.DaqRunning}\n\r";
             MessageBox.Show(da, "XCP 基本信息",MessageBoxButtons.OK ,MessageBoxIcon.Information);
+        }
+
+        private void logToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            logListview1.Visible = !logListview1.Visible;
+            logViewToolStripMenuItem.Checked = logToolStripMenuItem.Checked = logListview1.Visible;
+        }
+
+        private void logViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            logListview1.Visible = !logListview1.Visible;
+            logViewToolStripMenuItem.Checked = logToolStripMenuItem.Checked = logListview1.Visible;
         }
     }
 }

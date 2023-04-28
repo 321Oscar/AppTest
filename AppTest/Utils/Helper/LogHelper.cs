@@ -1,4 +1,5 @@
 ﻿using AppTest.Mainform;
+using AppTest.Model;
 using log4net.Appender;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,8 @@ namespace AppTest.Helper
         private static readonly log4net.ILog logSend = log4net.LogManager.GetLogger("LogSend");
         private static readonly log4net.ILog logReceive = log4net.LogManager.GetLogger("LogReceive");
         private static readonly LogForm logForm = new LogForm();
+
+        //private static Queue<LogModel> logs = new Queue<LogModel>();
 
         public static LogForm LogForm { get => logForm; }
 
@@ -116,6 +119,7 @@ namespace AppTest.Helper
 
         public static void Info(string context)
         {
+            //logs.Enqueue(new LogModel(context, LPLogLevel.Info));
             if (logInfo.IsInfoEnabled)
             {
                 logInfo.Info(context);

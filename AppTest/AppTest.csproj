@@ -256,6 +256,7 @@
     <Compile Include="Model\Interface\DBCAForm.cs" />
     <Compile Include="Model\Interface\IDataParse.cs" />
     <Compile Include="Model\Interface\IXCPDAQ.cs" />
+    <Compile Include="Model\LogModel.cs" />
     <Compile Include="Model\ModelHelper.cs" />
     <Compile Include="Model\BaseSignal.cs" />
     <Compile Include="Model\CanIndexItem.cs" />
@@ -345,16 +346,22 @@
     <Compile Include="View\FormType\ProtocolsForm.Designer.cs">
       <DependentUpon>ProtocolsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\SignalItemForm.cs">
+    <Compile Include="View\UC\LogListview.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\UC\LogListview.Designer.cs">
+      <DependentUpon>LogListview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\UC\SignalItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\UserControl\SignalItemForm.Designer.cs">
+    <Compile Include="View\UC\SignalItemForm.Designer.cs">
       <DependentUpon>SignalItemForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\TestBorderForm.cs">
+    <Compile Include="View\UC\TestBorderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\UserControl\TestBorderForm.Designer.cs">
+    <Compile Include="View\UC\TestBorderForm.Designer.cs">
       <DependentUpon>TestBorderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FormType\XCPDAQGetForm.cs">
@@ -395,10 +402,10 @@
     <Compile Include="View\Mainform\LogForm.Designer.cs">
       <DependentUpon>LogForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\CheckBoxColorUC.cs">
+    <Compile Include="View\UC\CheckBoxColorUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\UserControl\CheckBoxColorUC.Designer.cs">
+    <Compile Include="View\UC\CheckBoxColorUC.Designer.cs">
       <DependentUpon>CheckBoxColorUC.cs</DependentUpon>
     </Compile>
     <Compile Include="View\BaseForm\DataForm.cs">
@@ -407,22 +414,22 @@
     <Compile Include="View\BaseForm\DataForm.Designer.cs">
       <DependentUpon>DataForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\DeviceTypeBaudUC.cs">
+    <Compile Include="View\UC\DeviceTypeBaudUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\UserControl\DeviceTypeBaudUC.Designer.cs">
+    <Compile Include="View\UC\DeviceTypeBaudUC.Designer.cs">
       <DependentUpon>DeviceTypeBaudUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\DeviceTypeUC.cs">
+    <Compile Include="View\UC\DeviceTypeUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\UserControl\DeviceTypeUC.Designer.cs">
+    <Compile Include="View\UC\DeviceTypeUC.Designer.cs">
       <DependentUpon>DeviceTypeUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\ExceptionMessageBox.cs">
+    <Compile Include="View\UC\ExceptionMessageBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\UserControl\ExceptionMessageBox.Designer.cs">
+    <Compile Include="View\UC\ExceptionMessageBox.Designer.cs">
       <DependentUpon>ExceptionMessageBox.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FormType\HistoryCurveForm.cs">
@@ -431,10 +438,10 @@
     <Compile Include="View\FormType\HistoryCurveForm.Designer.cs">
       <DependentUpon>HistoryCurveForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\HistoryDataUC.cs">
+    <Compile Include="View\UC\HistoryDataUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\UserControl\HistoryDataUC.Designer.cs">
+    <Compile Include="View\UC\HistoryDataUC.Designer.cs">
       <DependentUpon>HistoryDataUC.cs</DependentUpon>
     </Compile>
     <Compile Include="View\BaseForm\RollingCounterForm.cs">
@@ -451,28 +458,28 @@
     <Compile Include="View\BaseForm\MeasureForm.Designer.cs">
       <DependentUpon>MeasureForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\MessageBoxUC.cs">
+    <Compile Include="View\UC\MessageBoxUC.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\UserControl\MessageBoxUC.Designer.cs">
+    <Compile Include="View\UC\MessageBoxUC.Designer.cs">
       <DependentUpon>MessageBoxUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\ProjectPanelUC.cs">
+    <Compile Include="View\UC\ProjectPanelUC.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="View\UserControl\ProjectPanelUC.Designer.cs">
+    <Compile Include="View\UC\ProjectPanelUC.Designer.cs">
       <DependentUpon>ProjectPanelUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\SignalInfoUC.cs">
+    <Compile Include="View\UC\SignalInfoUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\UserControl\SignalInfoUC.Designer.cs">
+    <Compile Include="View\UC\SignalInfoUC.Designer.cs">
       <DependentUpon>SignalInfoUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\TabControlDemo.cs">
+    <Compile Include="View\UC\TabControlDemo.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="View\UserControl\TabControlDemo.Designer.cs">
+    <Compile Include="View\UC\TabControlDemo.Designer.cs">
       <DependentUpon>TabControlDemo.cs</DependentUpon>
     </Compile>
     <Compile Include="Utils\Global.cs" />
@@ -511,23 +518,23 @@
       <DependentUpon>ProjectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\UserControl\TransparentLayerToolStripLabel.cs">
+    <Compile Include="View\UC\TransparentLayerToolStripLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="View\UserControl\TransparentLayerToolStripLabel.Designer.cs">
+    <Compile Include="View\UC\TransparentLayerToolStripLabel.Designer.cs">
       <DependentUpon>TransparentLayerToolStripLabel.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\UI\ImageEx.cs" />
-    <Compile Include="View\UserControl\UI\UILocalize.cs" />
-    <Compile Include="View\UserControl\UI\UIMessageTip.cs" />
-    <Compile Include="View\UserControl\UI\UINotifier.cs">
+    <Compile Include="View\UC\UI\ImageEx.cs" />
+    <Compile Include="View\UC\UI\UILocalize.cs" />
+    <Compile Include="View\UC\UI\UIMessageTip.cs" />
+    <Compile Include="View\UC\UI\UINotifier.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\UserControl\UI\UINotifier.Designer.cs">
+    <Compile Include="View\UC\UI\UINotifier.Designer.cs">
       <DependentUpon>UINotifier.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\UserControl\UI\UIStyle.cs" />
-    <Compile Include="View\UserControl\UI\UIStyleColor.cs" />
+    <Compile Include="View\UC\UI\UIStyle.cs" />
+    <Compile Include="View\UC\UI\UIStyleColor.cs" />
     <EmbeddedResource Include="View\FormType\AddNewXcpForm.resx">
       <DependentUpon>AddNewXcpForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -561,10 +568,13 @@
     <EmbeddedResource Include="View\FormType\ProtocolsForm.resx">
       <DependentUpon>ProtocolsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\UserControl\SignalItemForm.resx">
+    <EmbeddedResource Include="View\UC\LogListview.resx">
+      <DependentUpon>LogListview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\UC\SignalItemForm.resx">
       <DependentUpon>SignalItemForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\UserControl\TestBorderForm.resx">
+    <EmbeddedResource Include="View\UC\TestBorderForm.resx">
       <DependentUpon>TestBorderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormType\XCPDAQGetForm.resx">
@@ -579,25 +589,25 @@
     <EmbeddedResource Include="View\Mainform\LogForm.resx">
       <DependentUpon>LogForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\UserControl\CheckBoxColorUC.resx">
+    <EmbeddedResource Include="View\UC\CheckBoxColorUC.resx">
       <DependentUpon>CheckBoxColorUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\BaseForm\DataForm.resx">
       <DependentUpon>DataForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\UserControl\DeviceTypeBaudUC.resx">
+    <EmbeddedResource Include="View\UC\DeviceTypeBaudUC.resx">
       <DependentUpon>DeviceTypeBaudUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\UserControl\DeviceTypeUC.resx">
+    <EmbeddedResource Include="View\UC\DeviceTypeUC.resx">
       <DependentUpon>DeviceTypeUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\UserControl\ExceptionMessageBox.resx">
+    <EmbeddedResource Include="View\UC\ExceptionMessageBox.resx">
       <DependentUpon>ExceptionMessageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\FormType\HistoryCurveForm.resx">
       <DependentUpon>HistoryCurveForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\UserControl\HistoryDataUC.resx">
+    <EmbeddedResource Include="View\UC\HistoryDataUC.resx">
       <DependentUpon>HistoryDataUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\BaseForm\RollingCounterForm.resx">
@@ -606,13 +616,13 @@
     <EmbeddedResource Include="View\BaseForm\MeasureForm.resx">
       <DependentUpon>MeasureForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\UserControl\MessageBoxUC.resx">
+    <EmbeddedResource Include="View\UC\MessageBoxUC.resx">
       <DependentUpon>MessageBoxUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\UserControl\ProjectPanelUC.resx">
+    <EmbeddedResource Include="View\UC\ProjectPanelUC.resx">
       <DependentUpon>ProjectPanelUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\UserControl\SignalInfoUC.resx">
+    <EmbeddedResource Include="View\UC\SignalInfoUC.resx">
       <DependentUpon>SignalInfoUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Mainform\MainForm.en-US.resx">

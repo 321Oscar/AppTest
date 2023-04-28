@@ -1,4 +1,5 @@
 ﻿using AppTest.FormType;
+using AppTest.Model;
 using LPCanControl.CANInfo;
 using System.Windows.Forms;
 
@@ -29,7 +30,7 @@ namespace AppTest.ViewModel
 
         public SetLog ShowLog;
 
-        public delegate void SetLog(string log); 
+        public delegate void SetLog(string log,LPLogLevel level = LPLogLevel.Debug); 
         public delegate void ModifiedGetState(bool getOrnot);
 
         public abstract void ModifiedSignals();

@@ -1,4 +1,5 @@
 ﻿using AppTest.Model;
+using AppTest.View.UC;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,6 +21,10 @@ namespace AppTest.View.FormType
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.RowHeadersVisible = true;
+
+            //LogListview log = new LogListview();
+            //log.Dock = DockStyle.Bottom;
+            //this.Controls.Add(log);
         }
 
         private void LicenseForm_Load(object sender, EventArgs e)

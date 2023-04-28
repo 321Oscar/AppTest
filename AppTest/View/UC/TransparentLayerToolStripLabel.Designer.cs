@@ -1,5 +1,5 @@
 ﻿
-namespace AppTest.View.UserControl
+namespace AppTest.View.UC
 {
     partial class TransparentLayerToolStripLabel
     {

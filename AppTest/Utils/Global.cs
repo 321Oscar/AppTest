@@ -218,13 +218,18 @@ namespace AppTest.Helper
          * 4.增加UDS库
          * 5.修改历史记录界面，增加分页
          * 
-         * 
+         * v0.003.07-beta
+         * 1.增加日志ListView
+         * 2.校验软件次数 DID的factory
+         * 2.1 校验软件 取消waiting cursor
+         * 2.2 修改次数超限后的 窗口使能
+         * 3.优化解析dbc
          */
 
         /// <summary>
         /// 版本号
         /// </summary>
-        public const string SoftVersion = "v10.003.06-beta";
+        public const string SoftVersion = "v10.003.07-beta";
 
         /// <summary>
         /// Protect = 1时，版本号为10.xxx.xx

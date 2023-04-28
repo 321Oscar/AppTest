@@ -44,11 +44,17 @@ namespace AppTest
             this.newFormToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xCPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xCPInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.logListview1 = new AppTest.View.UC.LogListview();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.logViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -67,7 +73,7 @@ namespace AppTest
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip1.Size = new System.Drawing.Size(536, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(777, 31);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -145,12 +151,13 @@ namespace AppTest
             this.OpenFormToolStripMenuItem,
             this.OpenedToolStripMenuItem,
             this.newFormToolStripMenuItem,
-            this.xCPToolStripMenuItem});
+            this.xCPToolStripMenuItem,
+            this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.MdiWindowListItem = this.OpenedToolStripMenuItem;
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(536, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(777, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -192,6 +199,24 @@ namespace AppTest
             this.xCPInfoToolStripMenuItem.Text = "XCPInfo";
             this.xCPInfoToolStripMenuItem.Click += new System.EventHandler(this.xCPInfoToolStripMenuItem_Click);
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.logToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(47, 22);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // logToolStripMenuItem
+            // 
+            this.logToolStripMenuItem.Checked = true;
+            this.logToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.logToolStripMenuItem.Name = "logToolStripMenuItem";
+            this.logToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.logToolStripMenuItem.Text = "Log";
+            this.logToolStripMenuItem.ToolTipText = "日志窗口";
+            this.logToolStripMenuItem.Click += new System.EventHandler(this.logToolStripMenuItem_Click);
+            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -207,18 +232,45 @@ namespace AppTest
             // 
             this.statusStrip1.BackColor = System.Drawing.Color.Gainsboro;
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.statusStrip1.Location = new System.Drawing.Point(0, 367);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 561);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(536, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(777, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // logListview1
+            // 
+            this.logListview1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.logListview1.Location = new System.Drawing.Point(0, 378);
+            this.logListview1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.logListview1.Name = "logListview1";
+            this.logListview1.Size = new System.Drawing.Size(777, 183);
+            this.logListview1.TabIndex = 3;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.logViewToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(126, 26);
+            // 
+            // logViewToolStripMenuItem
+            // 
+            this.logViewToolStripMenuItem.Checked = true;
+            this.logViewToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.logViewToolStripMenuItem.Name = "logViewToolStripMenuItem";
+            this.logViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.logViewToolStripMenuItem.Text = "LogView";
+            this.logViewToolStripMenuItem.Click += new System.EventHandler(this.logViewToolStripMenuItem_Click);
             // 
             // ProjectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(536, 389);
+            this.ClientSize = new System.Drawing.Size(777, 583);
+            this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.logListview1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
@@ -235,6 +287,7 @@ namespace AppTest
             this.toolStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,5 +311,10 @@ namespace AppTest
         private System.Windows.Forms.ToolStripButton tsp_ImportElf;
         private System.Windows.Forms.ToolStripMenuItem xCPToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xCPInfoToolStripMenuItem;
+        private View.UC.LogListview logListview1;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem logViewToolStripMenuItem;
     }
 }

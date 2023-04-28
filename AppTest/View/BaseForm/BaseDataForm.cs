@@ -18,7 +18,7 @@ using MetroFramework.Forms;
 using LPCanControl.CANInfo;
 using AppTest.ProtocolLib;
 using AppTest.Model.Interface;
-using AppTest.View.UserControl;
+using AppTest.View.UC;
 
 namespace AppTest.FormType
 {
@@ -431,7 +431,7 @@ namespace AppTest.FormType
         /// 显示日志
         /// </summary>
         /// <param name="log"></param>
-        protected virtual void ShowLog(string log)
+        protected virtual void ShowLog(string log,LPLogLevel level = LPLogLevel.Debug)
         {
             try
             {
@@ -445,6 +445,10 @@ namespace AppTest.FormType
                 else
                 {
                     toolLog.Text = log;
+                }
+                if (MdiParent != null && this.MdiParent is ProjectForm && !string.IsNullOrEmpty(log))
+                {
+                    ((ProjectForm)MdiParent).ShowLog(log, level);
                 }
             }
             catch (Exception ex)

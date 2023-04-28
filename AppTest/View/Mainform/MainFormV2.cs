@@ -532,7 +532,7 @@ namespace AppTest
             //configAsync.Result.AuthenticationEntities.CountAsync();
 
             LicenseForm licenseForm = new LicenseForm();
-            licenseForm.ShowDialog();
+            licenseForm.Show();
         }
 
         private void treeViewRoot_DrawNode(object sender, DrawTreeNodeEventArgs e)

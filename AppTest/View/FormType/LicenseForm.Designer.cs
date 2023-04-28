@@ -31,11 +31,15 @@ namespace AppTest.View.FormType
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.codeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.countDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.authenticationEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.btnFresh = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.logListview1 = new AppTest.View.UC.LogListview();
+            this.authenticationEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.code1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.code2DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.authenticationEntityBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -50,41 +54,18 @@ namespace AppTest.View.FormType
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.iDDataGridViewTextBoxColumn,
-            this.codeDataGridViewTextBoxColumn,
-            this.countDataGridViewTextBoxColumn});
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.code1DataGridViewTextBoxColumn,
+            this.code2DataGridViewTextBoxColumn,
+            this.dataGridViewTextBoxColumn3});
             this.dataGridView1.DataSource = this.authenticationEntityBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(12, 70);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(774, 360);
+            this.dataGridView1.Size = new System.Drawing.Size(682, 136);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // iDDataGridViewTextBoxColumn
-            // 
-            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
-            this.iDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // codeDataGridViewTextBoxColumn
-            // 
-            this.codeDataGridViewTextBoxColumn.DataPropertyName = "Code";
-            this.codeDataGridViewTextBoxColumn.HeaderText = "Code";
-            this.codeDataGridViewTextBoxColumn.Name = "codeDataGridViewTextBoxColumn";
-            this.codeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // countDataGridViewTextBoxColumn
-            // 
-            this.countDataGridViewTextBoxColumn.DataPropertyName = "Count";
-            this.countDataGridViewTextBoxColumn.HeaderText = "Count";
-            this.countDataGridViewTextBoxColumn.Name = "countDataGridViewTextBoxColumn";
-            this.countDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // authenticationEntityBindingSource
-            // 
-            this.authenticationEntityBindingSource.DataSource = typeof(AppTest.Model.AuthenticationEntity);
             // 
             // btnFresh
             // 
@@ -96,11 +77,59 @@ namespace AppTest.View.FormType
             this.btnFresh.UseVisualStyleBackColor = true;
             this.btnFresh.Click += new System.EventHandler(this.btnFresh_Click);
             // 
+            // logListview1
+            // 
+            this.logListview1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.logListview1.Location = new System.Drawing.Point(0, 212);
+            this.logListview1.Name = "logListview1";
+            this.logListview1.Size = new System.Drawing.Size(798, 230);
+            this.logListview1.TabIndex = 2;
+            // 
+            // authenticationEntityBindingSource
+            // 
+            this.authenticationEntityBindingSource.DataSource = typeof(AppTest.Model.AuthenticationEntity);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "ID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Code";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Code";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // code1DataGridViewTextBoxColumn
+            // 
+            this.code1DataGridViewTextBoxColumn.DataPropertyName = "Code1";
+            this.code1DataGridViewTextBoxColumn.HeaderText = "Code1";
+            this.code1DataGridViewTextBoxColumn.Name = "code1DataGridViewTextBoxColumn";
+            this.code1DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // code2DataGridViewTextBoxColumn
+            // 
+            this.code2DataGridViewTextBoxColumn.DataPropertyName = "Code2";
+            this.code2DataGridViewTextBoxColumn.HeaderText = "Code2";
+            this.code2DataGridViewTextBoxColumn.Name = "code2DataGridViewTextBoxColumn";
+            this.code2DataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Count";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Count";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
             // LicenseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(798, 442);
+            this.Controls.Add(this.logListview1);
             this.Controls.Add(this.btnFresh);
             this.Controls.Add(this.dataGridView1);
             this.Name = "LicenseForm";
@@ -118,7 +147,14 @@ namespace AppTest.View.FormType
         private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn countDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource authenticationEntityBindingSource;
         private System.Windows.Forms.Button btnFresh;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private UC.LogListview logListview1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn code1DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn code2DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.BindingSource authenticationEntityBindingSource;
     }
 }

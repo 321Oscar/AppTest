@@ -27,7 +27,10 @@ namespace AppTest.ProtocolLib
                 var protocols = protocolName.Split(';');
                 for (int i = 0; i < protocols.Length; i++)
                 {
-                    foreach (var item in ProtocolFile(protocols[i]))
+                    var signals = ProtocolFile(protocols[i]);
+                    if (signals == null)
+                        continue;
+                    foreach (var item in signals)
                     {
                         if (item is DBCSignal signal)
                         {

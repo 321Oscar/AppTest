@@ -1,4 +1,5 @@
-﻿using AppTest.Model;
+﻿using AppTest.Helper;
+using AppTest.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -27,10 +28,29 @@ namespace AppTest.View.UC
             //lvLog.Columns[2].Width = lvLog.ClientSize.Width - lvLog.Columns[0].Width - lvLog.Columns[1].Width - 10;
         }
 
-        public void AddLog(string log, LPLogLevel logLevel = LPLogLevel.Info)
+        public void AddLog(string log, LPLogLevel logLevel = LPLogLevel.Info,Exception ex = null)
         {
             var l = new LogModel(log, logLevel);
-
+            Task.Run(new Action(()=>
+            {
+                switch (logLevel)
+                {
+                    case LPLogLevel.Debug:
+                        LogHelper.Debug(log);
+                        break;
+                    case LPLogLevel.Info:
+                        LogHelper.Info(log);
+                        break;
+                    case LPLogLevel.Warn:
+                        LogHelper.Warn(log);
+                        break;
+                    case LPLogLevel.Error:
+                        LogHelper.Error(log, ex);
+                        break;
+                    case LPLogLevel.All:
+                        break;
+                }
+            }));
             _logs.Add(l);
             if(_logs.Count > 1000)
             {

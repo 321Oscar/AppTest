@@ -37,6 +37,7 @@ namespace AppTest.ViewModel
         public XCPPollingViewModel(BaseDataForm form)
         {
             Form = form;
+            this.ShowLog += form.ShowLog;
         }
         public override void OnDataRecieveEvent(object sender, CANDataReceiveEventArgs args)
         {

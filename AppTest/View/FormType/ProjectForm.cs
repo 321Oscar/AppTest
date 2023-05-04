@@ -705,8 +705,8 @@ namespace AppTest
                 tslbXCPCmdStatus.Text = $"XCP CMD:{status}";
             }
         }
-        Color colorB = Color.FromArgb(255, 255, 255);
-        public void ShowLog(string log,LPLogLevel level = LPLogLevel.Info, bool showtip = false)
+
+        public void ShowLog(string log, LPLogLevel level = LPLogLevel.Info, bool showtip = false)
         {
             if (this.InvokeRequired)
             {
@@ -730,7 +730,9 @@ namespace AppTest
                 }
             }
         }
-
+        /// <summary>
+        /// 当前选择的CAN索引，主要用来连接XCP
+        /// </summary>
         public uint CurrentCanValue { get; set; }
 
         private void Tscbb_SelectedIndexChanged(object sender, EventArgs e)

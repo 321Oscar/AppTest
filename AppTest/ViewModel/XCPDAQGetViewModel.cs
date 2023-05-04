@@ -14,6 +14,7 @@ namespace AppTest.ViewModel
         public XCPDAQGetViewModel(BaseDataForm form)
         {
             Form = form;
+            this.ShowLog += form.ShowLog;
         }
 
         public override bool InitDAQ(uint canChannel)
@@ -40,17 +41,17 @@ namespace AppTest.ViewModel
             {
                 var initDaqTrue = XcpModule.SetDAQ(DAQList.DAQs, canChannel);
 
-                Form.ShowLog($"DAQ 配置{(initDaqTrue ? "成功" : "失败")}");
+                ShowLog?.Invoke($"DAQ 配置{(initDaqTrue ? "成功" : "失败")}");
 
                 return initDaqTrue;
             }
             catch (XCPException xcperr)
             {
-                Form.ShowLog(xcperr.Message, LPLogLevel.Warn);
+                ShowLog?.Invoke(xcperr.Message, LPLogLevel.Warn);
             }
             catch (Exception err)
             {
-                Form.ShowLog(err.Message, LPLogLevel.Error);
+                ShowLog?.Invoke(err.Message, LPLogLevel.Error);
             }
             return false;
         }
@@ -132,11 +133,11 @@ namespace AppTest.ViewModel
                 }
                 catch (System.InvalidOperationException errOp)
                 {
-                    Form.ShowLog($"{Form.Name} {signal.SignalName} Data :{signal.StrValue};{errOp.Message}",LPLogLevel.Warn );
+                    ShowLog?.Invoke($"{Form.Name} {signal.SignalName} Data :{signal.StrValue};{errOp.Message}",LPLogLevel.Warn );
                 }
                 catch (ArgumentOutOfRangeException errRange)
                 {
-                    Form.ShowLog($"{Form.Name} {signal.SignalName} size :{size};startInd:{signal.StartIndex};dataLength:{data.Count} {errRange.Message}" , LPLogLevel.Warn);
+                    ShowLog?.Invoke($"{Form.Name} {signal.SignalName} size :{size};startInd:{signal.StartIndex};dataLength:{data.Count} {errRange.Message}" , LPLogLevel.Warn);
                 }
                 catch (Exception err)
                 {
@@ -146,7 +147,7 @@ namespace AppTest.ViewModel
                     {
                         log += $" {item:X}";
                     }
-                    Form.ShowLog($"{Form.Name} {signal.SignalName} Parse Data error {err.Message} :{log}", LPLogLevel.Error);
+                    ShowLog?.Invoke($"{Form.Name} {signal.SignalName} Parse Data error {err.Message} :{log}", LPLogLevel.Error);
                 }
                 signal.TimeStamp = timestamp;
                 entity = new SignalEntity

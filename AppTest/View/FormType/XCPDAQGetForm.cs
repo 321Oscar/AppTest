@@ -73,7 +73,7 @@ namespace AppTest.FormType
 
             if (!vm.InitDAQ((uint)this.CanChannel))
             {
-                
+                ShowLog("DAQ 配置失败");
             }
             else
             {

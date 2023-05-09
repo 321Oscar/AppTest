@@ -453,6 +453,7 @@ namespace AppTest.FormType
                 {
                     ((ProjectForm)MdiParent).ShowLog($"[{this.Name}] {log}", level);
                 }
+                LogHelper.WriteToOutput(this.Name, log);
             }
             catch (Exception ex)
             {
@@ -468,7 +469,7 @@ namespace AppTest.FormType
             tslbCanIndex = new ToolStripLabel();
             tslbCanIndex.Text = $"CanIndex: {CanChannel}";
             toolLog = new ToolStripStatusLabel() { Spring = true };
-            toolLog.ForeColor = Color.Red;
+            toolLog.ForeColor = Color.White;
             //分隔符
             ToolStripSeparator tss1 = new ToolStripSeparator();
 
@@ -503,7 +504,7 @@ namespace AppTest.FormType
 
         protected virtual void ModifiedSignals()
         {
-            ReLoadSignal();return;
+            //ReLoadSignal();return;
             AddNewForm editForm;
             if (OwnerProject.CanIndex[0].ProtocolType == (int)ProtocolType.DBC)
             {

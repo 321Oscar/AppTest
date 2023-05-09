@@ -217,8 +217,6 @@ namespace AppTest.FormType
         {
             btnGet.Text = !get ? "Start" : "Stop";
             nudTimerInterval.Enabled = !get;
-            ShowLog($"{this.Name} {get}");
-            //WhetherSendOrGet.ReadOnly = get;
             RegisterOrUnRegisterDataRecieve(get);
         }
 

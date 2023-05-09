@@ -450,6 +450,7 @@ namespace AppTest.Helper
         /// <param name="canindex">发送的CAN通道</param>
         /// <param name="sendData">数据</param>
         /// <param name="formName">发送的窗口</param>
+        /// <exception cref="USBCANOpenException"></exception>
         /// <returns>发送成功/失败<see cref="bool"/></returns>
         internal bool Send(ProjectItem project,int canindex = 0, CANSendFrame sendData = null,string formName = null, byte sendtype = 0)
         {

@@ -99,9 +99,10 @@ namespace AppTest.FormType
             }
             else
             {
-                if (!USBCanManager.Instance.Exist(OwnerProject))
+                string log = string.Empty;
+                if (!USBCanManager.Instance.Exist(OwnerProject) || !USBCanManager.Instance.SendTest(OwnerProject,ref log))
                 {
-                    ShowLog("CAN未打开!", LPLogLevel.Warn);
+                    ShowLog($"CAN未打开!{log}", LPLogLevel.Warn);
                     return;
                 }
                 foreach (var item in vm.DBCSignals.SignalList)

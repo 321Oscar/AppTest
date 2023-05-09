@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
@@ -76,6 +77,8 @@ namespace AppTest.FormType
             metroComboBox_Signals.AutoCompleteSource = AutoCompleteSource.ListItems;
             metroComboBox_Signals.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
 
+            
+
             #region StatusStrip
 
             tscbb = new ToolStripComboBox();
@@ -101,16 +104,7 @@ namespace AppTest.FormType
             statusStrip1.Visible = true;
             statusStrip1.BackColor = RtlColor;
             statusStrip1.ForeColor = Color.White;
-            //this.statusStrip1.Items.AddRange(new ToolStripItem[]
-            //{
-            //        tscbb,
-            //        tss,
-            //        tslbCanIndex,
-            //        tss1,
-            //        this.tsslbLog
-            //});
-
-            //PanelLog.Location = new Point(10, this.Height - 30);
+            tscbb.Enabled = false;
             #endregion
         }
 
@@ -200,10 +194,32 @@ namespace AppTest.FormType
 
         protected override void ReLoadSignal()
         {
-            //base.ReLoadSignal();
-            
-
             InitSignalUC();
+        }
+
+        protected override void ModifiedSignals()
+        {
+            AddNewForm editForm;
+            if (OwnerProject.CanIndex[0].ProtocolType == (int)ProtocolType.DBC)
+            {
+                editForm = new AddNewForm(this.OwnerProject, this.OwnerProject.Form.Find(x => x.Name == this.Name));
+            }
+            else if (OwnerProject.CanIndex[0].ProtocolType == (int)ProtocolType.XCP)
+            {
+                editForm = new AddNewXcpForm(this.OwnerProject, this.OwnerProject.Form.Find(x => x.Name == this.Name));
+            }
+            else
+            {
+                return;
+            }
+            if (editForm.ShowDialog() == DialogResult.OK)
+            {
+                //IsGetdata = false;
+                //reload Signals
+                this.Signals = editForm.FormItem.DBCSignals;
+                //this.xCPSingals = editForm.FormItem.XCPSingals;
+                ReLoadSignal();
+            }
         }
         #endregion
 
@@ -390,72 +406,57 @@ namespace AppTest.FormType
         /// <param name="groupbox"></param>
         private void Send(object groupbox)
         {
-            //SignalEqualityComarer signalEqualityComarer = new SignalEqualityComarer();
-            Dictionary<BaseSignal, string> keyValues = new Dictionary<BaseSignal, string>();
             if (!(groupbox is GroupBox gb))
                 return;
             if (!isSend)
                 return;
+            Dictionary<BaseSignal, string> keyValues = new Dictionary<BaseSignal, string>();
             try
             {
                 bool needCheckSum = false;
-                Control lfp = gb.Controls[0];
-
-                needCheckSum = false;
-                if (lfp is FlowLayoutPanel)
+                if (gb.Controls.Count > 0 && gb.Controls[0] is FlowLayoutPanel lfp)
                 {
-                    foreach (var item in lfp.Controls)
+                    foreach (SignalInfoUC uS in lfp.Controls.OfType<SignalInfoUC>())
                     {
-                        if (item is SignalInfoUC uS)
+                        string value = uS.SignalValue;
+                        if (uS.Signal.SignalName.ToLower().Contains("rolling"))
                         {
-                            string value = uS.SignalValue;
-                            if (uS.Signal.SignalName.ToLower().Contains("rolling"))
+                            if (!int.TryParse(value, out int valInt))
                             {
-                                if (int.Parse(value) == 15)
-                                {
-                                    //uS.SetData("0");
-                                    uS.SignalValue = "0";
-                                }
-                                else
-                                {
-                                    int nextValue = int.Parse(value) + 1;
-                                    uS.SignalValue = nextValue.ToString();
-                                }
+                                valInt = 0;
+                                ShowLog($"{uS.Signal.SignalName} 应为整数{value}，已自动从0开始",LPLogLevel.Warn);
                             }
-                            if (uS.Signal.SignalName.ToLower().Contains("checksum"))
-                                needCheckSum = true;
-
-                            keyValues.Add(uS.Signal, value);
+                            int nextValue = valInt + 1;
+                            uS.SignalValue = (nextValue % 16).ToString();
                         }
+                        if (uS.Signal.SignalName.ToLower().Contains("checksum"))
+                            needCheckSum = true;
+
+                        keyValues.Add(uS.Signal, value);
                     }
                 }
 
                 if (keyValues.Count == 0)
                     return;
+
+                ///组帧
                 var frame = Protocol.BuildFrames(keyValues);
 
                 /// 这里直接写死了checksum的位置和长度
                 /// 重新计算checksum
                 if (needCheckSum)
                 {
-                    byte crc = 0;
-                    for (UInt16 i = 0; i < 7; i++)
-                    {
-                        crc = (byte)(crc + frame[0].Data[i]);
-                    }
-                    crc = (byte)(crc ^ 0xff);
-                    frame[0].Data[7] = crc;
+                    byte crc = (byte)frame[0].Data.Take(7).Sum(b => b);
+                    frame[0].Data[7] = (byte)~crc;
+                    //old
+                    //for (UInt16 i = 0; i < 7; i++)
+                    //{
+                    //    crc = (byte)(crc + frame[0].Data[i]);
+                    //}
+                    //crc = (byte)(crc ^ 0xff);
                 }
 
-                ///组帧
-                /*
-                * 模拟发送成功
-                   SetLog("ID:" + gb.Name +
-                     $"--{DateTime.Now}--已发送：{frame[0].cid:X},DATA:{frame[0].w[0]:X} {frame[0].w[1]:X} {frame[0].w[2]:X} {frame[0].w[3]:X} {frame[0].w[4]:X} {frame[0].w[5]:X} {frame[0].w[6]:X} {frame[0].w[7]:X}\n");
-
-               */
                 USBCanManager.Instance.Send(OwnerProject, canindex: this.CanChannel, sendData: frame[0], $"[{this.FormType}]{this.Name}");
-                //ShowLog($"[{ this.FormType}]{ this.Name} Send Data {res}:{frame[0]}");
             }
             catch(USBCANOpenException ex)
             {

@@ -64,6 +64,9 @@ namespace AppTest.FormType
             cbbProtocolType.DataSource = Enum.GetValues(typeof(ProtocolType));
             cbbDeviceType.DataSource = Enum.GetValues(typeof(DeviceType));
             cbbProtocolType.Enabled = cbbProtocolFiles.Enabled =btnSelectProtocol.Enabled= btnImportProtocolFile.Enabled = false;
+
+            cbAuth.Visible = Global.Protected == 1;
+            cbbDeviceIndex.SelectedIndex = 0;
         }
 
         public AddProjectForm(ProjectItem projectItem) : this()

@@ -78,6 +78,13 @@ namespace AppTest.ViewModel
                 var rx_mails = args.can_msgs;
                 if (null == rx_mails)
                     throw new Exception("接收数据错误。");
+                foreach(var canmsg in rx_mails.Where(x=> CurrentIDs.Contains(x.cid)))
+                {
+                    //ShowLog?.Invoke($"Recieve {canmsg}",LPLogLevel.Debug);
+                    LogHelper.WriteToOutput(this.Form.Name, $"Recieve {canmsg}");
+                }
+
+
                 foreach (var item in DBCProtocol.MultipYield(rx_mails, DBCSignals.SignalList.Cast<BaseSignal>().ToList()))
                 {
                     //signalUC[item.SignalName].SignalValue = item.StrValue;
@@ -105,7 +112,7 @@ namespace AppTest.ViewModel
             catch (Exception ex)
             {
                 VMIsGetdata = false;
-                ShowLog?.Invoke(ex.Message,LPLogLevel.Error);
+                ShowLog?.Invoke(ex.Message, LPLogLevel.Error);
             }
         }
 

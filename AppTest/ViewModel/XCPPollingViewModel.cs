@@ -159,7 +159,7 @@ namespace AppTest.ViewModel
 
                     if (XcpModule.CurrentCMDStatus == XCPCMDStatus.UploadFail)
                     {
-                        ShowLog($"{item.SignalName} Upload Fail");
+                        ShowLog?.Invoke($"{item.SignalName} Upload Fail");
                         continue;
                     }
 

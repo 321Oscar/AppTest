@@ -212,7 +212,10 @@ namespace AppTest.FormType
         #endregion
 
         #region Get - Method
-
+        /// <summary>
+        /// 获取数据时，界面按钮变化
+        /// </summary>
+        /// <param name="get"></param>
         protected override void ModifiedGetdata(bool get)
         {
             btnGet.Text = !get ? "Start" : "Stop";
@@ -220,11 +223,18 @@ namespace AppTest.FormType
             RegisterOrUnRegisterDataRecieve(get);
         }
 
+        /// <summary>
+        /// 获取数据启动/关闭
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDataControl_Click(object sender, EventArgs e)
         {
             DataControl();
         }
-
+        /// <summary>
+        /// 获取数据启动/关闭
+        /// </summary>
         protected virtual void DataControl()
         {
         }

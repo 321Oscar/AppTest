@@ -60,8 +60,8 @@ namespace AppTest.FormType
 
         protected override void ModifiedSignals()
         {
-            vm.ModifiedSignals();
-            ReLoadSignal();
+            if (vm.ModifiedSignals())
+                ReLoadSignal();
         }
 
         protected override void ReLoadSignal()
@@ -137,7 +137,7 @@ namespace AppTest.FormType
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            vm.ShowSignalDetai(this.dataGridView1, e);
+            vm.ShowSignalDetails(this.dataGridView1, e);
         }
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

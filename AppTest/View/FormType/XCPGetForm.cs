@@ -117,8 +117,8 @@ namespace AppTest.FormType
 
         protected override void ModifiedSignals()
         {
-            vm.ModifiedSignals();
-            ReLoadSignal();
+            if(vm.ModifiedSignals())
+                ReLoadSignal();
         }
 
         protected override void SelectedSignalChanged()
@@ -186,14 +186,13 @@ namespace AppTest.FormType
 
         protected override void ShowSignalInfo(DataGridViewCellEventArgs e)
         {
-            vm.ShowSignalDetai(this.dataGridView1, e);
+            vm.ShowSignalDetails(this.dataGridView1, e);
         }
 
         protected override void SetOrSend()
         {
             foreach (var item in vm.XCPSignals.xCPSignalList)
             {
-                ShowLog("");
                 if (!item.WhetherSendOrGet)
                     continue;
                 try

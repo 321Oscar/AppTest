@@ -244,8 +244,8 @@ namespace AppTest.FormType
 
         protected override void ModifiedSignals()
         {
-            vm.ModifiedSignals();
-            ReLoadSignal();
+            if (vm.ModifiedSignals())
+                ReLoadSignal();
         }
 
     }

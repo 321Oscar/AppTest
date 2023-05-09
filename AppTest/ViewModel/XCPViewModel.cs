@@ -11,7 +11,7 @@ namespace AppTest.ViewModel
 
         public XCPModule XcpModule;
 
-        public override void ModifiedSignals()
+        public override bool ModifiedSignals()
         {
             AddNewForm editForm;
             editForm = new AddNewXcpForm(Form.OwnerProject, Form.OwnerProject.Form.Find(x => x.Name == Form.Name));
@@ -19,10 +19,12 @@ namespace AppTest.ViewModel
             {
                 XCPSignals = editForm.FormItem.XCPSingals;
                 //ReLoadSignal();
+                return true;
             }
+            return false;
         }
 
-        public override void ShowSignalDetai(DataGridView dataGridView,DataGridViewCellEventArgs e)
+        public override void ShowSignalDetails(DataGridView dataGridView,DataGridViewCellEventArgs e)
         {
             try
             {

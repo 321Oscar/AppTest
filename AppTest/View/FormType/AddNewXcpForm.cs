@@ -101,15 +101,27 @@ namespace AppTest.FormType
                         LeapMessageBox.Instance.ShowInfo("先选择CAN通道");
                         return;
                     }
-                    var data = XCPModuleManager.GetXCPModule(this.projectItem).GetEventsName(CurrentCanValue);
-                    if (data != null && data.Count > 0)
+                    try
                     {
-                        eventCombobox.DataSource = data;
+                        var data = XCPModuleManager.GetXCPModule(this.projectItem).GetEventsName(CurrentCanValue);
+                        if (data != null && data.Count > 0)
+                        {
+                            eventCombobox.DataSource = data;
+                        }
+                        else
+                        {
+                            LeapMessageBox.Instance.ShowError("未获取到 XCP DAQ 事件通道信息", 20);
+                        }
                     }
-                    else
+                    catch (XCPException xcperr)
                     {
-                        LeapMessageBox.Instance.ShowError("未获取到 XCP DAQ 事件通道信息", 20);
+                        LeapMessageBox.Instance.ShowError(xcperr.Message);
                     }
+                    catch (Exception err)
+                    {
+                        LeapMessageBox.Instance.ShowError(err.Message);
+                    }
+                   
                     break;
                 case (int)FormType.Set://Set 对信号进行筛选，只能选character
                     {

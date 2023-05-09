@@ -371,29 +371,21 @@ namespace AppTest
                     zcan.SaveLog += LogHelper.InfoReceive;
                     USBCanManager.Instance.AddZCan( projectItem, zcan);
                 }
-                
             }
 
             if (CanIsOpen)
             {
-                LeapMessageBox.Instance.ShowInfo(this.Name + "，Can口已经打开成功。");
-                //if (USBCanManager.Instance.Close(projectItem))
-                //{
-                //    //btnStartCan.Text = "Start";
-                //    CanIsOpen = false;
-                //}
+                ShowLog(this.Name + "，Can口已经打开成功。", showtip: true);
             }
             else
             {
                 ///can.open 
                 if (USBCanManager.Instance.Open(projectItem))
                 {
-                    List<int> caninds = new List<int>();
                     foreach (var item in projectItem.CanIndex)
                     {
                         try
                         {
-                            caninds.Add(item.CanChannel);
                             switch ((FormType.DeviceType)projectItem.DeviceType)
                             {
                                 case FormType.DeviceType.VCI_USBCAN_2E_U:
@@ -416,7 +408,7 @@ namespace AppTest
                         }
                         catch (Exception ex)
                         {
-                            LeapMessageBox.Instance.ShowError("Init Can Error：" + ex.Message);
+                            ShowLog("Init Can Error：" + ex.Message, LPLogLevel.Error);
                             continue;
                         }
 
@@ -428,7 +420,7 @@ namespace AppTest
 
                     //启动接收线程
                     this.tslbCanStatus.Text = $"{(FormType.DeviceType)projectItem.DeviceType} [{projectItem.CanIndex.Count}] 已打开 ";
-                    USBCanManager.Instance.StartRecv(projectItem, caninds.ToArray());//caninds
+                    USBCanManager.Instance.StartRecv(projectItem, projectItem.CanIndex.Select(x => x.CanChannel).ToArray());//caninds
                     ShowLog("CAN 数据接收已启动");
 
                     //增加DID读写
@@ -520,19 +512,22 @@ namespace AppTest
                 }
             }
 
-            USBCanManager.Instance.StartRecv(projectItem,new int[] { 0,1});//caninds
+            USBCanManager.Instance.StartRecv(projectItem, projectItem.CanIndex.Select(x => x.CanChannel).ToArray());//caninds
             return res;
         }
 
+        /// <summary>
+        /// 调用UDS库 读取DID，调用后需重新调用开启CAN接收
+        /// </summary>
+        /// <param name="did"></param>
+        /// <param name="result">读取结果，若读取失败则为<see cref="LPCanControl.Model.Global.ReadDIDFail"/></param>
         private void ReadDID(LPCanControl.Model.DIDInfo did,out string result)
         {
             USBCanManager.Instance.CloseRecv(projectItem);//caninds
-            List<int> caninds = new List<int>();
             result = LPCanControl.Model.Global.ReadDIDFail;
             //遍历can口
             foreach (var item in projectItem.CanIndex)
             {
-                caninds.Add(item.CanChannel);
                 if ((FormType.DeviceType)projectItem.DeviceType == FormType.DeviceType.USBCANFD_200U)
                 {
                     result = UDSHelper.ReadDID(currentUpgradeType: UDSHelper.UpGradeIDs[LPCanControl.Model.UpgradeType.MCU],
@@ -552,18 +547,22 @@ namespace AppTest
                 if (result != LPCanControl.Model.Global.ReadDIDFail)
                     break;
             }
-            USBCanManager.Instance.StartRecv(projectItem, caninds.ToArray());//caninds
+            //USBCanManager.Instance.StartRecv(projectItem, projectItem.CanIndex.Select(x=>x.CanChannel).ToArray());//caninds
         }
 
+        /// <summary>
+        /// 调用UDS库 写入DID，调用后需重新开启CAN接收
+        /// </summary>
+        /// <param name="did"></param>
+        /// <param name="val"></param>
+        /// <param name="result">写入成功</param>
         private void WriteDID(LPCanControl.Model.DIDInfo did,string val, out bool result)
         {
             USBCanManager.Instance.CloseRecv(projectItem);//caninds
-            List<int> caninds = new List<int>();
             result = false;
             //遍历can口
             foreach (var item in projectItem.CanIndex)
             {
-                caninds.Add(item.CanChannel);
                 if ((FormType.DeviceType)projectItem.DeviceType == FormType.DeviceType.USBCANFD_200U)
                 {
                     result = UDSHelper.WriteDID(val,
@@ -585,7 +584,7 @@ namespace AppTest
                 if (result)
                     break;
             }
-            USBCanManager.Instance.StartRecv(projectItem, caninds.ToArray());//caninds
+            //USBCanManager.Instance.StartRecv(projectItem, caninds.ToArray());//caninds
         }
 
         private void toolStripButton_DisConnect_Click(object sender, EventArgs e)
@@ -696,14 +695,15 @@ namespace AppTest
         private void XcpModule_OnCMDStatusChanged(object sender, EventArgs args)
         {
             string status = sender.ToString();
-            if (this.InvokeRequired)
-            {
-                this.Invoke(new Action(() => { tslbXCPCmdStatus.Text = $"XCP CMD:{status}"; }));
-            }
-            else
-            {
-                tslbXCPCmdStatus.Text = $"XCP CMD:{status}";
-            }
+            ShowLog($"XCP CMD:{status}");
+            //if (this.InvokeRequired)
+            //{
+            //    this.Invoke(new Action(() => { tslbXCPCmdStatus.Text = $"XCP CMD:{status}"; }));
+            //}
+            //else
+            //{
+            //    tslbXCPCmdStatus.Text = $"XCP CMD:{status}";
+            //}
         }
 
         public void ShowLog(string log, LPLogLevel level = LPLogLevel.Info, bool showtip = false)

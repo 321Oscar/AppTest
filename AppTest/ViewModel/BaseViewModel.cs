@@ -32,9 +32,16 @@ namespace AppTest.ViewModel
 
         public delegate void SetLog(string log,LPLogLevel level = LPLogLevel.Info); 
         public delegate void ModifiedGetState(bool getOrnot);
-
-        public abstract void ModifiedSignals();
-
-        public abstract void ShowSignalDetai(DataGridView dataGridView, DataGridViewCellEventArgs e);
+        /// <summary>
+        /// 修改信号
+        /// </summary>
+        /// <returns></returns>
+        public abstract bool ModifiedSignals();
+        /// <summary>
+        /// 显示信号具体信息
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        /// <param name="e"></param>
+        public abstract void ShowSignalDetails(DataGridView dataGridView, DataGridViewCellEventArgs e);
     }
 }

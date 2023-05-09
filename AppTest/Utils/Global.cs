@@ -226,17 +226,20 @@ namespace AppTest.Helper
          * 3.优化解析dbc
          * 
          * rollingCounter 界面 modifiedSignal方法重写
+         * 
+         * v0.003.08-beta
+         * 读写DID 时，若can0 就能读写，重新开启CAN接收函数时，不会开启CAN1的接收
          */
 
         /// <summary>
         /// 版本号
         /// </summary>
-        public const string SoftVersion = "v10.003.07-beta";
+        public const string SoftVersion = "v10.003.09-beta";
 
         /// <summary>
         /// Protect = 1时，版本号为10.xxx.xx
         /// </summary>
-        public const int Protected = 0;
+        public const int Protected = 1;
 
         #region 图标
         public static System.IntPtr IconHandle_ProjectCenter = (global::AppTest.Properties.Resources.ProjectCenter).GetHicon();

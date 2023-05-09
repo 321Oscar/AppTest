@@ -86,8 +86,8 @@ namespace AppTest.FormType
 
         protected override void ModifiedSignals()
         {
-            vm.ModifiedSignals();
-            ReLoadSignal();
+            if (vm.ModifiedSignals())
+                ReLoadSignal();
         }
 
         protected override void DataControl()
@@ -187,7 +187,7 @@ namespace AppTest.FormType
 
         protected override void ShowSignalInfo(DataGridViewCellEventArgs e)
         {
-            vm.ShowSignalDetai(this.dataGridView1, e);
+            vm.ShowSignalDetails(this.dataGridView1, e);
         }
 
         protected override void SetOrSend()

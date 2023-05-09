@@ -762,7 +762,12 @@ namespace AppTest.Model
         {
 
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="canIndex"></param>
+        /// <exception cref="XCPException"></exception>
+        /// <returns></returns>
         public DAQProperty GetDAQInfo(uint canIndex)
         {
             DAQProperty = null;
@@ -800,7 +805,8 @@ namespace AppTest.Model
         /// <summary>
         /// 获取事件通道信息 DA
         /// </summary>
-        /// <returns></returns>
+        /// <returns>List string</returns>
+        /// <exception cref="XCPException"></exception>
         public List<string> GetEventsName(uint canIndex)
         {
             if (!CheckConnect(canIndex))
@@ -992,6 +998,7 @@ namespace AppTest.Model
         /// </summary>
         /// <param name="signal"></param>
         /// <param name="canIndex"></param>
+        /// <exception cref="XCPException"></exception>
         public void ShortUpload(ref XCPSignal signal, uint canIndex)
         {
             if (!CheckConnect(canIndex))
@@ -1059,14 +1066,16 @@ namespace AppTest.Model
         }
 
         private GetUnlockRes unlockRes;
-        public GetUnlockRes UnlockResponse { get => unlockRes; private set 
+        public GetUnlockRes UnlockResponse
+        {
+            get => unlockRes; private set
             {
                 unlockRes = value;
-                if(this.GetStatusResponse != null)
+                if (this.GetStatusResponse != null)
                 {
                     GetStatusResponse.CurrentResourceProtectionStatus = unlockRes.CurrentResourceProtectionStatus;
                 }
-            } 
+            }
         }
 
         public void UnlockResource(uint resourceCode, uint canIndex)
@@ -1174,6 +1183,8 @@ namespace AppTest.Model
         /// </summary>
         /// <param name="signal"></param>
         /// <param name="canIndex"></param>
+        /// <exception cref="XCPException"></exception>
+        /// <exception cref="USBCANOpenException"></exception>
         public void Upload(ref XCPSignal signal, uint canIndex)
         {
             if (!CheckConnect(canIndex))
@@ -1408,6 +1419,7 @@ namespace AppTest.Model
         /// <param name="resData">接收的数据</param>
         /// <param name="canIndex">调用的CAN通道号</param>
         /// <param name="receiveCount">接收次数</param>
+        /// <exception cref="USBCANOpenException"></exception>
         /// <returns></returns>
         private XCPResponse SendLongCMD(byte[] data, out List<byte[]> resData, uint canIndex, uint receiveCount)
         {

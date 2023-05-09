@@ -19,17 +19,19 @@ namespace AppTest.ViewModel
 
         public List<int> CurrentIDs;
 
-        public override void ModifiedSignals()
+        public override bool ModifiedSignals()
         {
             AddNewForm editForm;
             editForm = new AddNewForm(Form.OwnerProject, Form.OwnerProject.Form.Find(x => x.Name == Form.Name));
             if (editForm.ShowDialog() == DialogResult.OK)
             {
                 DBCSignals = editForm.FormItem.DBCSignals;
+                return true;
             }
+            return false;
         }
 
-        public override void ShowSignalDetai(DataGridView dataGridView, DataGridViewCellEventArgs e)
+        public override void ShowSignalDetails(DataGridView dataGridView, DataGridViewCellEventArgs e)
         {
             try
             {

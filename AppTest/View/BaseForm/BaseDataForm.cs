@@ -306,6 +306,7 @@ namespace AppTest.FormType
         protected virtual void RegisterOrUnRegisterDataRecieve(bool get)
         {
             USBCanManager.Instance.Register(OwnerProject, OnDataReceiveEvent, CanChannel, get);
+            ShowLog($"RegisterOrUnRegisterDataRecieve {get}", LPLogLevel.Debug);
         }
         /// <summary>
         /// Can Channel改变时的事件
@@ -502,6 +503,9 @@ namespace AppTest.FormType
             ModifiedSignals();
         }
 
+        /// <summary>
+        /// 修改信号
+        /// </summary>
         protected virtual void ModifiedSignals()
         {
             //ReLoadSignal();return;

@@ -534,6 +534,8 @@ namespace AppTest.Model
     public class XCPException : Exception
     {
         public XCPException(string msg) : base(msg) { }
+
+        //public XCPException(string msg,) : base(msg) { }
     }
 
     public class XCPModule
@@ -1308,7 +1310,8 @@ namespace AppTest.Model
         /// <param name="data"></param>
         /// <param name="resData"></param>
         /// <param name="canIndex"></param>
-        /// <returns></returns>
+        /// <returns><see cref="XCPResponse"/></returns>
+        /// <exception cref="USBCANOpenException"></exception>
         private XCPResponse SendCMD(byte[] data, out byte[] resData, uint canIndex)
         {
             resData = new byte[1] { 0xFE };
@@ -1430,7 +1433,7 @@ namespace AppTest.Model
                 try
                 {
                     if (!receiveRunning)
-                        this.startReceiveThread(canIndex);
+                        startOrStopRec((int)canIndex, true);
 
                     USBCanManager.Instance.Send(projectItem, (int)canIndex, new CANSendFrame((int)masterid, data), "XCPInfo");
 

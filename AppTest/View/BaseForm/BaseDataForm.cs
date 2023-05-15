@@ -105,7 +105,7 @@ namespace AppTest.FormType
         /// 信号名称；对应控件；
         /// </para>
         /// </summary>
-        public Dictionary<string, SignalInfoUC> SignalUC { get; set; }
+        public Dictionary<DBCSignal, SignalInfoUC> SignalUC { get; set; }
 
         /// <summary>
         /// 所属工程，获取Can Device

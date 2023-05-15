@@ -72,7 +72,7 @@ namespace AppTest.FormType
             //timerList = new List<System.Windows.Forms.Timer>();
             //timerList = new List<System.Threading.Timer>();
             timerList = new List<Thread>();
-            SignalUC = new Dictionary<string, SignalInfoUC>();
+            SignalUC = new Dictionary<DBCSignal, SignalInfoUC>();
             nudCoe.DecimalPlaces = 2;
             metroComboBox_Signals.AutoCompleteSource = AutoCompleteSource.ListItems;
             metroComboBox_Signals.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
@@ -119,7 +119,7 @@ namespace AppTest.FormType
             pnSignals.Controls.Clear();
 
             //保留原有信号的值
-            Dictionary<string, SignalInfoUC> oldSignals = new Dictionary<string, SignalInfoUC>(SignalUC);
+            Dictionary<DBCSignal, SignalInfoUC> oldSignals = new Dictionary<DBCSignal, SignalInfoUC>(SignalUC);
 
             SignalUC.Clear();
             gb.Clear();
@@ -129,16 +129,17 @@ namespace AppTest.FormType
             for (int i = 0; i < Signals.SignalList.Count; i++)
             {
                 SignalInfoUC signalInfoUS = new SignalInfoUC(Signals.SignalList[i], true);
-                signalInfoUS.Name = Signals.SignalList[i].SignalName;
+                string ucKey = Signals.SignalList[i].SignalName + Signals.SignalList[i].MessageID;
+                signalInfoUS.Name = ucKey;
                 minHeigt = signalInfoUS.Height;
                 //signalInfoUS.SetData("0");
                 signalInfoUS.Dock = DockStyle.Top;
-                SignalUC.Add(Signals.SignalList[i].SignalName, signalInfoUS);
+                SignalUC.Add(Signals.SignalList[i], signalInfoUS);
 
                 //保留原有信号的值
-                if (oldSignals.ContainsKey(Signals.SignalList[i].SignalName))
+                if (oldSignals.ContainsKey(Signals.SignalList[i]))
                 {
-                    signalInfoUS.SignalValue = oldSignals[Signals.SignalList[i].SignalName].SignalValue;
+                    signalInfoUS.SignalValue = oldSignals[Signals.SignalList[i]].SignalValue;
                 }
 
                 GroupBox groupBox = gb.Find(x => x.Name == Signals.SignalList[i].MessageID + ";" + Signals.SignalList[i].CycleTime);
@@ -156,21 +157,16 @@ namespace AppTest.FormType
                     gb.Add(groupBox);
                     groupBox.Dock = DockStyle.Top;
                     pnSignals.Controls.Add(groupBox);
-                    FlowLayoutPanel flp = new FlowLayoutPanel();
-                    //Type dgvType = flp.GetType();
-                    //PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
-
-                    //pi.SetValue(flp, true, null);
-                    flp.Dock = DockStyle.Fill;
-                    flp.AutoSize = true;
+                    FlowLayoutPanel flp = new FlowLayoutPanel
+                    {
+                        Dock = DockStyle.Fill,
+                        AutoSize = true
+                    };
                     groupBox.Controls.Add(flp);
                 }
-                foreach (Control item in groupBox.Controls)
+                foreach (FlowLayoutPanel item in groupBox.Controls.OfType<FlowLayoutPanel>())
                 {
-                    if (item is FlowLayoutPanel)
-                    {
-                        item.Controls.Add(signalInfoUS);
-                    }
+                    item.Controls.Add(signalInfoUS);
                 }
             }
 
@@ -488,7 +484,7 @@ namespace AppTest.FormType
             {
                 DBCSignal selectSignal = metroComboBox_Signals.SelectedItem as DBCSignal;
 
-                metroTextBox_CurVal.Text = SignalUC[selectSignal.SignalName].SignalValue;
+                metroTextBox_CurVal.Text = SignalUC[selectSignal].SignalValue;
             }
         }
 
@@ -498,7 +494,7 @@ namespace AppTest.FormType
             {
                 DBCSignal selectSignal = metroComboBox_Signals.SelectedItem as DBCSignal;
 
-                decimal oldValue = Convert.ToDecimal(SignalUC[selectSignal.SignalName].SignalValue);
+                decimal oldValue = Convert.ToDecimal(SignalUC[selectSignal].SignalValue);
 
                 decimal newValue;
 
@@ -531,7 +527,7 @@ namespace AppTest.FormType
                 }
 
                 //newValue = oldValue + nudCoe.Value;
-                SignalUC[selectSignal.SignalName].SignalValue = newValue.ToString();
+                SignalUC[selectSignal].SignalValue = newValue.ToString();
                 cbbSignals_SelectedIndexChanged(null, null);
 
                 //this.btnSetValue_Click(null, null);
@@ -543,7 +539,7 @@ namespace AppTest.FormType
             if (metroComboBox_Signals.SelectedIndex != -1 && !string.IsNullOrEmpty(metroTextBox_CurVal.Text.Trim()))
             {
                 DBCSignal selectSignal = metroComboBox_Signals.SelectedItem as DBCSignal;
-                SignalUC[selectSignal.SignalName].SignalValue = metroTextBox_CurVal.Text.Trim();
+                SignalUC[selectSignal].SignalValue = metroTextBox_CurVal.Text.Trim();
             }
         }
 

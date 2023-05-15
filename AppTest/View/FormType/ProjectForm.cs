@@ -420,31 +420,41 @@ namespace AppTest
 
                     //启动接收线程
                     this.tslbCanStatus.Text = $"{(FormType.DeviceType)projectItem.DeviceType} [{projectItem.CanIndex.Count}] 已打开 ";
-                    USBCanManager.Instance.StartRecv(projectItem, projectItem.CanIndex.Select(x => x.CanChannel).ToArray());//caninds
-                    ShowLog("CAN 数据接收已启动");
 
                     //增加DID读写
-                    if(Global.Protected == 1)
+                    foreach (Control item in Controls)
+                    {
+                        item.Enabled = false;
+                    }
+                    if (Global.Protected == 1)
                     {
                         ShowLog("软件校验中..请等待");
 
-                        foreach (Control item in Controls)
-                        {
-                            item.Enabled = false;
-                        }
-
-                        var res = await Task.Run(CheckAuth);
-
-                        if (res)
+                        if (await Task.Run(CheckAuth))
                         {
                             foreach (Control item in Controls)
                             {
                                 item.Enabled = true;
                             }
+                            ShowLog($"软件校验成功.");
                         }
-
-                        ShowLog($"软件校验{(res ? "成功" : "失败")}");
                     }
+                    else
+                    {
+                        ShowLog("0x0304 写入中...");
+                        await Task.Run(new Action(()=>
+                        {
+                            WriteDID(new LPCanControl.Model.DIDInfo() { Name = "0x0304", DID = 0x0304, Length = 1, DIDType = LPCanControl.Model.DIDType.enc_HEX }, "1", out bool suc);
+                            ShowLog($"write did 0x0304 to 1 {(suc ? "success" : "Fail")}", LPLogLevel.Debug);
+                        }));
+                        foreach (Control item in Controls)
+                        {
+                            item.Enabled = true;
+                        }
+                    }
+
+                    USBCanManager.Instance.StartRecv(projectItem, projectItem.CanIndex.Select(x => x.CanChannel).ToArray());//caninds
+                    ShowLog("CAN 数据接收已启动");
                 }
                 else
                 {

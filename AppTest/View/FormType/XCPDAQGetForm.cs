@@ -105,7 +105,6 @@ namespace AppTest.FormType
         protected override void ModifiedGetdata(bool get)
         {
             metroButtonStart.Text = !get ? "Start" : "Stop";
-            ShowLog("");
             RegisterOrUnRegisterDataRecieve(get);
         }
 

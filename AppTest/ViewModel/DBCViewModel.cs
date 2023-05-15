@@ -57,7 +57,8 @@ namespace AppTest.ViewModel
         public DBCGetViewModel(BaseDataForm form)
         {
             Form = form;
-            
+            this.ShowLog += form.ShowLog;
+
         }
         public DBCGetViewModel(BaseDataForm form, string dbcFilePath) : this(form)
         {

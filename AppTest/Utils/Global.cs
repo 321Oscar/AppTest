@@ -229,17 +229,22 @@ namespace AppTest.Helper
          * 
          * v0.003.08-beta
          * 读写DID 时，若can0 就能读写，重新开启CAN接收函数时，不会开启CAN1的接收
+         * 
+         * v0.003.09-beta
+         * 1.新建dbcform时，同名信号增加判断
+           2.调用cmd窗口不可见
+           3.Rlt界面调整用户控件的key
          */
 
         /// <summary>
         /// 版本号
         /// </summary>
-        public const string SoftVersion = "v10.003.09-beta";
+        public const string SoftVersion = "v0.003.09-beta";
 
         /// <summary>
         /// Protect = 1时，版本号为10.xxx.xx
         /// </summary>
-        public const int Protected = 1;
+        public const int Protected = 0;
 
         #region 图标
         public static System.IntPtr IconHandle_ProjectCenter = (global::AppTest.Properties.Resources.ProjectCenter).GetHicon();

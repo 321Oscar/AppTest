@@ -28,6 +28,7 @@ namespace AppTest.FormType
         public XCPGetForm(FormType formType) : base(formType, ProtocolType.XCP)
         {
             vm = new XCPPollingViewModel(this);
+            vm.VMModifiedGetdata += ModifiedGetdata;
             //vm.IsGetdata = this.IsGetdata;
         }
 
@@ -75,9 +76,15 @@ namespace AppTest.FormType
 
             vm.InitCylceSignals();
 
-            vm.VMModifiedGetdata += ModifiedGetdata;
-
             InitIDAndProtocolCmd();
+
+            HistoryDataUC hduc = new HistoryDataUC();
+            hduc.ProjectName = this.OwnerProject.Name;
+            hduc.FormName = this.Name;
+            hduc.Dock = DockStyle.Fill;
+            metroTabPage2.Controls.Clear();
+            metroTabPage2.Controls.Add(hduc);
+            hduc.ChangeColorTheme(GetColor);
 
             ProjectForm parent = (ProjectForm)this.MdiParent;
             vm.XcpModule = parent.XcpModule;

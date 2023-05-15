@@ -378,7 +378,7 @@ namespace AppTest.FormType
                     {
                         //lbSelectedNode.Items.Add(signal.Text);
                         if (SelectedDbcSignals.FirstOrDefault(x => x.SignalName == signal.Text && x.MessageID == msgID.Text) == null)
-                            SelectedDbcSignals.Add(allSingals.SignalList.Find(x => x.SignalName == signal.Text));
+                            SelectedDbcSignals.Add(allSingals.SignalList.Find(x => x.SignalName == signal.Text && x.MessageID == msgID.Text));
                     }
                 }
             }

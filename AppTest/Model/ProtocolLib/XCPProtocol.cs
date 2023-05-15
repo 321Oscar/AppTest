@@ -1244,6 +1244,7 @@ namespace AppTest.ProtocolLib
                     p.StartInfo.Arguments = ($" -jar {jarPath} -mj -a2l {filePath}");
                     p.StartInfo.RedirectStandardOutput = true;
                     p.StartInfo.UseShellExecute = false;
+                    p.StartInfo.CreateNoWindow = true;
                     p.Start();
                     jsonOutput = p.StandardOutput.ReadToEnd();
                     p.WaitForExit();

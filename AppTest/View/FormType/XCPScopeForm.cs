@@ -27,6 +27,7 @@ namespace AppTest.FormType
             InitializeComponent();
 
             vm = new XCPPollingViewModel(this);
+            vm.ShowLog += ShowLog;
         }
 
         #region override
@@ -221,7 +222,7 @@ namespace AppTest.FormType
             {
                 IsGetdata = false;
                 //ShowLog(ex.Message);
-                LogHelper.Error(this.Name, ex);
+                ShowLog(ex.Message, LPLogLevel.Error);
             }
         }
 

@@ -35,14 +35,16 @@ namespace AppTest.View.UC
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.btnClearLog = new System.Windows.Forms.Button();
             this.cbbLogLevel = new System.Windows.Forms.ComboBox();
             this.lbLogLevel = new System.Windows.Forms.Label();
-            this.btnAddLog = new System.Windows.Forms.Button();
+            this.btnQueryLog = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.querytb = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +85,15 @@ namespace AppTest.View.UC
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader3.Width = 300;
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "debug.png");
+            this.imageList1.Images.SetKeyName(1, "info.png");
+            this.imageList1.Images.SetKeyName(2, "warn.png");
+            this.imageList1.Images.SetKeyName(3, "error.png");
+            // 
             // btnClearLog
             // 
             this.btnClearLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -113,16 +124,16 @@ namespace AppTest.View.UC
             this.lbLogLevel.TabIndex = 3;
             this.lbLogLevel.Text = "Level:";
             // 
-            // btnAddLog
+            // btnQueryLog
             // 
-            this.btnAddLog.Location = new System.Drawing.Point(353, 13);
-            this.btnAddLog.Name = "btnAddLog";
-            this.btnAddLog.Size = new System.Drawing.Size(75, 23);
-            this.btnAddLog.TabIndex = 4;
-            this.btnAddLog.Text = "Test";
-            this.btnAddLog.UseVisualStyleBackColor = true;
-            this.btnAddLog.Visible = false;
-            this.btnAddLog.Click += new System.EventHandler(this.btnAddLog_Click);
+            this.btnQueryLog.Location = new System.Drawing.Point(417, 12);
+            this.btnQueryLog.Name = "btnQueryLog";
+            this.btnQueryLog.Size = new System.Drawing.Size(75, 23);
+            this.btnQueryLog.TabIndex = 4;
+            this.btnQueryLog.Text = "Test";
+            this.btnQueryLog.UseVisualStyleBackColor = true;
+            this.btnQueryLog.Visible = false;
+            this.btnQueryLog.Click += new System.EventHandler(this.btnAddLog_Click);
             // 
             // timer1
             // 
@@ -146,24 +157,35 @@ namespace AppTest.View.UC
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.querytb);
             this.panel1.Controls.Add(this.btnClearLog);
             this.panel1.Controls.Add(this.cbbLogLevel);
             this.panel1.Controls.Add(this.lbLogLevel);
-            this.panel1.Controls.Add(this.btnAddLog);
+            this.panel1.Controls.Add(this.btnQueryLog);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(552, 44);
             this.panel1.TabIndex = 0;
             // 
-            // imageList1
+            // querytb
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "debug.png");
-            this.imageList1.Images.SetKeyName(1, "info.png");
-            this.imageList1.Images.SetKeyName(2, "warn.png");
-            this.imageList1.Images.SetKeyName(3, "error.png");
+            this.querytb.Location = new System.Drawing.Point(311, 14);
+            this.querytb.Name = "querytb";
+            this.querytb.Size = new System.Drawing.Size(100, 21);
+            this.querytb.TabIndex = 5;
+            this.querytb.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(264, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "关键字";
+            this.label1.Visible = false;
             // 
             // LogListview
             // 
@@ -189,10 +211,12 @@ namespace AppTest.View.UC
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.Button btnAddLog;
+        private System.Windows.Forms.Button btnQueryLog;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox querytb;
     }
 }

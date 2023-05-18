@@ -279,6 +279,7 @@
     <Compile Include="Utils\Helper\DBCReadHelper.cs" />
     <Compile Include="Utils\Helper\ExpandMethod.cs" />
     <Compile Include="Utils\Helper\XCPModuleManager.cs" />
+    <Compile Include="Utils\LogUtils\TextBoxBaseAppender.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\DBCViewModel.cs" />
     <Compile Include="ViewModel\HistoryViewModel.cs" />

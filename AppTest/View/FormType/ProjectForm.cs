@@ -442,7 +442,7 @@ namespace AppTest
                     else
                     {
                         ShowLog("0x0304 写入中...");
-                        await Task.Run(new Action(()=>
+                        await Task.Run(new Action(() =>
                         {
                             WriteDID(new LPCanControl.Model.DIDInfo() { Name = "0x0304", DID = 0x0304, Length = 1, DIDType = LPCanControl.Model.DIDType.enc_HEX }, "1", out bool suc);
                             ShowLog($"write did 0x0304 to 1 {(suc ? "success" : "Fail")}", LPLogLevel.Debug);

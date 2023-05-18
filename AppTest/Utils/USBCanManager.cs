@@ -493,7 +493,7 @@ namespace AppTest.Helper
         /// <param name="canindex"></param>
         /// <param name="sendtype"></param>
         /// <returns></returns>
-        internal bool SendTest(ProjectItem project,ref string errorLog, int canindex = 0, byte sendtype = 2)
+        internal bool SendTest(ProjectItem project,ref string errorLog, int canindex = 0, byte sendtype = 0)
         {
             bool isadd = usbCans.TryGetValue(project, out USBCAN usbCan);
             

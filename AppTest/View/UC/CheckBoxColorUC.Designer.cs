@@ -77,24 +77,20 @@ namespace AppTest.FormType
             // 
             // tbSignalData
             // 
-            this.tbSignalData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbSignalData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tbSignalData.Location = new System.Drawing.Point(53, 28);
             this.tbSignalData.Name = "tbSignalData";
             this.tbSignalData.ReadOnly = true;
-            this.tbSignalData.Size = new System.Drawing.Size(196, 21);
+            this.tbSignalData.Size = new System.Drawing.Size(186, 21);
             this.tbSignalData.TabIndex = 3;
             // 
             // metroCheckBox1
             // 
-            this.metroCheckBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.metroCheckBox1.AutoSize = true;
+            this.metroCheckBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroCheckBox1.Location = new System.Drawing.Point(53, 3);
             this.metroCheckBox1.Name = "metroCheckBox1";
-            this.metroCheckBox1.Size = new System.Drawing.Size(196, 19);
+            this.metroCheckBox1.Size = new System.Drawing.Size(186, 19);
             this.metroCheckBox1.Style = MetroFramework.MetroColorStyle.Teal;
             this.metroCheckBox1.TabIndex = 4;
             this.metroCheckBox1.Text = "metroCheckBox1";

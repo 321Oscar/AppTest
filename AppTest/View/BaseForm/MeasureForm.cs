@@ -176,6 +176,7 @@ namespace AppTest.FormType
             cb.UserControlBtnClicked += Cb_CheckedChanged;
             cb.ColorChanged += Cb_ColorChanged;
             this.panelLegend.Controls.Add(cb);
+            panelLegend.Controls.SetChildIndex(cb, 0);
         }
 
         /// <summary>

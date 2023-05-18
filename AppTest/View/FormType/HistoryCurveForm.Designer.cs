@@ -46,6 +46,7 @@ namespace AppTest.FormType
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -245,7 +246,8 @@ namespace AppTest.FormType
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.importToolStripMenuItem});
+            this.importToolStripMenuItem,
+            this.changeXToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(803, 25);
@@ -259,6 +261,12 @@ namespace AppTest.FormType
             this.importToolStripMenuItem.Size = new System.Drawing.Size(60, 21);
             this.importToolStripMenuItem.Text = "Import";
             this.importToolStripMenuItem.Click += new System.EventHandler(this.importToolStripMenuItem_Click);
+            // 
+            // changeXToolStripMenuItem
+            // 
+            this.changeXToolStripMenuItem.Name = "changeXToolStripMenuItem";
+            this.changeXToolStripMenuItem.Size = new System.Drawing.Size(72, 21);
+            this.changeXToolStripMenuItem.Text = "ChangeX";
             // 
             // HistoryCurveForm
             // 
@@ -302,5 +310,6 @@ namespace AppTest.FormType
         private System.Windows.Forms.Button btnAutoSize;
         private System.Windows.Forms.CheckBox cbYZoom;
         private System.Windows.Forms.CheckBox cbXZoom;
+        private System.Windows.Forms.ToolStripMenuItem changeXToolStripMenuItem;
     }
 }

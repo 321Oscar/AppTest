@@ -22,9 +22,11 @@ namespace AppTest.ViewModel
             foreach (var item in XCPSignals.xCPSignalList)
             {
                 item.StrValue = "0";
+                item.TimeStamp = -1;
             }
 
             recieveData = new Dictionary<int, List<byte>>();
+            daqTimeCount = new Dictionary<int, int>();
             DAQList.Clear();
             //根据事件ID排序
             this.XCPSignals.xCPSignalList.Sort((x, y) => { return x.EventID.CompareTo(y.EventID); });
@@ -36,6 +38,7 @@ namespace AppTest.ViewModel
             foreach (var daq in DAQList.DAQs)
             {
                 recieveData.Add(daq.Event_Channel_Number, new List<byte>());
+                daqTimeCount.Add(daq.Event_Channel_Number, 0);
             }
             try
             {
@@ -119,6 +122,12 @@ namespace AppTest.ViewModel
             List<SignalEntity> signalEntities = new List<SignalEntity>();
             SignalEntity entity;
             var datatimeStr = DateTime.Now.ToString(Global.DATETIMEFORMAT);
+            if (signals[0].TimeStamp != -1 && signals[0].TimeStamp - 0x10000 * daqTimeCount[eventIndex] - timestamp > 0)
+            {
+                //时间戳重新开始
+                daqTimeCount[eventIndex]++;
+            }
+            timestamp += 0x10000 * daqTimeCount[eventIndex];
             foreach (var signal in signals)
             {
                 byte size = (byte)signal.Length;
@@ -129,6 +138,7 @@ namespace AppTest.ViewModel
                     {
                         da[i] = data[signal.StartIndex + i + 2];
                     }
+                   
                     signal.StrValue = XCPHelper.DealData4Byte(signal, da);
                 }
                 catch (System.InvalidOperationException errOp)

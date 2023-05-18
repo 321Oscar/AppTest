@@ -34,6 +34,11 @@ namespace AppTest.Model
                 return other.TimeStamp.CompareTo(this.TimeStamp);
             return otherTime.CompareTo(time);
         }
+
+        public object GetValue(string propertyName)
+        {
+            return this.GetType().GetProperty(propertyName).GetValue(this, null);
+        }
     }
 
     /// <summary>

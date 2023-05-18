@@ -2,6 +2,7 @@
 using AppTest.Helper;
 using AppTest.Model;
 using OxyPlot;
+using OxyPlot.Annotations;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using System;
@@ -10,6 +11,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,7 +20,14 @@ namespace AppTest.FormType
 {
     public partial class HistoryCurveForm : BaseForm
     {
+        private const string Value = "DataTime";
         PlotModel plotModel;
+
+        /// <summary>
+        /// X 轴坐标
+        /// </summary>
+        public string XAxes { get; set; } = Value;
+
         public HistoryCurveForm()
         {
             InitializeComponent();
@@ -37,12 +46,20 @@ namespace AppTest.FormType
                 Position = AxisPosition.Bottom,
             });
 
+            //var annotation1 = new LineAnnotation()
+            //{
+            //    Type = LineAnnotationType.Vertical,
+            //    X = 5,
+            //    LineStyle = LineStyle.Dash,
+            //    ClipByXAxis=true,
+            //};
+            //plotModel.Annotations.Add(annotation1);
             //y轴
-            plotModel.Axes.Add(new LinearAxis()
-            {
-                Position = AxisPosition.Left,
-                Angle = 60
-            });
+            //plotModel.Axes.Add(new LinearAxis()
+            //{
+            //    Position = AxisPosition.Left,
+            //    Angle = 60
+            //});
 
             //var controller = new PlotController();
             //controller.UnbindMouseDown(OxyMouseButton.Right);
@@ -58,6 +75,20 @@ namespace AppTest.FormType
             {
                 LeapMessageBox.Instance.ShowInfo("加载完成");
             };
+
+            //load x for entity's int or datetime property
+            Type listType = typeof(SignalEntity);
+            PropertyInfo[] properties = listType.GetProperties();
+
+            foreach (var item in properties)
+            {
+                if (item.Name.Contains(Value) || item.PropertyType == typeof(int) || item.PropertyType == typeof(uint))
+                {
+                    ToolStripMenuItem tsmi = new ToolStripMenuItem(item.Name);
+                    tsmi.Click += Tsmi_Click;
+                    changeXToolStripMenuItem.DropDownItems.Add(tsmi);
+                }
+            }
         }
 
         /// <summary>
@@ -69,21 +100,43 @@ namespace AppTest.FormType
             importToolStripMenuItem.Enabled = isImport;
 
         }
-
+        private IList<SignalEntity> signalEntities;
         public HistoryCurveForm(List<SignalEntity> entities) : this(false)
         {
+            signalEntities = entities;
             AddSeriesByEntity(entities);
-            //绘制数据
-            //foreach (var entity in entities)
-            //{
-            //    var lineSer2 = plotView1.Model.Series.Where(x => x.Title == entity.signalName).ToArray()[0] as LineSeries;
-            //    DateTime date = DateTime.ParseExact(entity.DataTime, Global.DATETIMEFORMAT, System.Globalization.CultureInfo.InvariantCulture);
-            //    lineSer2.Points.Add(new DataPoint(DateTimeAxis.ToDouble(date), Convert.ToDouble(entity.signalValue)));
-            //}
-            //plotModel.InvalidatePlot(true);
-           
 
-            backgroundWorker1.RunWorkerAsync(entities);
+            backgroundWorker1.RunWorkerAsync(signalEntities);
+        }
+
+        /// <summary>
+        /// change x 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Tsmi_Click(object sender, EventArgs e)
+        {
+            if (sender is ToolStripMenuItem item) 
+            {
+                XAxes = item.Text;
+                //clear axes and point
+                plotModel.Axes.Clear();
+                foreach (LineSeries ser in plotModel.Series.OfType<LineSeries>())
+                {
+                    ser.Points.Clear();
+                }
+                //add new bottom axes
+                if (XAxes.Contains(Value))
+                {
+                    plotModel.Axes.Add(new DateTimeAxis() { Position = AxisPosition.Bottom, Title = XAxes });
+                }
+                else
+                {
+                    plotModel.Axes.Add(new LinearAxis() { Position = AxisPosition.Bottom, Title = XAxes });
+                }
+                //add point
+                backgroundWorker1.RunWorkerAsync(signalEntities);
+            }
         }
 
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -100,8 +153,25 @@ namespace AppTest.FormType
             foreach (var entity in entities)
             {
                 var lineSer2 = plotView1.Model.Series.Where(x => x.Title == entity.SignalName).ToArray()[0] as LineSeries;
-                DateTime date = DateTime.ParseExact(entity.DataTime, Global.DATETIMEFORMAT, System.Globalization.CultureInfo.InvariantCulture);
-                lineSer2.Points.Add(new DataPoint(DateTimeAxis.ToDouble(date), Convert.ToDouble(entity.SignalValue)));
+
+                if (XAxes.Contains(Value))
+                {
+                    DateTime date = DateTime.ParseExact(entity.DataTime, Global.DATETIMEFORMAT, System.Globalization.CultureInfo.InvariantCulture);
+                    lineSer2.Points.Add(new DataPoint(DateTimeAxis.ToDouble(date), Convert.ToDouble(entity.SignalValue)));
+                }
+                else
+                {
+                    string val = entity.GetValue(XAxes).ToString();
+                    if (uint.TryParse(val, out uint valint))
+                    {
+                        lineSer2.Points.Add(new DataPoint(valint, Convert.ToDouble(entity.SignalValue)));
+                    }
+                    else
+                    {
+                        lineSer2.Points.Add(new DataPoint(0, Convert.ToDouble(entity.SignalValue)));
+                    }
+                }
+               
             }
             plotModel.InvalidatePlot(true);
         }
@@ -255,8 +325,9 @@ namespace AppTest.FormType
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 var entities = NPIOHelper.ExcelToList<SignalEntity>(openFileDialog.FileName);
+                signalEntities = entities;
                 AddSeriesByEntity(entities);
-                backgroundWorker1.RunWorkerAsync(entities);
+                backgroundWorker1.RunWorkerAsync(signalEntities);
             }
         }
 

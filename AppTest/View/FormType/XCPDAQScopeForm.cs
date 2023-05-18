@@ -30,9 +30,9 @@ namespace AppTest.FormType
             InitializeComponent();
 
             vm = new XCPDAQGetViewModel(this);
-            //plotView1.Model.Axes.Clear();
+            plotView1.Model.Axes.Clear();
 
-            //plotView1.Model.Axes.Add(new LinearAxis() { Position = AxisPosition.Bottom});
+            plotView1.Model.Axes.Add(new LinearAxis() { Position = AxisPosition.Bottom });
         }
 
         protected override void InitSignalUC()
@@ -187,30 +187,31 @@ namespace AppTest.FormType
         {
             sw.Reset();
             sw.Restart();
-            ShowLog("");
             foreach (var item in vm.XCPSignals.xCPSignalList)
             {
+                if (item.TimeStamp == -1)
+                    continue;
                 var lineSer2 = plotView1.Model.Series.Where(x => x.Title == item.SignalName).ToArray()[0] as LineSeries;
-#if DEBUG
-                DateTime dt = DateTime.Now;
-                plotModel.Axes[0].Maximum = DateTimeAxis.ToDouble(dt.AddSeconds(1));
 
-                lineSer2.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dt), Convert.ToDouble(item.StrValue)));
-                plotModel.Axes[0].Maximum = DateTimeAxis.ToDouble(dt.AddSeconds(1));
-#else //使用时间戳作为X轴
+                //DateTime dt = DateTime.Now;
+                //plotModel.Axes[0].Maximum = DateTimeAxis.ToDouble(dt.AddSeconds(1));
+
+                //lineSer2.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dt), Convert.ToDouble(item.StrValue)));
+                //plotModel.Axes[0].Maximum = DateTimeAxis.ToDouble(dt.AddSeconds(1));
+ //使用时间戳作为X轴
                 plotModel.Axes[0].Maximum = item.TimeStamp + 1;
                 if(lineSer2.Points.Count > 0)
                 {
                     ///上一个点的时间戳
                     var perTime = lineSer2.Points[lineSer2.Points.Count - 1].X;
-                    var interval = (item.TimeStamp - perTime);
+                    var interval = item.TimeStamp - perTime;
                     if (interval == 0)//相同时间戳
                         continue;
                     else if(interval < 0)//时间戳重新计数
                     {
                         lineSer2.Points.Clear();
                         lineSer2.Points.Add(new DataPoint(item.TimeStamp, Convert.ToDouble(item.StrValue)));
-                        LogHelper.WriteToOutput(this.Name, $"{item.SignalName} 添加点【{item.TimeStamp},{item.StrValue}】");
+                        ShowLog(this.Name+ $"{item.SignalName} 添加点【{item.TimeStamp},{item.StrValue}】");
                     }
                     else
                     {
@@ -218,19 +219,19 @@ namespace AppTest.FormType
                         for (int i = 0; i < lostPointCount; i++)
                         {
                             lineSer2.Points.Add(DataPoint.Undefined);
-                            LogHelper.WriteToOutput(this.Name, $"{item.SignalName} 丢失点【{perTime + (i+1)*item.CycleTime}】");
+                            ShowLog(this.Name + $"{item.SignalName} 丢失点【{perTime + (i + 1) * item.CycleTime}】", LPLogLevel.Debug);
                         }
-                        lineSer2.Points.Add(new DataPoint(item.TimeStamp, Convert.ToDouble(item.StrValue)));
-                        LogHelper.WriteToOutput(this.Name, $"{item.SignalName} 添加点【{item.TimeStamp},{item.StrValue}】");
-                    }
 
+                        lineSer2.Points.Add(new DataPoint(item.TimeStamp, Convert.ToDouble(item.StrValue)));
+                        ShowLog(this.Name + $"{item.SignalName} 添加点【{item.TimeStamp},{item.StrValue}】", LPLogLevel.Debug);
+                    }
                 }
                 else
                 {
                     lineSer2.Points.Add(new DataPoint(item.TimeStamp, Convert.ToDouble(item.StrValue)));
-                    LogHelper.WriteToOutput(this.Name, $"{item.SignalName} 添加点【{item.TimeStamp},{item.StrValue}】");
+                    ShowLog(this.Name + $"{item.SignalName} 添加点【{item.TimeStamp},{item.StrValue}】", LPLogLevel.Debug);
                 }
-#endif
+
                 if (lineSer2.Points.Count > CurvePointMaxCount)
                 {
                     lineSer2.Points.RemoveAt(0);

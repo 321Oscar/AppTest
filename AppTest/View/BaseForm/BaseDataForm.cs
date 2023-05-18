@@ -360,7 +360,7 @@ namespace AppTest.FormType
             try
             {
                 List<SignalEntity> signalEntities = new List<SignalEntity>();
-                SignalEntity entity;
+                //SignalEntity entity;
                 var datatimeStr = DateTime.Now.ToString(Global.DATETIMEFORMAT);
                 var rx_mails = args.can_msgs;
                 if (null == rx_mails)
@@ -371,23 +371,24 @@ namespace AppTest.FormType
                 foreach (var item in Protocol.MultipYield(rx_mails, Signals.SignalList.Cast<BaseSignal>().ToList()))
                 //foreach (var item in protocol.MultipYeild(rx_mails, Signals))
                 {
-                    //signalUC[item.SignalName].SignalValue = item.StrValue;
-                    entity = new SignalEntity();
-                    entity.DataTime = datatimeStr;
-                    entity.ProjectName = OwnerProject.Name;
-                    entity.FormName = this.Name;
-                    entity.SignalName = item.SignalName;
-                    entity.SignalValue = item.StrValue;
-                    entity.CreatedOn = DateTime.Now.ToString(Global.DATETIMEFORMAT);
-                    signalEntities.Add(entity);
+                    signalEntities.Add(new SignalEntity()
+                    {
+                        DataTime = datatimeStr,
+                        ProjectName = OwnerProject.Name,
+                        FormName = this.Name,
+                        SignalName = item.SignalName,
+                        SignalValue = item.StrValue,
+                        CreatedOn = DateTime.Now.ToString(Global.DATETIMEFORMAT),
+                        CANTimeStamp = item.TimeStamp
+                    });
                 }
 
                 if (signalEntities.Count > 0 && IsSaveData)
                 {
-                    LogHelper.WriteToOutput(this.Name, $"ThreadID:{Thread.CurrentThread.ManagedThreadId };Log:Start Save db.");
+                    //LogHelper.WriteToOutput(this.Name, $"ThreadID:{Thread.CurrentThread.ManagedThreadId };Log:Start Save db.");
                     var dbAsync = await DBHelper.GetDb();
                     var result = await dbAsync.InsertAllAsync(signalEntities);
-                    LogHelper.WriteToOutput(this.Name, $"ThreadID:{Thread.CurrentThread.ManagedThreadId };Log:Save Success，Counter:{result}.");
+                    //LogHelper.WriteToOutput(this.Name, $"ThreadID:{Thread.CurrentThread.ManagedThreadId };Log:Save Success，Counter:{result}.");
                 }
 
                 signalEntities.Clear();

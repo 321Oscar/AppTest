@@ -164,9 +164,9 @@ namespace AppTest.FormType
         /// <param name="signal"></param>
         /// <param name="color"></param>
         /// <param name="index"></param>
-        protected void AddcheckBox(BaseSignal signal, Color color, int index)
+        protected void AddcheckBox(BaseSignal signal, int index)
         {
-            CheckBoxColorUC cb = new CheckBoxColorUC(signal, color);
+            CheckBoxColorUC cb = new CheckBoxColorUC(signal);
             //cb.Name = index.ToString();
             cb.Text = signal.SignalName;
             cb.Tag = signal;
@@ -205,7 +205,7 @@ namespace AppTest.FormType
                     StartPosition = i / (double)Signals.SignalList.Count,
                     EndPosition = (i + 0.8) / (double)Signals.SignalList.Count,
                     AxislineStyle = LineStyle.Solid,
-                    TextColor = OxyColor.FromRgb(255, (byte)i, 0),
+                    TextColor = OxyColor.FromRgb(signal.ColorR, signal.ColorG, signal.ColorB),
                     MajorGridlineStyle = LineStyle.Solid,
                     MinorGridlineStyle = LineStyle.Dot,//MaximumPadding
                     Key = signal.SignalName//$"Y{i}"
@@ -214,7 +214,7 @@ namespace AppTest.FormType
                 //增加曲线
                 var series = new LineSeries()
                 {
-                    Color = OxyColor.FromRgb(255, (byte)i, 0),
+                    Color = OxyColor.FromRgb(signal.ColorR, signal.ColorG, signal.ColorB),
                     StrokeThickness = 1,
                     MarkerSize = 3,
                     MarkerStroke = OxyColors.DarkGreen,
@@ -225,7 +225,7 @@ namespace AppTest.FormType
                 };
 
                 plotModel.Series.Add(series);
-                AddcheckBox(signal, Color.FromArgb(255, (byte)i, 0), i);
+                AddcheckBox(signal, i);
             }
 
             plotModel.InvalidatePlot(true);

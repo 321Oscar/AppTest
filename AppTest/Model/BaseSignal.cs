@@ -19,6 +19,7 @@ namespace AppTest.Model
         private double minimum;
         private double max;
         private bool whetherSendorGet = true;
+     
         /// <summary>
         /// 信号名称
         /// </summary>
@@ -64,6 +65,15 @@ namespace AppTest.Model
                 }
             }
         }
+        /// <summary>
+        /// 信号曲线颜色，在曲线描点功能内使用
+        /// </summary>
+        public byte ColorR { get; set; } = 255;
+        public byte ColorG { get; set; } = 0;
+        public byte ColorB { get; set; } = 0;
+        public uint TimeStamp { get => timeStamp; set => timeStamp = value; }
+
+        private uint timeStamp = 0;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -90,6 +100,13 @@ namespace AppTest.Model
                 return false;
             else
                 return ((BaseSignal)obj).SignalName == this.SignalName;
+        }
+
+        public void ChangeColor(byte colorR, byte colorG, byte colorB)
+        {
+            ColorR = colorR;
+            ColorG = colorG;
+            ColorB = colorB;
         }
 
         public override int GetHashCode()

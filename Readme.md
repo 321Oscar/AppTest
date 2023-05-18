@@ -71,6 +71,9 @@
 | v0.003.05-beta   | 修改XCP数据解析，地址转换等方法 <br/>存储数据按钮放到左下角<br/>DAQGetForm修改颜色<br/>历史数据界面增加复制信号名|  2023-03-15  |
 | v0.003.06-beta   | 修复导入elf文件更新地址 固定更新can0的a2l文件的bug <br/>删除excel格式解析数据<br/>XCP增加sendNkey<br/>XCPDAQ保存信号增加报文时间戳<br/>修改历史记录界面，增加分页|  2023-04-20  |
 | v0.003.07-beta   | 增加日志ListView <br/>优化解析dbc<br/>|  2023-05-08  |
+| v0.003.08-beta   | rollingCounter 界面 modifiedSignal方法重写 <br/>读写DID 时，若can0 就能读写，重新开启CAN接收函数时，不会开启CAN1的接收<br/>|  2023-05-11  |
+| v0.003.09-beta   | 新建dbcform时，同名信号增加判断 <br/>调用cmd窗口不可见<br/>Rlt界面调整用户控件的key|  2023-05-12  |
+| v0.003.10-beta   | 标准版本增加did（0x0304）写入，但不判断成功与否 <br/>dbc get 窗口，测试发送zlgcan使用自收自发导致接收不到数据<br/>xcp daq 时间戳计算方法改变，超出0xffff 后加0x10000<br/>历史数据界面增加更换X轴功能|  2023-05-18  |
 注：该软件使用CAN的驱动版本为 ZLGCAN 2.2.0 ，若打开设备失败则安装对应版本驱动!
 
 ![123](ReadMeImg/image-20211206134506794.png)

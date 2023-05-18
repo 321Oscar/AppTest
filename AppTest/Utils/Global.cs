@@ -234,12 +234,20 @@ namespace AppTest.Helper
          * 1.新建dbcform时，同名信号增加判断
            2.调用cmd窗口不可见
            3.Rlt界面调整用户控件的key
+
+        V0.003.10-beta
+        标准版本增加did（0x0304）写入，但不判断成功与否
+        dbc get 窗口，测试发送zlgcan使用自收自发导致接收不到数据
+        xcp daq 时间戳计算方法改变，超出0xffff 后加0x10000
+        历史数据界面增加更换X轴功能
+        增加scope界面曲线颜色保存
+        dbc信号解析增加can时间戳
          */
 
         /// <summary>
         /// 版本号
         /// </summary>
-        public const string SoftVersion = "v0.003.09-beta";
+        public const string SoftVersion = "v0.003.10-beta";
 
         /// <summary>
         /// Protect = 1时，版本号为10.xxx.xx

@@ -86,7 +86,7 @@ namespace AppTest.FormType
                     StartPosition = i / (double)vm.XCPSignals.xCPSignalList.Count,
                     EndPosition = (i + 0.8) / (double)vm.XCPSignals.xCPSignalList.Count,
                     AxislineStyle = LineStyle.Solid,
-                    TextColor = OxyColor.FromRgb(255, (byte)i, 0),
+                    TextColor = OxyColor.FromRgb(signal.ColorR, signal.ColorG, signal.ColorB),
                     MajorGridlineStyle = LineStyle.Solid,
                     MinorGridlineStyle = LineStyle.Dot,//MaximumPadding
                     Key = signal.SignalName,//$"Y{i}"
@@ -96,7 +96,7 @@ namespace AppTest.FormType
                 //增加曲线
                 var series = new LineSeries()
                 {
-                    Color = OxyColor.FromRgb(255, (byte)i, 0),
+                    Color = OxyColor.FromRgb(signal.ColorR, signal.ColorG, signal.ColorB),
                     StrokeThickness = 1,
                     MarkerSize = 3,
                     MarkerStroke = OxyColors.DarkGreen,
@@ -110,7 +110,7 @@ namespace AppTest.FormType
             };
 
                 plotModel.Series.Add(series);
-                AddcheckBox(signal, Color.FromArgb(255, (byte)i, 0), i);
+                AddcheckBox(signal, i);
             }
 
             plotModel.InvalidatePlot(true);

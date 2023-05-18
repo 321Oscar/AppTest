@@ -177,6 +177,7 @@ namespace AppTest.ProtocolLib
 
                         double tmp_value = (double)((double)tmp * (double)signal.Factor + signal.Offset);
                         signal.StrValue = tmp_value.ToString("f2");
+                        signal.TimeStamp = item.TimeStampInt;
                         yield return signal;
                     }
                 }

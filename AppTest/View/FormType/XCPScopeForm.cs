@@ -105,7 +105,7 @@ namespace AppTest.FormType
                 };
 
                 plotModel.Series.Add(series);
-                AddcheckBox(signal, Color.FromArgb(255, (byte)i, 0), i);
+                AddcheckBox(signal, i);
             }
 
             plotModel.InvalidatePlot(true);

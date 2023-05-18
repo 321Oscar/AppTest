@@ -22,9 +22,9 @@ namespace AppTest.FormType
         /// 对应曲线图的线条颜色
         /// </summary>
         private Color color;
-        private BaseSignal dBCSignal;
+        private BaseSignal signal;
         private string signalName;
-        public BaseSignal DBCSignal { get => dBCSignal;private set => dBCSignal = value; }
+        public BaseSignal Signal { get => signal; private set => signal = value; }
         /// <summary>
         /// 是否显示
         /// </summary>
@@ -34,8 +34,8 @@ namespace AppTest.FormType
         {
             get
             {
-                if (DBCSignal != null)
-                    return DBCSignal.SignalName;
+                if (Signal != null)
+                    return Signal.SignalName;
                 else { return signalName; }
             }
             set => signalName = value;
@@ -69,26 +69,26 @@ namespace AppTest.FormType
         /// </summary>
         public Color Color { get => color; set => color = value; }
 
-        public CheckBoxColorUC(BaseSignal dBCSignal, Color color)
+        public CheckBoxColorUC(BaseSignal signal)
         {
             InitializeComponent();
-            this.Name = dBCSignal.ToString();
-            DBCSignal = dBCSignal;
+            this.Name = signal.ToString();
+            Signal = signal;
             this.AutoScaleMode = AutoScaleMode.Dpi;
-            this.metroCheckBox1.Text = dBCSignal.ToString();
+            this.metroCheckBox1.Text = signal.ToString();
             this.metroCheckBox1.Checked = true;
             //this.cbSignalName.Text = DBCSignal.SignalName;
             //this.cbSignalName.Checked = true;
-            this.panelColor.BackColor = color;
+            this.panelColor.BackColor = Color.FromArgb(signal.ColorR,signal.ColorG, signal.ColorB);
             ToolTip tTip = new ToolTip();
-            tTip.SetToolTip(metroCheckBox1, DBCSignal.SignalName);
-            tTip.SetToolTip(panelColor, DBCSignal.SignalName);
+            tTip.SetToolTip(metroCheckBox1, Signal.SignalName);
+            tTip.SetToolTip(panelColor, Signal.SignalName);
 
             this.OnSignalValueChange += CheckBoxColorUC_OnSignalValueChange;
 
-            var threadSafeModel = new SynchronizedNotifyPropertyChanged<BaseSignal>(dBCSignal, this);
+            var threadSafeModel = new SynchronizedNotifyPropertyChanged<BaseSignal>(signal, this);
             tbSignalData.DataBindings.Clear();
-            tbSignalData.DataBindings.Add("Text", threadSafeModel, nameof(DBCSignal.StrValue), false, DataSourceUpdateMode.OnPropertyChanged, "0");
+            tbSignalData.DataBindings.Add("Text", threadSafeModel, nameof(Signal.StrValue), false, DataSourceUpdateMode.OnPropertyChanged, "0");
         }
 
         public CheckBoxColorUC(string name, Color color)
@@ -147,6 +147,7 @@ namespace AppTest.FormType
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
                 this.Color = colorDialog.Color;
+                Signal.ChangeColor(colorDialog.Color.R, colorDialog.Color.G, colorDialog.Color.B);
                 panelColor.BackColor = Color;
                 if (ColorChanged != null)
                 {

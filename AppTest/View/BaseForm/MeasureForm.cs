@@ -207,9 +207,13 @@ namespace AppTest.FormType
                     AxislineStyle = LineStyle.Solid,
                     TextColor = OxyColor.FromRgb(signal.ColorR, signal.ColorG, signal.ColorB),
                     MajorGridlineStyle = LineStyle.Solid,
-                    MinorGridlineStyle = LineStyle.Dot,//MaximumPadding
-                    Key = signal.SignalName//$"Y{i}"
-                }); 
+                    MinorGridlineStyle = LineStyle.Dot,
+                    Key = signal.SignalName,//$"Y{i}"
+                                            //Unit = signal.Unit,//单位
+                                            //Angle = 60,//旋转角度
+                                            // PositionTier = i,//离数据的距离，值越大，离得越远
+                    IntervalLength = 10,
+                });
 
                 //增加曲线
                 var series = new LineSeries()

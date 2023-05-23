@@ -66,6 +66,43 @@ namespace AppTest.FormType
             //controller.BindMouseDown(OxyMouseButton.Left, PlotCommands.PanAt);
             //plotView1.Controller = controller;
 
+            #region RectangleAnnotation
+            //var range = new RectangleAnnotation { Fill = OxyColor.FromAColor(120, OxyColors.SkyBlue), MinimumX = 0, MaximumX = 0 };
+            //plotModel.Annotations.Add(range);
+
+            //double startx = double.NaN;
+
+            //plotModel.MouseDown += (s, e) =>
+            //{
+            //    if (e.ChangedButton == OxyMouseButton.Left)
+            //    {
+            //        startx = range.InverseTransform(e.Position).X;
+            //        range.MinimumX = startx;
+            //        range.MaximumX = startx;
+            //        plotModel.InvalidatePlot(true);
+            //        e.Handled = true;
+            //    }
+            //};
+            //plotModel.MouseMove += (s, e) =>
+            //{
+            //    if (!double.IsNaN(startx))
+            //    {
+            //        var x = range.InverseTransform(e.Position).X;
+            //        range.MinimumX = Math.Min(x, startx);
+            //        range.MaximumX = Math.Max(x, startx);
+            //        range.Text = string.Format("{0:0.00}", range.MaximumX - range.MinimumX);
+            //        plotModel.Subtitle = string.Format("Integrating from {0:0.00} to {1:0.00}", range.MinimumX, range.MaximumX);
+            //        plotModel.InvalidatePlot(true);
+            //        e.Handled = true;
+            //    }
+            //};
+
+            //plotModel.MouseUp += (s, e) =>
+            //{
+            //    startx = double.NaN;
+            //};
+            #endregion
+
             plotView1.Model = plotModel;
             backgroundWorker1.DoWork += BackgroundWorker1_DoWork;
             //backgroundWorker1.DoWork += (o, ea) => {

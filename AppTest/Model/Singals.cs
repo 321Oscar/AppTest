@@ -24,17 +24,4 @@ namespace AppTest.Model
         }
     }
 
-    /// <summary>
-    /// 暂定
-    /// </summary>
-    public class DAQSignals
-    {
-        public List<DAQSignal> daqSignalList;
-
-        public DAQSignals()
-        {
-            daqSignalList = new List<DAQSignal>();
-        }
-    }
-
 }

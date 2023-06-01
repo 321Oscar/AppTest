@@ -214,7 +214,7 @@ namespace AppTest
             this.logToolStripMenuItem.CheckOnClick = true;
             this.logToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.logToolStripMenuItem.Name = "logToolStripMenuItem";
-            this.logToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.logToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.logToolStripMenuItem.Text = "Log";
             this.logToolStripMenuItem.ToolTipText = "日志窗口";
             this.logToolStripMenuItem.Click += new System.EventHandler(this.logToolStripMenuItem_Click);
@@ -243,10 +243,10 @@ namespace AppTest
             // logListview1
             // 
             this.logListview1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.logListview1.Location = new System.Drawing.Point(0, 378);
+            this.logListview1.Location = new System.Drawing.Point(0, 415);
             this.logListview1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.logListview1.Name = "logListview1";
-            this.logListview1.Size = new System.Drawing.Size(777, 183);
+            this.logListview1.Size = new System.Drawing.Size(777, 146);
             this.logListview1.TabIndex = 3;
             // 
             // contextMenuStrip1
@@ -261,7 +261,7 @@ namespace AppTest
             this.logViewToolStripMenuItem.Checked = true;
             this.logViewToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.logViewToolStripMenuItem.Name = "logViewToolStripMenuItem";
-            this.logViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.logViewToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.logViewToolStripMenuItem.Text = "LogView";
             this.logViewToolStripMenuItem.Click += new System.EventHandler(this.logViewToolStripMenuItem_Click);
             // 
@@ -278,7 +278,6 @@ namespace AppTest
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ProjectForm";
             this.Text = "ProjectForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

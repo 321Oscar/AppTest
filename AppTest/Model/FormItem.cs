@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AppTest.Model
 {
     public class FormItem : IComparable<FormItem>
     {
         /// <summary>
-        /// 
+        /// 名称
         /// </summary>
         public string Name { get; set; }
         /// <summary>
-        /// 
+        /// 类型 <see cref="AppTest.FormType.FormType"/>
         /// </summary>
         public int FormType { get; set; }
         /// <summary>
@@ -22,8 +23,6 @@ namespace AppTest.Model
         public DBCSignals DBCSignals { get; set; }
 
         public XCPSignals XCPSingals { get; set; }
-
-        public DAQSignals DAQSignals { get; set; }
 
         /// <summary>
         /// 窗口是否打开
@@ -39,6 +38,10 @@ namespace AppTest.Model
         public int LocationY { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+        /// <summary>
+        /// Get/Set 窗口显示的列索引
+        /// </summary>
+        public List<int> ShowColumnIndexes { get; set; }
 
         public int CompareTo(FormItem other)
         {

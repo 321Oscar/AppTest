@@ -64,7 +64,7 @@ namespace AppTest.FormType
             InitializeComponent();
 
             base.SaveDataVisible = false;
-            base.metroPanelMain.Controls.Add(this.tableLayoutPanel1);
+           
             this.FormType = FormType.RollingCounter;
 
             //this.OnCanChannelChange += DataForm_OnCanChannelChange;

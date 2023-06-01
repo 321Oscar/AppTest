@@ -36,12 +36,10 @@ namespace AppTest.FormType
             this.autoSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.isSaveDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mDIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
-            this.metroPanelMain = new MetroFramework.Controls.MetroPanel();
+            this.panelContent = new System.Windows.Forms.Panel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.contextMenuStrip1.SuspendLayout();
-            this.tableLayoutPanelMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -80,28 +78,15 @@ namespace AppTest.FormType
             resources.ApplyResources(this.mDIToolStripMenuItem, "mDIToolStripMenuItem");
             this.mDIToolStripMenuItem.Click += new System.EventHandler(this.mDIToolStripMenuItem_Click);
             // 
+            // panelContent
+            // 
+            resources.ApplyResources(this.panelContent, "panelContent");
+            this.panelContent.Name = "panelContent";
+            // 
             // statusStrip1
             // 
             resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
-            // 
-            // tableLayoutPanelMain
-            // 
-            resources.ApplyResources(this.tableLayoutPanelMain, "tableLayoutPanelMain");
-            this.tableLayoutPanelMain.Controls.Add(this.statusStrip1, 0, 1);
-            this.tableLayoutPanelMain.Controls.Add(this.metroPanelMain, 0, 0);
-            this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
-            // 
-            // metroPanelMain
-            // 
-            resources.ApplyResources(this.metroPanelMain, "metroPanelMain");
-            this.metroPanelMain.HorizontalScrollbarBarColor = true;
-            this.metroPanelMain.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroPanelMain.HorizontalScrollbarSize = 14;
-            this.metroPanelMain.Name = "metroPanelMain";
-            this.metroPanelMain.VerticalScrollbarBarColor = true;
-            this.metroPanelMain.VerticalScrollbarHighlightOnWheel = false;
-            this.metroPanelMain.VerticalScrollbarSize = 12;
             // 
             // BaseDataForm
             // 
@@ -109,7 +94,8 @@ namespace AppTest.FormType
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ContextMenuStrip = this.contextMenuStrip1;
-            this.Controls.Add(this.tableLayoutPanelMain);
+            this.Controls.Add(this.panelContent);
+            this.Controls.Add(this.statusStrip1);
             this.Name = "BaseDataForm";
             this.ShowIcon = false;
             this.Style = MetroFramework.MetroColorStyle.Teal;
@@ -122,9 +108,8 @@ namespace AppTest.FormType
             this.Resize += new System.EventHandler(this.BaseForm_Resize);
             this.StyleChanged += new System.EventHandler(this.BaseForm_SizeChanged);
             this.contextMenuStrip1.ResumeLayout(false);
-            this.tableLayoutPanelMain.ResumeLayout(false);
-            this.tableLayoutPanelMain.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -134,10 +119,9 @@ namespace AppTest.FormType
         private System.Windows.Forms.ToolStripMenuItem addSignalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autoSizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem isSaveDataToolStripMenuItem;
-        protected System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolStripMenuItem mDIToolStripMenuItem;
-        protected MetroFramework.Controls.MetroPanel metroPanelMain;
-        public System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
+        public System.Windows.Forms.Panel panelContent;
+        public System.Windows.Forms.StatusStrip statusStrip1;
     }
 }

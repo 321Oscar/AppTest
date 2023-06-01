@@ -40,8 +40,7 @@ namespace AppTest.ViewModel
         /// <summary>
         /// 显示信号具体信息
         /// </summary>
-        /// <param name="dataGridView"></param>
-        /// <param name="e"></param>
-        public abstract void ShowSignalDetails(DataGridView dataGridView, DataGridViewCellEventArgs e);
+        /// <param name="dataGridrow"></param>
+        public abstract void ShowSignalDetails(DataGridViewRow dataGridrow);
     }
 }

@@ -31,7 +31,7 @@ namespace AppTest.FormType
 
             base.MDIModeVisible = false;
 
-            this.metroPanelMain.Controls.Add(this.tableLayoutPanel1);
+           
 
             InitStateStrip();
 
@@ -136,7 +136,7 @@ namespace AppTest.FormType
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            vm.ShowSignalDetails(this.dataGridView1, e);
+            vm.ShowSignalDetails(this.dataGridView1.Rows[e.RowIndex]);
         }
 
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

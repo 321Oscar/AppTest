@@ -269,7 +269,7 @@ namespace AppTest.FormType
         }
 
         #region -- virtual --
-
+       
         public void ShowAndLoad()
         {
             if (FormItem != null)
@@ -365,7 +365,7 @@ namespace AppTest.FormType
                 var rx_mails = args.can_msgs;
                 if (null == rx_mails)
                 {
-                    ShowLog("接收数据错误。", LPLogLevel.Warn);
+                    ShowLog(this.Name + "未接收到报文", LPLogLevel.Warn);
                 }
 
                 foreach (var item in Protocol.MultipYield(rx_mails, Signals.SignalList.Cast<BaseSignal>().ToList()))

@@ -50,6 +50,7 @@ namespace AppTest.FormType
             this.tableLayoutPanel1.SuspendLayout();
             this.plSend.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCoe)).BeginInit();
+            base.panelContent.Controls.Add(this.tableLayoutPanel1);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 

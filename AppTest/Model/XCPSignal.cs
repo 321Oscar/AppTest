@@ -73,21 +73,4 @@
         /// </summary>
         public int TimeStamp { get; set; }
     }
-
-    public class DAQSignal : XCPSignal
-    {
-        /// <summary>
-        /// 标识号
-        /// </summary>
-        public int DAQID { get; set; }
-        /// <summary>
-        /// 事件通道编号
-        /// </summary>
-        public int EventID { get; set; }
-        /// <summary>
-        /// 事件名称
-        /// </summary>
-        public string EventName { get; set; }
-    }
-
 }

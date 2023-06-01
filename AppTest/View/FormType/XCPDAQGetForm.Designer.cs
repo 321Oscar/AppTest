@@ -55,6 +55,7 @@ namespace AppTest.FormType
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.metroButtonStart = new MetroFramework.Controls.MetroButton();
+            this.panelContent.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
@@ -62,6 +63,11 @@ namespace AppTest.FormType
             ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // panelContent
+            // 
+            this.panelContent.Controls.Add(this.tableLayoutPanel1);
+            this.panelContent.Size = new System.Drawing.Size(608, 465);
             // 
             // tableLayoutPanel1
             // 
@@ -75,7 +81,7 @@ namespace AppTest.FormType
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(579, 309);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(608, 465);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // metroTabControl1
@@ -86,7 +92,7 @@ namespace AppTest.FormType
             this.metroTabControl1.Location = new System.Drawing.Point(3, 103);
             this.metroTabControl1.Name = "metroTabControl1";
             this.metroTabControl1.SelectedIndex = 0;
-            this.metroTabControl1.Size = new System.Drawing.Size(573, 203);
+            this.metroTabControl1.Size = new System.Drawing.Size(602, 359);
             this.metroTabControl1.TabIndex = 2;
             this.metroTabControl1.UseSelectable = true;
             // 
@@ -98,7 +104,7 @@ namespace AppTest.FormType
             this.metroTabPage1.HorizontalScrollbarSize = 10;
             this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(565, 161);
+            this.metroTabPage1.Size = new System.Drawing.Size(594, 317);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "实时数据";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
@@ -137,7 +143,7 @@ namespace AppTest.FormType
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(565, 161);
+            this.dataGridView1.Size = new System.Drawing.Size(594, 317);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
@@ -286,7 +292,7 @@ namespace AppTest.FormType
             this.metroTabPage2.HorizontalScrollbarSize = 10;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(494, 214);
+            this.metroTabPage2.Size = new System.Drawing.Size(500, 244);
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "历史数据";
             this.metroTabPage2.VerticalScrollbarBarColor = true;
@@ -299,7 +305,7 @@ namespace AppTest.FormType
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(573, 94);
+            this.groupBox1.Size = new System.Drawing.Size(602, 94);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "DAQ Control";
@@ -318,9 +324,10 @@ namespace AppTest.FormType
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(625, 400);
+            this.ClientSize = new System.Drawing.Size(648, 526);
             this.Name = "XCPDAQGetForm";
             this.Text = "XCPDAQForm";
+            this.panelContent.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
@@ -328,6 +335,7 @@ namespace AppTest.FormType
             ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

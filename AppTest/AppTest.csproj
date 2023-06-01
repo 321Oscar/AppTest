@@ -563,6 +563,9 @@
     <EmbeddedResource Include="View\BaseForm\BaseDataForm.resx">
       <DependentUpon>BaseDataForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\FormType\DBCGetForm.resx">
+      <DependentUpon>DBCGetForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormType\LicenseForm.resx">
       <DependentUpon>LicenseForm.cs</DependentUpon>
     </EmbeddedResource>

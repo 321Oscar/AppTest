@@ -1247,10 +1247,19 @@ namespace AppTest.ProtocolLib
                     p.StartInfo.CreateNoWindow = true;
                     p.Start();
                     jsonOutput = p.StandardOutput.ReadToEnd();
+                    if (string.IsNullOrEmpty(jsonOutput))
+                    {
+                        jsonOutput = p.StandardError.ReadToEnd();
+                    }
                     p.WaitForExit();
                 });
 
                 var a2l = Asap2File.FromJson(jsonOutput);
+
+                if(a2l == null)
+                {
+                    throw new Exception(jsonOutput);
+                }
 
                 foreach (var module in a2l.Project.Modules)
                 {

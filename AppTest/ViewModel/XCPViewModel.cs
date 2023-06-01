@@ -24,13 +24,11 @@ namespace AppTest.ViewModel
             return false;
         }
 
-        public override void ShowSignalDetails(DataGridView dataGridView,DataGridViewCellEventArgs e)
+        public override void ShowSignalDetails(DataGridViewRow row)
         {
             try
             {
-                if (e.RowIndex < 0)
-                    return;
-                var signal = dataGridView.Rows[e.RowIndex].DataBoundItem as XCPSignal;
+                var signal = row.DataBoundItem as XCPSignal;
                 SignalItemForm<XCPSignal> siF = new SignalItemForm<XCPSignal>(signal, signal.SignalName);
                 siF.Show();
             }

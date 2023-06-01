@@ -41,7 +41,7 @@ namespace AppTest.FormType
         {
             InitializeComponent();
 
-            this.metroPanelMain.Controls.Add(metroTabControl1);
+           
             //metroTabControl1.Dock = DockStyle.Fill;
             metroTabControl1.Style = MetroFramework.MetroColorStyle.Teal;
             btnCheckOther.BackColor = ScopeColor;
@@ -439,15 +439,13 @@ namespace AppTest.FormType
         /// <param name="sender"></param>
         protected virtual async void GetDataTimer_Elapsed(object sender)
         {
-
             try
             {
                 var date = DateTime.Now;
                 List<SignalEntity> signalEntities = new List<SignalEntity>();
                 var datatimeStr = DateTime.Now.ToString(Global.DATETIMEFORMAT);
                 SignalEntity entity;
-#if DEBUG
-                //debug 生成数据
+
                 var rx_mails = USBCanManager.Instance.Receive(OwnerProject, CurrentIDs.ToArray(), CanChannel, $"[{this.FormType}] [{this.Name}]");
                 if (rx_mails == null || rx_mails.Length == 0)
                 {
@@ -464,59 +462,8 @@ namespace AppTest.FormType
                     entity.SignalValue = item.StrValue;
                     entity.CreatedOn = DateTime.Now.ToString(Global.DATETIMEFORMAT);
                     signalEntities.Add(entity);
-
-                    //signalsCurrentQueue.Enqueue(entity);
                 }
 
-                //foreach (var item in Signals.Signal)
-                //{
-                //    //从Can口中取数据，并解析
-                //    //dt.Columns[item.SignalName] = 
-                //    string value = r.Next(2, 2000).ToString();
-
-                //    //signalUC[item.SignalName].SetData(data);
-                //    entity = new SignalEntity();
-                //    entity.DataTime = datatimeStr;
-                //    entity.ProjectName = OwnerProject.Name;
-                //    entity.FormName = this.Name;
-                //    entity.SignalName = item.SignalName;
-                //    entity.SignalValue = value;
-                //    entity.CreatedOn = DateTime.Now.ToString(Global.DATETIMEFORMAT);
-                //    signalEntities.Add(entity);
-                    
-                //    signalsCurrentQueue.Enqueue(entity);
-
-                //    LogHelper.WriteToOutput(this.Name, $"缓存数量-{signalsCurrentQueue.Count}");
-                //    //var lineSer2 = plotView1.Model.Series.Where(x => x.Title == item.SignalName).ToArray()[0] as LineSeries;
-                //    //lineSer2.Points.Add(new DataPoint(DateTimeAxis.ToDouble(date), Convert.ToDouble(value)));
-                //    //if (lineSer2.Points.Count > 200)
-                //    //{
-                //    //    lineSer2.Points.RemoveAt(0);
-                //    //}
-
-                //}
-#else
-
-                CAN_msg[] rx_mails = USBCanManager.Instance.Receive(OwnerProject,CurrentIDs.ToArray(), CanChannel, $"[{this.FormType}] [{this.Name}]");
-                if (rx_mails == null || rx_mails.Length == 0)
-                {
-                    return;
-                }
-                var data = Protocol.Multip(rx_mails, Signals);
-                foreach (var item in data)
-                {
-                    entity = new SignalEntity();
-                    entity.DataTime = datatimeStr;
-                    entity.ProjectName = OwnerProject.Name;
-                    entity.FormName = this.Name;
-                    entity.SignalName = item.Key.SignalName;
-                    entity.SignalValue = item.Value;
-                    entity.CreatedOn = DateTime.Now.ToString(Global.DATETIMEFORMAT);
-                    signalEntities.Add(entity);
-
-                    signalsCurrentQueue.Enqueue(entity);
-                }
-#endif
                 if (signalEntities.Count > 0 && base.IsSaveData)
                 {
                     var dbAsync = await DBHelper.GetDb();

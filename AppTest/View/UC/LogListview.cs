@@ -130,6 +130,7 @@ namespace AppTest.View.UC
         {
            // lvLog.Columns[2].Width = lvLog.ClientSize.Width - lvLog.Columns[0].Width - lvLog.Columns[1].Width -10;
         }
+
     }
 
 }

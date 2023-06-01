@@ -30,12 +30,19 @@ namespace AppTest.FormType
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.WhetherSendOrGet = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.messageIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.signalNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.strValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnStep = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnAdd = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ColumnReduce = new System.Windows.Forms.DataGridViewButtonColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.dBCSignalBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dBCSignalBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -61,12 +68,8 @@ namespace AppTest.FormType
             this.gbGetControls = new System.Windows.Forms.GroupBox();
             this.nudTimerInterval = new System.Windows.Forms.NumericUpDown();
             this.btnGet = new System.Windows.Forms.Button();
-            this.cbbSignals = new System.Windows.Forms.ComboBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label1 = new System.Windows.Forms.Label();
-            this.metroPanelMain.Controls.Add(this.tableLayoutPanel1);
+            this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource)).BeginInit();
@@ -78,17 +81,19 @@ namespace AppTest.FormType
             ((System.ComponentModel.ISupportInitialize)(this.nudStep)).BeginInit();
             this.gbGetControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudTimerInterval)).BeginInit();
-            this.tabControl1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // panelContent
+            // 
+            this.panelContent.Controls.Add(this.tableLayoutPanel1);
+            this.panelContent.Location = new System.Drawing.Point(17, 60);
+            this.panelContent.Size = new System.Drawing.Size(475, 458);
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -98,15 +103,19 @@ namespace AppTest.FormType
             this.messageIDDataGridViewTextBoxColumn,
             this.customNameDataGridViewTextBoxColumn,
             this.signalNameDataGridViewTextBoxColumn,
-            this.strValueDataGridViewTextBoxColumn});
+            this.strValueDataGridViewTextBoxColumn,
+            this.columnStep,
+            this.ColumnAdd,
+            this.ColumnReduce});
             this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.DataSource = this.dBCSignalBindingSource1;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 25;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(455, 275);
+            this.dataGridView1.Size = new System.Drawing.Size(461, 166);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
@@ -118,6 +127,7 @@ namespace AppTest.FormType
             this.WhetherSendOrGet.HeaderText = "参与收发";
             this.WhetherSendOrGet.MinimumWidth = 8;
             this.WhetherSendOrGet.Name = "WhetherSendOrGet";
+            this.WhetherSendOrGet.Visible = false;
             // 
             // messageIDDataGridViewTextBoxColumn
             // 
@@ -126,6 +136,7 @@ namespace AppTest.FormType
             this.messageIDDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.messageIDDataGridViewTextBoxColumn.Name = "messageIDDataGridViewTextBoxColumn";
             this.messageIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.messageIDDataGridViewTextBoxColumn.Visible = false;
             // 
             // customNameDataGridViewTextBoxColumn
             // 
@@ -137,18 +148,53 @@ namespace AppTest.FormType
             // 
             // signalNameDataGridViewTextBoxColumn
             // 
+            this.signalNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.signalNameDataGridViewTextBoxColumn.DataPropertyName = "SignalName";
             this.signalNameDataGridViewTextBoxColumn.HeaderText = "SignalName";
             this.signalNameDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.signalNameDataGridViewTextBoxColumn.Name = "signalNameDataGridViewTextBoxColumn";
             this.signalNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.signalNameDataGridViewTextBoxColumn.Width = 103;
             // 
             // strValueDataGridViewTextBoxColumn
             // 
             this.strValueDataGridViewTextBoxColumn.DataPropertyName = "StrValue";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.strValueDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.strValueDataGridViewTextBoxColumn.HeaderText = "StrValue";
             this.strValueDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.strValueDataGridViewTextBoxColumn.Name = "strValueDataGridViewTextBoxColumn";
+            // 
+            // columnStep
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.NullValue = "1";
+            this.columnStep.DefaultCellStyle = dataGridViewCellStyle2;
+            this.columnStep.HeaderText = "Step";
+            this.columnStep.Name = "columnStep";
+            this.columnStep.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnStep.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.columnStep.ToolTipText = "步长";
+            // 
+            // ColumnAdd
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.NullValue = "加";
+            this.ColumnAdd.DefaultCellStyle = dataGridViewCellStyle3;
+            this.ColumnAdd.HeaderText = "Add";
+            this.ColumnAdd.Name = "ColumnAdd";
+            this.ColumnAdd.Text = "Add";
+            this.ColumnAdd.ToolTipText = "增加";
+            // 
+            // ColumnReduce
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.NullValue = "减";
+            this.ColumnReduce.DefaultCellStyle = dataGridViewCellStyle4;
+            this.ColumnReduce.HeaderText = "Reduce";
+            this.ColumnReduce.Name = "ColumnReduce";
+            this.ColumnReduce.Text = "Reduce";
+            this.ColumnReduce.ToolTipText = "减少";
             // 
             // contextMenuStrip1
             // 
@@ -179,18 +225,17 @@ namespace AppTest.FormType
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(469, 451);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(475, 458);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // gbRlcntControls
             // 
             this.gbRlcntControls.Controls.Add(this.lbTips);
             this.gbRlcntControls.Controls.Add(this.btnAutoSend);
-            this.gbRlcntControls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbRlcntControls.Location = new System.Drawing.Point(3, 3);
             this.gbRlcntControls.Name = "gbRlcntControls";
-            this.gbRlcntControls.Size = new System.Drawing.Size(463, 55);
+            this.gbRlcntControls.Size = new System.Drawing.Size(469, 58);
             this.gbRlcntControls.TabIndex = 13;
             this.gbRlcntControls.TabStop = false;
             this.gbRlcntControls.Text = "RlcntControls";
@@ -212,24 +257,23 @@ namespace AppTest.FormType
             this.btnAutoSend.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(177)))), ((int)(((byte)(89)))));
             this.btnAutoSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAutoSend.ForeColor = System.Drawing.Color.White;
-            this.btnAutoSend.Location = new System.Drawing.Point(9, 18);
+            this.btnAutoSend.Location = new System.Drawing.Point(9, 21);
             this.btnAutoSend.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAutoSend.Name = "btnAutoSend";
             this.btnAutoSend.Size = new System.Drawing.Size(76, 33);
             this.btnAutoSend.TabIndex = 0;
             this.btnAutoSend.Text = "停止";
             this.btnAutoSend.UseVisualStyleBackColor = false;
-            //this.btnAutoSend.Click += new System.EventHandler(this.btnAutoSend_Click);
             // 
             // metroTabControl1
             // 
             this.metroTabControl1.Controls.Add(this.metroTabPage1);
             this.metroTabControl1.Controls.Add(this.metroTabPage2);
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.metroTabControl1.Location = new System.Drawing.Point(3, 245);
+            this.metroTabControl1.Location = new System.Drawing.Point(3, 247);
             this.metroTabControl1.Name = "metroTabControl1";
             this.metroTabControl1.SelectedIndex = 0;
-            this.metroTabControl1.Size = new System.Drawing.Size(463, 335);
+            this.metroTabControl1.Size = new System.Drawing.Size(469, 208);
             this.metroTabControl1.TabIndex = 4;
             this.metroTabControl1.UseSelectable = true;
             // 
@@ -241,7 +285,7 @@ namespace AppTest.FormType
             this.metroTabPage1.HorizontalScrollbarSize = 7;
             this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(455, 293);
+            this.metroTabPage1.Size = new System.Drawing.Size(461, 166);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "Signals";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
@@ -255,7 +299,7 @@ namespace AppTest.FormType
             this.metroTabPage2.HorizontalScrollbarSize = 7;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(494, 293);
+            this.metroTabPage2.Size = new System.Drawing.Size(696, 262);
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "HistoryData";
             this.metroTabPage2.VerticalScrollbarBarColor = true;
@@ -275,10 +319,9 @@ namespace AppTest.FormType
             this.gbSetControls.Controls.Add(this.nudStep);
             this.gbSetControls.Controls.Add(this.btnAdd);
             this.gbSetControls.Controls.Add(this.label4);
-            this.gbSetControls.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbSetControls.Location = new System.Drawing.Point(3, 64);
+            this.gbSetControls.Location = new System.Drawing.Point(3, 67);
             this.gbSetControls.Name = "gbSetControls";
-            this.gbSetControls.Size = new System.Drawing.Size(463, 101);
+            this.gbSetControls.Size = new System.Drawing.Size(469, 100);
             this.gbSetControls.TabIndex = 15;
             this.gbSetControls.TabStop = false;
             this.gbSetControls.Text = "SetControls";
@@ -302,7 +345,7 @@ namespace AppTest.FormType
             this.btnSet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
             this.btnSet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSet.ForeColor = System.Drawing.Color.White;
-            this.btnSet.Location = new System.Drawing.Point(204, 59);
+            this.btnSet.Location = new System.Drawing.Point(204, 58);
             this.btnSet.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSet.Name = "btnSet";
             this.btnSet.Size = new System.Drawing.Size(56, 33);
@@ -323,7 +366,7 @@ namespace AppTest.FormType
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(227, 25);
+            this.label3.Location = new System.Drawing.Point(227, 24);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 17);
             this.label3.TabIndex = 16;
@@ -333,7 +376,7 @@ namespace AppTest.FormType
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 25);
+            this.label2.Location = new System.Drawing.Point(3, 24);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 17);
             this.label2.TabIndex = 15;
@@ -345,7 +388,7 @@ namespace AppTest.FormType
             this.btnDivision.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
             this.btnDivision.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDivision.ForeColor = System.Drawing.Color.White;
-            this.btnDivision.Location = new System.Drawing.Point(317, 59);
+            this.btnDivision.Location = new System.Drawing.Point(317, 58);
             this.btnDivision.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDivision.Name = "btnDivision";
             this.btnDivision.Size = new System.Drawing.Size(31, 33);
@@ -361,7 +404,7 @@ namespace AppTest.FormType
             this.btnMultip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
             this.btnMultip.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMultip.ForeColor = System.Drawing.Color.White;
-            this.btnMultip.Location = new System.Drawing.Point(278, 59);
+            this.btnMultip.Location = new System.Drawing.Point(278, 58);
             this.btnMultip.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnMultip.Name = "btnMultip";
             this.btnMultip.Size = new System.Drawing.Size(31, 33);
@@ -377,7 +420,7 @@ namespace AppTest.FormType
             this.btnReduce.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
             this.btnReduce.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReduce.ForeColor = System.Drawing.Color.White;
-            this.btnReduce.Location = new System.Drawing.Point(166, 59);
+            this.btnReduce.Location = new System.Drawing.Point(166, 58);
             this.btnReduce.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnReduce.Name = "btnReduce";
             this.btnReduce.Size = new System.Drawing.Size(31, 33);
@@ -389,7 +432,7 @@ namespace AppTest.FormType
             // nudStep
             // 
             this.nudStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nudStep.Location = new System.Drawing.Point(42, 65);
+            this.nudStep.Location = new System.Drawing.Point(42, 64);
             this.nudStep.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);
             this.nudStep.Maximum = new decimal(new int[] {
             9999,
@@ -416,7 +459,7 @@ namespace AppTest.FormType
             this.btnAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(119)))), ((int)(((byte)(53)))));
             this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdd.ForeColor = System.Drawing.Color.White;
-            this.btnAdd.Location = new System.Drawing.Point(127, 59);
+            this.btnAdd.Location = new System.Drawing.Point(127, 58);
             this.btnAdd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(31, 33);
@@ -429,7 +472,7 @@ namespace AppTest.FormType
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 67);
+            this.label4.Location = new System.Drawing.Point(3, 66);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(32, 17);
             this.label4.TabIndex = 17;
@@ -440,9 +483,9 @@ namespace AppTest.FormType
             this.gbGetControls.Controls.Add(this.nudTimerInterval);
             this.gbGetControls.Controls.Add(this.btnGet);
             this.gbGetControls.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbGetControls.Location = new System.Drawing.Point(3, 171);
+            this.gbGetControls.Location = new System.Drawing.Point(3, 173);
             this.gbGetControls.Name = "gbGetControls";
-            this.gbGetControls.Size = new System.Drawing.Size(463, 68);
+            this.gbGetControls.Size = new System.Drawing.Size(469, 68);
             this.gbGetControls.TabIndex = 16;
             this.gbGetControls.TabStop = false;
             this.gbGetControls.Text = "GetControls";
@@ -475,50 +518,6 @@ namespace AppTest.FormType
             this.btnGet.UseVisualStyleBackColor = false;
             this.btnGet.Click += new System.EventHandler(this.btnDataControl_Click);
             // 
-            // cbbSignals
-            // 
-            this.cbbSignals.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.cbbSignals.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.cbbSignals.FormattingEnabled = true;
-            this.cbbSignals.Location = new System.Drawing.Point(402, 281);
-            this.cbbSignals.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.cbbSignals.Name = "cbbSignals";
-            this.cbbSignals.Size = new System.Drawing.Size(118, 25);
-            this.cbbSignals.TabIndex = 1;
-            this.cbbSignals.Visible = false;
-            this.cbbSignals.SelectedIndexChanged += new System.EventHandler(this.cbbSignals_SelectedIndexChanged);
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(468, 20);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(371, 115);
-            this.tabControl1.TabIndex = 11;
-            this.tabControl1.Visible = false;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 26);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(363, 85);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Signals";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(363, 85);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "HistoryData";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -535,16 +534,14 @@ namespace AppTest.FormType
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(509, 541);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.cbbSignals);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(1980128, 34696, 1980128, 34696);
             this.Name = "DataForm";
             this.Padding = new System.Windows.Forms.Padding(17, 60, 17, 0);
             this.Text = "DataForm";
             this.Load += new System.EventHandler(this.DataForm_Load);
-            this.Controls.SetChildIndex(this.cbbSignals, 0);
-            this.Controls.SetChildIndex(this.tabControl1, 0);
+            this.Controls.SetChildIndex(this.panelContent, 0);
+            this.panelContent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource)).EndInit();
@@ -558,8 +555,8 @@ namespace AppTest.FormType
             ((System.ComponentModel.ISupportInitialize)(this.nudStep)).EndInit();
             this.gbGetControls.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudTimerInterval)).EndInit();
-            this.tabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -570,9 +567,6 @@ namespace AppTest.FormType
         protected System.Windows.Forms.Button btnGet;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox gbGetControls;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox gbSetControls;
         private System.Windows.Forms.GroupBox gbRlcntControls;
         private System.Windows.Forms.Label label1;
@@ -580,7 +574,6 @@ namespace AppTest.FormType
         protected System.Windows.Forms.TextBox tbCurrent;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbbSignals;
         protected System.Windows.Forms.Button btnDivision;
         protected System.Windows.Forms.Button btnMultip;
         protected System.Windows.Forms.Button btnReduce;
@@ -595,11 +588,14 @@ namespace AppTest.FormType
         protected MetroFramework.Controls.MetroComboBox metroComboBox_Signal;
         private System.Windows.Forms.BindingSource dBCSignalBindingSource;
         private System.Windows.Forms.BindingSource dBCSignalBindingSource1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn WhetherSendOrGet;
         private System.Windows.Forms.DataGridViewTextBoxColumn messageIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn customNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn signalNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn strValueDataGridViewTextBoxColumn;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnStep;
+        private System.Windows.Forms.DataGridViewButtonColumn ColumnAdd;
+        private System.Windows.Forms.DataGridViewButtonColumn ColumnReduce;
     }
 }

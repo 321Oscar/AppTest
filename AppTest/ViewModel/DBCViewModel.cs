@@ -31,13 +31,11 @@ namespace AppTest.ViewModel
             return false;
         }
 
-        public override void ShowSignalDetails(DataGridView dataGridView, DataGridViewCellEventArgs e)
+        public override void ShowSignalDetails(DataGridViewRow row)
         {
             try
             {
-                if (e.RowIndex < 0)
-                    return;
-                var signal = dataGridView.Rows[e.RowIndex].DataBoundItem as DBCSignal;
+                var signal = row.DataBoundItem as DBCSignal;
                 SignalItemForm<DBCSignal> siF = new SignalItemForm<DBCSignal>(signal, signal.SignalName);
                 siF.Show();
             }

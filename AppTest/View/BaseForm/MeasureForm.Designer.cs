@@ -47,22 +47,19 @@ namespace AppTest.FormType
             this.btnCheckOther = new System.Windows.Forms.Button();
             this.cbCheckAll = new System.Windows.Forms.CheckBox();
             this.panelLegend = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.AddValueToPlottimer = new System.Windows.Forms.Timer(this.components);
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.panelContent.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudPointCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTime)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -71,6 +68,12 @@ namespace AppTest.FormType
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // panelContent
+            // 
+            this.panelContent.Controls.Add(this.metroTabControl1);
+            this.panelContent.Location = new System.Drawing.Point(17, 60);
+            this.panelContent.Size = new System.Drawing.Size(618, 499);
             // 
             // tableLayoutPanel1
             // 
@@ -86,7 +89,7 @@ namespace AppTest.FormType
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(381, 439);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(384, 457);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel3
@@ -100,7 +103,7 @@ namespace AppTest.FormType
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 3);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(375, 44);
+            this.panel3.Size = new System.Drawing.Size(378, 44);
             this.panel3.TabIndex = 9;
             // 
             // label2
@@ -185,7 +188,7 @@ namespace AppTest.FormType
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 53);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(375, 383);
+            this.panel1.Size = new System.Drawing.Size(378, 401);
             this.panel1.TabIndex = 0;
             // 
             // metroCheckBox_Y
@@ -224,7 +227,7 @@ namespace AppTest.FormType
             this.btnFocus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(170)))), ((int)(((byte)(173)))));
             this.btnFocus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFocus.ForeColor = System.Drawing.Color.White;
-            this.btnFocus.Location = new System.Drawing.Point(322, 2);
+            this.btnFocus.Location = new System.Drawing.Point(325, 2);
             this.btnFocus.Name = "btnFocus";
             this.btnFocus.Size = new System.Drawing.Size(48, 33);
             this.btnFocus.TabIndex = 3;
@@ -239,7 +242,7 @@ namespace AppTest.FormType
             this.plotView1.Location = new System.Drawing.Point(0, 0);
             this.plotView1.Name = "plotView1";
             this.plotView1.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.plotView1.Size = new System.Drawing.Size(373, 381);
+            this.plotView1.Size = new System.Drawing.Size(376, 399);
             this.plotView1.TabIndex = 0;
             this.plotView1.Text = "plotView1";
             this.plotView1.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
@@ -255,7 +258,7 @@ namespace AppTest.FormType
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(214, 44);
+            this.panel2.Size = new System.Drawing.Size(217, 44);
             this.panel2.TabIndex = 1;
             // 
             // metroCheckBox_checkAll
@@ -307,50 +310,13 @@ namespace AppTest.FormType
             this.panelLegend.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLegend.Location = new System.Drawing.Point(3, 53);
             this.panelLegend.Name = "panelLegend";
-            this.panelLegend.Size = new System.Drawing.Size(214, 383);
+            this.panelLegend.Size = new System.Drawing.Size(217, 401);
             this.panelLegend.TabIndex = 1;
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.tabControl1.Location = new System.Drawing.Point(738, 74);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(286, 214);
-            this.tabControl1.TabIndex = 1;
-            this.tabControl1.Visible = false;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 26);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage1.Size = new System.Drawing.Size(278, 184);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "实时数据";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabPage2.Size = new System.Drawing.Size(278, 184);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "历史数据";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.BackColor = System.Drawing.Color.White;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.splitContainer1.Name = "splitContainer1";
@@ -362,8 +328,8 @@ namespace AppTest.FormType
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel2);
-            this.splitContainer1.Size = new System.Drawing.Size(604, 439);
-            this.splitContainer1.SplitterDistance = 381;
+            this.splitContainer1.Size = new System.Drawing.Size(610, 457);
+            this.splitContainer1.SplitterDistance = 384;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -380,7 +346,7 @@ namespace AppTest.FormType
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(220, 439);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(223, 457);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // AddValueToPlottimer
@@ -396,7 +362,7 @@ namespace AppTest.FormType
             this.metroTabControl1.Location = new System.Drawing.Point(0, 0);
             this.metroTabControl1.Name = "metroTabControl1";
             this.metroTabControl1.SelectedIndex = 0;
-            this.metroTabControl1.Size = new System.Drawing.Size(612, 492);
+            this.metroTabControl1.Size = new System.Drawing.Size(618, 499);
             this.metroTabControl1.TabIndex = 2;
             this.metroTabControl1.UseSelectable = true;
             // 
@@ -409,7 +375,7 @@ namespace AppTest.FormType
             this.metroTabPage1.HorizontalScrollbarSize = 10;
             this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(604, 450);
+            this.metroTabPage1.Size = new System.Drawing.Size(610, 457);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "实时数据";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
@@ -423,7 +389,7 @@ namespace AppTest.FormType
             this.metroTabPage2.HorizontalScrollbarSize = 10;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(500, 320);
+            this.metroTabPage2.Size = new System.Drawing.Size(702, 402);
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "历史数据";
             this.metroTabPage2.VerticalScrollbarBarColor = true;
@@ -435,14 +401,13 @@ namespace AppTest.FormType
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(652, 582);
-            this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(500, 195);
             this.Name = "MeasureForm";
             this.Padding = new System.Windows.Forms.Padding(17, 60, 17, 0);
             this.Text = "MeasureForm";
             this.Load += new System.EventHandler(this.MeasureForm_Load);
-            this.Controls.SetChildIndex(this.tabControl1, 0);
+            this.panelContent.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
@@ -452,7 +417,6 @@ namespace AppTest.FormType
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -461,6 +425,7 @@ namespace AppTest.FormType
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -471,9 +436,6 @@ namespace AppTest.FormType
         private System.Windows.Forms.Panel panel1;
         protected OxyPlot.WindowsForms.PlotView plotView1;
         private System.Windows.Forms.Button btnGetData;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label label1;
         protected System.Windows.Forms.NumericUpDown nudTime;
         private System.Windows.Forms.CheckBox cbCheckAll;

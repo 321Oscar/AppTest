@@ -29,10 +29,30 @@ namespace AppTest.FormType
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            ((System.ComponentModel.ISupportInitialize)(this.nudTimerInterval)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStep)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // metroTabPage1
+            // 
+            this.metroTabPage1.Size = new System.Drawing.Size(359, 168);
+            // 
+            // panelContent
+            // 
+            this.panelContent.Size = new System.Drawing.Size(373, 458);
+            // 
+            // DBCGetForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(407, 541);
+            this.Name = "DBCGetForm";
             this.Text = "DBCGetForm";
+            ((System.ComponentModel.ISupportInitialize)(this.nudTimerInterval)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudStep)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion

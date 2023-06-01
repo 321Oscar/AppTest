@@ -242,12 +242,20 @@ namespace AppTest.Helper
         历史数据界面增加更换X轴功能
         增加scope界面曲线颜色保存
         dbc信号解析增加can时间戳
+
+        V0.003.11-beta
+        set界面增加信号单独步长
+        get/set界面增加记录显示列
+        scope界面修改y轴的间隔
+        dataform修改内容布局，继承后可添加控件
+        日志控件布局修改，减少占用界面空间
+        修改显示信号详细接口，增加复用性
          */
 
         /// <summary>
         /// 版本号
         /// </summary>
-        public const string SoftVersion = "v0.003.10-beta";
+        public const string SoftVersion = "v0.003.11-beta";
 
         /// <summary>
         /// Protect = 1时，版本号为10.xxx.xx

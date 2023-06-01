@@ -17,16 +17,11 @@ namespace AppTest
     /// </summary>
     public partial class BaseForm : Form
     {
-        
-
         public BaseForm()
         {
             InitializeComponent();
             //this.AutoScaleMode = AutoScaleMode.Dpi;
             this.Font = Global.CurrentFont;
         }
-
-
-       
     }
 }

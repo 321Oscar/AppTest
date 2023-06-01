@@ -27,10 +27,7 @@ namespace AppTest.FormType
         public DBCGetForm(FormType formType, ProtocolType protocolType = ProtocolType.DBC) : base(formType,protocolType)
         {
             vm = new DBCGetViewModel(this);
-
             vm.VMModifiedGetdata += ModifiedGetdata;
-
-           
         }
 
         protected override void InitSignalUC()
@@ -60,6 +57,7 @@ namespace AppTest.FormType
                 metroTabPage2.Controls.Add(hduc);
                 hduc.ChangeColorTheme(GetColor);
             }
+            base.InitSignalUC();
         }
 
         protected override void InitIDAndProtocolCmd()
@@ -185,9 +183,9 @@ namespace AppTest.FormType
             }
         }
 
-        protected override void ShowSignalInfo(DataGridViewCellEventArgs e)
+        protected override void ShowSignalInfo(DataGridViewRow row)
         {
-            vm.ShowSignalDetails(this.dataGridView1, e);
+            vm.ShowSignalDetails(row);
         }
 
         protected override void SetOrSend()

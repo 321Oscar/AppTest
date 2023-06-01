@@ -65,8 +65,8 @@ namespace AppTest
             {
                 Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\Data");
             }
-            var dbAsync = DBHelper.GetDb();
-            var configAsync = DBHelper.GetAuthenticationDb();
+            _ = DBHelper.GetDb();
+            _ = DBHelper.GetAuthenticationDb();
             //Hide config.db
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\Config\\Config.db";
             FileAttributes attributes = File.GetAttributes(filePath);

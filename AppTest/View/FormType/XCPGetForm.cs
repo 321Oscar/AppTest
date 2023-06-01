@@ -63,6 +63,41 @@ namespace AppTest.FormType
             return;
         }
 
+        protected override bool ChangeValueByCell(bool addorReduce, DataGridViewCellEventArgs e)
+        {
+            var signal = dataGridView1.Rows[e.RowIndex].DataBoundItem as XCPSignal;
+
+            //获取步长
+            if (dataGridView1.Rows[e.RowIndex].Cells[dataGridView1.Columns["ColumnStep"].Index].Value == null)
+            {
+                dataGridView1.Rows[e.RowIndex].Cells[dataGridView1.Columns["ColumnStep"].Index].Value = "1";
+            }
+
+            string stepStr = dataGridView1.Rows[e.RowIndex].Cells[dataGridView1.Columns["ColumnStep"].Index].Value.ToString();
+
+            if (decimal.TryParse(stepStr, out decimal stepD))
+            {
+                //获取信号，根据step修改信号值，并发送数据
+                decimal oldValue = Convert.ToDecimal(signal.StrValue);
+                if (addorReduce)
+                {
+                    signal.StrValue = (oldValue + stepD).ToString();
+                }
+                else
+                {
+                    signal.StrValue = (oldValue - stepD).ToString();
+                }
+                SetOrSend();
+                return true;
+            }
+            else
+            {
+                ShowLog($"{signal.SignalName ?? signal.CustomName} Step 值格式错误", LPLogLevel.Warn);
+            }
+
+            return false;
+        }
+
         protected override void InitSignalUC()
         {
             vm.XCPSignals = FormItem.XCPSingals;
@@ -88,6 +123,7 @@ namespace AppTest.FormType
 
             ProjectForm parent = (ProjectForm)this.MdiParent;
             vm.XcpModule = parent.XcpModule;
+            base.InitSignalUC();
         }
 
         protected override void ModifiedGetdata(bool get)
@@ -191,9 +227,9 @@ namespace AppTest.FormType
             }
         }
 
-        protected override void ShowSignalInfo(DataGridViewCellEventArgs e)
+        protected override void ShowSignalInfo(DataGridViewRow row)
         {
-            vm.ShowSignalDetails(this.dataGridView1, e);
+            vm.ShowSignalDetails(row);
         }
 
         protected override void SetOrSend()

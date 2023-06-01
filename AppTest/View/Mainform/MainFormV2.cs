@@ -380,7 +380,12 @@ namespace AppTest
                 return;
             }
 
-            AddNewForm addNewForm = new AddNewForm(projectItem);
+            AddNewForm addNewForm;// = new AddNewForm(projectItem, projectItem.Form.Find(x => x.Name == form.Name), true);
+            if (projectItem.CanIndex[0].ProtocolType == (int)ProtocolType.DBC)
+                addNewForm = new AddNewForm(projectItem);
+            else if (projectItem.CanIndex[0].ProtocolType == (int)ProtocolType.XCP)
+                addNewForm = new AddNewXcpForm(projectItem);
+            else return;
             addNewForm.StartPosition = FormStartPosition.CenterParent;
             if (addNewForm.ShowDialog() == DialogResult.OK)
             {

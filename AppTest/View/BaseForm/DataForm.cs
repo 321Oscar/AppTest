@@ -58,7 +58,7 @@ namespace AppTest.FormType
                     ColumnAdd.Visible = columnStep.Visible = ColumnReduce.Visible = true;
                     ChangeBaseColor(SetColor);
                     LoadDatGridViewContext();
-                    gbRlcntControls.Visible = gbGetControls.Visible = gbSetControls.Visible = false;
+                    gbRlcntControls.Visible = gbGetControls.Visible = false; //gbSetControls.Visible
                     this.SaveDataVisible = false;
                     tscbb = new ToolStripComboBox();
                     
@@ -440,5 +440,6 @@ namespace AppTest.FormType
             }
             metroComboBox_Signal.DropDownWidth = width;
         }
+
     }
 }

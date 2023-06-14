@@ -67,7 +67,7 @@ namespace AppTest.FormType
             // panelContent
             // 
             this.panelContent.Controls.Add(this.tableLayoutPanel1);
-            this.panelContent.Size = new System.Drawing.Size(608, 465);
+            this.panelContent.Size = new System.Drawing.Size(608, 442);
             // 
             // tableLayoutPanel1
             // 
@@ -81,7 +81,7 @@ namespace AppTest.FormType
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(608, 465);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(608, 442);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // metroTabControl1
@@ -92,7 +92,7 @@ namespace AppTest.FormType
             this.metroTabControl1.Location = new System.Drawing.Point(3, 103);
             this.metroTabControl1.Name = "metroTabControl1";
             this.metroTabControl1.SelectedIndex = 0;
-            this.metroTabControl1.Size = new System.Drawing.Size(602, 359);
+            this.metroTabControl1.Size = new System.Drawing.Size(602, 336);
             this.metroTabControl1.TabIndex = 2;
             this.metroTabControl1.UseSelectable = true;
             // 
@@ -104,7 +104,7 @@ namespace AppTest.FormType
             this.metroTabPage1.HorizontalScrollbarSize = 10;
             this.metroTabPage1.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(594, 317);
+            this.metroTabPage1.Size = new System.Drawing.Size(594, 294);
             this.metroTabPage1.TabIndex = 0;
             this.metroTabPage1.Text = "实时数据";
             this.metroTabPage1.VerticalScrollbarBarColor = true;
@@ -116,6 +116,9 @@ namespace AppTest.FormType
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -139,11 +142,10 @@ namespace AppTest.FormType
             this.byteOrderintDataGridViewTextBoxColumn,
             this.whetherSendOrGetDataGridViewCheckBoxColumn});
             this.dataGridView1.DataSource = this.dBCSignalBindingSource;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Location = new System.Drawing.Point(-4, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(594, 317);
+            this.dataGridView1.Size = new System.Drawing.Size(598, 317);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
@@ -292,7 +294,7 @@ namespace AppTest.FormType
             this.metroTabPage2.HorizontalScrollbarSize = 10;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(500, 244);
+            this.metroTabPage2.Size = new System.Drawing.Size(696, 296);
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "历史数据";
             this.metroTabPage2.VerticalScrollbarBarColor = true;

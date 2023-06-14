@@ -26,6 +26,7 @@ namespace AppTest.ViewModel
             if (editForm.ShowDialog() == DialogResult.OK)
             {
                 DBCSignals = editForm.FormItem.DBCSignals;
+                //Form.FormItem.Name = editForm.
                 return true;
             }
             return false;

@@ -89,7 +89,7 @@ namespace AppTest.FormType
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(384, 457);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(384, 455);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel3
@@ -188,7 +188,7 @@ namespace AppTest.FormType
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 53);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(378, 401);
+            this.panel1.Size = new System.Drawing.Size(378, 399);
             this.panel1.TabIndex = 0;
             // 
             // metroCheckBox_Y
@@ -242,7 +242,7 @@ namespace AppTest.FormType
             this.plotView1.Location = new System.Drawing.Point(0, 0);
             this.plotView1.Name = "plotView1";
             this.plotView1.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.plotView1.Size = new System.Drawing.Size(376, 399);
+            this.plotView1.Size = new System.Drawing.Size(376, 397);
             this.plotView1.TabIndex = 0;
             this.plotView1.Text = "plotView1";
             this.plotView1.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
@@ -258,7 +258,7 @@ namespace AppTest.FormType
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(217, 44);
+            this.panel2.Size = new System.Drawing.Size(218, 44);
             this.panel2.TabIndex = 1;
             // 
             // metroCheckBox_checkAll
@@ -310,14 +310,16 @@ namespace AppTest.FormType
             this.panelLegend.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLegend.Location = new System.Drawing.Point(3, 53);
             this.panelLegend.Name = "panelLegend";
-            this.panelLegend.Size = new System.Drawing.Size(217, 401);
+            this.panelLegend.Size = new System.Drawing.Size(218, 399);
             this.panelLegend.TabIndex = 1;
             // 
             // splitContainer1
             // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.BackColor = System.Drawing.Color.White;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Location = new System.Drawing.Point(-1, 2);
             this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.splitContainer1.Name = "splitContainer1";
             // 
@@ -328,7 +330,7 @@ namespace AppTest.FormType
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel2);
-            this.splitContainer1.Size = new System.Drawing.Size(610, 457);
+            this.splitContainer1.Size = new System.Drawing.Size(611, 455);
             this.splitContainer1.SplitterDistance = 384;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 1;
@@ -346,7 +348,7 @@ namespace AppTest.FormType
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(223, 457);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(224, 455);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // AddValueToPlottimer

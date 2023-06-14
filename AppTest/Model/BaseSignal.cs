@@ -74,6 +74,10 @@ namespace AppTest.Model
         public uint TimeStamp { get => timeStamp; set => timeStamp = value; }
 
         private uint timeStamp = 0;
+        /// <summary>
+        /// 控制步长
+        /// </summary>
+        public decimal Step { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

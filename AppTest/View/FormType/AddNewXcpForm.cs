@@ -482,31 +482,7 @@ namespace AppTest.FormType
 
         private void LoadSingalToTreeView(XCPSignals signals)
         {
-            //if (formItem == null)
-            //    return;
-            //bool isGetForm = this.formItem.FormType == (int)FormType.Set;//不能用formItem,新建窗口没有FormItem
-            bool isGetForm = cbbFormType.SelectedIndex == (int)FormType.Set;
-            if (signals != null && signals.xCPSignalList != null && signals.xCPSignalList.Count > 0)
-            {
-                tvAllNode.Nodes.Clear();
-                signals.xCPSignalList.Sort();
-                foreach (var item in signals.xCPSignalList)
-                {
-                    if (isGetForm)//Get 窗口，不能加载measurement
-                    {
-                        if (item.MeaOrCal)//
-                            continue;
-                        else
-                        {
-                            tvAllNode.Nodes.Add(item.SignalName);
-                        }
-                    }
-                    else
-                    {
-                        tvAllNode.Nodes.Add(item.SignalName);
-                    }
-                }
-            }
+            LoadSingalToTreeView(signals.xCPSignalList);
         }
 
         private void LoadSingalToTreeView(List<XCPSignal> signals)

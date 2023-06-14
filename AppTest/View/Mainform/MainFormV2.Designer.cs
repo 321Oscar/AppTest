@@ -63,6 +63,9 @@ namespace AppTest
             this.eLFAndA2LFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.versionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.contextMenuStrip_Project.SuspendLayout();
             this.contextMenuStrip_Form.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -262,14 +265,17 @@ namespace AppTest
             // 
             this.otherToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dBCFileToolStripMenuItem,
+            this.eLFAndA2LFileToolStripMenuItem,
+            this.aSCFileToolStripMenuItem,
+            this.toolStripSeparator1,
             this.historyMeasureToolStripMenuItem,
-            this.fontToolStripMenuItem,
-            this.reStartToolStripMenuItem,
+            this.toolStripSeparator2,
             this.showLogFileToolStripMenuItem,
             this.showLogToolStripMenuItem,
-            this.testToolStripMenuItem,
-            this.aSCFileToolStripMenuItem,
-            this.eLFAndA2LFileToolStripMenuItem});
+            this.toolStripSeparator3,
+            this.reStartToolStripMenuItem,
+            this.fontToolStripMenuItem,
+            this.testToolStripMenuItem});
             this.otherToolStripMenuItem.Name = "otherToolStripMenuItem";
             this.otherToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
             this.otherToolStripMenuItem.Text = "其他";
@@ -300,6 +306,7 @@ namespace AppTest
             this.reStartToolStripMenuItem.Name = "reStartToolStripMenuItem";
             this.reStartToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.reStartToolStripMenuItem.Text = "ReStart";
+            this.reStartToolStripMenuItem.Visible = false;
             this.reStartToolStripMenuItem.Click += new System.EventHandler(this.reStartToolStripMenuItem_Click);
             // 
             // showLogFileToolStripMenuItem
@@ -354,6 +361,21 @@ namespace AppTest
             this.versionToolStripMenuItem.Text = "版本";
             this.versionToolStripMenuItem.Click += new System.EventHandler(this.versionToolStripMenuItem_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            // 
             // MainFormV2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -363,7 +385,6 @@ namespace AppTest
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainFormV2";
             this.Text = "MainFormV2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFormV2_FormClosing);
@@ -410,5 +431,8 @@ namespace AppTest
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aSCFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eLFAndA2LFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }

@@ -250,12 +250,23 @@ namespace AppTest.Helper
         dataform修改内容布局，继承后可添加控件
         日志控件布局修改，减少占用界面空间
         修改显示信号详细接口，增加复用性
+
+        20230607
+        setcontrol保留
+        增加保存set界面的步长
+        form创建后canchannel可变
+
+        20230609
+        set界面step设为1报错
+
+        20230613
+        metrotab中的控件dock.fill 改为achor（Fill会导致左上角有灰条）
          */
 
         /// <summary>
         /// 版本号
         /// </summary>
-        public const string SoftVersion = "v0.003.11-beta";
+        public const string SoftVersion = "v0.003.11-beta-20230613";
 
         /// <summary>
         /// Protect = 1时，版本号为10.xxx.xx

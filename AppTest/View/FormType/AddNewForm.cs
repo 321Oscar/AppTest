@@ -43,19 +43,7 @@ namespace AppTest.FormType
             dataGridView1.AutoGenerateColumns = false;
         }
 
-        public void SetColumnVisible(bool visible)
-        {
-            MessageIDColumn.Visible = visible;
-            startBitDataGridViewTextBoxColumn1.Visible = visible;
-            byteOrderDataGridViewTextBoxColumn1.Visible = visible;
-            valueTypeDataGridViewTextBoxColumn1.Visible = visible;
-            factorDataGridViewTextBoxColumn1.Visible = visible;
-            offsetDataGridViewTextBoxColumn1.Visible = visible;
-            strValueDataGridViewTextBoxColumn1.Visible = visible;
-            commentDataGridViewTextBoxColumn1.Visible = visible;
-        }
-
-        public AddNewForm(ProjectItem projectItem) :this()
+        public AddNewForm(ProjectItem projectItem) : this()
         {
             this.projectItem = projectItem;
             projectItem.CanIndex.Sort();
@@ -69,7 +57,7 @@ namespace AppTest.FormType
             Init();
         }
 
-       
+        
         /// <summary>
         /// 编辑信号
         /// </summary>
@@ -80,7 +68,7 @@ namespace AppTest.FormType
             this.Text = "修改信号";
             this.formItem = formitem;
             isEdit = true;
-            cbbCanIndex.Enabled = false;
+            //cbbCanIndex.Enabled = false;
             cbbCanIndex.SelectedItem = formitem.CanChannel;
             tbFormName.Enabled = false;
             tbFormName.Text = formitem.Name;
@@ -110,6 +98,19 @@ namespace AppTest.FormType
             //messageIDDataGridViewTextBoxColumn1.Visible = true;
         }
 
+        protected void SetColumnVisible(bool visible)
+        {
+            MessageIDColumn.Visible = visible;
+            startBitDataGridViewTextBoxColumn1.Visible = visible;
+            byteOrderDataGridViewTextBoxColumn1.Visible = visible;
+            valueTypeDataGridViewTextBoxColumn1.Visible = visible;
+            factorDataGridViewTextBoxColumn1.Visible = visible;
+            offsetDataGridViewTextBoxColumn1.Visible = visible;
+            strValueDataGridViewTextBoxColumn1.Visible = visible;
+            commentDataGridViewTextBoxColumn1.Visible = visible;
+        }
+
+
 
         public FormItem FormItem { get => formItem; }
 
@@ -123,8 +124,8 @@ namespace AppTest.FormType
             {
                 formItem = new FormItem();
             }
-            formItem.Name = tbFormName.Text;
-            formItem.FormType = cbbFormType.SelectedIndex;
+            FormItem.Name = tbFormName.Text;
+            FormItem.FormType = cbbFormType.SelectedIndex;
             FormItem.CanChannel = (int)cbbCanIndex.SelectedItem;
 
             SaveSignals();
@@ -510,6 +511,8 @@ namespace AppTest.FormType
         /// </summary>
         protected virtual void LoadSelectedSignals(FormItem formitem)
         {
+            SelectedDbcSignals.Clear();
+
             foreach (var item in formitem.DBCSignals.SignalList)
             {
                 SelectedDbcSignals.Add(item);

@@ -44,6 +44,7 @@ namespace AppTest.FormType
 
             BindingList<DBCSignal> bs = new BindingList<DBCSignal>(vm.DBCSignals.SignalList);
             this.dataGridView1.DataSource = bs;
+            base.metroGrid1.DataSource = bs;
 
             InitIDAndProtocolCmd();
 

@@ -510,7 +510,7 @@ namespace AppTest
             string logPath = Path.Combine(Application.StartupPath, "Log");
             System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo("Explorer.exe");
             psi.Arguments = "/e,/select," + logPath;
-            System.Diagnostics.Process.Start(psi);
+            System.Diagnostics.Process.Start("Explorer.exe", logPath);
         }
 
         private void treeViewRoot_DoubleClick(object sender, EventArgs e)

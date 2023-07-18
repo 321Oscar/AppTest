@@ -510,7 +510,9 @@ namespace AppTest
             SolidBrush txtBrush1 = new SolidBrush(Color.FromArgb(46, 45, 43));
             SolidBrush bacBrush1 = new SolidBrush(Color.FromArgb(255, 255, 255));
 
+#pragma warning disable CS0219 // 变量“picSize”已被赋值，但从未使用过它的值
             int picSize = 25;
+#pragma warning restore CS0219 // 变量“picSize”已被赋值，但从未使用过它的值
             int picX = e.Bounds.X + 20;
             int picY = e.Bounds.Y + treeViewRoot.ItemHeight / 5;
 

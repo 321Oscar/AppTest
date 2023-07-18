@@ -1,7 +1,6 @@
-﻿
-namespace AppTest.FormType
+﻿namespace AppTest.View.FormType
 {
-    partial class XCPScopeForm
+    partial class ProjectMainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,28 +28,16 @@ namespace AppTest.FormType
         /// </summary>
         private void InitializeComponent()
         {
-            ((System.ComponentModel.ISupportInitialize)(this.nudTime)).BeginInit();
             this.SuspendLayout();
             // 
-            // plotView1
+            // ProjectMainForm
             // 
-            this.plotView1.Size = new System.Drawing.Size(431, 419);
-            // 
-            // panelContent
-            // 
-            this.panelContent.Size = new System.Drawing.Size(706, 521);
-            // 
-            // XCPScopeForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(740, 604);
-            this.Location = new System.Drawing.Point(0, 0);
-            this.Name = "XCPScopeForm";
-            this.Text = "XCPScopeForm";
-            ((System.ComponentModel.ISupportInitialize)(this.nudTime)).EndInit();
+            this.ClientSize = new System.Drawing.Size(819, 603);
+            this.Name = "ProjectMainForm";
+            this.Text = "ProjectMainForm";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

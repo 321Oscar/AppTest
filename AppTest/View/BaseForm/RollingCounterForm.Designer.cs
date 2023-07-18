@@ -30,6 +30,8 @@ namespace AppTest.FormType
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pnSignals = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.plSend = new System.Windows.Forms.Panel();
             this.metroTextBox_CurVal = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
@@ -44,15 +46,18 @@ namespace AppTest.FormType
             this.nudCoe = new System.Windows.Forms.NumericUpDown();
             this.tbCurrent = new System.Windows.Forms.TextBox();
             this.cbbSignals = new System.Windows.Forms.ComboBox();
-            this.pnSignals = new System.Windows.Forms.Panel();
             this.tsslbLog = new System.Windows.Forms.ToolStripStatusLabel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panelContent.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.plSend.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCoe)).BeginInit();
-            base.panelContent.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // panelContent
+            // 
+            this.panelContent.Controls.Add(this.tableLayoutPanel1);
+            this.panelContent.Size = new System.Drawing.Size(356, 373);
             // 
             // tableLayoutPanel1
             // 
@@ -66,8 +71,29 @@ namespace AppTest.FormType
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(350, 366);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(356, 373);
             this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // pnSignals
+            // 
+            this.pnSignals.AutoScroll = true;
+            this.pnSignals.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnSignals.Location = new System.Drawing.Point(3, 154);
+            this.pnSignals.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pnSignals.Name = "pnSignals";
+            this.pnSignals.Size = new System.Drawing.Size(350, 215);
+            this.pnSignals.TabIndex = 1;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.plSend);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(350, 144);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Controls";
             // 
             // plSend
             // 
@@ -87,7 +113,7 @@ namespace AppTest.FormType
             this.plSend.Dock = System.Windows.Forms.DockStyle.Fill;
             this.plSend.Location = new System.Drawing.Point(3, 19);
             this.plSend.Name = "plSend";
-            this.plSend.Size = new System.Drawing.Size(338, 122);
+            this.plSend.Size = new System.Drawing.Size(344, 122);
             this.plSend.TabIndex = 2;
             // 
             // metroTextBox_CurVal
@@ -158,7 +184,7 @@ namespace AppTest.FormType
             this.btnAutoSend.Name = "btnAutoSend";
             this.btnAutoSend.Size = new System.Drawing.Size(76, 33);
             this.btnAutoSend.TabIndex = 0;
-            this.btnAutoSend.Text = "停止";
+            this.btnAutoSend.Text = "启动";
             this.btnAutoSend.UseVisualStyleBackColor = false;
             this.btnAutoSend.Click += new System.EventHandler(this.btnAutoSend_Click);
             // 
@@ -268,33 +294,12 @@ namespace AppTest.FormType
             this.cbbSignals.Visible = false;
             this.cbbSignals.SelectedIndexChanged += new System.EventHandler(this.cbbSignals_SelectedIndexChanged);
             // 
-            // pnSignals
-            // 
-            this.pnSignals.AutoScroll = true;
-            this.pnSignals.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnSignals.Location = new System.Drawing.Point(3, 154);
-            this.pnSignals.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.pnSignals.Name = "pnSignals";
-            this.pnSignals.Size = new System.Drawing.Size(344, 208);
-            this.pnSignals.TabIndex = 1;
-            // 
             // tsslbLog
             // 
             this.tsslbLog.ForeColor = System.Drawing.Color.Red;
             this.tsslbLog.Name = "tsslbLog";
             this.tsslbLog.Size = new System.Drawing.Size(131, 17);
             this.tsslbLog.Text = "toolStripStatusLabel1";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.plSend);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(344, 144);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Controls";
             // 
             // RollingCounterForm
             // 
@@ -306,12 +311,14 @@ namespace AppTest.FormType
             this.Style = MetroFramework.MetroColorStyle.Green;
             this.Text = "RollingCounterForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RollingCounterForm_FormClosing);
+            this.panelContent.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.plSend.ResumeLayout(false);
             this.plSend.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudCoe)).EndInit();
-            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

@@ -19,7 +19,7 @@
         [Signal(false)]
         public CCP_COMPU_METHOD Compu_Methd { get; set; }
         /// <summary>
-        /// 标定/测量
+        /// 标定 False/测量 True
         /// </summary>
         [Signal("标定/测量信号", "测量信号", "标定信号")]
         public bool MeaOrCal { get; set; }
@@ -71,6 +71,8 @@
         /// <summary>
         /// 时间戳
         /// </summary>
+#pragma warning disable CS0108 // “XCPSignal.TimeStamp”隐藏继承的成员“BaseSignal.TimeStamp”。如果是有意隐藏，请使用关键字 new。
         public int TimeStamp { get; set; }
+#pragma warning restore CS0108 // “XCPSignal.TimeStamp”隐藏继承的成员“BaseSignal.TimeStamp”。如果是有意隐藏，请使用关键字 new。
     }
 }

@@ -30,8 +30,8 @@ namespace AppTest.FormType
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SignalName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,12 +68,14 @@ namespace AppTest.FormType
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.nudPageIndex = new System.Windows.Forms.NumericUpDown();
             this.lbTotalPage = new System.Windows.Forms.Label();
             this.tbCurrentPage = new System.Windows.Forms.TextBox();
             this.btnPageEnd = new System.Windows.Forms.Button();
             this.btnNextPage = new System.Windows.Forms.Button();
             this.btnPrevPage = new System.Windows.Forms.Button();
             this.btnPageStart = new System.Windows.Forms.Button();
+            this.metroCB_AndOrLike = new MetroFramework.Controls.MetroCheckBox();
             this.projectNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.formNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.signalEntityBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -87,6 +89,7 @@ namespace AppTest.FormType
             this.tableLayoutPanel1.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPageIndex)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalEntityBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -159,8 +162,8 @@ namespace AppTest.FormType
             // DataTime
             // 
             this.DataTime.DataPropertyName = "DataTime";
-            dataGridViewCellStyle1.Format = "yyyy-MM-dd HH:mm:ss fff";
-            this.DataTime.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "yyyy-MM-dd HH:mm:ss fff";
+            this.DataTime.DefaultCellStyle = dataGridViewCellStyle5;
             this.DataTime.HeaderText = "DataTime";
             this.DataTime.Name = "DataTime";
             this.DataTime.ReadOnly = true;
@@ -168,9 +171,9 @@ namespace AppTest.FormType
             // CreatedOn
             // 
             this.CreatedOn.DataPropertyName = "CreatedOn";
-            dataGridViewCellStyle2.Format = "yyyy-MM-dd HH:mm:ss fff";
-            dataGridViewCellStyle2.NullValue = "--";
-            this.CreatedOn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "yyyy-MM-dd HH:mm:ss fff";
+            dataGridViewCellStyle6.NullValue = "--";
+            this.CreatedOn.DefaultCellStyle = dataGridViewCellStyle6;
             this.CreatedOn.HeaderText = "CreatedOn";
             this.CreatedOn.Name = "CreatedOn";
             this.CreatedOn.ReadOnly = true;
@@ -258,17 +261,18 @@ namespace AppTest.FormType
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.metroCB_AndOrLike);
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(72, 0);
             this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(269, 42);
+            this.panel2.Size = new System.Drawing.Size(296, 42);
             this.panel2.TabIndex = 2;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(65, 9);
+            this.textBox1.Location = new System.Drawing.Point(57, 9);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(191, 23);
@@ -277,7 +281,7 @@ namespace AppTest.FormType
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 13);
+            this.label2.Location = new System.Drawing.Point(1, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 17);
             this.label2.TabIndex = 0;
@@ -287,10 +291,10 @@ namespace AppTest.FormType
             // 
             this.panel1.Controls.Add(this.dateTimePickerStart);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(341, 0);
+            this.panel1.Location = new System.Drawing.Point(368, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(201, 42);
+            this.panel1.Size = new System.Drawing.Size(193, 42);
             this.panel1.TabIndex = 1;
             // 
             // dateTimePickerStart
@@ -314,7 +318,7 @@ namespace AppTest.FormType
             // 
             this.panel3.Controls.Add(this.dateTimePickerEnd);
             this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(542, 0);
+            this.panel3.Location = new System.Drawing.Point(561, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(180, 42);
@@ -456,6 +460,7 @@ namespace AppTest.FormType
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
+            this.panel5.Controls.Add(this.nudPageIndex);
             this.panel5.Controls.Add(this.lbTotalPage);
             this.panel5.Controls.Add(this.tbCurrentPage);
             this.panel5.Controls.Add(this.btnPageEnd);
@@ -468,10 +473,28 @@ namespace AppTest.FormType
             this.panel5.Size = new System.Drawing.Size(1098, 34);
             this.panel5.TabIndex = 3;
             // 
+            // nudPageIndex
+            // 
+            this.nudPageIndex.Location = new System.Drawing.Point(467, 8);
+            this.nudPageIndex.Maximum = new decimal(new int[] {
+            1410065408,
+            2,
+            0,
+            0});
+            this.nudPageIndex.Name = "nudPageIndex";
+            this.nudPageIndex.Size = new System.Drawing.Size(120, 23);
+            this.nudPageIndex.TabIndex = 6;
+            this.nudPageIndex.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.nudPageIndex.Visible = false;
+            // 
             // lbTotalPage
             // 
             this.lbTotalPage.AutoSize = true;
-            this.lbTotalPage.Location = new System.Drawing.Point(212, 11);
+            this.lbTotalPage.Location = new System.Drawing.Point(212, 9);
             this.lbTotalPage.Name = "lbTotalPage";
             this.lbTotalPage.Size = new System.Drawing.Size(43, 17);
             this.lbTotalPage.TabIndex = 5;
@@ -479,7 +502,7 @@ namespace AppTest.FormType
             // 
             // tbCurrentPage
             // 
-            this.tbCurrentPage.Location = new System.Drawing.Point(167, 8);
+            this.tbCurrentPage.Location = new System.Drawing.Point(167, 6);
             this.tbCurrentPage.Name = "tbCurrentPage";
             this.tbCurrentPage.Size = new System.Drawing.Size(39, 23);
             this.tbCurrentPage.TabIndex = 4;
@@ -488,7 +511,7 @@ namespace AppTest.FormType
             // btnPageEnd
             // 
             this.btnPageEnd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPageEnd.Location = new System.Drawing.Point(348, 8);
+            this.btnPageEnd.Location = new System.Drawing.Point(348, 6);
             this.btnPageEnd.Name = "btnPageEnd";
             this.btnPageEnd.Size = new System.Drawing.Size(75, 23);
             this.btnPageEnd.TabIndex = 3;
@@ -499,7 +522,7 @@ namespace AppTest.FormType
             // btnNextPage
             // 
             this.btnNextPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNextPage.Location = new System.Drawing.Point(267, 8);
+            this.btnNextPage.Location = new System.Drawing.Point(267, 6);
             this.btnNextPage.Name = "btnNextPage";
             this.btnNextPage.Size = new System.Drawing.Size(75, 23);
             this.btnNextPage.TabIndex = 2;
@@ -510,7 +533,7 @@ namespace AppTest.FormType
             // btnPrevPage
             // 
             this.btnPrevPage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrevPage.Location = new System.Drawing.Point(85, 8);
+            this.btnPrevPage.Location = new System.Drawing.Point(85, 6);
             this.btnPrevPage.Name = "btnPrevPage";
             this.btnPrevPage.Size = new System.Drawing.Size(75, 23);
             this.btnPrevPage.TabIndex = 1;
@@ -521,13 +544,23 @@ namespace AppTest.FormType
             // btnPageStart
             // 
             this.btnPageStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPageStart.Location = new System.Drawing.Point(4, 8);
+            this.btnPageStart.Location = new System.Drawing.Point(4, 6);
             this.btnPageStart.Name = "btnPageStart";
             this.btnPageStart.Size = new System.Drawing.Size(75, 23);
             this.btnPageStart.TabIndex = 0;
             this.btnPageStart.Text = "<<";
             this.btnPageStart.UseVisualStyleBackColor = true;
             this.btnPageStart.Click += new System.EventHandler(this.btnPageStart_Click);
+            // 
+            // metroCB_AndOrLike
+            // 
+            this.metroCB_AndOrLike.AutoSize = true;
+            this.metroCB_AndOrLike.Location = new System.Drawing.Point(250, 13);
+            this.metroCB_AndOrLike.Name = "metroCB_AndOrLike";
+            this.metroCB_AndOrLike.Size = new System.Drawing.Size(49, 15);
+            this.metroCB_AndOrLike.TabIndex = 2;
+            this.metroCB_AndOrLike.Text = "全字";
+            this.metroCB_AndOrLike.UseSelectable = true;
             // 
             // projectNameDataGridViewTextBoxColumn
             // 
@@ -571,6 +604,7 @@ namespace AppTest.FormType
             this.panel6.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPageIndex)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.signalEntityBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -623,5 +657,7 @@ namespace AppTest.FormType
         private System.Windows.Forms.DataGridViewTextBoxColumn CreatedOn;
         private System.Windows.Forms.DataGridViewTextBoxColumn projectNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn formNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.NumericUpDown nudPageIndex;
+        private MetroFramework.Controls.MetroCheckBox metroCB_AndOrLike;
     }
 }

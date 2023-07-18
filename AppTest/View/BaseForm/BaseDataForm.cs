@@ -23,7 +23,7 @@ using AppTest.View.UC;
 namespace AppTest.FormType
 {
 
-    public partial class BaseDataForm : MetroForm
+    public partial class BaseDataForm : MetroForm,ILogForm
     {
         #region kernel32
        
@@ -129,6 +129,18 @@ namespace AppTest.FormType
             get { return canChannel; }
         }
 
+        protected HistoryDataUC HistoryDataView { get; set; }
+
+        private DateTime saveStartTime = DateTime.Now;
+        public DateTime SaveDataStartTime { 
+            get => saveStartTime; 
+            set 
+            { 
+                saveStartTime = value; 
+                OnSaveTimelChange(saveStartTime); 
+            }
+        }
+
         /// <summary>
         /// 协议类名
         /// </summary>
@@ -166,6 +178,7 @@ namespace AppTest.FormType
                 if (IsSaveData)
                 {
                     savedataBtn.Text = "保存中";
+                    SaveDataStartTime = DateTime.Now;
                 }
                 else
                 {
@@ -228,6 +241,10 @@ namespace AppTest.FormType
         public delegate void CanChannelChange(string signalValue);
 
         public event CanChannelChange OnCanChannelChange;
+
+        public delegate void SaveTimeChange(DateTime signalValue);
+
+        public event SaveTimeChange OnSaveTimelChange;
         #endregion
 
 
@@ -260,7 +277,10 @@ namespace AppTest.FormType
             //y = Height;
             //setTag(this);
             this.OnCanChannelChange += DataForm_OnCanChannelChange;
+            this.OnSaveTimelChange += BaseDataForm_OnSaveTimelChange;
         }
+
+       
 
         private void SavedataBtn_Click(object sender, EventArgs e)
         {
@@ -436,7 +456,7 @@ namespace AppTest.FormType
         /// 显示日志
         /// </summary>
         /// <param name="log"></param>
-        public virtual void ShowLog(string log, LPLogLevel level = LPLogLevel.Info)
+        public virtual void ShowLog(string log, LPLogLevel level = LPLogLevel.Info, bool showtip = false)
         {
             try
             {
@@ -451,9 +471,9 @@ namespace AppTest.FormType
                 {
                     toolLog.Text = log;
                 }
-                if (MdiParent != null && this.MdiParent is ProjectForm && !string.IsNullOrEmpty(log))
+                if (MdiParent != null && this.MdiParent is ILogForm && !string.IsNullOrEmpty(log))
                 {
-                    ((ProjectForm)MdiParent).ShowLog($"[{this.Name}] {log}", level);
+                    ((ILogForm)MdiParent).ShowLog($"[{this.Name}] {log}", level);
                 }
                 LogHelper.WriteToOutput(this.Name, log);
             }
@@ -490,6 +510,14 @@ namespace AppTest.FormType
             this.statusStrip1.ForeColor = Color.White;
         }
 
+        protected virtual void BaseDataForm_OnSaveTimelChange(DateTime signalValue)
+        {
+            if (HistoryDataView != null)
+            {
+                HistoryDataView.StartTime = signalValue;
+            }
+        }
+
         #endregion
 
         #region 右键菜单
@@ -523,12 +551,15 @@ namespace AppTest.FormType
             {
                 return;
             }
+
+            editForm.Parent = this;
             if (editForm.ShowDialog() == DialogResult.OK)
             {
                 //IsGetdata = false;
                 //reload Signals
                 this.Signals = editForm.FormItem.DBCSignals;
                 //this.xCPSingals = editForm.FormItem.XCPSingals;
+                this.CanChannel = editForm.FormItem.CanChannel;
                 ReLoadSignal();
             }
         }
@@ -634,6 +665,7 @@ namespace AppTest.FormType
         {
             base.OnPaint(e);
             return;
+#pragma warning disable CS0162 // 检测到无法访问的代码
             if (IsSaveData)
             {
                 using (SolidBrush brush = new SolidBrush(Color.FromArgb(128, Color.Gray)))
@@ -645,6 +677,7 @@ namespace AppTest.FormType
                     e.Graphics.FillRectangle(brush, rect);
                 }
             }
+#pragma warning restore CS0162 // 检测到无法访问的代码
 
             return;
             //e.Graphics.FillRectangle(Brushes.Green, Top);
@@ -668,6 +701,7 @@ namespace AppTest.FormType
         {
             base.WndProc(ref m);
             return;
+#pragma warning disable CS0162 // 检测到无法访问的代码
             if (m.Msg == 0x84)
             {
                 Point pos = new Point(m.LParam.ToInt32());
@@ -712,15 +746,19 @@ namespace AppTest.FormType
                 //    m.Result = (IntPtr)HTBOTTOM;
                 //}
             }
+#pragma warning restore CS0162 // 检测到无法访问的代码
         }
 
         #region -- 弃用 -- 控件大小随窗口大小等比例缩放 --
+#pragma warning disable CS0649 // 从未对字段“BaseDataForm.x”赋值，字段将一直保持其默认值 0
         private float x;
+#pragma warning restore CS0649 // 从未对字段“BaseDataForm.x”赋值，字段将一直保持其默认值 0
 
         private void BaseDataForm_MouseMove(object sender, MouseEventArgs e)
         {
             //Debug.a
             return;
+#pragma warning disable CS0162 // 检测到无法访问的代码
             if(this.MdiParent != null)
             {
                 var closeForm = FindChildForm(this);
@@ -745,6 +783,7 @@ namespace AppTest.FormType
 
                 this.Location = new Point(x, y);
             }
+#pragma warning restore CS0162 // 检测到无法访问的代码
         }
 
         /// <summary>
@@ -771,7 +810,9 @@ namespace AppTest.FormType
             return f;
         }
 
+#pragma warning disable CS0649 // 从未对字段“BaseDataForm.y”赋值，字段将一直保持其默认值 0
         private float y;
+#pragma warning restore CS0649 // 从未对字段“BaseDataForm.y”赋值，字段将一直保持其默认值 0
 
 
         private void setTag(Control cons)
@@ -816,17 +857,25 @@ namespace AppTest.FormType
             //return;
             float newx = (this.Width) / x;
             float newy = (Height) / y;
+#pragma warning disable CS0612 // “BaseDataForm.isSized”已过时
             if (isSized)
                 setControls(newx, newy, this);
+#pragma warning restore CS0612 // “BaseDataForm.isSized”已过时
         }
 
         private void autoSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+#pragma warning disable CS0612 // “BaseDataForm.isSized”已过时
+#pragma warning disable CS0612 // “BaseDataForm.isSized”已过时
             isSized = !isSized;
+#pragma warning restore CS0612 // “BaseDataForm.isSized”已过时
+#pragma warning restore CS0612 // “BaseDataForm.isSized”已过时
+#pragma warning disable CS0612 // “BaseDataForm.isSized”已过时
             if (isSized)
                 autoSizeToolStripMenuItem.Image = Properties.Resources.Checked;
             else
                 autoSizeToolStripMenuItem.Image = null;
+#pragma warning restore CS0612 // “BaseDataForm.isSized”已过时
         }
 
         private void BaseForm_SizeChanged(object sender, EventArgs e)

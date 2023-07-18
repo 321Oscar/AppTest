@@ -47,7 +47,7 @@ namespace AppTest.ViewModel
                 TotalPageStr = totalPage.ToString();
             }
         }
-        private string totalPageStr = "/共{x}页";
+        private string totalPageStr = "/共 ？页";
         public string TotalPageStr
         {
             get => totalPageStr;
@@ -82,7 +82,7 @@ namespace AppTest.ViewModel
         public DataGridView DataGridView { get; set; }
         public string QueryLog { get => queryLog; set { queryLog = value; NotifyPropertyChanged(); } }
 
-        public Task Query(bool page = true, int pageIdx = 1)
+        public Task Query(bool page = true, int pageIdx = 1, bool andorlike = false)
         {
             return Task.Run(new Action(async () => {
                 string sqlCount = "select Count(TimeStamp) from";
@@ -90,7 +90,14 @@ namespace AppTest.ViewModel
                     $" FormName = '{FormName}' and CreatedON > '{Start:yyyy-MM-dd HH:mm:ss}' and CreatedON < '{End:yyyy-MM-dd HH:mm:ss}'";
                 if (!string.IsNullOrEmpty(QueryName))
                 {
-                    sqlStr += $" and SignalName like '%{QueryName}%'";
+                    if (!andorlike)
+                    {
+                        sqlStr += $" and SignalName like '%{QueryName}%'";
+                    }
+                    else
+                    {
+                        sqlStr += $" and SignalName = '{QueryName}'";
+                    }
                 }
                 string sqlorder = $" Order by CANTimeStamp asc";
                 QueryLog = "查询中...";
@@ -126,7 +133,7 @@ namespace AppTest.ViewModel
                         sqlAll += $" Limit {pageInfoCount} offset {offset}";
                     }
 
-                    var e = await db.QueryAsync<SignalEntity>(sqlAll );
+                    var e = await db.QueryAsync<SignalEntity>(sqlAll);
                     if (DataGridView.InvokeRequired) {
                         DataGridView.Invoke(new Action(() =>
                         {

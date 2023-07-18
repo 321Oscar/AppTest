@@ -74,6 +74,14 @@
 | v0.003.08-beta   | rollingCounter 界面 modifiedSignal方法重写 <br/>读写DID 时，若can0 就能读写，重新开启CAN接收函数时，不会开启CAN1的接收<br/>|  2023-05-11  |
 | v0.003.09-beta   | 新建dbcform时，同名信号增加判断 <br/>调用cmd窗口不可见<br/>Rlt界面调整用户控件的key|  2023-05-12  |
 | v0.003.10-beta   | 标准版本增加did（0x0304）写入，但不判断成功与否 <br/>dbc get 窗口，测试发送zlgcan使用自收自发导致接收不到数据<br/>xcp daq 时间戳计算方法改变，超出0xffff 后加0x10000<br/>历史数据界面增加更换X轴功能|  2023-05-18  |
+| v0.003.11-beta   | set界面增加信号单独步长 <br/>get/set界面增加记录显示列<br/>scope界面修改y轴的间隔<br/>dataform修改内容布局，继承后可添加控件<br/>日志控件布局修改，减少占用界面空间<br/>修改显示信号详细接口，增加复用性|  2023-06-01  |
+| v0.003.11-beta-20230607  | set界面setcontrol保留 <br/>增加保存set界面的步长<br/>form创建后canchannel可变|  2023-06-07  |
+| v0.003.11-beta-20230609  | set界面step设为1报错|  2023-06-09  |
+| v0.003.11-beta-20230613  | metrotab中的控件dock.fill 改为achor（Fill会导致左上角有灰条）|  2023-06-13  |
+| v0.003.11-beta-20230614  | 更新dbc协议文件后，信号的customName清空，须保留|  2023-06-14  |
+| v0.003.11-beta-20230628  | 新建xcp窗口加载信号报错（判断了formitem的formtype，而新建的没有formitem） |  2023-06-28  |
+| v0.003.11-beta-2023062801  | xcp meas/char信号判断错误|  2023-06-28  |
+| v0.003.11-beta-20230629  | xcp daq窗口灰边<br/>meas/char信号判断错误，应该是set窗口不加载measurements，而不是get窗口不加载character<br/>seedNKeyDll.dll 更新，原先的有依赖项 msvcr100d.dll & kerner.dll 或者msvcr100.dll 需要在sysWOW目录下有这些dll才能调用|  2023-06-29  |
 注：该软件使用CAN的驱动版本为 ZLGCAN 2.2.0 ，若打开设备失败则安装对应版本驱动!
 
 ![123](ReadMeImg/image-20211206134506794.png)

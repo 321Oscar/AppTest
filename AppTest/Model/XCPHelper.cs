@@ -45,39 +45,39 @@ namespace AppTest.Model
                     break;
                 case XCPValueType.UBYTE:
                     //case XCPValueType.UBYTE:
-                    UInt16 ui = Convert.ToUInt16(writeData);
+                    UInt16 ui = Convert.ToUInt16(Convert.ToDouble(writeData));
                     rntData[0] = Convert.ToByte(ui);
                     break;
-                case XCPValueType.BYTE:
-                    Int16 i = Convert.ToInt16(writeData);
-                    rntData[0] = Convert.ToByte(i);
+                case XCPValueType.SBYTE:
+                    Int16 i = Convert.ToInt16(Convert.ToDouble(writeData));
+                    rntData[0] = Convert.ToByte(i & 0xff);
                     break;
                 case XCPValueType.UWORD:
                     {
-                        UInt64 temp = Convert.ToUInt64(writeData);
+                        UInt64 temp = Convert.ToUInt32(Convert.ToDouble(writeData));
                         rntData[1] = Convert.ToByte(temp & 0xff);//
                         rntData[0] = Convert.ToByte((temp >> 8) & 0xff);//
                     }
                     break;
                 case XCPValueType.SWORD:
                     {
-                        Int64 temp = Convert.ToInt64(writeData);
+                        Int64 temp = Convert.ToInt32(Convert.ToDouble(writeData));
                         rntData[1] = Convert.ToByte(temp & 0xff);//
                         rntData[0] = Convert.ToByte((temp >> 8) & 0xff);//
                     }
                     break;
                 case XCPValueType.ULONG:
                     {
-                        UInt64 temp = Convert.ToUInt64(writeData);
+                        UInt64 temp = Convert.ToUInt64(Convert.ToDouble(writeData));
                         rntData[3] = Convert.ToByte(temp & 0xff);//
                         rntData[2] = Convert.ToByte((temp >> 8) & 0xff);//
                         rntData[1] = Convert.ToByte((temp >> 16) & 0xff);//
                         rntData[0] = Convert.ToByte((temp >> 24) & 0xff);//
                     }
                     break;
-                case XCPValueType.LONG:
+                case XCPValueType.SLONG:
                     {
-                        Int64 temp = Convert.ToInt64(writeData);
+                        Int64 temp = Convert.ToInt64(Convert.ToDouble(writeData));
                         rntData[3] = Convert.ToByte(temp & 0xff);//
                         rntData[2] = Convert.ToByte((temp >> 8) & 0xff);//
                         rntData[1] = Convert.ToByte((temp >> 16) & 0xff);//
@@ -141,7 +141,7 @@ namespace AppTest.Model
                 case XCPValueType.UBYTE:
                     rntData = new byte[] { Convert.ToByte(writeData) };
                     break;
-                case XCPValueType.BYTE:
+                case XCPValueType.SBYTE:
                     rntData = BitConverter.GetBytes(Convert.ToSByte(writeData));
                     break;
                 case XCPValueType.UWORD:
@@ -153,7 +153,7 @@ namespace AppTest.Model
                 case XCPValueType.ULONG:
                     rntData = BitConverter.GetBytes(Convert.ToUInt32(writeData));
                     break;
-                case XCPValueType.LONG:
+                case XCPValueType.SLONG:
                     rntData = BitConverter.GetBytes(Convert.ToInt32(writeData));
                     break;
                 case XCPValueType.FLOAT32:
@@ -168,7 +168,7 @@ namespace AppTest.Model
                 default:
                     throw new ArgumentException($"Unsupported value type: {valueType}");
             }
-
+            
             if (byteorder == 0) //intel
             {
                 Array.Reverse(rntData);
@@ -244,10 +244,10 @@ namespace AppTest.Model
                 case XCPValueType.UWORD:
                 case XCPValueType.SWORD:
                 case XCPValueType.ULONG:
-                case XCPValueType.LONG:
+                case XCPValueType.SLONG:
                     return Convert.ToString(temp);
-                case XCPValueType.BYTE:
-                    return Convert.ToString((int)temp);
+                case XCPValueType.SBYTE:
+                    return Convert.ToChar((int)temp).ToString();
                 case XCPValueType.FLOAT32:
                     {
                         if (signal.ByteOrder_int == 0)
@@ -279,11 +279,11 @@ namespace AppTest.Model
             {
                 { XCPValueType.BOOLEAN, data => Convert.ToString(temp) },
                 { XCPValueType.UBYTE, data => Convert.ToString(temp) },
-                { XCPValueType.BYTE, data => Convert.ToString((int)temp) },
+                { XCPValueType.SBYTE, data => Convert.ToString((sbyte)Convert.ToByte(temp)) },
                 { XCPValueType.UWORD, data => Convert.ToString(temp) },
-                { XCPValueType.SWORD, data => Convert.ToString(temp) },
+                { XCPValueType.SWORD, data => Convert.ToString((short)Convert.ToUInt16(temp)) },
                 { XCPValueType.ULONG, data => Convert.ToString(temp) },
-                { XCPValueType.LONG, data => Convert.ToString(temp) },
+                { XCPValueType.SLONG, data => Convert.ToString((int)Convert.ToUInt32(temp)) },
                 { XCPValueType.FLOAT32, data =>
                     {
                         if (signal.ByteOrder_int == 0)
@@ -363,13 +363,13 @@ namespace AppTest.Model
                 List<string> valueTypes = new List<string>();
                 valueTypes.Add(XCPValueType.BOOLEAN.ToString());
                 valueTypes.Add(XCPValueType.UBYTE.ToString());
-                valueTypes.Add(XCPValueType.LONG.ToString());
+                valueTypes.Add(XCPValueType.SLONG.ToString());
                 valueTypes.Add(XCPValueType.SWORD.ToString());
                 valueTypes.Add(XCPValueType.UWORD.ToString());
                 valueTypes.Add(XCPValueType.ULONG.ToString());
                 valueTypes.Add(XCPValueType.FLOAT32.ToString());
                 valueTypes.Add(XCPValueType.FLOAT64.ToString());
-                valueTypes.Add(XCPValueType.BYTE.ToString());
+                valueTypes.Add(XCPValueType.SBYTE.ToString());
                 valueTypes.Add(XCPValueType.Lookup1D_BOOLEAN.ToString());
 
                 var ty = valueTypes.Find(x => record.ToUpper().Contains(x));

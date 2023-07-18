@@ -261,12 +261,64 @@ namespace AppTest.Helper
 
         20230613
         metrotab中的控件dock.fill 改为achor（Fill会导致左上角有灰条）
+
+        20230614
+        更新dbc协议文件后，信号的customName清空，须保留
+
+        20230628
+        新建xcp窗口加载信号报错（判断了formitem的formtype，而新建的没有formitem）
+        xcp meas/char信号判断错误
+
+        20230629
+        xcp daq窗口灰边
+        meas/char信号判断错误，应该是set窗口不加载measurements，而不是get窗口不加载character
+        seedNKeyDll.dll 更新，原先的有依赖项 msvcr100d.dll & kerner.dll 或者msvcr100.dll 需要在sysWOW目录下有这些dll才能调用
+
+        20230706
+        新建xcp窗口时，若先选类型在选通道，daq事件通道未获取
+        XCP Daq窗口增加列表显示控制
+
+        20230707
+        修改信号时，会加载两遍信号（调用异步导致？具体原因未知）只能在add时判断是否有重复信号
+
+        20230711
+        XCP sbyte 支持负数
+        get xcp event 增加重试三次
+        2023071101
+        sword, slong 支持负数
+
+        20230712
+        增加 XCP数据超限不发送的规则
+
+        20230713
+        更新a2l文件时，更新信号
+
+        20230714
+        rollingcounter 发送失败不停止发送线程
+        修改窗口通道时，无法获取daq事件
+        修改窗口信号时，会加载两次选中信号
+        xcp daq 默认第一个事件
+
+        20230717
+        存储时间记录:点击存储数据后，修改起始事件为当前时间，结束时间为最大时间
+        查询：分为模糊匹配和全字匹配：增加选中按钮
+        RollingCount：发送失败后 重启连接
+
+        2023071701
+        重写CAN接口，发送失败后重连三次后再发送失败
+
+        20230718
+        更换软件logo
+
+        2023071801
+        修改CAN接口后，can1未打开
+        发送失败重启改为lock，提到rollingcounter界面重启CAN，取消关闭CAN，直接InitCan
          */
 
         /// <summary>
         /// 版本号
         /// </summary>
-        public const string SoftVersion = "v0.003.11-beta-20230613";
+        public const string SoftVersion = "v0.003.12-beta-2023071801";
 
         /// <summary>
         /// Protect = 1时，版本号为10.xxx.xx

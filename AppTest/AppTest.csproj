@@ -77,6 +77,30 @@
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
@@ -255,6 +279,7 @@
     <Compile Include="Model\DAQProperty.cs" />
     <Compile Include="Model\Interface\DBCAForm.cs" />
     <Compile Include="Model\Interface\IDataParse.cs" />
+    <Compile Include="Model\Interface\ILogForm.cs" />
     <Compile Include="Model\Interface\IXCPDAQ.cs" />
     <Compile Include="Model\LogModel.cs" />
     <Compile Include="Model\ModelHelper.cs" />
@@ -340,6 +365,12 @@
     </Compile>
     <Compile Include="View\FormType\LicenseForm.Designer.cs">
       <DependentUpon>LicenseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormType\ProjectMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\FormType\ProjectMainForm.Designer.cs">
+      <DependentUpon>ProjectMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\FormType\ProtocolsForm.cs">
       <SubType>Form</SubType>
@@ -569,8 +600,14 @@
     <EmbeddedResource Include="View\FormType\LicenseForm.resx">
       <DependentUpon>LicenseForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\FormType\ProjectMainForm.resx">
+      <DependentUpon>ProjectMainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\FormType\ProtocolsForm.resx">
       <DependentUpon>ProtocolsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormType\XCPScopeForm.resx">
+      <DependentUpon>XCPScopeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\UC\LogListview.resx">
       <DependentUpon>LogListview.cs</DependentUpon>
@@ -766,6 +803,12 @@
     <None Include="Resources\Image\导入.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\a2lparser.jar">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Config\readelf.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="kerneldlls\CAN232.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1052,10 +1095,14 @@
     <Content Include="kerneldlls\ZlgCloud.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="logo.ico" />
+    <Content Include="logo2.ico" />
+    <None Include="Resources\bmp1.bmp" />
     <Content Include="Resources\Image\debug.png" />
     <Content Include="Resources\Image\error.png" />
     <Content Include="Resources\Image\info.png" />
     <Content Include="Resources\Image\warn.png" />
+    <None Include="Resources\leapLOGO.bmp" />
     <Content Include="UDSDependency\ControlCAN.dll" />
     <Content Include="UDSDependency\ControlCAN2e-u.dll" />
     <Content Include="UDSDependency\ControlCAN2e.dll" />
@@ -1083,9 +1130,9 @@
       <Project>{8b9cb7ea-2149-4a1c-962e-593ff6c6c8e5}</Project>
       <Name>DBCLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\Platforms\ELFTest\ELFTest.csproj">
+    <ProjectReference Include="..\..\..\Platforms\ELFTest\ELFA2LTool.csproj">
       <Project>{cb24d50b-400a-4d25-bfb6-6c0c85791c7f}</Project>
-      <Name>ELFTest</Name>
+      <Name>ELFA2LTool</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Platforms\LPCanControl\LPCanControl.csproj">
       <Project>{2d4a9545-cbab-4d8d-82c3-74c2c5b9b4bb}</Project>

@@ -19,7 +19,9 @@ namespace AppTest.FormType.Helper
             new Lazy<LeapMessageBox>(() => new LeapMessageBox());
         //static List<MessageBoxUC> boxes = new List<MessageBoxUC>();
         public static LeapMessageBox Instance { get { return lazy.Value; } }
+#pragma warning disable CS0169 // 从不使用字段“LeapMessageBox.messageBoxUC”
         MessageBoxUC messageBoxUC;
+#pragma warning restore CS0169 // 从不使用字段“LeapMessageBox.messageBoxUC”
         /// <summary>
         /// 提示框-右下角显示3秒
         /// </summary>

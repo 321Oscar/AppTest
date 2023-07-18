@@ -39,6 +39,7 @@
             this.cbbProtocolFiles = new System.Windows.Forms.ComboBox();
             this.btnImportProtocolFile = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbAuth = new System.Windows.Forms.CheckBox();
             this.tbSlaveID = new System.Windows.Forms.TextBox();
             this.lbSlaveID = new System.Windows.Forms.Label();
             this.tbMasterID = new System.Windows.Forms.TextBox();
@@ -64,7 +65,6 @@
             this.cbbDeviceType = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cbAuth = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.grbCanInfo.SuspendLayout();
             this.SuspendLayout();
@@ -102,6 +102,7 @@
             // btnCancel
             // 
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
@@ -151,6 +152,12 @@
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // cbAuth
+            // 
+            resources.ApplyResources(this.cbAuth, "cbAuth");
+            this.cbAuth.Name = "cbAuth";
+            this.cbAuth.UseVisualStyleBackColor = true;
             // 
             // tbSlaveID
             // 
@@ -321,16 +328,12 @@
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.panel1.Name = "panel1";
             // 
-            // cbAuth
-            // 
-            resources.ApplyResources(this.cbAuth, "cbAuth");
-            this.cbAuth.Name = "cbAuth";
-            this.cbAuth.UseVisualStyleBackColor = true;
-            // 
             // AddProjectForm
             // 
+            this.AcceptButton = this.btnConfirm;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.grbCanInfo);
             this.Controls.Add(this.btnCancel);

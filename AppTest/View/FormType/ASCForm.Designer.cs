@@ -205,7 +205,9 @@ namespace AppTest.FormType
         private System.Windows.Forms.TreeView tvAllNode;
         private MetroFramework.Controls.MetroComboBox metroComboBoxDBCFiles;
         private System.Windows.Forms.DataGridView dataGridView1;
+#pragma warning disable CS0169 // 从不使用字段“ASCForm.msgidDataGridViewTextBoxColumn”
         private System.Windows.Forms.DataGridViewTextBoxColumn msgidDataGridViewTextBoxColumn;
+#pragma warning restore CS0169 // 从不使用字段“ASCForm.msgidDataGridViewTextBoxColumn”
         private System.Windows.Forms.BindingSource aSCSignalBindingSource;
         private MetroFramework.Controls.MetroProgressBar metroProgressBar1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;

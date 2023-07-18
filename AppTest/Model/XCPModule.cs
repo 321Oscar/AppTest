@@ -92,11 +92,11 @@ namespace AppTest.Model
         BOOLEAN,
         //UBYTE,
         UBYTE,//一字节无符号整型
-        BYTE,//一字节有符号
+        SBYTE,//一字节有符号
         UWORD,//2字节无符号整型
         SWORD,//2字节有符号整型
         ULONG,//4字节无符号
-        LONG,//四字节有符号
+        SLONG,//四字节有符号
         FLOAT32,//4字节浮点型
         FLOAT64,//8字节浮点型
         Lookup1D_BOOLEAN,
@@ -544,7 +544,9 @@ namespace AppTest.Model
         private readonly ProjectItem projectItem;
         private readonly Queue<CANReceiveFrame> receiveData;
         private readonly AutoResetEvent ReceiveEvent;
+#pragma warning disable CS0649 // 从未对字段“XCPModule.byteOrder”赋值，字段将一直保持其默认值
         private Global.ByteOrder byteOrder;
+#pragma warning restore CS0649 // 从未对字段“XCPModule.byteOrder”赋值，字段将一直保持其默认值
         private XCPConnectStatus connectStatus = XCPConnectStatus.Init;
         private XCPMode current_mode = XCPMode.Polling;
         private XCPCMDStatus currentCMDStatus;
@@ -755,15 +757,20 @@ namespace AppTest.Model
             }
         }
 
+        private const int FREEDAQ = 0xD6;
+
         public XCPResponse FreeDAQ(uint canIndex)
         {
-            return SendCMD(new byte[] { 0xD6 }, out _, canIndex);
+            return SendCMD(new byte[] { FREEDAQ }, out _, canIndex);
         }
 
         public void GetDaqClock()
         {
 
         }
+
+        private const int GETDAQINFO = 0xDA;
+
         /// <summary>
         /// 
         /// </summary>
@@ -773,20 +780,32 @@ namespace AppTest.Model
         public DAQProperty GetDAQInfo(uint canIndex)
         {
             DAQProperty = null;
-
-            if (SendCMD(new byte[] { 0xDA }, out byte[] resData, canIndex) == XCPResponse.Ok)
+            int errCnt = 0;
+            do
             {
-                DAQProperty = new DAQProperty(resData);
-            }
-            else
-            {
-                throw new XCPException("DA 命令失败");
-            }
+                if (SendCMD(new byte[] { GETDAQINFO }, out byte[] resData, canIndex) == XCPResponse.Ok)
+                {
+                    DAQProperty = new DAQProperty(resData);
+                    break;
+                }
+                else
+                {
+                    errCnt++;
+                    if (errCnt > 2)
+                        break;
+                    
+                }
+            } while (true);
+           
+            if(errCnt == 3)
+                throw new XCPException("DA 命令失败:获取DAQ Info 失败");
 
             return DAQProperty;
         }
 
         public DAQGetDaqProcessRes GetdaqProcessResponse { get; private set; }
+
+        private const int GETDAQPROCESSRESOLUTION = 0xD9;
 
         /// <summary>
         /// DAQ 
@@ -795,7 +814,7 @@ namespace AppTest.Model
         /// <returns></returns>
         public XCPResponse GetDAQProcessResolution(uint canIndex)
         {
-            var res = SendCMD(new byte[] { 0xD9 }, out byte[] data, canIndex);
+            var res = SendCMD(new byte[] { GETDAQPROCESSRESOLUTION }, out byte[] data, canIndex);
             GetdaqProcessResponse = new DAQGetDaqProcessRes(data, (byte)this.ByteOrder);
             if (res != XCPResponse.Ok)
             {
@@ -804,8 +823,10 @@ namespace AppTest.Model
             return res;
         }
 
+        private const int GETDAQEVENTNAME = 0xD7;
+
         /// <summary>
-        /// 获取事件通道信息 DA
+        /// 获取事件通道信息 D7
         /// </summary>
         /// <returns>List string</returns>
         /// <exception cref="XCPException"></exception>
@@ -829,41 +850,69 @@ namespace AppTest.Model
             if (DAQProperty == null)
                 GetDAQInfo(canIndex);
 
-            for (int i = 0; i < DAQProperty.Max_Event_Channel; i++)
+            int errCnt = 0;bool getevent = true;
+            do
             {
-                byte[] sendData = new byte[4];
-                sendData[0] = 0xD7;
-                sendData[1] = 0x00;
-                var d = BitConverterExt.GetBytes((short)i, false);
-                sendData[2] = d[0];
-                sendData[3] = d[1];
-                if (SendCMD(sendData, out byte[] resData, canIndex) == XCPResponse.Ok)
+                for (int i = 0; i < DAQProperty.Max_Event_Channel; i++)
                 {
-                    DAQEventProperty dAQEventProperty = new DAQEventProperty(resData);
-
-                    if (SendCMD(new byte[] { 0xF5, dAQEventProperty.EventChannelNameLength }, out List<byte[]> resDatas, canIndex, (uint)dAQEventProperty.EventChannelNameLength / 7 + 1) == XCPResponse.Ok)
+                    byte[] sendData = new byte[4];
+                    sendData[0] = GETDAQEVENTNAME;
+                    sendData[1] = 0x00;
+                    var d = BitConverterExt.GetBytes((short)i, false);
+                    sendData[2] = d[0];
+                    sendData[3] = d[1];
+                    if (SendCMD(sendData, out byte[] resData, canIndex) == XCPResponse.Ok)
                     {
-                        List<byte> nameBytes = new List<byte>();
-                        var len = dAQEventProperty.EventChannelNameLength;
-                        for (int j = 0; j < resDatas.Count; j++)
-                        {
-                            var len1 = len / 7 > 0 ? 7 : len % 7;
-                            len -= 7;
-                            //从第二位开始，第一位是FF
-                            for (int m = 1; m < len1 + 1; m++)
-                            {
-                                nameBytes.Add(resDatas[j][m]);
-                            }
+                        DAQEventProperty dAQEventProperty = new DAQEventProperty(resData);
 
+                        if (SendCMD(new byte[] { 0xF5, dAQEventProperty.EventChannelNameLength }, out List<byte[]> resDatas, canIndex, (uint)dAQEventProperty.EventChannelNameLength / 7 + 1) == XCPResponse.Ok)
+                        {
+                            List<byte> nameBytes = new List<byte>();
+                            var len = dAQEventProperty.EventChannelNameLength;
+                            for (int j = 0; j < resDatas.Count; j++)
+                            {
+                                var len1 = len / 7 > 0 ? 7 : len % 7;
+                                len -= 7;
+                                //从第二位开始，第一位是FF
+                                for (int m = 1; m < len1 + 1; m++)
+                                {
+                                    nameBytes.Add(resDatas[j][m]);
+                                }
+
+                            }
+                            dAQEventProperty.EventName = System.Text.Encoding.ASCII.GetString(nameBytes.ToArray());
+                            EventNames.Add(dAQEventProperty.EventName);
                         }
-                        dAQEventProperty.EventName = System.Text.Encoding.ASCII.GetString(nameBytes.ToArray());
-                        EventNames.Add(dAQEventProperty.EventName);
+                        else
+                        {
+                            getevent = false;
+                            errCnt++;
+                        }
+                    }
+                    else
+                    {
+                        getevent = false; 
+                        errCnt++;
                     }
                 }
-            }
+
+                if (getevent || errCnt > 2)
+                    break;
+            } while (true);
+
+           
 
             return EventNames;
         }
+
+        private const int INITDAQ = 0xD5;
+        private const int ODTINTODAQ = 0xD4;
+        private const int ENTRYINTOODT = 0xD3;
+        private const int SELECTDAQODT = 0xE2;
+        private const int SETADDRFORODT = 0xE1;
+        private const int SERDAQMODE = 0xE0;
+        private const int SELECTDAQ = 0xDE;
+        private const int GETDAQCLOCK = 0xDC;
 
         /// <summary>
         /// 根据信号，通道，配置DAQ列表
@@ -885,7 +934,7 @@ namespace AppTest.Model
             //-根据DAQCount分配DAQ组（0xD5）
             short daqCount = (short)daqList.Count;
             byte[] sendData = new byte[8];
-            sendData[0] = 0xD5;
+            sendData[0] = INITDAQ;
             sendData[1] = 0x00;
             var number = BitConverterExt.GetBytes(daqCount, false);//daq Count
             sendData[2] = number[0];
@@ -900,7 +949,7 @@ namespace AppTest.Model
             //-根据DAQ数量，将ODT填入DAQ列表中（0xD4）
             for (short n = DAQProperty.Min_DAQ; n < DAQProperty.Min_DAQ + daqCount; n++)
             {
-                sendData[0] = 0xD4;
+                sendData[0] = ODTINTODAQ;
                 sendData[1] = 0x00;
                 number = BitConverterExt.GetBytes(n, false);//daq list number
                 sendData[2] = number[0];
@@ -915,7 +964,7 @@ namespace AppTest.Model
             {
                 for (byte j = 0; j < daqList[n].ODTs.Count; j++)
                 {
-                    sendData[0] = 0xD3;
+                    sendData[0] = ENTRYINTOODT;
                     sendData[1] = 0x00;
                     number = BitConverterExt.GetBytes(n, false);            //daq list number
                     sendData[2] = number[0];
@@ -932,7 +981,7 @@ namespace AppTest.Model
             {
                 for (byte j = 0; j < daqList[n].ODTs.Count; j++)
                 {
-                    sendData[0] = 0xE2;
+                    sendData[0] = SELECTDAQODT;
                     sendData[1] = 0x00;
                     number = BitConverterExt.GetBytes(n, false);            //DAQ List Number
                     sendData[2] = number[0];
@@ -944,7 +993,7 @@ namespace AppTest.Model
 
                     for (byte i = 0; i < daqList[n].ODTs[j].ODTEntries.Count; i++)
                     {
-                        sendData[0] = 0xE1;
+                        sendData[0] = SETADDRFORODT;
                         sendData[1] = 0xFF;
                         sendData[2] = daqList[n].ODTs[j].ODTEntries[i].Size;
                         sendData[3] = daqList[n].ODTs[j].ODTEntries[i].AddressExtension;
@@ -961,7 +1010,7 @@ namespace AppTest.Model
             //-设置每个DAQ的模式（0xE0）,-选中DAQ（0xDE）
             for (short i = 0; i < daqList.Count; i++)
             {
-                sendData[0] = 0xE0;
+                sendData[0] = SERDAQMODE;
                 sendData[1] = 0x10;//Mode=>direction=daq,timestamped
                 var daqlistnumber = BitConverterExt.GetBytes(i, (int)byteOrder);
                 sendData[2] = daqlistnumber[0];
@@ -974,7 +1023,7 @@ namespace AppTest.Model
                 if (SendCMD(sendData, out res, canIndex) != XCPResponse.Ok)
                     throw new XCPException($"设置每个DAQ的模式（0xE0） 失败:" + XCPHelper.ParseErrCode(res[1]));
 
-                sendData[0] = 0xDE;
+                sendData[0] = SELECTDAQ;
                 sendData[1] = 0x02;//mode => select
                 var daqListNumber = BitConverterExt.GetBytes(i, (int)byteOrder);
                 sendData[2] = daqListNumber[0];
@@ -988,7 +1037,7 @@ namespace AppTest.Model
             }
 
             //-获取DAQ Clock（0xDC）
-            sendData[0] = 0xDC;
+            sendData[0] = GETDAQCLOCK;
             if (SendCMD(sendData, out _, canIndex) != XCPResponse.Ok)
                 return false;
 
@@ -1052,6 +1101,11 @@ namespace AppTest.Model
             }
         }
 
+        public const byte STOPALLDAQ = 0x00;
+        public const byte STARTSELECTEDDAQ = 0x01;
+        public const byte STOPSELECTEDDAQ = 0x02;
+        public const byte STD_StartStopDAQ = 0xDD;
+
         /// <summary>
         /// Mode：
         /// 00=stop all；
@@ -1062,7 +1116,7 @@ namespace AppTest.Model
         /// <returns></returns>
         public bool StartStopDAQ(byte mode, uint canIndex)
         {
-            byte[] sendData = new byte[] { 0xDD, mode };
+            byte[] sendData = new byte[] { STD_StartStopDAQ, mode };
             //sendData[1] = 0x01;mode =
             return SendCMD(sendData, out _, canIndex) == XCPResponse.Ok;
         }

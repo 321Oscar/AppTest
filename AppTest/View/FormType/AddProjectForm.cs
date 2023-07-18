@@ -202,7 +202,7 @@ namespace AppTest.FormType
             channelCount--;
         }
 
-        private void BtnSaveChannel_Click(object sender, EventArgs e)
+        private async void BtnSaveChannel_Click(object sender, EventArgs e)
         {
             CanIndexItem canIndex = projectItem.CanIndex.Find(x => x.CanChannel == cbbCanIndex.SelectedIndex);
             try
@@ -254,10 +254,38 @@ namespace AppTest.FormType
                         {
                             for (int i = 0; i < item.DBCSignals.SignalList.Count; i++)
                             {
-                                var newSignal = signals.Find(x => x.SignalName == item.DBCSignals.SignalList[i].SignalName && ((DBCSignal)x).MessageID == ((DBCSignal)item.DBCSignals.SignalList[i]).MessageID);
+                                var oldSignal = item.DBCSignals.SignalList[i];
+                                var newSignal = signals.Find(x => x.SignalName == oldSignal.SignalName && ((DBCSignal)x).MessageID == oldSignal.MessageID);
                                 if (newSignal != null)
                                 {
-                                    item.DBCSignals.SignalList[i] = (DBCSignal)newSignal;
+                                    var newdbcSignal = (DBCSignal)newSignal;
+                                    if (!string.IsNullOrWhiteSpace(oldSignal.CustomName))
+                                        newdbcSignal.CustomName = oldSignal.CustomName;
+                                    newdbcSignal.Step = oldSignal.Step;
+                                    item.DBCSignals.SignalList[i] = newdbcSignal;
+                                }
+                            }
+                        }
+                    }
+                }
+                else if ((ProtocolType)cbbProtocolType.SelectedItem == ProtocolType.XCP)
+                {
+                    var signals = await BaseProtocol.GetSingalsByProtocolTask(projectItem.CanIndex.Find(x => x.CanChannel == cbbCanIndex.SelectedIndex).ProtocolType, fileName);
+                    foreach (var item in projectItem.Form)
+                    {
+                        if (item.CanChannel == cbbCanIndex.SelectedIndex && item.XCPSingals != null)
+                        {
+                            for (int i = 0; i < item.XCPSingals.xCPSignalList.Count; i++)
+                            {
+                                var oldSignal = item.XCPSingals.xCPSignalList[i];
+                                var newSignal = signals.Find(x => x.SignalName == oldSignal.SignalName);
+                                if (newSignal != null)
+                                {
+                                    var newdbcSignal = (XCPSignal)newSignal;
+                                    if (!string.IsNullOrWhiteSpace(oldSignal.CustomName))
+                                        newdbcSignal.CustomName = oldSignal.CustomName;
+                                    newdbcSignal.Step = oldSignal.Step;
+                                    item.XCPSingals.xCPSignalList[i] = newdbcSignal;
                                 }
                             }
                         }

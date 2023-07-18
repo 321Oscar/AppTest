@@ -31,13 +31,13 @@ namespace AppTest.FormType
 
             base.MDIModeVisible = false;
 
-           
-
             InitStateStrip();
 
-            cycleTimeDataGridViewTextBoxColumn.Visible = false;
+            //cycleTimeDataGridViewTextBoxColumn.Visible = false;
 
             ChangeBaseColor(GetColor);
+
+            LoadDatGridViewContext();
         }
 
         protected override void InitSignalUC()
@@ -46,13 +46,13 @@ namespace AppTest.FormType
             BindingList<XCPSignal> bs = new BindingList<XCPSignal>(vm.XCPSignals.xCPSignalList);
             this.dataGridView1.DataSource = bs;
 
-            HistoryDataUC hduc = new HistoryDataUC();
-            hduc.ProjectName = this.OwnerProject.Name;
-            hduc.FormName = this.Name;
-            hduc.Dock = DockStyle.Fill;
+            HistoryDataView = new HistoryDataUC();
+            HistoryDataView.ProjectName = this.OwnerProject.Name;
+            HistoryDataView.FormName = this.Name;
+            HistoryDataView.Dock = DockStyle.Fill;
             metroTabPage2.Controls.Clear();
-            metroTabPage2.Controls.Add(hduc);
-            hduc.ChangeColorTheme(GetColor);
+            metroTabPage2.Controls.Add(HistoryDataView);
+            HistoryDataView.ChangeColorTheme(GetColor);
 
             ProjectForm parent = (ProjectForm)this.MdiParent;
             vm.XcpModule = parent.XcpModule;
@@ -61,24 +61,40 @@ namespace AppTest.FormType
         protected override void ModifiedSignals()
         {
             if (vm.ModifiedSignals())
+            {
                 ReLoadSignal();
+            }
+                
         }
 
         protected override void ReLoadSignal()
         {
             base.ReLoadSignal();
-
-            vm.XcpModule.StartStopDAQ(0x00, (uint)this.CanChannel);
-            IsGetdata = false;
-
-            if (!vm.InitDAQ((uint)this.CanChannel))
+            try
             {
-                ShowLog("DAQ 配置失败");
+                if (IsGetdata)
+                {
+                    vm.XcpModule.StartStopDAQ(XCPModule.STOPALLDAQ, (uint)this.CanChannel);
+                    IsGetdata = false;
+                }
+
+                if (!vm.InitDAQ((uint)this.CanChannel))
+                {
+                    ShowLog("DAQ 配置失败");
+                }
+                else
+                {
+                    vm.XcpModule.StartStopDAQ(XCPModule.STARTSELECTEDDAQ, (uint)this.CanChannel);
+                    IsGetdata = true;
+                }
             }
-            else
+            catch (USBCANOpenException canerr)
             {
-                vm.XcpModule.StartStopDAQ(0x01, (uint)this.CanChannel);
-                IsGetdata = true;
+                ShowLog(canerr.Message,LPLogLevel.Warn);
+            }
+            catch (Exception err)
+            {
+                ShowLog(err.Message, LPLogLevel.Error);
             }
         }
 
@@ -96,7 +112,7 @@ namespace AppTest.FormType
             this.Style = MetroFramework.MetroColorStyle.Blue;
             this.dataGridView1.DefaultCellStyle.SelectionBackColor = GetColor;
         }
-
+         
         public override void OnDataReceiveEvent(object sender, CANDataReceiveEventArgs args)
         {
             vm.OnDataRecieveEvent(sender, args);
@@ -106,6 +122,43 @@ namespace AppTest.FormType
         {
             metroButtonStart.Text = !get ? "Start" : "Stop";
             RegisterOrUnRegisterDataRecieve(get);
+        }
+
+        protected void LoadDatGridViewContext()
+        {
+            foreach (DataGridViewColumn item in dataGridView1.Columns)
+            {
+                if (string.IsNullOrEmpty(item.DataPropertyName))
+                    continue;
+                ToolStripMenuItem tsb = new ToolStripMenuItem();
+                tsb.Checked = item.Visible;
+                tsb.Click += Tsb_Click;
+                tsb.Text = item.HeaderText;
+                tsb.Name = item.Index.ToString();
+                contextMenuStrip1.Items.Add(tsb);
+            }
+            ToolStripMenuItem tsbShowInfo = new ToolStripMenuItem();
+            //tsb.Checked = item.Visible;
+            tsbShowInfo.Click += TsbShowInfo_Click; ;
+            tsbShowInfo.Text = "信号详细";
+            tsbShowInfo.Name = "SignalDetails";
+            contextMenuStrip1.Items.Add(new ToolStripSeparator());
+            contextMenuStrip1.Items.Add(tsbShowInfo);
+        }
+
+        private void TsbShowInfo_Click(object sender, EventArgs e)
+        {
+            if (this.dataGridView1.CurrentRow == null)
+                return;
+            vm.ShowSignalDetails(dataGridView1.CurrentRow);
+        }
+
+        private void Tsb_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsb = sender as ToolStripMenuItem;
+            int idx = int.Parse(tsb.Name);
+            dataGridView1.Columns[idx].Visible = !dataGridView1.Columns[idx].Visible;
+            tsb.Checked = dataGridView1.Columns[idx].Visible;
         }
 
         private void metroButtonStart_Click(object sender, EventArgs e)

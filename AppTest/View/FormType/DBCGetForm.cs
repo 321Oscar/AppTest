@@ -19,6 +19,7 @@ namespace AppTest.FormType
     public partial class DBCGetForm : DataForm
     {
         DBCGetViewModel vm;
+        
         public DBCGetForm()
         {
             InitializeComponent();
@@ -50,15 +51,21 @@ namespace AppTest.FormType
 
             if (FormType == FormType.Get)
             {
-                HistoryDataUC hduc = new HistoryDataUC();
-                hduc.ProjectName = this.OwnerProject.Name;
-                hduc.FormName = this.Name;
-                hduc.Dock = DockStyle.Fill;
+                HistoryDataView = new HistoryDataUC();
+                HistoryDataView.ProjectName = this.OwnerProject.Name;
+                HistoryDataView.FormName = this.Name;
+                HistoryDataView.Dock = DockStyle.Fill;
+                HistoryDataView.StartTime = this.SaveDataStartTime;
                 metroTabPage2.Controls.Clear();
-                metroTabPage2.Controls.Add(hduc);
-                hduc.ChangeColorTheme(GetColor);
+                metroTabPage2.Controls.Add(HistoryDataView);
+                HistoryDataView.ChangeColorTheme(GetColor);
             }
             base.InitSignalUC();
+        }
+
+        protected override void BaseDataForm_OnSaveTimelChange(DateTime signalValue)
+        {
+            base.BaseDataForm_OnSaveTimelChange(signalValue);
         }
 
         protected override void InitIDAndProtocolCmd()
@@ -208,6 +215,10 @@ namespace AppTest.FormType
                         if (USBCanManager.Instance.Send(OwnerProject, CanChannel, sendData: frame[0], $"[{this.FormType}]{this.Name}", sendtype))
                         {
                             ShowLog( $"{frame[0].ID:X}发送成功:{frame[0]}",LPLogLevel.Debug);
+                        }
+                        else
+                        {
+                            ShowLog($"{frame[0].ID:X}发送失败:{frame[0]}", LPLogLevel.Warn);
                         }
                     }
                     catch (USBCANOpenException ex)

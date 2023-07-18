@@ -70,14 +70,14 @@ namespace AppTest.ViewModel
         public void StartThread(uint canChannel)
         {
             // 启动get thread，分为10ms，100ms，1s三种线程
-                // 线程一直启动？一直在获取数据
-                // 按照cycletime 分组（三个信号列表），启动就新建线程（从列表中获取信号，遍历获取信号值），关闭则停止线程
-                tenThread = new Thread(Get10ms);
-                hThread = new Thread(Get100ms);
-                tThread = new Thread(Get1000ms);
-                tenThread.Start(canChannel);
-                hThread.Start(canChannel);
-                tThread.Start(canChannel);
+            // 线程一直启动？一直在获取数据
+            // 按照cycletime 分组（三个信号列表），启动就新建线程（从列表中获取信号，遍历获取信号值），关闭则停止线程
+            tenThread = new Thread(Get10ms);
+            hThread = new Thread(Get100ms);
+            tThread = new Thread(Get1000ms);
+            tenThread.Start(canChannel);
+            hThread.Start(canChannel);
+            tThread.Start(canChannel);
         }
 
         public void CloseThread()

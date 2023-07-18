@@ -3,7 +3,7 @@ using AppTest.FormType.Helper;
 using AppTest.Helper;
 using AppTest.Model;
 using AppTest.View.FormType;
-using ELFTest;
+using ELFA2LTool;
 using LPCanControl.UDS;
 using Newtonsoft.Json;
 using System;
@@ -134,11 +134,13 @@ namespace AppTest
 
                 if (File.Exists(dbFile))
                 {
+#pragma warning disable CS0168 // 声明了变量“ex”，但从未使用过
                     try
                     {
                         File.Delete(dbFile);
                     }
                     catch(Exception ex) { }
+#pragma warning restore CS0168 // 声明了变量“ex”，但从未使用过
                 }
             }
 
@@ -543,7 +545,9 @@ namespace AppTest
         private void treeViewRoot_DrawNode(object sender, DrawTreeNodeEventArgs e)
         {
             return;
+#pragma warning disable CS0162 // 检测到无法访问的代码
             e.DrawDefault = false;
+#pragma warning restore CS0162 // 检测到无法访问的代码
             Graphics g = e.Graphics;
             SolidBrush txtBrush = new SolidBrush(Color.FromArgb(255, 255, 255));//选中的文本颜色
             SolidBrush bacBrush = new SolidBrush(Color.FromArgb(224, 224, 224));//选中的背景颜色
@@ -608,6 +612,7 @@ namespace AppTest
         private void treeViewRoot_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             return;
+#pragma warning disable CS0162 // 检测到无法访问的代码
             if(e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 if (e.Node.IsExpanded)
@@ -623,6 +628,7 @@ namespace AppTest
 
                 //}
             }
+#pragma warning restore CS0162 // 检测到无法访问的代码
             //this.SelectedNode = e.Node;
         }
 

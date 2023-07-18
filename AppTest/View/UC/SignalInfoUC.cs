@@ -32,9 +32,13 @@ namespace AppTest.FormType
 
         private delegate void SignalValueChange(string signalValue);
 
+#pragma warning disable CS0067 // 从不使用事件“SignalInfoUC.OnSignalValueChange”
         private event SignalValueChange OnSignalValueChange;
+#pragma warning restore CS0067 // 从不使用事件“SignalInfoUC.OnSignalValueChange”
         [Obsolete("弃用，直接赋值Signal.StrValue")]
+#pragma warning disable CS0414 // 字段“SignalInfoUC.signalvalue”已被赋值，但从未使用过它的值
         private string signalvalue = "0";
+#pragma warning restore CS0414 // 字段“SignalInfoUC.signalvalue”已被赋值，但从未使用过它的值
 
         /// <summary>
         /// 信号的值
@@ -101,6 +105,7 @@ namespace AppTest.FormType
 
         private void SignalInfoUS_OnSignalValueChange(string signalValue)
         {
+#pragma warning disable CS0618 // “SignalInfoUC.IsShowDataChangeUI”已过时:“弃用,使用IPropertychanged接口实现UI变更”
             if (IsShowDataChangeUI)
             {
                 if (tbSignalData.InvokeRequired)
@@ -114,6 +119,7 @@ namespace AppTest.FormType
                     tbSignalData.Text = signalValue;
                 }
             }
+#pragma warning restore CS0618 // “SignalInfoUC.IsShowDataChangeUI”已过时:“弃用,使用IPropertychanged接口实现UI变更”
         }
 
         private void Splitter_DoubleClick(object sender, EventArgs e)

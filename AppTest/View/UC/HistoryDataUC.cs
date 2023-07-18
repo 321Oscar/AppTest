@@ -189,16 +189,32 @@ namespace AppTest.FormType
             }
         }
 
+        public void ChangeStartTime(DateTime dateTime)
+        {
+            dateTimePickerStart.Value = dateTime;
+        }
+
+        public DateTime StartTime
+        {
+            get => dateTimePickerStart.Value;
+            set
+            {
+                dateTimePickerStart.Value = value;
+                dateTimePickerEnd.Value = dateTimePickerEnd.MaxDate;
+            }
+        }
+
         private async void Query()
         {
             btnQuery.Enabled = false;
 
             try
             {
+                _historyViewModel.PageInfoCount = (int)this.nudPageIndex.Value;
                 _historyViewModel.Start = dateTimePickerStart.Value;
                 _historyViewModel.End = dateTimePickerEnd.Value;
                 //_historyViewModel.que = dateTimePickerEnd.Value;
-                await _historyViewModel.Query();
+                await _historyViewModel.Query(andorlike:metroCB_AndOrLike.Checked);
             }
             catch (Exception err)
             {
@@ -261,7 +277,7 @@ namespace AppTest.FormType
             _historyViewModel.Start = dateTimePickerStart.Value;
             _historyViewModel.End = dateTimePickerEnd.Value;
 
-            await _historyViewModel.Query(true, _historyViewModel.CurrentPage);
+            await _historyViewModel.Query(pageIdx: _historyViewModel.CurrentPage,andorlike:metroCB_AndOrLike.Checked);
 
             dataGridView1.Refresh();
         }
@@ -271,7 +287,7 @@ namespace AppTest.FormType
             if(_historyViewModel.CurrentPage > 1)
             {
                 _historyViewModel.CurrentPage--;
-                _historyViewModel.Query(pageIdx:_historyViewModel.CurrentPage);
+                _historyViewModel.Query(pageIdx:_historyViewModel.CurrentPage, andorlike: metroCB_AndOrLike.Checked);
             }
             
         }
@@ -281,7 +297,7 @@ namespace AppTest.FormType
             if (_historyViewModel.CurrentPage < _historyViewModel.TotalPage)
             {
                 _historyViewModel.CurrentPage++;
-                _historyViewModel.Query(pageIdx: _historyViewModel.CurrentPage);
+                _historyViewModel.Query(pageIdx: _historyViewModel.CurrentPage, andorlike: metroCB_AndOrLike.Checked);
             }
         }
 
@@ -289,14 +305,14 @@ namespace AppTest.FormType
         {
             if (e.KeyCode == Keys.Enter)
             {
-                _historyViewModel.Query(pageIdx: _historyViewModel.CurrentPage);
+                _historyViewModel.Query(pageIdx: _historyViewModel.CurrentPage, andorlike: metroCB_AndOrLike.Checked);
             }
         }
 
         private void btnPageEnd_Click(object sender, EventArgs e)
         {
             _historyViewModel.CurrentPage = _historyViewModel.TotalPage;
-            _historyViewModel.Query(pageIdx: _historyViewModel.CurrentPage);
+            _historyViewModel.Query(pageIdx: _historyViewModel.CurrentPage, andorlike: metroCB_AndOrLike.Checked);
         }
     }
 }

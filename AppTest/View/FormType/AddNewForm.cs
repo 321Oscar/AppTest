@@ -41,6 +41,7 @@ namespace AppTest.FormType
             dataGridView1.AllowUserToAddRows = false;
             //metroGrid_Signals.AutoGenerateColumns = false;
             dataGridView1.AutoGenerateColumns = false;
+            this.ShowIcon = false;
         }
 
         public AddNewForm(ProjectItem projectItem) : this()
@@ -54,6 +55,8 @@ namespace AppTest.FormType
                     cbbCanIndex.Items.Add(item.CanChannel);
                 }
             }
+
+            cbbCanIndex.SelectedItem = 0;
             Init();
         }
 
@@ -70,6 +73,10 @@ namespace AppTest.FormType
             isEdit = true;
             //cbbCanIndex.Enabled = false;
             cbbCanIndex.SelectedItem = formitem.CanChannel;
+            //当form的can通道是通道0时，修改selectitem 不触发selectIndexchange，就不会加载选择的信号
+            //当form的can通道为1时，则会触发selectIndexchange，不用再调用一次
+            //if (formitem.CanChannel == 0)
+            //    cbbCanIndex_SelectedIndexChanged(null, null);
             tbFormName.Enabled = false;
             tbFormName.Text = formitem.Name;
             cbbFormType.SelectedIndex = formitem.FormType;
@@ -79,7 +86,8 @@ namespace AppTest.FormType
             //显示有顺序要求，不用foreach改用for
             lbSelectedNode.Sorted = false;
 
-            
+            if (this.FormItem != null)
+                LoadSelectedSignals(this.FormItem);
         }
 
         public AddNewForm(ProjectItem projectItem, FormItem formitem, bool modifiedName) : this(projectItem, formitem)
@@ -140,12 +148,10 @@ namespace AppTest.FormType
             this.Close();
         }
 
-        private  void cbbCanIndex_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbbCanIndex_SelectedIndexChanged(object sender, EventArgs e)
         {
             LoadAllSignalsFromFile();
-
-            if (this.FormItem != null)
-                LoadSelectedSignals(this.FormItem);
+            ChangeType();
         }
 
         DBCSignals allSingals;
@@ -333,37 +339,21 @@ namespace AppTest.FormType
         /// </summary>
         protected virtual void ChangeType()
         {
-            //f(cbbFormType.SelectedIndex == (int)FormType.RollingCounter)
-            //{
-            //    allSingals.Signal = (from c in allSingals.Signal
-            //             where c.SignalName.ToLower().IndexOf("rolling") >= 0
-            //             select c).ToList();
-            //    tvAllNode.Nodes.Clear();
-            //    foreach (var item in allSingals.Signal)
-            //    {
-            //        if (tvAllNode.Nodes.Find(item.MessageID, false).Count() == 0)
-            //        {
-            //            TreeNode tn = new TreeNode()
-            //            {
-            //                Name = item.MessageID,
-            //                Text = item.MessageID
-            //            };
-            //            tvAllNode.Nodes.Add(tn);
-            //            tvAllNode.Nodes[tvAllNode.Nodes.Count - 1].Nodes.Add(item.SignalName);
-            //        }
-            //        else
-            //        {
-            //            tvAllNode.Nodes[item.MessageID].Nodes.Add(item.SignalName);
-            //        }
-
-            //        // listView1.Items.Add();
-            //        lbAllNode.Items.Add(item.SignalName);
-            //    }
-            //}
-            //else
-            //{
-            //    allSingals = BaseProtocol.GetSingalsByProtocol(projectItem.CanIndex.Find(x => x.CanChannel == cbbCanIndex.SelectedIndex).ProtocolType, fileName);
-            //}
+            switch (cbbFormType.SelectedIndex)
+            {
+                case (int)FormType.XCP_DAQ:
+                case (int)FormType.XCP_DAQScope:
+                    
+                    break;
+                case (int)FormType.Set://Set 对信号进行筛选，只能选character
+                    {
+                        cycleTimeDataGridViewTextBoxColumn1.Visible = false;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            //LoadSingalToTreeView(allSingals);
         }
 
         /// <summary>

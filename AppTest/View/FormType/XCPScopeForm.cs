@@ -7,20 +7,15 @@ using OxyPlot.Axes;
 using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace AppTest.FormType
 {
     public partial class XCPScopeForm : MeasureForm
     {
-        XCPPollingViewModel vm;
+        private readonly XCPPollingViewModel vm;
 
         public XCPScopeForm() : base(protocolType: ProtocolType.XCP)
         {
@@ -145,7 +140,9 @@ namespace AppTest.FormType
         protected override void AddValuetoPlotter()
         {
             return;
+#pragma warning disable CS0162 // 检测到无法访问的代码
             sw.Reset();
+#pragma warning restore CS0162 // 检测到无法访问的代码
             sw.Restart();
             ShowLog("");
             foreach (var item in vm.XCPSignals.xCPSignalList)

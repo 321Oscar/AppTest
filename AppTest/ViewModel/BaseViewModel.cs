@@ -30,7 +30,7 @@ namespace AppTest.ViewModel
 
         public SetLog ShowLog;
 
-        public delegate void SetLog(string log,LPLogLevel level = LPLogLevel.Info); 
+        public delegate void SetLog(string log,LPLogLevel level = LPLogLevel.Info,bool showtip = false); 
         public delegate void ModifiedGetState(bool getOrnot);
         /// <summary>
         /// 修改信号

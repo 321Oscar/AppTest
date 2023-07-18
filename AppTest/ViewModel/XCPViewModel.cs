@@ -15,9 +15,11 @@ namespace AppTest.ViewModel
         {
             AddNewForm editForm;
             editForm = new AddNewXcpForm(Form.OwnerProject, Form.OwnerProject.Form.Find(x => x.Name == Form.Name));
+            editForm.Tag = this.Form;
             if (editForm.ShowDialog() == DialogResult.OK)
             {
                 XCPSignals = editForm.FormItem.XCPSingals;
+                Form.CanChannel = editForm.FormItem.CanChannel;
                 //ReLoadSignal();
                 return true;
             }

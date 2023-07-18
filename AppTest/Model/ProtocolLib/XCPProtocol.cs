@@ -1233,9 +1233,9 @@ namespace AppTest.ProtocolLib
         private async Task<List<BaseSignal>> A2lFileParseWithjar(string filePath)
         {
             List<BaseSignal> signals = new List<BaseSignal>();
-            try
-            {
+            
                 string jsonOutput = string.Empty;
+                string err = string.Empty;
                 await Task.Run( () =>
                 {
                     string jarPath = @".\Config\a2lparser.jar";
@@ -1243,22 +1243,24 @@ namespace AppTest.ProtocolLib
                     p.StartInfo.FileName = "java";
                     p.StartInfo.Arguments = ($" -jar {jarPath} -mj -a2l {filePath}");
                     p.StartInfo.RedirectStandardOutput = true;
+                    p.StartInfo.RedirectStandardError = true;
                     p.StartInfo.UseShellExecute = false;
                     p.StartInfo.CreateNoWindow = true;
                     p.Start();
                     jsonOutput = p.StandardOutput.ReadToEnd();
                     if (string.IsNullOrEmpty(jsonOutput))
                     {
-                        jsonOutput = p.StandardError.ReadToEnd();
+                        err = p.StandardError.ReadToEnd();
                     }
                     p.WaitForExit();
                 });
-
+                if (string.IsNullOrEmpty(jsonOutput))
+                    throw new Exception("A2l解析错误：" + err);
                 var a2l = Asap2File.FromJson(jsonOutput);
 
-                if(a2l == null)
+                if (a2l == null)
                 {
-                    throw new Exception(jsonOutput);
+                    throw new Exception("A2l解析错误：" + jsonOutput);
                 }
 
                 foreach (var module in a2l.Project.Modules)
@@ -1276,20 +1278,25 @@ namespace AppTest.ProtocolLib
 
                     foreach (var chara in module.Characteristics)
                     {
-                        chara.Length = checkMeasureMentDatalen(chara.Deposit.ToString());
-                        chara.ValueType = XCPHelper.RecordStrConvert(chara.Deposit.ToString());
-                        chara.ECUAddress = chara.Address.ToString("X");
-                        chara.MeaOrCal = false;
-                        chara.Minimum = chara.LowerLimit;
-                        chara.Maximum = chara.UpperLimit;
-                        signals.Add(chara);
+                        var exsit = signals.Find(x => x.SignalName == chara.Name);
+                        if (exsit != null)
+                        {
+                            ((XCPSignal)exsit).MeaOrCal = false;
+                        }
+                        else
+                        {
+                            chara.Length = checkMeasureMentDatalen(chara.Deposit.ToString());
+                            chara.ValueType = XCPHelper.RecordStrConvert(chara.Deposit.ToString());
+                            chara.ECUAddress = chara.Address.ToString("X");
+                            chara.MeaOrCal = false;
+                            chara.Minimum = chara.LowerLimit;
+                            chara.Maximum = chara.UpperLimit;
+                            signals.Add(chara);
+                        }
+                        
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Error("A2lFileParseWithjar", ex);
-            }
+            
             return signals;
         }
 

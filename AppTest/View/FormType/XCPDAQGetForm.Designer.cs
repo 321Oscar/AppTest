@@ -34,27 +34,14 @@ namespace AppTest.FormType
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.customNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.signalNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.strValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.messageIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startBitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.byteOrderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.valueTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.factorDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.offsetDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cycleTimeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.commentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.minimumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.maximumDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lengthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.byteOrderintDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.whetherSendOrGetDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.dBCSignalBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.metroButtonStart = new MetroFramework.Controls.MetroButton();
+            this.customNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.signalNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.strValueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelContent.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.metroTabControl1.SuspendLayout();
@@ -126,162 +113,21 @@ namespace AppTest.FormType
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.customNameDataGridViewTextBoxColumn,
             this.signalNameDataGridViewTextBoxColumn,
-            this.strValueDataGridViewTextBoxColumn,
-            this.messageIDDataGridViewTextBoxColumn,
-            this.startBitDataGridViewTextBoxColumn,
-            this.byteOrderDataGridViewTextBoxColumn,
-            this.valueTypeDataGridViewTextBoxColumn,
-            this.factorDataGridViewTextBoxColumn,
-            this.offsetDataGridViewTextBoxColumn,
-            this.cycleTimeDataGridViewTextBoxColumn,
-            this.unitDataGridViewTextBoxColumn,
-            this.commentDataGridViewTextBoxColumn,
-            this.minimumDataGridViewTextBoxColumn,
-            this.maximumDataGridViewTextBoxColumn,
-            this.lengthDataGridViewTextBoxColumn,
-            this.byteOrderintDataGridViewTextBoxColumn,
-            this.whetherSendOrGetDataGridViewCheckBoxColumn});
+            this.strValueDataGridViewTextBoxColumn});
+            this.dataGridView1.ContextMenuStrip = this.contextMenuStrip1;
             this.dataGridView1.DataSource = this.dBCSignalBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(-4, 0);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 3);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(598, 317);
+            this.dataGridView1.Size = new System.Drawing.Size(598, 291);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             // 
-            // customNameDataGridViewTextBoxColumn
+            // contextMenuStrip1
             // 
-            this.customNameDataGridViewTextBoxColumn.DataPropertyName = "CustomName";
-            this.customNameDataGridViewTextBoxColumn.HeaderText = "CustomName";
-            this.customNameDataGridViewTextBoxColumn.Name = "customNameDataGridViewTextBoxColumn";
-            this.customNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // signalNameDataGridViewTextBoxColumn
-            // 
-            this.signalNameDataGridViewTextBoxColumn.DataPropertyName = "SignalName";
-            this.signalNameDataGridViewTextBoxColumn.HeaderText = "SignalName";
-            this.signalNameDataGridViewTextBoxColumn.Name = "signalNameDataGridViewTextBoxColumn";
-            this.signalNameDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // strValueDataGridViewTextBoxColumn
-            // 
-            this.strValueDataGridViewTextBoxColumn.DataPropertyName = "StrValue";
-            this.strValueDataGridViewTextBoxColumn.HeaderText = "StrValue";
-            this.strValueDataGridViewTextBoxColumn.Name = "strValueDataGridViewTextBoxColumn";
-            this.strValueDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // messageIDDataGridViewTextBoxColumn
-            // 
-            this.messageIDDataGridViewTextBoxColumn.DataPropertyName = "MessageID";
-            this.messageIDDataGridViewTextBoxColumn.HeaderText = "MessageID";
-            this.messageIDDataGridViewTextBoxColumn.Name = "messageIDDataGridViewTextBoxColumn";
-            this.messageIDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.messageIDDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // startBitDataGridViewTextBoxColumn
-            // 
-            this.startBitDataGridViewTextBoxColumn.DataPropertyName = "StartBit";
-            this.startBitDataGridViewTextBoxColumn.HeaderText = "StartBit";
-            this.startBitDataGridViewTextBoxColumn.Name = "startBitDataGridViewTextBoxColumn";
-            this.startBitDataGridViewTextBoxColumn.ReadOnly = true;
-            this.startBitDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // byteOrderDataGridViewTextBoxColumn
-            // 
-            this.byteOrderDataGridViewTextBoxColumn.DataPropertyName = "ByteOrder";
-            this.byteOrderDataGridViewTextBoxColumn.HeaderText = "ByteOrder";
-            this.byteOrderDataGridViewTextBoxColumn.Name = "byteOrderDataGridViewTextBoxColumn";
-            this.byteOrderDataGridViewTextBoxColumn.ReadOnly = true;
-            this.byteOrderDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // valueTypeDataGridViewTextBoxColumn
-            // 
-            this.valueTypeDataGridViewTextBoxColumn.DataPropertyName = "ValueType";
-            this.valueTypeDataGridViewTextBoxColumn.HeaderText = "ValueType";
-            this.valueTypeDataGridViewTextBoxColumn.Name = "valueTypeDataGridViewTextBoxColumn";
-            this.valueTypeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.valueTypeDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // factorDataGridViewTextBoxColumn
-            // 
-            this.factorDataGridViewTextBoxColumn.DataPropertyName = "Factor";
-            this.factorDataGridViewTextBoxColumn.HeaderText = "Factor";
-            this.factorDataGridViewTextBoxColumn.Name = "factorDataGridViewTextBoxColumn";
-            this.factorDataGridViewTextBoxColumn.ReadOnly = true;
-            this.factorDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // offsetDataGridViewTextBoxColumn
-            // 
-            this.offsetDataGridViewTextBoxColumn.DataPropertyName = "Offset";
-            this.offsetDataGridViewTextBoxColumn.HeaderText = "Offset";
-            this.offsetDataGridViewTextBoxColumn.Name = "offsetDataGridViewTextBoxColumn";
-            this.offsetDataGridViewTextBoxColumn.ReadOnly = true;
-            this.offsetDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // cycleTimeDataGridViewTextBoxColumn
-            // 
-            this.cycleTimeDataGridViewTextBoxColumn.DataPropertyName = "CycleTime";
-            this.cycleTimeDataGridViewTextBoxColumn.HeaderText = "CycleTime";
-            this.cycleTimeDataGridViewTextBoxColumn.Name = "cycleTimeDataGridViewTextBoxColumn";
-            this.cycleTimeDataGridViewTextBoxColumn.ReadOnly = true;
-            this.cycleTimeDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // unitDataGridViewTextBoxColumn
-            // 
-            this.unitDataGridViewTextBoxColumn.DataPropertyName = "Unit";
-            this.unitDataGridViewTextBoxColumn.HeaderText = "Unit";
-            this.unitDataGridViewTextBoxColumn.Name = "unitDataGridViewTextBoxColumn";
-            this.unitDataGridViewTextBoxColumn.ReadOnly = true;
-            this.unitDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // commentDataGridViewTextBoxColumn
-            // 
-            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
-            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
-            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
-            this.commentDataGridViewTextBoxColumn.ReadOnly = true;
-            this.commentDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // minimumDataGridViewTextBoxColumn
-            // 
-            this.minimumDataGridViewTextBoxColumn.DataPropertyName = "Minimum";
-            this.minimumDataGridViewTextBoxColumn.HeaderText = "Minimum";
-            this.minimumDataGridViewTextBoxColumn.Name = "minimumDataGridViewTextBoxColumn";
-            this.minimumDataGridViewTextBoxColumn.ReadOnly = true;
-            this.minimumDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // maximumDataGridViewTextBoxColumn
-            // 
-            this.maximumDataGridViewTextBoxColumn.DataPropertyName = "Maximum";
-            this.maximumDataGridViewTextBoxColumn.HeaderText = "Maximum";
-            this.maximumDataGridViewTextBoxColumn.Name = "maximumDataGridViewTextBoxColumn";
-            this.maximumDataGridViewTextBoxColumn.ReadOnly = true;
-            this.maximumDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // lengthDataGridViewTextBoxColumn
-            // 
-            this.lengthDataGridViewTextBoxColumn.DataPropertyName = "Length";
-            this.lengthDataGridViewTextBoxColumn.HeaderText = "Length";
-            this.lengthDataGridViewTextBoxColumn.Name = "lengthDataGridViewTextBoxColumn";
-            this.lengthDataGridViewTextBoxColumn.ReadOnly = true;
-            this.lengthDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // byteOrderintDataGridViewTextBoxColumn
-            // 
-            this.byteOrderintDataGridViewTextBoxColumn.DataPropertyName = "ByteOrder_int";
-            this.byteOrderintDataGridViewTextBoxColumn.HeaderText = "ByteOrder_int";
-            this.byteOrderintDataGridViewTextBoxColumn.Name = "byteOrderintDataGridViewTextBoxColumn";
-            this.byteOrderintDataGridViewTextBoxColumn.ReadOnly = true;
-            this.byteOrderintDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // whetherSendOrGetDataGridViewCheckBoxColumn
-            // 
-            this.whetherSendOrGetDataGridViewCheckBoxColumn.DataPropertyName = "WhetherSendOrGet";
-            this.whetherSendOrGetDataGridViewCheckBoxColumn.HeaderText = "WhetherSendOrGet";
-            this.whetherSendOrGetDataGridViewCheckBoxColumn.Name = "whetherSendOrGetDataGridViewCheckBoxColumn";
-            this.whetherSendOrGetDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.whetherSendOrGetDataGridViewCheckBoxColumn.Visible = false;
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // dBCSignalBindingSource
             // 
@@ -322,6 +168,27 @@ namespace AppTest.FormType
             this.metroButtonStart.UseSelectable = true;
             this.metroButtonStart.Click += new System.EventHandler(this.metroButtonStart_Click);
             // 
+            // customNameDataGridViewTextBoxColumn
+            // 
+            this.customNameDataGridViewTextBoxColumn.DataPropertyName = "CustomName";
+            this.customNameDataGridViewTextBoxColumn.HeaderText = "CustomName";
+            this.customNameDataGridViewTextBoxColumn.Name = "customNameDataGridViewTextBoxColumn";
+            this.customNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // signalNameDataGridViewTextBoxColumn
+            // 
+            this.signalNameDataGridViewTextBoxColumn.DataPropertyName = "SignalName";
+            this.signalNameDataGridViewTextBoxColumn.HeaderText = "SignalName";
+            this.signalNameDataGridViewTextBoxColumn.Name = "signalNameDataGridViewTextBoxColumn";
+            this.signalNameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // strValueDataGridViewTextBoxColumn
+            // 
+            this.strValueDataGridViewTextBoxColumn.DataPropertyName = "StrValue";
+            this.strValueDataGridViewTextBoxColumn.HeaderText = "StrValue";
+            this.strValueDataGridViewTextBoxColumn.Name = "strValueDataGridViewTextBoxColumn";
+            this.strValueDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // XCPDAQGetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -329,6 +196,7 @@ namespace AppTest.FormType
             this.ClientSize = new System.Drawing.Size(648, 526);
             this.Name = "XCPDAQGetForm";
             this.Text = "XCPDAQForm";
+            this.Controls.SetChildIndex(this.panelContent, 0);
             this.panelContent.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.metroTabControl1.ResumeLayout(false);
@@ -348,25 +216,12 @@ namespace AppTest.FormType
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource dBCSignalBindingSource;
         private MetroFramework.Controls.MetroButton metroButtonStart;
-        private System.Windows.Forms.DataGridViewTextBoxColumn customNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn signalNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn strValueDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn messageIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn startBitDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn byteOrderDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn valueTypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn factorDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn offsetDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cycleTimeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn unitDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn commentDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn minimumDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn maximumDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lengthDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn byteOrderintDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn whetherSendOrGetDataGridViewCheckBoxColumn;
         private MetroFramework.Controls.MetroTabControl metroTabControl1;
         private MetroFramework.Controls.MetroTabPage metroTabPage1;
         private MetroFramework.Controls.MetroTabPage metroTabPage2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn signalNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn strValueDataGridViewTextBoxColumn;
     }
 }

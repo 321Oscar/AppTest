@@ -88,7 +88,11 @@ namespace AppTest.FormType
 
         protected override void ChangeType()
         {
-            base.ChangeType();
+            if (cbbCanIndex.SelectedIndex < 0 && cbbCanIndex.Items.Count > 0)
+            {
+                LeapMessageBox.Instance.ShowInfo("先选择CAN通道");
+                return;
+            }
             switch (cbbFormType.SelectedIndex)
             {
                 case (int)FormType.XCP_DAQ:
@@ -96,11 +100,6 @@ namespace AppTest.FormType
                     eventNameDataGridViewTextBoxColumn.Visible = true;
                     eventIDDataGridViewTextBoxColumn.Visible = true;
                     DAQIDDataGridViewTextBoxColumn.Visible = true;
-                    if(cbbCanIndex.SelectedIndex < 0)
-                    {
-                        LeapMessageBox.Instance.ShowInfo("先选择CAN通道");
-                        return;
-                    }
                     try
                     {
                         var data = XCPModuleManager.GetXCPModule(this.projectItem).GetEventsName(CurrentCanValue);
@@ -110,7 +109,7 @@ namespace AppTest.FormType
                         }
                         else
                         {
-                            LeapMessageBox.Instance.ShowError("未获取到 XCP DAQ 事件通道信息", 20);
+                            MessageBox.Show("未获取到 XCP DAQ 事件通道信息","XCP",buttons: MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     catch (XCPException xcperr)
@@ -128,15 +127,18 @@ namespace AppTest.FormType
                         eventNameDataGridViewTextBoxColumn.Visible = false;
                         eventIDDataGridViewTextBoxColumn.Visible = false;
                         DAQIDDataGridViewTextBoxColumn.Visible = false;
+                        cycleTimeDataGridViewTextBoxColumn1.Visible = false;
+                        LoadSingalToTreeView(allSingals);
                     }
                     break;
                 default:
                     eventNameDataGridViewTextBoxColumn.Visible = false;
                     eventIDDataGridViewTextBoxColumn.Visible = false;
                     DAQIDDataGridViewTextBoxColumn.Visible = false;
+                    cycleTimeDataGridViewTextBoxColumn1.Visible = true;
                     break;
             }
-            LoadSingalToTreeView(allSingals);
+            
         }
 
         protected override bool CheckNameNull()
@@ -198,6 +200,9 @@ namespace AppTest.FormType
                 allSingals.xCPSignalList = new List<XCPSignal>();
                 foreach (var signal in await BaseProtocol.GetSingalsByProtocolTask(projectItem.CanIndex.Find(x => x.CanChannel == CurrentCanValue).ProtocolType, fileNames))
                 {
+                    if (allSingals.xCPSignalList.Find(x => x.SignalName == signal.SignalName) != null)
+                        continue;
+
                     if (signal is XCPSignal signal1)
                         allSingals.xCPSignalList.Add(signal1);
                 }
@@ -222,7 +227,7 @@ namespace AppTest.FormType
                 while (allSingals.xCPSignalList == null || allSingals.xCPSignalList.Count == 0 || count < 60);
 
             });
-
+            SelectedXcpSignals.Clear();
             foreach (var item in formitem.XCPSingals.xCPSignalList)
             {
                 SelectedXcpSignals.Add(item);
@@ -285,8 +290,16 @@ namespace AppTest.FormType
             {
                 if (signal.Checked && !(SelectedXcpSignals.Any(x => x.SignalName == signal.Text)))
                 {
-                    //lbSelectedNode.Items.Add(signal.Text);
-                    SelectedXcpSignals.Add(allSingals.xCPSignalList.Find(x => x.SignalName == signal.Text));
+                    var newsignal = allSingals.xCPSignalList.Find(x => x.SignalName == signal.Text);
+                    if (this.cbbFormType.SelectedIndex == (int)FormType.XCP_DAQ || this.cbbFormType.SelectedIndex == (int)FormType.XCP_DAQScope)
+                    {
+                        //默认第一个事件通道
+                        if(eventCombobox.Items.Count > 0)
+                        {
+                            newsignal.EventName = eventCombobox.Items[0].ToString();
+                        }
+                    }
+                    SelectedXcpSignals.Add(newsignal);
                 }
             }
         }
@@ -482,19 +495,20 @@ namespace AppTest.FormType
 
         private void LoadSingalToTreeView(XCPSignals signals)
         {
-            LoadSingalToTreeView(signals.xCPSignalList);
+            if (signals != null && signals.xCPSignalList.Count > 0)
+                LoadSingalToTreeView(signals.xCPSignalList);
         }
 
         private void LoadSingalToTreeView(List<XCPSignal> signals)
         {
-            bool isGetForm = this.formItem.FormType == (int)FormType.Get;
+            bool isGetForm = this.cbbFormType.SelectedIndex == (int)FormType.Set;
             if (signals != null && signals.Count > 0)
             {
                 tvAllNode.Nodes.Clear();
                 signals.Sort();
                 foreach (var item in signals)
                 {
-                    if (isGetForm)//Get 窗口，不能加载measurement
+                    if (isGetForm)//Set 窗口 不能加载measure
                     {
                         if (item.MeaOrCal)//
                             continue;

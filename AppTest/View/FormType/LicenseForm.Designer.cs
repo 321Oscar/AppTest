@@ -166,9 +166,15 @@ namespace AppTest.View.FormType
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
+#pragma warning disable CS0169 // 从不使用字段“LicenseForm.iDDataGridViewTextBoxColumn”
         private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
+#pragma warning restore CS0169 // 从不使用字段“LicenseForm.iDDataGridViewTextBoxColumn”
+#pragma warning disable CS0169 // 从不使用字段“LicenseForm.codeDataGridViewTextBoxColumn”
         private System.Windows.Forms.DataGridViewTextBoxColumn codeDataGridViewTextBoxColumn;
+#pragma warning restore CS0169 // 从不使用字段“LicenseForm.codeDataGridViewTextBoxColumn”
+#pragma warning disable CS0169 // 从不使用字段“LicenseForm.countDataGridViewTextBoxColumn”
         private System.Windows.Forms.DataGridViewTextBoxColumn countDataGridViewTextBoxColumn;
+#pragma warning restore CS0169 // 从不使用字段“LicenseForm.countDataGridViewTextBoxColumn”
         private System.Windows.Forms.Button btnFresh;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private UC.LogListview logListview1;

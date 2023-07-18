@@ -98,7 +98,9 @@ namespace AppTest.ViewModel
                             recieveData[daq.Event_Channel_Number].AddRange(data);
                         }
                         //解析数据
+#pragma warning disable CS4014 // 由于此调用不会等待，因此在此调用完成之前将会继续执行当前方法。请考虑将 "await" 运算符应用于调用结果。
                         ParseResponeToXCPSignalAsync(recieveData[daq.Event_Channel_Number], daq.Event_Channel_Number, item.TimeStampInt);
+#pragma warning restore CS4014 // 由于此调用不会等待，因此在此调用完成之前将会继续执行当前方法。请考虑将 "await" 运算符应用于调用结果。
 
                         //清空数据
                         recieveData[daq.Event_Channel_Number].Clear();
@@ -147,7 +149,7 @@ namespace AppTest.ViewModel
                 }
                 catch (ArgumentOutOfRangeException errRange)
                 {
-                    ShowLog?.Invoke($"{Form.Name} {signal.SignalName} size :{size};startInd:{signal.StartIndex};dataLength:{data.Count} {errRange.Message}" , LPLogLevel.Warn);
+                    ShowLog?.Invoke($"{Form.Name} {signal.SignalName} size :{size};startInd:{signal.StartIndex};dataLength:{data.Count} {errRange.Message};timestamp:{data[0]:X} {data[1]:X}" , LPLogLevel.Warn);
                 }
                 catch (Exception err)
                 {

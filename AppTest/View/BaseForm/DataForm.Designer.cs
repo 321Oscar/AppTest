@@ -30,13 +30,13 @@ namespace AppTest.FormType
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.dBCSignalBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dBCSignalBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -46,7 +46,6 @@ namespace AppTest.FormType
             this.btnAutoSend = new System.Windows.Forms.Button();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
             this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
-            this.metroGrid1 = new MetroFramework.Controls.MetroGrid();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.WhetherSendOrGet = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.messageIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,23 +55,7 @@ namespace AppTest.FormType
             this.columnStep = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnAdd = new System.Windows.Forms.DataGridViewButtonColumn();
             this.ColumnReduce = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
-            this.gbSetControls = new System.Windows.Forms.GroupBox();
-            this.metroComboBox_Signal = new MetroFramework.Controls.MetroComboBox();
-            this.btnSet = new System.Windows.Forms.Button();
-            this.tbCurrent = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnDivision = new System.Windows.Forms.Button();
-            this.btnMultip = new System.Windows.Forms.Button();
-            this.btnReduce = new System.Windows.Forms.Button();
-            this.nudStep = new System.Windows.Forms.NumericUpDown();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.gbGetControls = new System.Windows.Forms.GroupBox();
-            this.nudTimerInterval = new System.Windows.Forms.NumericUpDown();
-            this.btnGet = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.metroGrid1 = new MetroFramework.Controls.MetroGrid();
             this.messageIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.signalNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.customNameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,6 +78,23 @@ namespace AppTest.FormType
             this.colorBDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timeStampDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stepDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.gbSetControls = new System.Windows.Forms.GroupBox();
+            this.metroComboBox_Signal = new MetroFramework.Controls.MetroComboBox();
+            this.btnSet = new System.Windows.Forms.Button();
+            this.tbCurrent = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnDivision = new System.Windows.Forms.Button();
+            this.btnMultip = new System.Windows.Forms.Button();
+            this.btnReduce = new System.Windows.Forms.Button();
+            this.nudStep = new System.Windows.Forms.NumericUpDown();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.gbGetControls = new System.Windows.Forms.GroupBox();
+            this.nudTimerInterval = new System.Windows.Forms.NumericUpDown();
+            this.btnGet = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dBCSignalBindingSource)).BeginInit();
@@ -102,8 +102,8 @@ namespace AppTest.FormType
             this.gbRlcntControls.SuspendLayout();
             this.metroTabControl1.SuspendLayout();
             this.metroTabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).BeginInit();
             this.gbSetControls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudStep)).BeginInit();
             this.gbGetControls.SuspendLayout();
@@ -213,76 +213,6 @@ namespace AppTest.FormType
             this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage1.VerticalScrollbarSize = 9;
             // 
-            // metroGrid1
-            // 
-            this.metroGrid1.AllowUserToResizeRows = false;
-            this.metroGrid1.AutoGenerateColumns = false;
-            this.metroGrid1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.metroGrid1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.metroGrid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.metroGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle24;
-            this.metroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.metroGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.messageIDDataGridViewTextBoxColumn1,
-            this.signalNameDataGridViewTextBoxColumn1,
-            this.customNameDataGridViewTextBoxColumn1,
-            this.strValueDataGridViewTextBoxColumn1,
-            this.startBitDataGridViewTextBoxColumn,
-            this.byteOrderDataGridViewTextBoxColumn,
-            this.valueTypeDataGridViewTextBoxColumn,
-            this.factorDataGridViewTextBoxColumn,
-            this.offsetDataGridViewTextBoxColumn,
-            this.cycleTimeDataGridViewTextBoxColumn,
-            this.unitDataGridViewTextBoxColumn,
-            this.commentDataGridViewTextBoxColumn,
-            this.minimumDataGridViewTextBoxColumn,
-            this.maximumDataGridViewTextBoxColumn,
-            this.lengthDataGridViewTextBoxColumn,
-            this.byteOrderintDataGridViewTextBoxColumn,
-            this.whetherSendOrGetDataGridViewCheckBoxColumn,
-            this.colorRDataGridViewTextBoxColumn,
-            this.colorGDataGridViewTextBoxColumn,
-            this.colorBDataGridViewTextBoxColumn,
-            this.timeStampDataGridViewTextBoxColumn,
-            this.stepDataGridViewTextBoxColumn});
-            this.metroGrid1.ContextMenuStrip = this.contextMenuStrip1;
-            this.metroGrid1.DataSource = this.dBCSignalBindingSource;
-            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle25.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle25;
-            this.metroGrid1.EnableHeadersVisualStyles = false;
-            this.metroGrid1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.metroGrid1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.metroGrid1.Location = new System.Drawing.Point(50, 13);
-            this.metroGrid1.Name = "metroGrid1";
-            this.metroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle26;
-            this.metroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.metroGrid1.RowTemplate.Height = 23;
-            this.metroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.metroGrid1.Size = new System.Drawing.Size(305, 150);
-            this.metroGrid1.TabIndex = 4;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -352,8 +282,8 @@ namespace AppTest.FormType
             // strValueDataGridViewTextBoxColumn
             // 
             this.strValueDataGridViewTextBoxColumn.DataPropertyName = "StrValue";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.strValueDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.strValueDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.strValueDataGridViewTextBoxColumn.HeaderText = "StrValue";
             this.strValueDataGridViewTextBoxColumn.MinimumWidth = 8;
             this.strValueDataGridViewTextBoxColumn.Name = "strValueDataGridViewTextBoxColumn";
@@ -361,8 +291,8 @@ namespace AppTest.FormType
             // columnStep
             // 
             this.columnStep.DataPropertyName = "Step";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.columnStep.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.columnStep.DefaultCellStyle = dataGridViewCellStyle2;
             this.columnStep.HeaderText = "Step";
             this.columnStep.Name = "columnStep";
             this.columnStep.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -371,9 +301,9 @@ namespace AppTest.FormType
             // 
             // ColumnAdd
             // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle18.NullValue = "加";
-            this.ColumnAdd.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.NullValue = "加";
+            this.ColumnAdd.DefaultCellStyle = dataGridViewCellStyle3;
             this.ColumnAdd.HeaderText = "Add";
             this.ColumnAdd.Name = "ColumnAdd";
             this.ColumnAdd.Text = "Add";
@@ -381,13 +311,215 @@ namespace AppTest.FormType
             // 
             // ColumnReduce
             // 
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle23.NullValue = "减";
-            this.ColumnReduce.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.NullValue = "减";
+            this.ColumnReduce.DefaultCellStyle = dataGridViewCellStyle4;
             this.ColumnReduce.HeaderText = "Reduce";
             this.ColumnReduce.Name = "ColumnReduce";
             this.ColumnReduce.Text = "Reduce";
             this.ColumnReduce.ToolTipText = "减少";
+            // 
+            // metroGrid1
+            // 
+            this.metroGrid1.AllowUserToResizeRows = false;
+            this.metroGrid1.AutoGenerateColumns = false;
+            this.metroGrid1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metroGrid1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.metroGrid1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.metroGrid1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.metroGrid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.metroGrid1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.messageIDDataGridViewTextBoxColumn1,
+            this.signalNameDataGridViewTextBoxColumn1,
+            this.customNameDataGridViewTextBoxColumn1,
+            this.strValueDataGridViewTextBoxColumn1,
+            this.startBitDataGridViewTextBoxColumn,
+            this.byteOrderDataGridViewTextBoxColumn,
+            this.valueTypeDataGridViewTextBoxColumn,
+            this.factorDataGridViewTextBoxColumn,
+            this.offsetDataGridViewTextBoxColumn,
+            this.cycleTimeDataGridViewTextBoxColumn,
+            this.unitDataGridViewTextBoxColumn,
+            this.commentDataGridViewTextBoxColumn,
+            this.minimumDataGridViewTextBoxColumn,
+            this.maximumDataGridViewTextBoxColumn,
+            this.lengthDataGridViewTextBoxColumn,
+            this.byteOrderintDataGridViewTextBoxColumn,
+            this.whetherSendOrGetDataGridViewCheckBoxColumn,
+            this.colorRDataGridViewTextBoxColumn,
+            this.colorGDataGridViewTextBoxColumn,
+            this.colorBDataGridViewTextBoxColumn,
+            this.timeStampDataGridViewTextBoxColumn,
+            this.stepDataGridViewTextBoxColumn});
+            this.metroGrid1.ContextMenuStrip = this.contextMenuStrip1;
+            this.metroGrid1.DataSource = this.dBCSignalBindingSource;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.metroGrid1.DefaultCellStyle = dataGridViewCellStyle6;
+            this.metroGrid1.EnableHeadersVisualStyles = false;
+            this.metroGrid1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.metroGrid1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metroGrid1.Location = new System.Drawing.Point(50, 13);
+            this.metroGrid1.Name = "metroGrid1";
+            this.metroGrid1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.metroGrid1.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.metroGrid1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.metroGrid1.RowTemplate.Height = 23;
+            this.metroGrid1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.metroGrid1.Size = new System.Drawing.Size(305, 150);
+            this.metroGrid1.TabIndex = 4;
+            // 
+            // messageIDDataGridViewTextBoxColumn1
+            // 
+            this.messageIDDataGridViewTextBoxColumn1.DataPropertyName = "MessageID";
+            this.messageIDDataGridViewTextBoxColumn1.HeaderText = "MessageID";
+            this.messageIDDataGridViewTextBoxColumn1.Name = "messageIDDataGridViewTextBoxColumn1";
+            // 
+            // signalNameDataGridViewTextBoxColumn1
+            // 
+            this.signalNameDataGridViewTextBoxColumn1.DataPropertyName = "SignalName";
+            this.signalNameDataGridViewTextBoxColumn1.HeaderText = "SignalName";
+            this.signalNameDataGridViewTextBoxColumn1.Name = "signalNameDataGridViewTextBoxColumn1";
+            // 
+            // customNameDataGridViewTextBoxColumn1
+            // 
+            this.customNameDataGridViewTextBoxColumn1.DataPropertyName = "CustomName";
+            this.customNameDataGridViewTextBoxColumn1.HeaderText = "CustomName";
+            this.customNameDataGridViewTextBoxColumn1.Name = "customNameDataGridViewTextBoxColumn1";
+            // 
+            // strValueDataGridViewTextBoxColumn1
+            // 
+            this.strValueDataGridViewTextBoxColumn1.DataPropertyName = "StrValue";
+            this.strValueDataGridViewTextBoxColumn1.HeaderText = "StrValue";
+            this.strValueDataGridViewTextBoxColumn1.Name = "strValueDataGridViewTextBoxColumn1";
+            // 
+            // startBitDataGridViewTextBoxColumn
+            // 
+            this.startBitDataGridViewTextBoxColumn.DataPropertyName = "StartBit";
+            this.startBitDataGridViewTextBoxColumn.HeaderText = "StartBit";
+            this.startBitDataGridViewTextBoxColumn.Name = "startBitDataGridViewTextBoxColumn";
+            // 
+            // byteOrderDataGridViewTextBoxColumn
+            // 
+            this.byteOrderDataGridViewTextBoxColumn.DataPropertyName = "ByteOrder";
+            this.byteOrderDataGridViewTextBoxColumn.HeaderText = "ByteOrder";
+            this.byteOrderDataGridViewTextBoxColumn.Name = "byteOrderDataGridViewTextBoxColumn";
+            // 
+            // valueTypeDataGridViewTextBoxColumn
+            // 
+            this.valueTypeDataGridViewTextBoxColumn.DataPropertyName = "ValueType";
+            this.valueTypeDataGridViewTextBoxColumn.HeaderText = "ValueType";
+            this.valueTypeDataGridViewTextBoxColumn.Name = "valueTypeDataGridViewTextBoxColumn";
+            // 
+            // factorDataGridViewTextBoxColumn
+            // 
+            this.factorDataGridViewTextBoxColumn.DataPropertyName = "Factor";
+            this.factorDataGridViewTextBoxColumn.HeaderText = "Factor";
+            this.factorDataGridViewTextBoxColumn.Name = "factorDataGridViewTextBoxColumn";
+            // 
+            // offsetDataGridViewTextBoxColumn
+            // 
+            this.offsetDataGridViewTextBoxColumn.DataPropertyName = "Offset";
+            this.offsetDataGridViewTextBoxColumn.HeaderText = "Offset";
+            this.offsetDataGridViewTextBoxColumn.Name = "offsetDataGridViewTextBoxColumn";
+            // 
+            // cycleTimeDataGridViewTextBoxColumn
+            // 
+            this.cycleTimeDataGridViewTextBoxColumn.DataPropertyName = "CycleTime";
+            this.cycleTimeDataGridViewTextBoxColumn.HeaderText = "CycleTime";
+            this.cycleTimeDataGridViewTextBoxColumn.Name = "cycleTimeDataGridViewTextBoxColumn";
+            // 
+            // unitDataGridViewTextBoxColumn
+            // 
+            this.unitDataGridViewTextBoxColumn.DataPropertyName = "Unit";
+            this.unitDataGridViewTextBoxColumn.HeaderText = "Unit";
+            this.unitDataGridViewTextBoxColumn.Name = "unitDataGridViewTextBoxColumn";
+            // 
+            // commentDataGridViewTextBoxColumn
+            // 
+            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
+            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
+            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
+            // 
+            // minimumDataGridViewTextBoxColumn
+            // 
+            this.minimumDataGridViewTextBoxColumn.DataPropertyName = "Minimum";
+            this.minimumDataGridViewTextBoxColumn.HeaderText = "Minimum";
+            this.minimumDataGridViewTextBoxColumn.Name = "minimumDataGridViewTextBoxColumn";
+            // 
+            // maximumDataGridViewTextBoxColumn
+            // 
+            this.maximumDataGridViewTextBoxColumn.DataPropertyName = "Maximum";
+            this.maximumDataGridViewTextBoxColumn.HeaderText = "Maximum";
+            this.maximumDataGridViewTextBoxColumn.Name = "maximumDataGridViewTextBoxColumn";
+            // 
+            // lengthDataGridViewTextBoxColumn
+            // 
+            this.lengthDataGridViewTextBoxColumn.DataPropertyName = "Length";
+            this.lengthDataGridViewTextBoxColumn.HeaderText = "Length";
+            this.lengthDataGridViewTextBoxColumn.Name = "lengthDataGridViewTextBoxColumn";
+            // 
+            // byteOrderintDataGridViewTextBoxColumn
+            // 
+            this.byteOrderintDataGridViewTextBoxColumn.DataPropertyName = "ByteOrder_int";
+            this.byteOrderintDataGridViewTextBoxColumn.HeaderText = "ByteOrder_int";
+            this.byteOrderintDataGridViewTextBoxColumn.Name = "byteOrderintDataGridViewTextBoxColumn";
+            // 
+            // whetherSendOrGetDataGridViewCheckBoxColumn
+            // 
+            this.whetherSendOrGetDataGridViewCheckBoxColumn.DataPropertyName = "WhetherSendOrGet";
+            this.whetherSendOrGetDataGridViewCheckBoxColumn.HeaderText = "WhetherSendOrGet";
+            this.whetherSendOrGetDataGridViewCheckBoxColumn.Name = "whetherSendOrGetDataGridViewCheckBoxColumn";
+            // 
+            // colorRDataGridViewTextBoxColumn
+            // 
+            this.colorRDataGridViewTextBoxColumn.DataPropertyName = "ColorR";
+            this.colorRDataGridViewTextBoxColumn.HeaderText = "ColorR";
+            this.colorRDataGridViewTextBoxColumn.Name = "colorRDataGridViewTextBoxColumn";
+            // 
+            // colorGDataGridViewTextBoxColumn
+            // 
+            this.colorGDataGridViewTextBoxColumn.DataPropertyName = "ColorG";
+            this.colorGDataGridViewTextBoxColumn.HeaderText = "ColorG";
+            this.colorGDataGridViewTextBoxColumn.Name = "colorGDataGridViewTextBoxColumn";
+            // 
+            // colorBDataGridViewTextBoxColumn
+            // 
+            this.colorBDataGridViewTextBoxColumn.DataPropertyName = "ColorB";
+            this.colorBDataGridViewTextBoxColumn.HeaderText = "ColorB";
+            this.colorBDataGridViewTextBoxColumn.Name = "colorBDataGridViewTextBoxColumn";
+            // 
+            // timeStampDataGridViewTextBoxColumn
+            // 
+            this.timeStampDataGridViewTextBoxColumn.DataPropertyName = "TimeStamp";
+            this.timeStampDataGridViewTextBoxColumn.HeaderText = "TimeStamp";
+            this.timeStampDataGridViewTextBoxColumn.Name = "timeStampDataGridViewTextBoxColumn";
+            // 
+            // stepDataGridViewTextBoxColumn
+            // 
+            this.stepDataGridViewTextBoxColumn.DataPropertyName = "Step";
+            this.stepDataGridViewTextBoxColumn.HeaderText = "Step";
+            this.stepDataGridViewTextBoxColumn.Name = "stepDataGridViewTextBoxColumn";
             // 
             // metroTabPage2
             // 
@@ -625,138 +757,6 @@ namespace AppTest.FormType
             this.label1.TabIndex = 3;
             this.label1.Text = "ms";
             // 
-            // messageIDDataGridViewTextBoxColumn1
-            // 
-            this.messageIDDataGridViewTextBoxColumn1.DataPropertyName = "MessageID";
-            this.messageIDDataGridViewTextBoxColumn1.HeaderText = "MessageID";
-            this.messageIDDataGridViewTextBoxColumn1.Name = "messageIDDataGridViewTextBoxColumn1";
-            // 
-            // signalNameDataGridViewTextBoxColumn1
-            // 
-            this.signalNameDataGridViewTextBoxColumn1.DataPropertyName = "SignalName";
-            this.signalNameDataGridViewTextBoxColumn1.HeaderText = "SignalName";
-            this.signalNameDataGridViewTextBoxColumn1.Name = "signalNameDataGridViewTextBoxColumn1";
-            // 
-            // customNameDataGridViewTextBoxColumn1
-            // 
-            this.customNameDataGridViewTextBoxColumn1.DataPropertyName = "CustomName";
-            this.customNameDataGridViewTextBoxColumn1.HeaderText = "CustomName";
-            this.customNameDataGridViewTextBoxColumn1.Name = "customNameDataGridViewTextBoxColumn1";
-            // 
-            // strValueDataGridViewTextBoxColumn1
-            // 
-            this.strValueDataGridViewTextBoxColumn1.DataPropertyName = "StrValue";
-            this.strValueDataGridViewTextBoxColumn1.HeaderText = "StrValue";
-            this.strValueDataGridViewTextBoxColumn1.Name = "strValueDataGridViewTextBoxColumn1";
-            // 
-            // startBitDataGridViewTextBoxColumn
-            // 
-            this.startBitDataGridViewTextBoxColumn.DataPropertyName = "StartBit";
-            this.startBitDataGridViewTextBoxColumn.HeaderText = "StartBit";
-            this.startBitDataGridViewTextBoxColumn.Name = "startBitDataGridViewTextBoxColumn";
-            // 
-            // byteOrderDataGridViewTextBoxColumn
-            // 
-            this.byteOrderDataGridViewTextBoxColumn.DataPropertyName = "ByteOrder";
-            this.byteOrderDataGridViewTextBoxColumn.HeaderText = "ByteOrder";
-            this.byteOrderDataGridViewTextBoxColumn.Name = "byteOrderDataGridViewTextBoxColumn";
-            // 
-            // valueTypeDataGridViewTextBoxColumn
-            // 
-            this.valueTypeDataGridViewTextBoxColumn.DataPropertyName = "ValueType";
-            this.valueTypeDataGridViewTextBoxColumn.HeaderText = "ValueType";
-            this.valueTypeDataGridViewTextBoxColumn.Name = "valueTypeDataGridViewTextBoxColumn";
-            // 
-            // factorDataGridViewTextBoxColumn
-            // 
-            this.factorDataGridViewTextBoxColumn.DataPropertyName = "Factor";
-            this.factorDataGridViewTextBoxColumn.HeaderText = "Factor";
-            this.factorDataGridViewTextBoxColumn.Name = "factorDataGridViewTextBoxColumn";
-            // 
-            // offsetDataGridViewTextBoxColumn
-            // 
-            this.offsetDataGridViewTextBoxColumn.DataPropertyName = "Offset";
-            this.offsetDataGridViewTextBoxColumn.HeaderText = "Offset";
-            this.offsetDataGridViewTextBoxColumn.Name = "offsetDataGridViewTextBoxColumn";
-            // 
-            // cycleTimeDataGridViewTextBoxColumn
-            // 
-            this.cycleTimeDataGridViewTextBoxColumn.DataPropertyName = "CycleTime";
-            this.cycleTimeDataGridViewTextBoxColumn.HeaderText = "CycleTime";
-            this.cycleTimeDataGridViewTextBoxColumn.Name = "cycleTimeDataGridViewTextBoxColumn";
-            // 
-            // unitDataGridViewTextBoxColumn
-            // 
-            this.unitDataGridViewTextBoxColumn.DataPropertyName = "Unit";
-            this.unitDataGridViewTextBoxColumn.HeaderText = "Unit";
-            this.unitDataGridViewTextBoxColumn.Name = "unitDataGridViewTextBoxColumn";
-            // 
-            // commentDataGridViewTextBoxColumn
-            // 
-            this.commentDataGridViewTextBoxColumn.DataPropertyName = "Comment";
-            this.commentDataGridViewTextBoxColumn.HeaderText = "Comment";
-            this.commentDataGridViewTextBoxColumn.Name = "commentDataGridViewTextBoxColumn";
-            // 
-            // minimumDataGridViewTextBoxColumn
-            // 
-            this.minimumDataGridViewTextBoxColumn.DataPropertyName = "Minimum";
-            this.minimumDataGridViewTextBoxColumn.HeaderText = "Minimum";
-            this.minimumDataGridViewTextBoxColumn.Name = "minimumDataGridViewTextBoxColumn";
-            // 
-            // maximumDataGridViewTextBoxColumn
-            // 
-            this.maximumDataGridViewTextBoxColumn.DataPropertyName = "Maximum";
-            this.maximumDataGridViewTextBoxColumn.HeaderText = "Maximum";
-            this.maximumDataGridViewTextBoxColumn.Name = "maximumDataGridViewTextBoxColumn";
-            // 
-            // lengthDataGridViewTextBoxColumn
-            // 
-            this.lengthDataGridViewTextBoxColumn.DataPropertyName = "Length";
-            this.lengthDataGridViewTextBoxColumn.HeaderText = "Length";
-            this.lengthDataGridViewTextBoxColumn.Name = "lengthDataGridViewTextBoxColumn";
-            // 
-            // byteOrderintDataGridViewTextBoxColumn
-            // 
-            this.byteOrderintDataGridViewTextBoxColumn.DataPropertyName = "ByteOrder_int";
-            this.byteOrderintDataGridViewTextBoxColumn.HeaderText = "ByteOrder_int";
-            this.byteOrderintDataGridViewTextBoxColumn.Name = "byteOrderintDataGridViewTextBoxColumn";
-            // 
-            // whetherSendOrGetDataGridViewCheckBoxColumn
-            // 
-            this.whetherSendOrGetDataGridViewCheckBoxColumn.DataPropertyName = "WhetherSendOrGet";
-            this.whetherSendOrGetDataGridViewCheckBoxColumn.HeaderText = "WhetherSendOrGet";
-            this.whetherSendOrGetDataGridViewCheckBoxColumn.Name = "whetherSendOrGetDataGridViewCheckBoxColumn";
-            // 
-            // colorRDataGridViewTextBoxColumn
-            // 
-            this.colorRDataGridViewTextBoxColumn.DataPropertyName = "ColorR";
-            this.colorRDataGridViewTextBoxColumn.HeaderText = "ColorR";
-            this.colorRDataGridViewTextBoxColumn.Name = "colorRDataGridViewTextBoxColumn";
-            // 
-            // colorGDataGridViewTextBoxColumn
-            // 
-            this.colorGDataGridViewTextBoxColumn.DataPropertyName = "ColorG";
-            this.colorGDataGridViewTextBoxColumn.HeaderText = "ColorG";
-            this.colorGDataGridViewTextBoxColumn.Name = "colorGDataGridViewTextBoxColumn";
-            // 
-            // colorBDataGridViewTextBoxColumn
-            // 
-            this.colorBDataGridViewTextBoxColumn.DataPropertyName = "ColorB";
-            this.colorBDataGridViewTextBoxColumn.HeaderText = "ColorB";
-            this.colorBDataGridViewTextBoxColumn.Name = "colorBDataGridViewTextBoxColumn";
-            // 
-            // timeStampDataGridViewTextBoxColumn
-            // 
-            this.timeStampDataGridViewTextBoxColumn.DataPropertyName = "TimeStamp";
-            this.timeStampDataGridViewTextBoxColumn.HeaderText = "TimeStamp";
-            this.timeStampDataGridViewTextBoxColumn.Name = "timeStampDataGridViewTextBoxColumn";
-            // 
-            // stepDataGridViewTextBoxColumn
-            // 
-            this.stepDataGridViewTextBoxColumn.DataPropertyName = "Step";
-            this.stepDataGridViewTextBoxColumn.HeaderText = "Step";
-            this.stepDataGridViewTextBoxColumn.Name = "stepDataGridViewTextBoxColumn";
-            // 
             // DataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -778,8 +778,8 @@ namespace AppTest.FormType
             this.gbRlcntControls.PerformLayout();
             this.metroTabControl1.ResumeLayout(false);
             this.metroTabPage1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).EndInit();
             this.gbSetControls.ResumeLayout(false);
             this.gbSetControls.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudStep)).EndInit();

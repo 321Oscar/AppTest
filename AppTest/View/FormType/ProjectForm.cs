@@ -4,7 +4,7 @@ using AppTest.Helper;
 using AppTest.Model;
 using ELFSharp.ELF;
 using ELFSharp.ELF.Sections;
-using ELFTest;
+using ELFA2LTool;
 using LPCanControl.CANInfo;
 using LPCanControl.UDS;
 using System;
@@ -17,10 +17,11 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using AppTest.Model.Interface;
 
 namespace AppTest
 {
-    public partial class ProjectForm : BaseForm
+    public partial class ProjectForm : BaseForm, ILogForm
     {
         #region 打开动画
 
@@ -91,11 +92,31 @@ namespace AppTest
         /// </remarks>
         [DllImport("user32")]
         private static extern bool AnimateWindow(IntPtr hwnd, int dwtime, int flags);
-        
+
 
 
         #endregion
-        public bool CanIsOpen = false;
+        private bool canIsOpen;
+        public bool CanIsOpen 
+        { 
+            get { return canIsOpen; } 
+            set
+            {
+                canIsOpen = value;
+                if (this.InvokeRequired)
+                {
+                    this.Invoke(new Action(() => {
+                        toolStripButton_DisConnect.Enabled = canIsOpen;
+                        this.tslbCanStatus.Text = $"{(FormType.DeviceType)projectItem.DeviceType} 通道数：[{projectItem.CanIndex.Count}] 已{(canIsOpen ? "开启" : "关闭")} ";
+                    }));
+                }
+                else
+                {
+                    toolStripButton_DisConnect.Enabled = canIsOpen;
+                    this.tslbCanStatus.Text = $"{(FormType.DeviceType)projectItem.DeviceType} 通道数：[{projectItem.CanIndex.Count}] 已{(canIsOpen ? "开启" : "关闭")} ";
+                }
+            }
+        }
 
         public int StartX = 0;
 
@@ -355,22 +376,27 @@ namespace AppTest
         }
 
        
-        private async void toolStripButton_Connect_Click(object sender, EventArgs e)
+        public async void toolStripButton_Connect_Click(object sender, EventArgs e)
         {
             if (!USBCanManager.Instance.Exist(projectItem))
             {
-                if(projectItem.DeviceType == (int)FormType.DeviceType.VCI_USBCAN_2E_U || projectItem.DeviceType == (int)FormType.DeviceType.VCI_USBCAN1)
+                ICAN can;
+                if(projectItem.DeviceType == (int)FormType.DeviceType.VCI_USBCAN_2E_U )
                 {
-                    USBCAN usbCan = new USBCAN(projectItem.DeviceType, projectItem.DeviceIndex, 0);
-                    usbCan.SaveLog += LogHelper.InfoReceive;
-                    USBCanManager.Instance.AddUsbCan(usbCan, projectItem);
+                    can = new USBCAN(projectItem.DeviceType, projectItem.DeviceIndex, new int[] { 0, 1 });
+                    //usbCan.SaveLog += LogHelper.InfoReceive;
+                    //USBCanManager.Instance.AddUsbCan(can, projectItem);
+                }else if(projectItem.DeviceType == (int)FormType.DeviceType.VCI_USBCAN1)
+                {
+                    can = new USBCAN(projectItem.DeviceType, projectItem.DeviceIndex, 0);
                 }
                 else
                 {
-                    ZCANInstance zcan = new ZCANInstance((uint)projectItem.DeviceType, (uint)projectItem.DeviceIndex, new int[] { 0 });
-                    zcan.SaveLog += LogHelper.InfoReceive;
-                    USBCanManager.Instance.AddZCan( projectItem, zcan);
+                    can = new ZCANInstance((uint)projectItem.DeviceType, (uint)projectItem.DeviceIndex, new int[] { 0 ,1});
+                    //zcan.SaveLog += LogHelper.InfoReceive;
+                    //USBCanManager.Instance.AddZCan( projectItem, zcan);
                 }
+                USBCanManager.Instance.AddICAN(projectItem, can);
             }
 
             if (CanIsOpen)
@@ -380,46 +406,42 @@ namespace AppTest
             else
             {
                 ///can.open 
-                if (USBCanManager.Instance.Open(projectItem))
+                if (USBCanManager.Instance.OpenInitStart(projectItem))
                 {
-                    foreach (var item in projectItem.CanIndex)
-                    {
-                        try
-                        {
-                            switch ((FormType.DeviceType)projectItem.DeviceType)
-                            {
-                                case FormType.DeviceType.VCI_USBCAN_2E_U:
-                                    ///Can.SetReference
-                                    USBCanManager.Instance.SetRefenrece(projectItem, item.CanChannel);
-                                    break;
-                            }
-                            ///can.init
-                            if (tsb_ConnectXCP.Visible)
-                            {
-                                //USBCanManager.Instance.InitCan(projectItem, item.CanChannel, (uint)projectItem.CanIndex[0].SlaveID - 1, (uint)projectItem.CanIndex[0].SlaveID +1 );
-                                USBCanManager.Instance.InitCan(projectItem, item.CanChannel);
-                            }
-                            else
-                            {
-                                USBCanManager.Instance.InitCan(projectItem, item.CanChannel);
-                            }
-                            ///can.start
-                            USBCanManager.Instance.StartCanIndex(projectItem, item.CanChannel);
-                        }
-                        catch (Exception ex)
-                        {
-                            ShowLog("Init Can Error：" + ex.Message, LPLogLevel.Error);
-                            continue;
-                        }
+                    //foreach (var item in projectItem.CanIndex)
+                    //{
+                    //    try
+                    //    {
+                    //        switch ((FormType.DeviceType)projectItem.DeviceType)
+                    //        {
+                    //            case FormType.DeviceType.VCI_USBCAN_2E_U:
+                    //                ///Can.SetReference
+                    //                USBCanManager.Instance.SetRefenrece(projectItem, item.CanChannel);
+                    //                break;
+                    //        }
+                    //        ///can.init
+                    //        if (tsb_ConnectXCP.Visible)
+                    //        {
+                    //            //USBCanManager.Instance.InitCan(projectItem, item.CanChannel, (uint)projectItem.CanIndex[0].SlaveID - 1, (uint)projectItem.CanIndex[0].SlaveID +1 );
+                    //            USBCanManager.Instance.InitCan(projectItem, item.CanChannel);
+                    //        }
+                    //        else
+                    //        {
+                    //            USBCanManager.Instance.InitCan(projectItem, item.CanChannel);
+                    //        }
+                    //        ///can.start
+                    //        USBCanManager.Instance.StartCanIndex(projectItem, item.CanChannel);
+                    //    }
+                    //    catch (Exception ex)
+                    //    {
+                    //        ShowLog("Init Can Error：" + ex.Message, LPLogLevel.Error);
+                    //        continue;
+                    //    }
 
-                    }
+                    //}
                     CanIsOpen = true;
-                    toolStripButton_DisConnect.Enabled = true;
                     //btnStartCan.Text = "Close";
                     ShowLog("CAN 打开成功");
-
-                    //启动接收线程
-                    this.tslbCanStatus.Text = $"{(FormType.DeviceType)projectItem.DeviceType} [{projectItem.CanIndex.Count}] 已打开 ";
 
                     //增加DID读写
                     foreach (Control item in Controls)
@@ -428,7 +450,9 @@ namespace AppTest
                     }
                     if (Global.Protected == 1)
                     {
+#pragma warning disable CS0162 // 检测到无法访问的代码
                         ShowLog("软件校验中..请等待");
+#pragma warning restore CS0162 // 检测到无法访问的代码
 
                         if (await Task.Run(CheckAuth))
                         {
@@ -566,7 +590,7 @@ namespace AppTest
         /// <param name="did"></param>
         /// <param name="val"></param>
         /// <param name="result">写入成功</param>
-        private void WriteDID(LPCanControl.Model.DIDInfo did,string val, out bool result)
+        private void WriteDID(LPCanControl.Model.DIDInfo did, string val, out bool result)
         {
             USBCanManager.Instance.CloseRecv(projectItem);//caninds
             result = false;
@@ -597,15 +621,11 @@ namespace AppTest
             //USBCanManager.Instance.StartRecv(projectItem, caninds.ToArray());//caninds
         }
 
-        private void toolStripButton_DisConnect_Click(object sender, EventArgs e)
+        public void toolStripButton_DisConnect_Click(object sender, EventArgs e)
         {
             if (USBCanManager.Instance.Close(projectItem))
             {
-                //btnStartCan.Text = "Start";
                 CanIsOpen = false;
-                toolStripButton_DisConnect.Enabled = false;
-                this.tslbCanStatus.Text = $"{(FormType.DeviceType)projectItem.DeviceType} 通道数：[{projectItem.CanIndex.Count}] 已关闭 ";
-                //LeapMessageBox.Instance.ShowInfo(this.Name + "，关闭Can成功。");
                 ShowLog(this.Name + "，关闭Can成功。",showtip:true);
             }
         }

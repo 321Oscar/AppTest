@@ -54,6 +54,7 @@ namespace AppTest.Helper
                 _ilogDict = new Dictionary<string, log4net.ILog>();
             }
 
+#pragma warning disable CS0168 // 声明了变量“ee”，但从未使用过
             try
             {
                 if (!_ilogDict.ContainsKey(logFileName))
@@ -115,6 +116,7 @@ namespace AppTest.Helper
 
                 //throw;
             }
+#pragma warning restore CS0168 // 声明了变量“ee”，但从未使用过
         }
 
         public static void Info(string context)

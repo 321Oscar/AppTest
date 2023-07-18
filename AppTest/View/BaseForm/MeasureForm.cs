@@ -114,13 +114,13 @@ namespace AppTest.FormType
 
             InitStateStrip();
 
-            HistoryDataUC hduc = new HistoryDataUC();
-            hduc.ProjectName = this.OwnerProject.Name;
-            hduc.FormName = this.Name;
-            hduc.Dock = DockStyle.Fill;
+            HistoryDataView = new HistoryDataUC();
+            HistoryDataView.ProjectName = this.OwnerProject.Name;
+            HistoryDataView.FormName = this.Name;
+            HistoryDataView.Dock = DockStyle.Fill;
             metroTabPage2.Controls.Clear() ;
-            metroTabPage2.Controls.Add(hduc);
-            hduc.ChangeColorTheme(ScopeColor);
+            metroTabPage2.Controls.Add(HistoryDataView);
+            HistoryDataView.ChangeColorTheme(ScopeColor);
         }
 
         protected override void ReLoadSignal()

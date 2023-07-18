@@ -79,14 +79,20 @@ namespace AppTest.FormType
             {
                 //获取信号，根据step修改信号值，并发送数据
                 decimal oldValue = Convert.ToDecimal(signal.StrValue);
+                decimal newValue = oldValue;
                 if (addorReduce)
                 {
-                    signal.StrValue = (oldValue + stepD).ToString();
+                    newValue = (oldValue + stepD);
+                    //signal.StrValue = .ToString();
                 }
                 else
                 {
-                    signal.StrValue = (oldValue - stepD).ToString();
+                    newValue = (oldValue - stepD);
+                    //signal.StrValue = (oldValue - stepD).ToString();
                 }
+
+                
+                signal.StrValue = newValue.ToString();
                 SetOrSend();
                 return true;
             }
@@ -113,13 +119,13 @@ namespace AppTest.FormType
 
             InitIDAndProtocolCmd();
 
-            HistoryDataUC hduc = new HistoryDataUC();
-            hduc.ProjectName = this.OwnerProject.Name;
-            hduc.FormName = this.Name;
-            hduc.Dock = DockStyle.Fill;
+            HistoryDataView = new HistoryDataUC();
+            HistoryDataView.ProjectName = this.OwnerProject.Name;
+            HistoryDataView.FormName = this.Name;
+            HistoryDataView.Dock = DockStyle.Fill;
             metroTabPage2.Controls.Clear();
-            metroTabPage2.Controls.Add(hduc);
-            hduc.ChangeColorTheme(GetColor);
+            metroTabPage2.Controls.Add(HistoryDataView);
+            HistoryDataView.ChangeColorTheme(GetColor);
 
             ProjectForm parent = (ProjectForm)this.MdiParent;
             vm.XcpModule = parent.XcpModule;
@@ -160,8 +166,11 @@ namespace AppTest.FormType
 
         protected override void ModifiedSignals()
         {
-            if(vm.ModifiedSignals())
+            if (vm.ModifiedSignals())
+            {
                 ReLoadSignal();
+            }
+              
         }
 
         protected override void SelectedSignalChanged()
@@ -238,6 +247,12 @@ namespace AppTest.FormType
             {
                 if (!item.WhetherSendOrGet)
                     continue;
+                if (Convert.ToDouble(item.StrValue) > (double)item.Maximum || Convert.ToDouble(item.StrValue) < (double)item.Minimum)
+                {
+                    ShowLog($"{item.CustomName ?? item.SignalName}数值超限[{item.Minimum},{item.Maximum}]", LPLogLevel.Warn);
+                    continue;
+                }
+
                 try
                 {
                     vm.XcpModule.Download(item , (uint)CanChannel);

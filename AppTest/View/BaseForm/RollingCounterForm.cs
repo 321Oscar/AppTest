@@ -185,7 +185,8 @@ namespace AppTest.FormType
                 Protocol = ReflectionHelper.CreateInstance<BaseProtocol>(ProtocolCommand, Assembly.GetExecutingAssembly().ToString(), new string[] { canIndex.ProtocolFileName });
             }
 
-            AddSendThread();
+            if (TestCanSend())
+                AddSendThread();
         }
 
         protected override void ReLoadSignal()
@@ -263,8 +264,10 @@ namespace AppTest.FormType
 
         private void GroupBox_Resize(object sender, EventArgs e)
         {
+#pragma warning disable CS0612 // “BaseDataForm.IsSized”已过时
             if (this.IsSized)
                 return;
+#pragma warning restore CS0612 // “BaseDataForm.IsSized”已过时
             GroupBox gb = sender as GroupBox;
             int signalWidth = 0;
             int signalHeight = 0;
@@ -396,6 +399,8 @@ namespace AppTest.FormType
             timerList.Clear();
         }
 
+        private readonly object locked = new object();
+
         /// <summary>
         /// 发送数据
         /// </summary>
@@ -452,17 +457,36 @@ namespace AppTest.FormType
                     //crc = (byte)(crc ^ 0xff);
                 }
 
-                USBCanManager.Instance.Send(OwnerProject, canindex: this.CanChannel, sendData: frame[0], $"[{this.FormType}]{this.Name}");
+                var sendFlag = USBCanManager.Instance.Send(OwnerProject, canindex: this.CanChannel, sendData: frame[0], $"[{this.FormType}]{this.Name}");
+
+                if (!sendFlag)
+                {
+                    ShowLog("发送失败");
+                    lock (locked)
+                    {
+                        //var close = USBCanManager.Instance.Close(OwnerProject);
+                        //ShowLog($"close {close}");
+                       var open =  USBCanManager.Instance.OpenInitStartReceive(OwnerProject);
+                        ShowLog($"open {open}");
+                    }
+                   
+                }
+                //{
+                //    ((ProjectForm)this.MdiParent).toolStripButton_DisConnect_Click(null, null);
+                //    ((ProjectForm)this.MdiParent).toolStripButton_Connect_Click(null, null);
+                //}
             }
-            catch(USBCANOpenException ex)
+            catch (USBCANOpenException ex)
             {
                 ShowLog(ex.Message, LPLogLevel.Warn);
-                IsSend = false;
-                var thread = timerList.Find(x => x.Name == gb.Name);
-                if (thread != null)
-                {
-                    thread.Abort();
-                }
+                //USBCanManager.Instance.Close(OwnerProject);
+                //USBCanManager.Instance.OpenInitStartReceive(OwnerProject);
+                //IsSend = false;
+                //var thread = timerList.Find(x => x.Name == gb.Name);
+                //if (thread != null)
+                //{
+                //    thread.Abort();
+                //}
             }
             catch (Exception ex)
             {

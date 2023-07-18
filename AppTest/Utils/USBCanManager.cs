@@ -12,9 +12,9 @@ namespace AppTest.Helper
 {
     public sealed class USBCanManager
     {
-        private static readonly Lazy<USBCanManager> lazy = new Lazy<USBCanManager>(()=> new USBCanManager());
+        private static readonly Lazy<USBCanManager> lazy = new Lazy<USBCanManager>(() => new USBCanManager());
 
-        Dictionary<BaudRateType, string> BaudRateTypeValue_Special = new Dictionary<BaudRateType, string>() 
+        Dictionary<BaudRateType, string> BaudRateTypeValue_Special = new Dictionary<BaudRateType, string>()
         {
             { BaudRateType.Kbps5, "0x1c01c1" },
             { BaudRateType.Kbps1000,"0x060003"},
@@ -25,7 +25,7 @@ namespace AppTest.Helper
             { BaudRateType.Kbps100,"0x160023"},
             { BaudRateType.Kbps50,"0x1c002c"},
             { BaudRateType.Kbps20,"0x1600b3"},
-            { BaudRateType.Kbps10,"0x1c00e0"}, 
+            { BaudRateType.Kbps10,"0x1c00e0"},
         };
 
         Dictionary<BaudRateType, string> BaudRateTypeValue_Normal_Timer0 = new Dictionary<BaudRateType, string>()
@@ -59,18 +59,261 @@ namespace AppTest.Helper
             { BaudRateType.Kbps1000,"0x14"}
 
         };
+
+        private readonly Dictionary<ProjectItem, USBCAN> usbCans;
+        private readonly Dictionary<ProjectItem, ZCANInstance> zCANInstances;
+        private readonly Dictionary<ProjectItem, ICAN> CANs;
+        public Dictionary<ProjectItem, USBCAN> USBCans { get { return usbCans; } }
+        public Dictionary<ProjectItem, ZCANInstance> ZCans { get { return zCANInstances; } }
         public static USBCanManager Instance { get { return lazy.Value; } }
 
         private USBCanManager()
         {
             usbCans = new Dictionary<ProjectItem, USBCAN>();
             zCANInstances = new Dictionary<ProjectItem, ZCANInstance>();
+            CANs = new Dictionary<ProjectItem, ICAN>();
         }
 
-        private readonly Dictionary<ProjectItem, USBCAN> usbCans;
-        private readonly Dictionary<ProjectItem, ZCANInstance> zCANInstances;
-
         public bool Exist(ProjectItem project)
+        {
+            bool exist = CANs.TryGetValue(project, out _);
+            if (exist)
+                return true;
+            return false;
+        }
+
+        public void AddICAN(ProjectItem project, ICAN can)
+        {
+            CANs.Add(project, can);
+        }
+        /// <summary>
+        /// 注册/注销 接收事件
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="recieveMethod"></param>
+        /// <param name="canChannel"></param>
+        /// <param name="get"></param>
+        public void Register(ProjectItem project, ReceiveDataEventHandler recieveMethod, int canChannel, bool get)
+        {
+            if (get)
+            {
+                CANs[project].Register(recieveMethod, canChannel);
+            }
+            else
+            {
+                CANs[project].UnRegister(recieveMethod, canChannel);
+            }
+        }
+
+        /// <summary>
+        /// 删除CAN
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="isOpen">若CAN打开，则先关闭再删除</param>
+        public void RemoveUsbCan(ProjectItem project, bool isOpen = true)
+        {
+            bool isExist = CANs.TryGetValue(project, out ICAN usbCan);
+            if (isExist)
+            {
+                if (isOpen)
+                {
+                    try
+                    {
+                        usbCan.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        LogHelper.Error("关闭失败", ex);
+                    }
+                }
+                CANs.Remove(project);
+            }
+        }
+        /// <summary>
+        /// 打开CAN盒
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns></returns>
+        public bool Open(ProjectItem project)
+        {
+            bool isExist = CANs.TryGetValue(project, out ICAN usbCan);
+            if (isExist)
+            {
+                return (usbCan.Open());
+
+            }
+            return false;
+        }
+        /// <summary>
+        /// 打开CAN并初始化通道，启动通道
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns></returns>
+        public bool OpenInitStart(ProjectItem project)
+        {
+            return CANs[project].OpenInitStart(null);
+        }
+        /// <summary>
+        /// 打开CAN并初始化通道，启动通道，并开始接收数据线程
+        /// </summary>
+        /// <param name="project"></param>
+        /// <returns></returns>
+        public bool OpenInitStartReceive(ProjectItem project)
+        {
+            return CANs[project].OpenInitStartReceive(project.CanIndex.Select(x => x.CanChannel).ToArray());
+        }
+
+        /// <summary>
+        /// 启动接收数据
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="canind"></param>
+        public void StartRecv(ProjectItem project, int[] canind)
+        {
+            bool isExist = CANs.TryGetValue(project, out ICAN usbCan);
+            if (isExist)
+            {
+                usbCan.StartReceive(true, canind);
+            }
+            else
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// 关闭接收数据
+        /// </summary>
+        /// <param name="project"></param>
+        public void CloseRecv(ProjectItem project)
+        {
+            bool isExist = CANs.TryGetValue(project, out ICAN usbCan);
+            if (isExist)
+            {
+                usbCan.StartReceive(false, new int[] { 0, 1 });
+            }
+        }
+
+        /// <summary>
+        /// 发送数据
+        /// </summary>
+        /// <param name="project">根据Project获取CanDevice</param>
+        /// <param name="canindex">发送的CAN通道</param>
+        /// <param name="sendData">数据</param>
+        /// <param name="formName">发送的窗口</param>
+        /// <exception cref="USBCANOpenException"></exception>
+        /// <returns>发送成功/失败<see cref="bool"/></returns>
+        internal bool Send(ProjectItem project, int canindex = 0, CANSendFrame sendData = null, string formName = null, byte sendtype = 0)
+        {
+            bool isadd = CANs.TryGetValue(project, out ICAN usbCan);
+
+            if (!isadd)
+            {
+                throw new USBCANOpenException($"{project.Name},Can口未打开");
+            }
+
+            if (!usbCan.IsOpen)
+                throw new USBCANOpenException($"{project.Name},Can口为关闭状态");
+
+            bool sendFlag = usbCan.Send(canindex, sendData, (LPCanControl.CANInfo.CANSendType)sendtype);
+
+            LogHelper.InfoSend($"{formName} 发送{(sendFlag ? "成功" : "失败")} [通道{canindex}]：{sendData}");
+            
+
+            return sendFlag;
+        }
+
+        /// <summary>
+        /// 测试CAN是否通
+        /// </summary>
+        /// <param name="project"></param>
+        /// <param name="errorLog"></param>
+        /// <param name="canindex"></param>
+        /// <param name="sendtype"></param>
+        /// <returns></returns>
+        internal bool SendTest(ProjectItem project, ref string errorLog, int canindex = 0, byte sendtype = 0)
+        {
+            bool isadd = CANs.TryGetValue(project, out ICAN usbCan);
+
+            if (!isadd)
+            {
+                errorLog = ($"{project.Name},Can口未打开");
+                return false;
+
+            }
+
+            if (!usbCan.IsOpen)
+            {
+                errorLog = ($"{project.Name},Can口为关闭状态");
+                return false;
+            }
+
+            var sendData = new CANSendFrame(0x11, new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 });
+
+            bool sendFlag = usbCan.Send(canindex, sendData, (LPCanControl.CANInfo.CANSendType)sendtype);
+
+            if (!sendFlag)
+                errorLog = $"CAN index {canindex} 发送失败！";
+
+            return sendFlag;
+        }
+
+        internal bool Close(ProjectItem project)
+        {
+            bool isExist = CANs.TryGetValue(project, out ICAN usbCan);
+            if (isExist)
+            {
+                CloseRecv(project);
+
+                return usbCan.Close();
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// 关闭所有Can口
+        /// </summary>
+        internal void Close()
+        {
+            try
+            {
+                foreach (var item in CANs)
+                {
+                    if (!item.Value.Close())
+                    {
+                        LogHelper.Warn($"关闭失败：{item.Key.Name}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error("关闭失败", ex);
+            }
+
+        }
+
+        #region [Obsolete]
+
+        [Obsolete]
+        public bool ExistZcan(ProjectItem project)
+        {
+            return zCANInstances.TryGetValue(project, out _);
+        }
+        [Obsolete]
+        public void AddUsbCan(USBCAN usbCan, ProjectItem project)
+        {
+            usbCans.Add(project, usbCan);
+        }
+        [Obsolete]
+        public void AddZCan(ProjectItem project, ZCANInstance zCAN)
+        {
+            zCANInstances.Add(project, zCAN);
+        }
+        [Obsolete]
+        public bool Exist_old(ProjectItem project)
         {
             bool exist = usbCans.TryGetValue(project, out _);
             if (exist)
@@ -79,60 +322,10 @@ namespace AppTest.Helper
             {
                 return ExistZcan(project);
             }
-            
-        }
 
-        public bool ExistZcan(ProjectItem project)
-        {
-            return zCANInstances.TryGetValue(project, out _);
         }
-
-        public void AddUsbCan(USBCAN usbCan, ProjectItem project)
-        {
-            usbCans.Add(project, usbCan);
-        }
-
-        public void AddZCan(ProjectItem project, ZCANInstance zCAN)
-        {
-            zCANInstances.Add(project, zCAN);
-        }
-
-        public Dictionary<ProjectItem, USBCAN> USBCans { get { return usbCans; } }
-        public Dictionary<ProjectItem, ZCANInstance> ZCans { get { return zCANInstances; } }
-        public void Register(ProjectItem project, ReceiveDataEventHandler recieveMethod, int canChannel, bool get)
-        {
-            if (usbCans.ContainsKey(project))
-            {
-                if (get)
-                {
-                    USBCans[project].Register(recieveMethod, canChannel);
-                }
-                else
-                {
-                    USBCans[project].UnRegister(recieveMethod, canChannel);
-                }
-            }
-            else
-            {
-                if (ZCans.ContainsKey(project))
-                {
-                    if (get)
-                    {
-                        ZCans[project].Register(recieveMethod, canChannel);
-                    }
-                    else
-                    {
-                        ZCans[project].UnRegister(recieveMethod, canChannel);
-                    }
-                }
-            }
-        }
-        /// <summary>
-        /// 删除CAN
-        /// </summary>
-        /// <param name="project"></param>
-        /// <param name="isOpen">若CAN打开，则先关闭再删除</param>
-        public void RemoveUsbCan(ProjectItem project, bool isOpen = true)
+        [Obsolete]
+        public void RemoveUsbCan_old(ProjectItem project, bool isOpen = true)
         {
             bool isExist = usbCans.TryGetValue(project, out USBCAN usbCan);
             if (isExist)
@@ -168,24 +361,20 @@ namespace AppTest.Helper
                     }
                     ZCans.Remove(project);
                 }
-                
+
             }
         }
-
-        public bool Open(ProjectItem project)
+        [Obsolete]
+        public bool Open_old(ProjectItem project)
         {
             bool isExist = usbCans.TryGetValue(project, out USBCAN usbCan);
             if (isExist)
             {
                 if (usbCan.Open_Device() == 0)
                 {
-                    usbCan.IsOpen = false;
                     return false;
                 }
-                else
-                {
-                    usbCan.IsOpen = true;
-                }
+
             }
             else
             {
@@ -194,11 +383,35 @@ namespace AppTest.Helper
                 {
                     return zCAN.OpenDevice();
                 }
-                return false; 
+                return false;
             }
             return true;
         }
 
+
+        [Obsolete]
+        public void StartRecv_old(ProjectItem project, int[] canind)
+        {
+            bool isExist = usbCans.TryGetValue(project, out USBCAN usbCan);
+            if (isExist)
+            {
+                usbCan.StartReceive(true, canind);
+            }
+            else
+            {
+                ZcanStartReceive(project, canind);
+            }
+        }
+        [Obsolete]
+        public void ZcanStartReceive(ProjectItem project, int[] canind)
+        {
+            bool isExist = ZCans.TryGetValue(project, out ZCANInstance usbCan);
+            if (isExist)
+            {
+                usbCan.StartReceive(true, canind);
+            }
+        }
+        [Obsolete]
         public bool OpenZCan(ProjectItem project)
         {
             bool isExist = ZCans.TryGetValue(project, out ZCANInstance usbCan);
@@ -220,51 +433,20 @@ namespace AppTest.Helper
             }
             return true;
         }
-
-        /// <summary>
-        /// 启动接收数据
-        /// </summary>
-        /// <param name="project"></param>
-        /// <param name="canind"></param>
-        public void StartRecv(ProjectItem project, int[] canind)
+        [Obsolete]
+        public void CloseRecv_old(ProjectItem project)
         {
             bool isExist = usbCans.TryGetValue(project, out USBCAN usbCan);
             if (isExist)
             {
-                usbCan.StartReceive(true, canind);
-            }
-            else
-            {
-                ZcanStartReceive(project, canind);
-            }
-        }
-
-        public void ZcanStartReceive(ProjectItem project, int[] canind)
-        {
-            bool isExist = ZCans.TryGetValue(project, out ZCANInstance usbCan);
-            if (isExist)
-            {
-                usbCan.StartReceive(true, canind);
-            }
-        }
-
-        /// <summary>
-        /// 关闭接收数据
-        /// </summary>
-        /// <param name="project"></param>
-        public void CloseRecv(ProjectItem project)
-        {
-            bool isExist = usbCans.TryGetValue(project, out USBCAN usbCan);
-            if (isExist)
-            {
-                usbCan.StartReceive(false, new int[] { 0,1 });
+                usbCan.StartReceive(false, new int[] { 0, 1 });
             }
             else
             {
                 ZcanCloseReceive(project);
             }
         }
-
+        [Obsolete]
         public void ZcanCloseReceive(ProjectItem project)
         {
             bool isExist = ZCans.TryGetValue(project, out ZCANInstance usbCan);
@@ -273,7 +455,7 @@ namespace AppTest.Helper
                 usbCan.StartReceive(false, new int[] { 0 });
             }
         }
-        
+        [Obsolete]
         public bool InitCan(ProjectItem project, int can_index, uint startid = 0x00, uint endid = 0xffffffff)
         {
             bool isExist = usbCans.TryGetValue(project, out USBCAN usbCan);
@@ -303,7 +485,7 @@ namespace AppTest.Helper
 
             return true;
         }
-
+        [Obsolete]
         public bool InitZCan(ProjectItem project, int can_index, uint startid = 0x00, uint endid = 0xFFFFFFFF)
         {
             bool isExist = ZCans.TryGetValue(project, out ZCANInstance usbCan);
@@ -325,7 +507,7 @@ namespace AppTest.Helper
 
             return usbCan.InitCan(baud, can_index);
         }
-
+        [Obsolete]
         public bool StartCanIndex(ProjectItem project, int can_index)
         {
             bool isExist = usbCans.TryGetValue(project, out USBCAN usbCan);
@@ -340,7 +522,7 @@ namespace AppTest.Helper
             }
             return true;
         }
-
+        [Obsolete]
         public bool StartZCanIndex(ProjectItem project, int can_index)
         {
             bool isExist = ZCans.TryGetValue(project, out ZCANInstance usbCan);
@@ -356,12 +538,14 @@ namespace AppTest.Helper
             return true;
         }
 
+
         /// <summary>
         /// 设置CAN通道波特率
         /// </summary>
         /// <param name="project"></param>
         /// <param name="can_index"></param>
         /// <returns></returns>
+        [Obsolete]
         unsafe public bool SetRefenrece(ProjectItem project, int can_index)
         {
             bool isExist = usbCans.TryGetValue(project, out USBCAN usbCan);
@@ -370,7 +554,7 @@ namespace AppTest.Helper
             uint baud;
             if (canGetBaud)
             {
-                baud = Convert.ToUInt32(baudStr,16);
+                baud = Convert.ToUInt32(baudStr, 16);
             }
             else
             {
@@ -385,6 +569,40 @@ namespace AppTest.Helper
                 return false;
             }
         }
+        [Obsolete]
+        internal bool Send_old(ProjectItem project, int canindex = 0, CANSendFrame sendData = null, string formName = null, byte sendtype = 0)
+        {
+            bool isadd = usbCans.TryGetValue(project, out USBCAN usbCan);
+
+            if (!isadd)
+            {
+                isadd = ZCans.TryGetValue(project, out ZCANInstance zCAN);
+                if (!isadd)
+                    throw new USBCANOpenException($"{project.Name},Can口未打开");
+                if (!zCAN.IsOpen)
+                    throw new USBCANOpenException($"{project.Name},Can口为关闭状态");
+
+                bool sendSuc = zCAN.TransmitData((uint)sendData.ID, sendData.Data, sendtype, canindex, 0);
+
+                LogHelper.InfoSend($"{formName} 发送{(sendSuc ? "成功" : "失败")} [通道{canindex}]：{sendData}");
+
+                if (!sendSuc)
+                    throw new USBCANOpenException("发送失败！");
+                return sendSuc;
+            }
+
+            if (!usbCan.IsOpen)
+                throw new USBCANOpenException($"{project.Name},Can口为关闭状态");
+
+            bool sendFlag = usbCan.CAN_Send(sendData, 0, canindex, sendtype) > 0;
+
+            LogHelper.InfoSend($"{formName} 发送{(sendFlag ? "成功" : "失败")} [通道{canindex}]：{sendData}");
+
+            if (!sendFlag)
+                return false;
+            //throw new USBCANOpenException($"CanIndex【{canindex}】发送失败！");
+            return sendFlag;
+        }
 
         /// <summary>
         /// 接收数据
@@ -393,6 +611,7 @@ namespace AppTest.Helper
         /// <param name="canindex">can口通道索引：默认为0</param>
         /// <param name="formName">接收的窗口</param>
         /// <returns><see cref="CAN_msg"/>[]</returns>
+        [Obsolete]
         public CANReceiveFrame[] Receive(ProjectItem project, int canindex = 0, string formName = "recieve")
         {
             bool isadd = usbCans.TryGetValue(project, out USBCAN usbCan);
@@ -421,6 +640,7 @@ namespace AppTest.Helper
         /// <param name="canindex">can口通道索引：默认为0</param>
         /// <param name="formName">接收的窗口</param>
         /// <returns><see cref="CAN_msg"/>[]</returns>
+        [Obsolete]
         public CANReceiveFrame[] Receive(ProjectItem project, int[] ids, int canindex = 0, string formName = "recieve")
         {
             bool isadd = usbCans.TryGetValue(project, out USBCAN usbCan);
@@ -443,128 +663,8 @@ namespace AppTest.Helper
             return data;
         }
 
-        /// <summary>
-        /// 发送数据
-        /// </summary>
-        /// <param name="project">根据Project获取CanDevice</param>
-        /// <param name="canindex">发送的CAN通道</param>
-        /// <param name="sendData">数据</param>
-        /// <param name="formName">发送的窗口</param>
-        /// <exception cref="USBCANOpenException"></exception>
-        /// <returns>发送成功/失败<see cref="bool"/></returns>
-        internal bool Send(ProjectItem project,int canindex = 0, CANSendFrame sendData = null,string formName = null, byte sendtype = 0)
-        {
-            bool isadd = usbCans.TryGetValue(project, out USBCAN usbCan);
-
-            if (!isadd)
-            { 
-                isadd = ZCans.TryGetValue(project, out ZCANInstance zCAN); 
-                if(!isadd)
-                    throw new USBCANOpenException($"{project.Name},Can口未打开");
-                if (!zCAN.IsOpen)
-                    throw new USBCANOpenException($"{project.Name},Can口为关闭状态");
-
-                bool sendSuc = zCAN.TransmitData((uint)sendData.ID, sendData.Data, sendtype, canindex, 0);
-
-                LogHelper.InfoSend($"{formName} 发送{(sendSuc ? "成功" : "失败")} [通道{canindex}]：{sendData}");
-
-                if (!sendSuc)
-                    throw new USBCANOpenException("发送失败！");
-                return sendSuc;
-            }
-
-            if (!usbCan.IsOpen)
-                throw new USBCANOpenException($"{project.Name},Can口为关闭状态");
-
-            bool sendFlag = usbCan.CAN_Send(sendData, 0, canindex, sendtype) > 0;
-
-            LogHelper.InfoSend($"{formName} 发送{(sendFlag ? "成功" : "失败")} [通道{canindex}]：{sendData}");
-
-            if (!sendFlag)
-                throw new USBCANOpenException($"CanIndex【{canindex}】发送失败！");
-            return sendFlag;
-        }
-
-        /// <summary>
-        /// 测试CAN是否通
-        /// </summary>
-        /// <param name="project"></param>
-        /// <param name="errorLog"></param>
-        /// <param name="canindex"></param>
-        /// <param name="sendtype"></param>
-        /// <returns></returns>
-        internal bool SendTest(ProjectItem project,ref string errorLog, int canindex = 0, byte sendtype = 0)
-        {
-            bool isadd = usbCans.TryGetValue(project, out USBCAN usbCan);
-            
-            if (!isadd)
-            {
-                isadd = ZCans.TryGetValue(project, out ZCANInstance zCAN);
-
-                if (!isadd)
-                {
-                    errorLog = ($"{project.Name},Can口未打开");
-                    return false;
-                }
-
-                if (!zCAN.IsOpen)
-                {
-                    errorLog = ($"{project.Name},Can口为关闭状态");
-                    return false;
-                }
-
-                //var sendData = new CANSendFrame(0x11, new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 });
-
-                bool sendsuc = zCAN.TransmitData(0x11, new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 }, sendtype, canindex, 0);
-
-                if (!sendsuc)
-                    errorLog = $"CAN index {canindex} 发送失败！";
-
-                return sendsuc;
-            }
-
-            if (!usbCan.IsOpen)
-            {
-                errorLog = ($"{project.Name},Can口为关闭状态");
-                return false;
-            }
-
-            var sendData = new CANSendFrame(0x11, new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 });
-
-            bool sendFlag = usbCan.CAN_Send(sendData, 0, canindex, sendtype) > 0;
-
-            if (!sendFlag)
-                errorLog = $"CAN index {canindex} 发送失败！";
-
-            return sendFlag;
-        }
-
-        internal bool Close(ProjectItem project)
-        {
-            bool isExist = usbCans.TryGetValue(project, out USBCAN usbCan);
-            if (isExist)
-            {
-                CloseRecv(project);
-
-                return usbCan.Close_device();
-            }
-            else
-            {
-                isExist = ZCans.TryGetValue(project, out ZCANInstance zcan);
-                if (isExist)
-                {
-                    CloseRecv(project);
-
-                    return zcan.CloseCan();
-                }
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// 关闭所有Can口
-        /// </summary>
-        internal void Close()
+        [Obsolete]
+        internal void Close_old()
         {
             try
             {
@@ -586,9 +686,32 @@ namespace AppTest.Helper
             }
             catch (Exception ex)
             {
-                LogHelper.Error("关闭失败",ex);
+                LogHelper.Error("关闭失败", ex);
             }
-            
+
         }
+
+        internal bool Close_old(ProjectItem project)
+        {
+            bool isExist = usbCans.TryGetValue(project, out USBCAN usbCan);
+            if (isExist)
+            {
+                CloseRecv(project);
+
+                return usbCan.Close_device();
+            }
+            else
+            {
+                isExist = ZCans.TryGetValue(project, out ZCANInstance zcan);
+                if (isExist)
+                {
+                    CloseRecv(project);
+
+                    return zcan.CloseCan();
+                }
+                return false;
+            }
+        }
+        #endregion [Obsolete]
     }
 }

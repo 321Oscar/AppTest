@@ -35,17 +35,17 @@ namespace AppTest.FormType
             // 
             // metroTabPage1
             // 
-            this.metroTabPage1.Size = new System.Drawing.Size(359, 168);
+            this.metroTabPage1.Size = new System.Drawing.Size(365, 166);
             // 
             // panelContent
             // 
-            this.panelContent.Size = new System.Drawing.Size(373, 458);
+            this.panelContent.Size = new System.Drawing.Size(379, 458);
             // 
             // DBCGetForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(407, 541);
+            this.ClientSize = new System.Drawing.Size(413, 541);
             this.Name = "DBCGetForm";
             this.Text = "DBCGetForm";
             ((System.ComponentModel.ISupportInitialize)(this.nudTimerInterval)).EndInit();

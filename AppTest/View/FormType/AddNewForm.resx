@@ -277,10 +277,10 @@
     <value>Fill</value>
   </data>
   <data name="panel5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>603, 53</value>
+    <value>787, 53</value>
   </data>
   <data name="panel5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 290</value>
+    <value>47, 278</value>
   </data>
   <data name="panel5.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -454,13 +454,13 @@
     <value>Fill</value>
   </data>
   <data name="dataGridView1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>353, 53</value>
+    <value>445, 53</value>
   </data>
   <data name="dataGridView1.RowHeadersWidth" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
   <data name="dataGridView1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 290</value>
+    <value>336, 278</value>
   </data>
   <data name="dataGridView1.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -511,10 +511,10 @@
     <value>Fill</value>
   </data>
   <data name="panel4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>353, 3</value>
+    <value>445, 3</value>
   </data>
   <data name="panel4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 44</value>
+    <value>336, 44</value>
   </data>
   <data name="panel4.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -586,10 +586,10 @@
     <value>Fill</value>
   </data>
   <data name="panel3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 53</value>
+    <value>345, 53</value>
   </data>
   <data name="panel3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 290</value>
+    <value>94, 278</value>
   </data>
   <data name="panel3.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -616,7 +616,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="tbSignalText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 23</value>
+    <value>238, 23</value>
   </data>
   <data name="tbSignalText.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -637,7 +637,7 @@
     <value>Top, Right</value>
   </data>
   <data name="metroButton_Query.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 11</value>
+    <value>247, 11</value>
   </data>
   <data name="metroButton_Query.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 24</value>
@@ -667,7 +667,7 @@
     <value>3, 3</value>
   </data>
   <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 44</value>
+    <value>336, 44</value>
   </data>
   <data name="panel2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -694,7 +694,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="tvAllNode.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 288</value>
+    <value>336, 276</value>
   </data>
   <data name="tvAllNode.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -721,7 +721,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>652, 346</value>
+    <value>837, 334</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -739,7 +739,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel5" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="dataGridView1" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="panel4" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="panel3" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tvAllNode" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Absolute,100,Percent,50,Absolute,52" /&gt;&lt;Rows Styles="Absolute,50,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="panel5" Row="1" RowSpan="1" Column="3" ColumnSpan="1" /&gt;&lt;Control Name="dataGridView1" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="panel4" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="panel3" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="panel2" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="tvAllNode" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,50,Absolute,100,Percent,50,Absolute,53" /&gt;&lt;Rows Styles="Absolute,50,Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="groupBox1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -754,7 +754,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>658, 370</value>
+    <value>843, 358</value>
   </data>
   <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1000,7 +1000,7 @@
     <value>3, 4, 3, 4</value>
   </data>
   <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>658, 71</value>
+    <value>843, 71</value>
   </data>
   <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1024,7 +1024,7 @@
     <value>Top, Right</value>
   </data>
   <data name="metroButton_Cancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>550, 3</value>
+    <value>735, 3</value>
   </data>
   <data name="metroButton_Cancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 33</value>
@@ -1051,7 +1051,7 @@
     <value>Top, Right</value>
   </data>
   <data name="metroButton_Ok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>454, 5</value>
+    <value>639, 5</value>
   </data>
   <data name="metroButton_Ok.Size" type="System.Drawing.Size, System.Drawing">
     <value>87, 33</value>
@@ -1078,13 +1078,13 @@
     <value>Fill</value>
   </data>
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 441</value>
+    <value>0, 429</value>
   </data>
   <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>658, 41</value>
+    <value>843, 41</value>
   </data>
   <data name="panel1.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -1180,7 +1180,7 @@
     <value>3</value>
   </data>
   <data name="tableLayoutPanel2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>658, 482</value>
+    <value>843, 470</value>
   </data>
   <data name="tableLayoutPanel2.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1210,7 +1210,7 @@
     <value>7, 17</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>698, 562</value>
+    <value>883, 550</value>
   </data>
   <data name="$this.Font" type="System.Drawing.Font, System.Drawing">
     <value>微软雅黑, 9pt</value>
@@ -1227,17 +1227,23 @@
   <data name="$this.Text" xml:space="preserve">
     <value>新建</value>
   </data>
-  <data name="&gt;&gt;signalNameDataGridViewTextBoxColumn1.Name" xml:space="preserve">
-    <value>signalNameDataGridViewTextBoxColumn1</value>
-  </data>
-  <data name="&gt;&gt;signalNameDataGridViewTextBoxColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;EventNameColumn.Name" xml:space="preserve">
     <value>EventNameColumn</value>
   </data>
   <data name="&gt;&gt;EventNameColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewComboBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;MessageIDColumn.Name" xml:space="preserve">
+    <value>MessageIDColumn</value>
+  </data>
+  <data name="&gt;&gt;MessageIDColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;signalNameDataGridViewTextBoxColumn1.Name" xml:space="preserve">
+    <value>signalNameDataGridViewTextBoxColumn1</value>
+  </data>
+  <data name="&gt;&gt;signalNameDataGridViewTextBoxColumn1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;customNameDataGridViewTextBoxColumn1.Name" xml:space="preserve">
     <value>customNameDataGridViewTextBoxColumn1</value>
@@ -1285,12 +1291,6 @@
     <value>byteOrderDataGridViewTextBoxColumn1</value>
   </data>
   <data name="&gt;&gt;byteOrderDataGridViewTextBoxColumn1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;MessageIDColumn.Name" xml:space="preserve">
-    <value>MessageIDColumn</value>
-  </data>
-  <data name="&gt;&gt;MessageIDColumn.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;valueTypeDataGridViewTextBoxColumn1.Name" xml:space="preserve">

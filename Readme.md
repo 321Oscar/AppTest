@@ -128,7 +128,7 @@
 * ~~Root+Project: 方案信息与Project窗口合并在一个界面~~
 * Root-Project:方案信息和Project窗口各自独立，但关闭方案信息界面会关闭所有打开的Project窗口
 
-![image-20220106094555259](ReadMeImg/image-20220106094555259.png)
+![image-20220106094555259](./ReadMeImg/image-20220106094555259.png)
 
 ###  3.2. <a name='AddProject'></a>新建方案(Add Project)
 
